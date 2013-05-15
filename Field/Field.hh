@@ -11,6 +11,12 @@
 
 namespace Field
 {
+    enum eObjectType	{ BOMB, BUFF };
+    enum eBuffType		{ LIFE, SPEED, RANGE };
+    
+#include <list>
+#include <vector>
+    
 #include "Human.h"
 #include "IA.h"
 #include "Wall.h"
@@ -20,9 +26,12 @@ namespace Field
 
 class   Field
     {
-        std::array<std::array<std::list<IGameComponent *> > >	_map;
+        std::vector<std::vector<std::list<IGameComponent *> > >	_map;
         
     public:
+        Field();
+        ~Field();
+        
         std::list<IGameComponent *>	&	getGameComponent(int x, int y) const;
     }
 }

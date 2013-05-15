@@ -9,17 +9,24 @@
 #ifndef __BomberMan__AGameComponent__
 #define __BomberMan__AGameComponent__
 
-#include <iostream>
+#include "IGameComponent.hh"
 
-class AGameComponent
+class AGameComponent : public IGameComponent
 {
-    float							_x;
-    float							_y;
-    BomberMan::Display::IAsset *	_asset;
-    BomberMan::Display::ISound *	_default_sound;
+protected:
+    float		_x;
+    float		_y;
+    IAsset *	_asset;
+    ISound *	_default_sound;
     
 public:
-    <#member functions#>
+    virtual ~AGameComponent(){}
+    
+    virtual void		explode() = 0;
+    virtual IAsset *	getAsset() const;
+    virtual ISound *	getDefaultSound() const;
+    virtual	float		getX() const;
+    virtual float		getY() const;
 };
 
 #endif /* defined(__BomberMan__AGameComponent__) */
