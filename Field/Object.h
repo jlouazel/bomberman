@@ -13,20 +13,20 @@
 
 class Object : public AGameComponent
 {
-    eObjectType		_object_type;
-    eBuffType		_buff_type;
-    int				_power;
-    ???				_timer;
+    Field::eObjectType		_object_type;
+    Field::eBuffType		_buff_type;
+    int                     _power;
+    int                     _timer;
     
 public:
     Object();
     ~Object();
     
-    eObjectType     getObjectType() const;
-    eBuffType		getBuffType() const;
-    int             getPower() const;
-    ???             getTimer() const;
-    void			explode(int)
+    Field::eObjectType      getObjectType() const;
+    Field::eBuffType		getBuffType() const;
+    int                     getPower() const;
+    int                     getTimer() const;
+    void                    explode(int)
 };
 
 #endif /* defined(__BomberMan__Object__) */

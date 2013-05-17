@@ -27,7 +27,6 @@ public:
     void    move();
     void    setBomb();
     void    acquireObject();
-    void    explode();
     void    run();
     int     getNbBombMax() const;
     void    setNbBombMax(int);
@@ -35,6 +34,8 @@ public:
     float   getSpeed() const;
     void    setSpeed(float);
     void    explode(int);
+    int     getPv() const;
+    void    setPv(int);
 };
 
 #endif /* defined(__BomberMan__Player__) */

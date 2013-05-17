@@ -25,9 +25,9 @@ public:
     
     virtual void                    explode(int) = 0;
     virtual float                   getX() const;
-    virtual float                   setX();
+    virtual void                    setX(float);
     virtual float                   getY() const;
-    virtual float                   setY();
+    virtual void                    setY(float);
     virtual Display::IAsset *       getAsset() const;
     virtual void                    setAsset(Display::IAsset *);
     virtual Display::ISound *       getSound() const;

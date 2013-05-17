@@ -7,3 +7,16 @@
 //
 
 #include "Empty.h"
+
+Empty::Empty()
+{
+}
+
+Empty::~Empty()
+{
+}
+
+void    Empty::explode(int damages)
+{
+    // propagation
+}

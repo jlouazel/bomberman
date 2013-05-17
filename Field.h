@@ -20,16 +20,22 @@
 
 namespace Field
 {
-    enum eObjectType { BOMB, BUFF };
-    enum eBuffType { LIFE, SPEED, RANGE };
+    enum eObjectType    { BOMB, BUFF };
+    enum eBuffType      { NONE, LIFE, SPEED, RANGE };
     
     class Field
     {
-        std::vector<std::vector<std::list<IGameComponent *> > >	_map;
+        unsigned int								_width;
+        unsigned int								_height;
+        std::vector<std::list<IGameComponent *> > &	_map;
         
     public:
-        std::list<IGameComponent *>	&	getGameComponent(unsigned int, unsigned int);
-        std::list<IGameComponent *> &	operator[][](unsigned int, unsigned int);
+        Field(unsigned int width, unsigned int height);
+        ~Field();
+        
+        std::list<IGameComponent *>	&	get(unsigned int, unsigned int);
+        unsigned int					getWidth() const;
+        unsigned int                    getHeight() const;
     };
 }
 

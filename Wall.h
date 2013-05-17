@@ -21,6 +21,8 @@ public:
     ~Wall();
     
     void	explode(int);
+    int     getPv() const;
+    void    setPv(int);
 };
 
 #endif /* defined(__BomberMan__Wall__) */
