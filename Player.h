@@ -33,7 +33,7 @@ public:
     int     getNbBombSet() const;
     float   getSpeed() const;
     void    setSpeed(float);
-    void    explode(int);
+    void    explode(int, Field::eDirection);
     int     getPv() const;
     void    setPv(int);
 };

@@ -23,7 +23,7 @@ protected:
 public:
     virtual ~AGameComponent(){}
     
-    virtual void                    explode(int) = 0;
+    virtual void                    explode(int, Field::eDirection) = 0;
     virtual float                   getX() const;
     virtual void                    setX(float);
     virtual float                   getY() const;

@@ -22,6 +22,7 @@ namespace Field
 {
     enum eObjectType    { BOMB, BUFF };
     enum eBuffType      { NONE, LIFE, SPEED, RANGE };
+    enum eDirection     { UP, RIGHT, DOWN, LEFT };
     
     class Field
     {

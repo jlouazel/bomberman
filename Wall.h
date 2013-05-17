@@ -20,7 +20,7 @@ public:
     Wall();
     ~Wall();
     
-    void	explode(int);
+    void	explode(int, Field::eDirection);
     int     getPv() const;
     void    setPv(int);
 };

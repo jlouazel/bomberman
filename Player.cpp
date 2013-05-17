@@ -67,7 +67,7 @@ void    Player::setPv(int pv)
     this->_pv = pv;
 }
 
-void    Player::explode(int damages)
+void    Player::explode(int damages, Field::eDirection direction)
 {
     this->setPv(this->_pv - damages);
     // animation dmg

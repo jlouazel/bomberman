@@ -16,7 +16,7 @@ Empty::~Empty()
 {
 }
 
-void    Empty::explode(int damages)
+void    Empty::explode(int damages, Field::eDirection direction)
 {
     // propagation
 }

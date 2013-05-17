@@ -26,7 +26,7 @@ public:
     Field::eBuffType		getBuffType() const;
     int                     getPower() const;
     int                     getTimer() const;
-    void                    explode(int)
+    void                    explode(int, Field::eDirection)
 };
 
 #endif /* defined(__BomberMan__Object__) */

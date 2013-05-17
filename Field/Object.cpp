@@ -36,7 +36,7 @@ int                 Object::getTimer() const
     return this->_timer;
 }
 
-void                Object::explode(int damages)
+void                Object::explode(int damages, Field::eDirection direction)
 {
     
 }
