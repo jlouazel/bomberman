@@ -238,7 +238,7 @@ std::string const &			Xml::Balise::getContent() const {
 }
 
 void					Xml::Balise::setContent(std::string const & content) {
-  this->_content = content;
+  this->_content += content;
 }
 
 std::list<Xml::Balise *> const &	Xml::Balise::getChilden() const {
