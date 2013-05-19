@@ -10,6 +10,7 @@
 
 Player::Player()
 {
+    this->_bomb = 
 }
 
 Player::~Player()
@@ -55,6 +56,11 @@ float   Player::getSpeed() const
 void    Player::setSpeed(float speed)
 {
     this->_speed = speed;
+}
+
+Object &    Player::getBomb() const
+{
+    return this->_bomb;
 }
 
 int		Player::getPV() const

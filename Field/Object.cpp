@@ -8,7 +8,19 @@
 
 #include "Object.h"
 
-Object::Object()
+Object::Object(eObjectType objectType, eBuffType buffType, int power, int timer)
+:   _object_type(objectType),
+    _buff_type(buffType),
+    _power(power),
+    _timer(timer)
+{
+}
+
+Object::Object(const Object & other)
+:   _object_type(other->_object_type),
+    _buff_type(other->_buff_type),
+    _power(other->_power),
+    _timer(other->_timer)
 {
 }
 
@@ -16,27 +28,32 @@ Object::~Object()
 {
 }
 
-Field::eObjectType	Object::getObjectType() const
+eObjectType Object::getObjectType() const
 {
     return this->_object_type;
 }
 
-Field::eBuffType    Object::getBuffType() const
+eBuffType   Object::getBuffType() const
 {
     return this->_buff_type;
 }
 
-int                 Object::getPower() const
+void        Object::setPower(int power)
+{
+    this->_power = power;
+}
+
+int         Object::getPower() const
 {
     return this->_power;
 }
 
-int                 Object::getTimer() const
+int         Object::getTimer() const
 {
     return this->_timer;
 }
 
-void                Object::explode(int damages, Field::eDirection direction)
+void        Object::explode(int damages, eDirection direction)
 {
     
 }

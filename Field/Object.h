@@ -10,23 +10,26 @@
 #define __BomberMan__Object__
 
 #include "AGameComponent.h"
+#include "Enums.h"
 
 class Object : public AGameComponent
 {
-    Field::eObjectType		_object_type;
-    Field::eBuffType		_buff_type;
-    int                     _power;
-    int                     _timer;
+    eObjectType		_object_type;
+    eBuffType		_buff_type;
+    int             _power;
+    int             _timer;
     
 public:
-    Object();
+    Object(eObjectType objectType, eBuffType buffType, int power, int timer);
+    Object(const Object &);
     ~Object();
     
-    Field::eObjectType      getObjectType() const;
-    Field::eBuffType		getBuffType() const;
-    int                     getPower() const;
-    int                     getTimer() const;
-    void                    explode(int, Field::eDirection)
+    eObjectType getObjectType() const;
+    eBuffType   getBuffType() const;
+    int         getPower() const;
+    void        setPower();
+    int         getTimer() const;
+    void        explode(int, eDirection)
 };
 
 #endif /* defined(__BomberMan__Object__) */

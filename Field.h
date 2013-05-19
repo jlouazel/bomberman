@@ -12,17 +12,15 @@
 #include <vector>
 #include <list>
 
+namespace Field
+{
 #include "IGameComponent.h"
 #include "Player.h"
 #include "Wall.h"
 #include "Empty.h"
 #include "Object.h"
-
-namespace Field
-{
-    enum eObjectType    { BOMB, BUFF };
-    enum eBuffType      { NONE, LIFE, SPEED, RANGE };
-    enum eDirection     { UP, UPRIGHT, RIGHT, DOWNRIGHT, DOWN, DOWNLEFT, LEFT, UPLEFT };
+#include "ObjectFactory.h"
+#include "Enums.h"
     
     class Field
     {

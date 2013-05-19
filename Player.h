@@ -10,32 +10,34 @@
 #define __BomberMan__Player__
 
 #include "AGameComponent.h"
+#include "Object.h"
 
 class Player : public AGameComponent
 {
 protected:
-    int		_pv;
-    float	_speed;
-    int		_nb_bomb_max;
-    int		_nb_bomb_set;
-    int     _bomb_range;
+    int         _pv;
+    float       _speed;
+    int         _nb_bomb_max;
+    int         _nb_bomb_set;
+    Object &    _bomb;
     
 public:
     Player();
     ~Player();
     
-    void    move();
-    void    setBomb();
-    void    acquireObject();
-    void    run();
-    int     getNbBombMax() const;
-    void    setNbBombMax(int);
-    int     getNbBombSet() const;
-    float   getSpeed() const;
-    void    setSpeed(float);
-    void    explode(int, Field::eDirection);
-    int     getPv() const;
-    void    setPv(int);
+    void        move();
+    void    	setBomb();
+    void        acquireObject();
+    void        run();
+    int         getNbBombMax() const;
+    void        setNbBombMax(int);
+    int         getNbBombSet() const;
+    float       getSpeed() const;
+    void        setSpeed(float);
+    Object &    getBomb() const;
+    void        explode(int, Field::eDirection);
+    int         getPv() const;
+    void        setPv(int);
 };
 
 #endif /* defined(__BomberMan__Player__) */
