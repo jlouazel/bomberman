@@ -12,11 +12,11 @@ Empty::Empty()
 {
 }
 
-Empty::~Empty()
+Empty::~Empty() throw()
 {
 }
 
-void    Empty::explode(int damages, Field::eDirection direction)
+void    Empty::explode(int damages, eDirection direction)
 {
     // propagation
 }

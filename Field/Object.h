@@ -27,9 +27,9 @@ public:
     eObjectType getObjectType() const;
     eBuffType   getBuffType() const;
     int         getPower() const;
-    void        setPower();
+    void        setPower(int);
     int         getTimer() const;
-    void        explode(int, eDirection)
+    void        explode(int, eDirection);
 };
 
 #endif /* defined(__BomberMan__Object__) */

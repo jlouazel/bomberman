@@ -17,10 +17,10 @@ Object::Object(eObjectType objectType, eBuffType buffType, int power, int timer)
 }
 
 Object::Object(const Object & other)
-:   _object_type(other->_object_type),
-    _buff_type(other->_buff_type),
-    _power(other->_power),
-    _timer(other->_timer)
+:   _object_type(other._object_type),
+    _buff_type(other._buff_type),
+    _power(other._power),
+    _timer(other._timer)
 {
 }
 

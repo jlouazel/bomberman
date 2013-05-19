@@ -10,6 +10,7 @@
 #define __BomberMan__Wall__
 
 #include "AGameComponent.h"
+#include "Enums.h"
 
 class Wall : public AGameComponent
 {
@@ -20,7 +21,7 @@ public:
     Wall();
     ~Wall();
     
-    void	explode(int, Field::eDirection);
+    void	explode(int, eDirection);
     int     getPv() const;
     void    setPv(int);
 };

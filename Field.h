@@ -10,6 +10,8 @@
 #define __BomberMan__Field__
 
 #include <vector>
+#include <iostream>
+#include <utility>
 #include <list>
 
 namespace Field
@@ -21,6 +23,7 @@ namespace Field
 #include "Object.h"
 #include "ObjectFactory.h"
 #include "Enums.h"
+#include "Error.h"
     
     class Field
     {

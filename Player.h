@@ -19,7 +19,7 @@ protected:
     float       _speed;
     int         _nb_bomb_max;
     int         _nb_bomb_set;
-    Object &    _bomb;
+    Object *    _bomb;
     
 public:
     Player();
@@ -34,8 +34,8 @@ public:
     int         getNbBombSet() const;
     float       getSpeed() const;
     void        setSpeed(float);
-    Object &    getBomb() const;
-    void        explode(int, Field::eDirection);
+    Object *    getBomb() const;
+    void        explode(int, eDirection);
     int         getPv() const;
     void        setPv(int);
 };

@@ -10,7 +10,7 @@
 
 Player::Player()
 {
-    this->_bomb = 
+    this->_bomb = new Object(BOMB, NONE, 3, 3);
 }
 
 Player::~Player()
@@ -58,12 +58,12 @@ void    Player::setSpeed(float speed)
     this->_speed = speed;
 }
 
-Object &    Player::getBomb() const
+Object *    Player::getBomb() const
 {
     return this->_bomb;
 }
 
-int		Player::getPV() const
+int		Player::getPv() const
 {
     return this->_pv;
 }
@@ -73,7 +73,7 @@ void    Player::setPv(int pv)
     this->_pv = pv;
 }
 
-void    Player::explode(int damages, Field::eDirection direction)
+void    Player::explode(int damages, eDirection direction)
 {
     this->setPv(this->_pv - damages);
     // animation dmg
