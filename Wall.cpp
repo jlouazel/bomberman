@@ -26,7 +26,7 @@ void    Wall::setPv(int pv)
     this->_pv = pv;
 }
 
-void    Wall::explode(int damages. Field::eDirection direction)
+void    Wall::explode(int damages, eDirection direction)
 {
     if (this->_breakable == true)
     {

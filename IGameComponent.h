@@ -9,14 +9,17 @@
 #ifndef BomberMan_IGameComponent_h
 #define BomberMan_IGameComponent_h
 
+#include <iostream>
+
 #include "Display.h"
+#include "Enums.h"
 
 class IGameComponent
 {
 public:
     virtual ~IGameComponent(){}
 
-    virtual void                	explode(int, Field::eDirection) = 0;
+    virtual void                	explode(int, eDirection) = 0;
     virtual float               	getX() const = 0;
     virtual float               	setX() = 0;
     virtual float               	getY() const = 0;

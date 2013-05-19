@@ -17,7 +17,7 @@ public:
     Empty();
     ~Empty();
     
-    void	explode(int, Field::eDirection);
+    void	explode(int, eDirection);
 };
 
 #endif /* defined(__BomberMan__Empty__) */
