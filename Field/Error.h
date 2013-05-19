@@ -21,6 +21,10 @@ class Error : public std::exception
 public:
     Error(std::string &, std::string &, std::string &);
     ~Error();
+    
+    std::string &   getWhat() const;
+    std::string &   getWhere() const;
+    std::string &   getDetails() const;
 };
 
 #endif /* defined(__BomberMan__Error__) */

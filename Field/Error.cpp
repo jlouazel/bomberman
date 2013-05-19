@@ -18,3 +18,18 @@ Error::Error(std::string & what, std::string & where, std::string & details)
 Error::~Error()
 {
 }
+
+std::string &   Error::getWhat() const
+{
+    return this->_what;
+}
+
+std::string &   Error::getWhere() const
+{
+    return this->_where;
+}
+
+std::string &   Error::getDetails() const
+{
+    return this->_details;
+}
