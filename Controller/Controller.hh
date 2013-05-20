@@ -2,16 +2,19 @@
 //  Controller.h
 //  BomberMan
 //
-//  Created by manour_m on 18/05/13.
+//  Created by manour_m on 20/05/13.
 //  Copyright (c) 2013 manour_m. All rights reserved.
 //
 
-#ifndef BomberMan_Controller_h
-#define BomberMan_Controller_h
+#ifndef __BomberMan__Controller__
+#define __BomberMan__Controller__
 
-namespace Controller
+#include "AController.hh"
+
+class Controller : public AController
 {
-#include "Error.hh"
-}
+public:
 
-#endif
+};
+
+#endif /* defined(__BomberMan__Controller__) */
