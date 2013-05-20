@@ -10,8 +10,8 @@
 
 class ADataFormat : public IDataFormat {
 protected:
-  eFormat	_format;
-  std::ifstream	_infile;
+  eFormat							_format;
+  std::ifstream						_infile;
   std::map<int, std::string const>	_content;
 
   explicit ADataFormat(eFormat, std::string const &);
@@ -19,10 +19,10 @@ protected:
 public:
   virtual ~ADataFormat();
 
-  eFormat getFormat() const;
-  std::ifstream const & getInFile() const;
-  std::map<int, std::string const> const & getContent() const;
-  virtual void generate(std::string const &) const = 0;
+  eFormat 									getFormat() const;
+  std::ifstream const & 					getInFile() const;
+  std::map<int, std::string const> const & 	getContent() const;
+  virtual void								generate(std::string const &) const = 0;
 };
 
 #endif

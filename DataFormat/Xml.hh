@@ -22,7 +22,7 @@ public:
     eBaliseState		_state;
     Balise *			_parent;
     std::string			_content;
-    std::list<Balise *>		_children;
+    std::list<Balise *>	_children;
     std::string			_attribute;
     Balise *			_associated;
     std::string			_attributeName;
@@ -31,12 +31,12 @@ public:
     explicit Balise(std::string const &, eBaliseState);
     ~Balise();
 
-    std::string	const &		getName() const;
-    eBaliseState		getState() const;
-    Balise *			getParent() const;
-    std::string const &		getContent() const;
+    std::string	const &			getName() const;
+    eBaliseState				getState() const;
+    Balise *					getParent() const;
+    std::string const &			getContent() const;
     std::list<Balise *> const &	getChilden() const;
-    Balise *			getAssociated() const;
+    Balise *					getAssociated() const;
 
     void			addChild(Balise *);
     void			setParent(Balise *);

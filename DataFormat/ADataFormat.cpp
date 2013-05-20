@@ -48,11 +48,11 @@ ADataFormat::~ADataFormat() {
   this->_infile.close();
 }
 
-eFormat ADataFormat::getFormat() const {
+eFormat 									ADataFormat::getFormat() const {
   return this->_format;
 }
 
-std::ifstream const & ADataFormat::getInFile() const {
+std::ifstream const &						ADataFormat::getInFile() const {
   return this->_infile;
 }
 
