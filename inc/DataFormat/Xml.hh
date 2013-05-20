@@ -6,7 +6,7 @@
 #include <utility>
 
 #include "ADataFormat.hh"
-#include "Error.hh"
+#include "FormatError.hh"
 
 enum eBaliseState {
   OPENING,

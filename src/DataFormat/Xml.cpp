@@ -7,7 +7,7 @@
 #include <algorithm>
 #include "ADataFormat.hh"
 #include "Parser.hh"
-#include "Error.hh"
+#include "FormatError.hh"
 #include "eFormat.hh"
 #include "Xml.hh"
 
