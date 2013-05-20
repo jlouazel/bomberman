@@ -9,7 +9,11 @@ CPPFLAGS	+= -I ./includes
 
 SRC_DIR		= sources/
 
-SRCS		=
+SRCS		= $(SRC_DIR)parser.cpp \
+		$(SRC_DIR)ADataFormat.cpp \
+		$(SRC_DIR)Parser.cpp \
+		$(SRC_DIR)Error.cpp \
+		$(SRC_DIR)Xml.cpp
 
 OBJS		= $(SRCS:.cpp=.o)
 

@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include <list>
+#include <fstream>
 #include <sstream>
 #include <string>
 #include <algorithm>
@@ -179,20 +180,20 @@ Xml::Xml(std::string const & infile) : ADataFormat(XML, infile) {
 	throw (Error("invalid xml syntax", infile, "balise \"</" + (*it2)->getName() + ">\" has no related opening one"));
     }
   }
-  for (std::list<Balise *>::iterator it2 = this->_balises.begin(); it2 != this->_balises.end(); ++it2) {
-    std::cout << "Balise : " << (*it2)->Balise::getName() << stateChar(*it2) << std::endl;
-    std::cout << "Associated : " << (*it2)->Balise::getAssociated()->Balise::getName() << stateChar((*it2)->Balise::getAssociated()) << std::endl;
-    if (!(*it2)->Balise::getParent())
-      std::cout << "Herited from : DOM" << std::endl;
-    else
-      std::cout << "Herited from : " << (*it2)->Balise::getParent()->Balise::getName() << std::endl;
-    std::cout << "Content : " << (*it2)->Balise::getContent() << std::endl;
-    std::cout << "Enfants :" << std::endl;
-    for (std::list<Balise *>::const_iterator it3 = (*it2)->Balise::getChilden().begin(); it3 != (*it2)->Balise::getChilden().end(); ++it3) {
-      std::cout << "- " << (*it3)->Balise::getName() << stateChar(*it3) << std::endl;
-    }
-    std::cout << std::endl;
-  }
+  // for (std::list<Balise *>::iterator it2 = this->_balises.begin(); it2 != this->_balises.end(); ++it2) {
+  //   std::cout << "Balise : " << (*it2)->Balise::getName() << stateChar(*it2) << std::endl;
+  //   std::cout << "Associated : " << (*it2)->Balise::getAssociated()->Balise::getName() << stateChar((*it2)->Balise::getAssociated()) << std::endl;
+  //   if (!(*it2)->Balise::getParent())
+  //     std::cout << "Herited from : DOM" << std::endl;
+  //   else
+  //     std::cout << "Herited from : " << (*it2)->Balise::getParent()->Balise::getName() << std::endl;
+  //   std::cout << "Content : " << (*it2)->Balise::getContent() << std::endl;
+  //   std::cout << "Enfants :" << std::endl;
+  //   for (std::list<Balise *>::const_iterator it3 = (*it2)->Balise::getChilden().begin(); it3 != (*it2)->Balise::getChilden().end(); ++it3) {
+  //     std::cout << "- " << (*it3)->Balise::getName() << stateChar(*it3) << std::endl;
+  //   }
+  //   std::cout << std::endl;
+  // }
 }
 
 static void	eraseBalises(Xml::Balise *bal) {
@@ -238,7 +239,7 @@ std::string const &			Xml::Balise::getContent() const {
 }
 
 void					Xml::Balise::setContent(std::string const & content) {
-  this->_content += "\n" + content;
+  this->_content = content;
 }
 
 std::list<Xml::Balise *> const &	Xml::Balise::getChilden() const {
@@ -263,4 +264,22 @@ eBaliseState				Xml::Balise::getState() const {
 
 void					Xml::Balise::setChildren(std::list<Xml::Balise *> const & children) {
   this->_children = children;
+}
+
+void					Xml::generate(std::string const & outFileName) const {
+  std::ofstream file(outFileName.c_str(), std::ios::in | std::ios::trunc);
+  if (file) {
+    for (std::list<Balise *>::const_iterator it = this->_balises.begin(); it != this->_balises.end(); ++it) {
+      file << "<";
+      if ((*it)->getState() == CLOSING)
+	file << "/";
+      file << (*it)->getName()<< ">" << std::endl;
+      if ((*it)->getState() == OPENING)
+	if ((*it)->getContent().empty() == false)
+	file << (*it)->getContent() << std::endl;
+    }
+    file.close();
+  }
+  else
+    throw (Error("file error", "generate method", "the file " +  outFileName + " can't be openened"));
 }

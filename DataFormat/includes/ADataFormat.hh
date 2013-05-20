@@ -21,6 +21,7 @@ public:
   eFormat getFormat() const;
   std::ifstream const & getInFile() const;
   std::map<int, std::string const> const & getContent() const;
+  virtual void generate(std::string const &) const = 0;
 };
 
 #endif
