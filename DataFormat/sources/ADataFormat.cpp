@@ -5,10 +5,9 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+
 #include "ADataFormat.hh"
-#include "eFormat.hh"
 #include "Parser.hh"
-#include "Error.hh"
 
 ADataFormat::ADataFormat(eFormat format, std::string const & infile)
   : _format(format),

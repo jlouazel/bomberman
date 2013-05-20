@@ -6,6 +6,7 @@
 #include <fstream>
 #include "eFormat.hh"
 #include "IDataFormat.hh"
+#include "Error.hh"
 
 class ADataFormat : public IDataFormat {
 protected:
