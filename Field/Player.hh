@@ -9,8 +9,8 @@
 #ifndef __BomberMan__Player__
 #define __BomberMan__Player__
 
-#include "AGameComponent.h"
-#include "Object.h"
+#include "AGameComponent.hh"
+#include "Object.hh"
 
 class Player : public AGameComponent
 {

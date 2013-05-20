@@ -9,7 +9,7 @@
 #ifndef __BomberMan__Empty__
 #define __BomberMan__Empty__
 
-#include "AGameComponent.h"
+#include "AGameComponent.hh"
 
 class Empty : public AGameComponent
 {

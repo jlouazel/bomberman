@@ -11,7 +11,7 @@
 
 namespace Core
 {
-    
+#include "Error.hh"
 }
 
 #endif

@@ -9,8 +9,8 @@
 #ifndef __BomberMan__Wall__
 #define __BomberMan__Wall__
 
-#include "AGameComponent.h"
-#include "Enums.h"
+#include "AGameComponent.hh"
+#include "Enums.hh"
 
 class Wall : public AGameComponent
 {

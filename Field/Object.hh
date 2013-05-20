@@ -9,8 +9,8 @@
 #ifndef __BomberMan__Object__
 #define __BomberMan__Object__
 
-#include "AGameComponent.h"
-#include "Enums.h"
+#include "AGameComponent.hh"
+#include "Enums.hh"
 
 class Object : public AGameComponent
 {

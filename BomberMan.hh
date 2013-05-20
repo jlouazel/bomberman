@@ -11,13 +11,13 @@
 
 namespace BomberMan
 {
-#include "Threads.h"
-#include "Controller.h"
-#include "Core.h"
-#include "DataFormat.h"
-#include "Event.h"
-#include "Display.h"
-#include "Field.h"
+#include "Threads.hh"
+#include "Controller.hh"
+#include "Core.hh"
+#include "DataFormat.hh"
+#include "Events.hh"
+#include "Display.hh"
+#include "Field.hh"
 }
 
 #endif /* defined(__BomberMan__BomberMan__) */

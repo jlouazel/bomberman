@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 manour_m. All rights reserved.
 //
 
-#include "Object.h"
+#include "Object.hh"
 
 Object::Object(eObjectType objectType, eBuffType buffType, int power, int timer)
 :   _object_type(objectType),

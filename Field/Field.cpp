@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 manour_m. All rights reserved.
 //
 
-#include "Field.h"
+#include "Field.hh"
 
 Field::Field(unsigned int width, unsigned int height)
 :   _width(width),

@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 manour_m. All rights reserved.
 //
 
-#include "AGameComponent.h"
+#include "AGameComponent.hh"
 
 float                   AGameComponent::getX() const
 {

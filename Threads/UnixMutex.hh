@@ -9,7 +9,7 @@
 #ifndef __BomberMan__UnixMutex__
 #define __BomberMan__UnixMutex__
 
-#include        "IMutex.h"
+#include        "IMutex.hh"
 
 class UnixMutex : public IMutex
 {

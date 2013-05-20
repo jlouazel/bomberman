@@ -11,8 +11,8 @@
 
 namespace Threads
 {
-#include "IThread.h"
-#include "IMutex.h"
+#include "IThread.hh"
+#include "IMutex.hh"
 }
 
 #endif

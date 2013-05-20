@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 manour_m. All rights reserved.
 //
 
-#include "Player.h"
+#include "Player.hh"
 
 Player::Player()
 {

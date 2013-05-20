@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 manour_m. All rights reserved.
 //
 
-#include "UnixMutex.h"
+#include "UnixMutex.hh"
 
 UnixMutex::UnixMutex(size_t id)
 : id(id)

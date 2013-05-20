@@ -9,7 +9,7 @@
 #ifndef __BomberMan__UnixThread__
 #define __BomberMan__UnixThread__
 
-#include        "IThread.h"
+#include        "IThread.hh"
 
 class UnixThread : public IThread
 {

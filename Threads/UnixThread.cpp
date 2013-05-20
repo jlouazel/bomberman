@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 manour_m. All rights reserved.
 //
 
-#include "UnixThread.h"
+#include "UnixThread.hh"
 
 UnixThread::UnixThread(pthread_attr_t *attr, void *(*func)(void *), void *arg, size_t id)
 : id(id)

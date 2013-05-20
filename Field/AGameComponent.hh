@@ -9,7 +9,7 @@
 #ifndef __BomberMan__AGameComponent__
 #define __BomberMan__AGameComponent__
 
-#include "IGameComponent.h"
+#include "IGameComponent.hh"
 
 class AGameComponent : public IGameComponent
 {

@@ -12,8 +12,8 @@
 #include <map>
 #include <utility>
 
-#include "Object.h"
-#include "Enums.h"
+#include "Object.hh"
+#include "Enums.hh"
 
 class ObjectFactory
 {

@@ -11,8 +11,8 @@
 
 #include <iostream>
 
-#include "Display.h"
-#include "Enums.h"
+#include "Display.hh"
+#include "Enums.hh"
 
 class IGameComponent
 {

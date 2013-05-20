@@ -1,5 +1,5 @@
 //
-//  Event.h
+//  Events.h
 //  BomberMan
 //
 //  Created by manour_m on 18/05/13.
@@ -11,7 +11,10 @@
 
 namespace Event
 {
-    
+#include "Event.hh"
+#include "EventFactory.hh"
+#include "Error.hh"
+#include "Manager.hh"
 }
 
 #endif

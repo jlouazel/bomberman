@@ -16,14 +16,14 @@
 
 namespace Field
 {
-#include "IGameComponent.h"
-#include "Player.h"
-#include "Wall.h"
-#include "Empty.h"
-#include "Object.h"
-#include "ObjectFactory.h"
-#include "Enums.h"
-#include "Error.h"
+#include "IGameComponent.hh"
+#include "Player.hh"
+#include "Wall.hh"
+#include "Empty.hh"
+#include "Object.hh"
+#include "ObjectFactory.hh"
+#include "Enums.hh"
+#include "Error.hh"
     
     class Field
     {
