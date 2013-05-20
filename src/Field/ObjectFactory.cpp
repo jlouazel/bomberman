@@ -32,5 +32,5 @@ Object *    ObjectFactory::create(std::pair<eObjectType, eBuffType> type) const
     if ((it = this->_objects.find(type)) != this->_objects.end())
         return new Object(it->second);
     else
-        throw Error("Failed to create an instance of type 'Object'", "ObjectFactory::create", "Trying to create an unknown object");
+        throw FieldError("Failed to create an instance of type 'Object'", "ObjectFactory::create", "Trying to create an unknown object");
 }

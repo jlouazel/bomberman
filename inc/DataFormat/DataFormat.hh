@@ -13,7 +13,7 @@ namespace DataFormat
 {
 #include "IDataFormat.hh"
 #include "eFormat.hh"
-#include "Error.hh"
+#include "FormatError.hh"
 #include "Parser.hh"
 #include "Xml.hh"
 }

@@ -4,7 +4,7 @@
 #include <algorithm>
 
 #include "Parser.hh"
-#include "Error.hh"
+#include "FormatError.hh"
 #include "Xml.hh"
 
 std::string const 			Parser::typeToString(eFormat format) {
@@ -30,7 +30,7 @@ IDataFormat *				Parser::getAppropriateContainer(std::string const &filename) {
   std::vector<std::string>  parsedName = splitString(filename, ".");
   if (parsedName.back() == "xml")
     return new Xml(filename);
-  throw (Error("invalid format", "parser", "the format \"" + parsedName.back() + "\" is not managed by the parser"));
+  throw (FormatError("invalid format", "parser", "the format \"" + parsedName.back() + "\" is not managed by the parser"));
   return 0;
 }
 

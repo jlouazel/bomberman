@@ -13,7 +13,7 @@ namespace Events
 {
 #include "Event.hh"
 #include "EventFactory.hh"
-#include "Error.hh"
+#include "EventError.hh"
 #include "Manager.hh"
 }
 

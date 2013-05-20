@@ -23,7 +23,7 @@ namespace Field
 #include "Object.hh"
 #include "ObjectFactory.hh"
 #include "Enums.hh"
-#include "Error.hh"
+#include "FieldError.hh"
     
     class Field
     {

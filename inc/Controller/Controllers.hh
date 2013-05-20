@@ -13,7 +13,7 @@ namespace Input
 {
     namespace Controller
     {
-#include "Error.hh"
+#include "ControllerError.hh"
     }
 }
 

@@ -9,7 +9,7 @@
 #include "ADataFormat.hh"
 
 #include "Parser.hh"
-#include "Error.hh"
+#include "FormatError.hh"
 
 ADataFormat::ADataFormat(eFormat format, std::string const & infile)
 :   _format(format),
@@ -17,12 +17,12 @@ ADataFormat::ADataFormat(eFormat format, std::string const & infile)
   struct stat st;
   if (stat(infile.c_str(), &st) == 0) {
       if(st.st_mode & S_IFDIR)
-          throw (Error("invalid format", "parser", "\"" + infile + "\" is a directory"));
+          throw (FormatError("invalid format", "parser", "\"" + infile + "\" is a directory"));
       else if(st.st_mode & S_IFREG) {
 	if (this->_infile.is_open() == false)
-	  throw (Error("invalid file", "parser", "unable to open \"" + infile + "\", maybe you don't have the permission to open it"));
+	  throw (FormatError("invalid file", "parser", "unable to open \"" + infile + "\", maybe you don't have the permission to open it"));
 	if (Parser::checkExtend(format, infile) == false)
-	  throw (Error("invalid file type", "parser", "this is not a " + Parser::typeToString(format) + " file"));
+	  throw (FormatError("invalid file type", "parser", "this is not a " + Parser::typeToString(format) + " file"));
 	char c;
 	int line = 1;
 	std::string recup;
@@ -40,10 +40,10 @@ ADataFormat::ADataFormat(eFormat format, std::string const & infile)
 	  }
       }
       else
-	throw (Error("invalid format", "parser", "\"" + infile + "\" is an unknown format file"));
+	throw (FormatError("invalid format", "parser", "\"" + infile + "\" is an unknown format file"));
     }
   else
-    throw (Error("unknown file", "parser", "the file \"" + infile + "\" doesn't exists"));
+    throw (FormatError("unknown file", "parser", "the file \"" + infile + "\" doesn't exists"));
 }
 
 ADataFormat::~ADataFormat() {

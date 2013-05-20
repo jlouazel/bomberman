@@ -15,7 +15,7 @@ namespace Display
 #include "GDLAsset.hh"
 #include "GDLPicture.hh"
 #include "GDLSound.hh"
-#include "Error.hh"
+#include "DisplayError.hh"
 #include "Manager.hh"
 #include "Resources.hh"
 }
