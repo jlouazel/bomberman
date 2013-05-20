@@ -22,7 +22,7 @@ int	main(int ac, char **av)
       return -1;
     }
     IDataFormat *f = new Xml(av[1]);
-    //std::for_each(f->getContent().begin(), f->getContent().end(), aff);
+    f->generate("pute.xml");
     delete f;
     return 0;
   }

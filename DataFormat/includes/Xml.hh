@@ -46,6 +46,8 @@ public:
     void			setChildren(std::list<Balise *> const &);
   };
 
+  virtual void generate(std::string const &) const;
+
 private:
   std::list<Balise *>		_balises;
 };
