@@ -1,0 +1,35 @@
+CC		= g++
+
+RM		= rm -f
+
+NAME		= avm
+
+CPPFLAGS	+= -W -Wall -Wextra
+CPPFLAGS	+= -Iincludes
+
+SRC_DIR		= sources/
+
+SRCS		= $(SRC_DIR)main.cpp \
+		$(SRC_DIR)Chipset.cpp \
+		$(SRC_DIR)Operand.cpp \
+		$(SRC_DIR)Memory.cpp \
+		$(SRC_DIR)Processor.cpp \
+		$(SRC_DIR)Flow.cpp \
+		$(SRC_DIR)Error.cpp
+
+OBJS		= $(SRCS:.cpp=.o)
+
+all:		$(NAME)
+
+$(NAME):	$(OBJS)
+		$(CC) $(OBJS) -o $(NAME)
+
+clean:
+		$(RM) $(OBJS)
+
+fclean:		clean
+		$(RM) $(NAME)
+
+re:		fclean all
+
+.PHONY:		all clean fclean
