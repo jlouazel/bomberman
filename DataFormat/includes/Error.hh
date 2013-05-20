@@ -1,21 +1,30 @@
-#ifndef	__ERROR_HH__
-#define __ERROR_HH__
+//
+//  Error.h
+//  BomberMan
+//
+//  Created by manour_m on 20/05/13.
+//  Copyright (c) 2013 manour_m. All rights reserved.
+//
+
+#ifndef __BomberMan__Error__
+#define __BomberMan__Error__
+
+#include <exception>
+#include <string>
 
 class Error : public std::exception
 {
-private:
-  std::string  	_what;
-  std::string 	_where;
-  std::string 	_details;
-
+    std::string &	_what;
+    std::string &   _where;
+    std::string &   _details;
+    
 public:
-
-  Error(std::string const &, std::string const &, std::string const &);
-  ~Error() throw();
-
-  std::string const & getWhat() const;
-  std::string const & getWhere() const;
-  std::string const & getDetails() const;
+    Error(std::string &, std::string &, std::string &);
+    ~Error();
+    
+    std::string &   getWhat() const;
+    std::string &   getWhere() const;
+    std::string &   getDetails() const;
 };
 
-#endif
+#endif /* defined(__BomberMan__Error__) */
