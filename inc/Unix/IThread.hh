@@ -16,11 +16,11 @@ class IThread
 public:
   virtual       ~IThread(){}
     
-  virtual void                exit() = 0;
-  virtual int                 join() = 0;
-  virtual int                 detach() = 0;
-  virtual const pthread_t *   getThread() const = 0;
-  virtual boolgetStatus() const = 0;
+  virtual void              exit() = 0;
+  virtual int               join() = 0;
+  virtual int               detach() = 0;
+  virtual const pthread_t *	getThread() const = 0;
+  virtual bool				getStatus() const = 0;
 };
 
 #endif
