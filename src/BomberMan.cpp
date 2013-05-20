@@ -13,7 +13,14 @@ int		main()
     try
     {
     }
-    catch (BomberMan::Controllers::Error e)
+    catch (BomberMan::Input::Error e)
+    {
+        std::cerr << "An error occured concerning inputs : " << e.getWhat()
+        << " in " << e.getWhere()
+        << " (" << e.getDetails()
+        << ")" << std::endl;
+    }
+    catch (BomberMan::Input::Controllers::Error e)
     {
         std::cerr << "An error occured concerning controllers : " << e.getWhat()
         << " in " << e.getWhere()

@@ -15,6 +15,7 @@ namespace DataFormat
 #include "eFormat.hh"
 #include "Error.hh"
 #include "Parser.hh"
+#include "Xml.hh"
 }
 
 #endif

@@ -2,9 +2,8 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+
 #include "Parser.hh"
-#include "IDataFormat.hh"
-#include "eFormat.hh"
 #include "Error.hh"
 #include "Xml.hh"
 
