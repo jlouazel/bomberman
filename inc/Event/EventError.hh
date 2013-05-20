@@ -12,15 +12,15 @@
 #include <exception>
 #include <string>
 
-class Error : public std::exception
+class EventError : public std::exception
 {
     std::string &	_what;
     std::string &   _where;
     std::string &   _details;
     
 public:
-    Error(std::string &, std::string &, std::string &);
-    ~Error() throw();
+    EventError(std::string &, std::string &, std::string &);
+    ~EventError() throw();
     
     std::string &   getWhat() const;
     std::string &   getWhere() const;

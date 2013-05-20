@@ -12,15 +12,15 @@
 #include <exception>
 #include <string>
 
-class Error : public std::exception
+class ControllerError : public std::exception
 {
     std::string &	_what;
     std::string &   _where;
     std::string &   _details;
     
 public:
-    Error(std::string &, std::string &, std::string &);
-    ~Error() throw();
+    ControllerError(std::string &, std::string &, std::string &);
+    ~ControllerError() throw();
     
     std::string &   getWhat() const;
     std::string &   getWhere() const;

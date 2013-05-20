@@ -8,28 +8,28 @@
 
 #include "Error.hh"
 
-Error::Error(std::string & what, std::string & where, std::string & details)
+EventError::EventError(std::string & what, std::string & where, std::string & details)
 :   _what(what),
     _where(where),
     _details(details)
 {
 }
 
-Error::~Error() throw()
+EventError::~EventError() throw()
 {
 }
 
-std::string &   Error::getWhat() const
+std::string &   EventError::getWhat() const
 {
     return this->_what;
 }
 
-std::string &   Error::getWhere() const
+std::string &   EventError::getWhere() const
 {
     return this->_where;
 }
 
-std::string &   Error::getDetails() const
+std::string &   EventError::getDetails() const
 {
     return this->_details;
 }

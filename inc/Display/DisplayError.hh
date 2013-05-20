@@ -12,15 +12,15 @@
 #include <exception>
 #include <string>
 
-class Error : public std::exception
+class DisplayError : public std::exception
 {
     std::string &	_what;
     std::string &   _where;
     std::string &   _details;
     
 public:
-    Error(std::string &, std::string &, std::string &);
-    ~Error() throw();
+    DisplayError(std::string &, std::string &, std::string &);
+    ~DisplayError() throw();
     
     std::string &   getWhat() const;
     std::string &   getWhere() const;

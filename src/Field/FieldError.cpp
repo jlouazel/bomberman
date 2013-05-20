@@ -6,30 +6,30 @@
 //  Copyright (c) 2013 manour_m. All rights reserved.
 //
 
-#include "Error.hh"
+#include "FieldError.hh"
 
-Error::Error(std::string & what, std::string & where, std::string & details)
+FieldError::FieldError(std::string & what, std::string & where, std::string & details)
 :   _what(what),
     _where(where),
     _details(details)
 {
 }
 
-Error::~Error() throw()
+FieldError::~FieldError() throw()
 {
 }
 
-std::string &   Error::getWhat() const
+std::string &   FieldError::getWhat() const
 {
     return this->_what;
 }
 
-std::string &   Error::getWhere() const
+std::string &   FieldError::getWhere() const
 {
     return this->_where;
 }
 
-std::string &   Error::getDetails() const
+std::string &   FieldError::getDetails() const
 {
     return this->_details;
 }

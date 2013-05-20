@@ -6,30 +6,30 @@
 //  Copyright (c) 2013 manour_m. All rights reserved.
 //
 
-#include "Error.hh"
+#include "CoreError.hh"
 
-Error::Error(std::string & what, std::string & where, std::string & details)
+CoreError::CoreError(std::string & what, std::string & where, std::string & details)
 :   _what(what),
     _where(where),
     _details(details)
 {
 }
 
-Error::~Error() throw()
+CoreError::~CoreError() throw()
 {
 }
 
-std::string &   Error::getWhat() const
+std::string &   CoreError::getWhat() const
 {
     return this->_what;
 }
 
-std::string &   Error::getWhere() const
+std::string &   CoreError::getWhere() const
 {
     return this->_where;
 }
 
-std::string &   Error::getDetails() const
+std::string &   CoreError::getDetails() const
 {
     return this->_details;
 }
