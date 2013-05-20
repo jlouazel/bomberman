@@ -9,32 +9,32 @@
 #include "UnixMutex.hh"
 
 UnixMutex::UnixMutex(size_t id)
-: id(id)
+: _id(id)
 {
-    pthread_mutex_init(&(this->mutex), NULL);
+    pthread_mutex_init(&(this->_mutex), NULL);
 }
 
 UnixMutex::~UnixMutex()
 {
-    pthread_mutex_destroy(&(this->mutex));
+    pthread_mutex_destroy(&(this->_mutex));
 }
 
 int                     UnixMutex::lock()
 {
-    return pthread_mutex_lock(&(this->mutex));
+    return pthread_mutex_lock(&(this->_mutex));
 }
 
 int                     UnixMutex::trylock()
 {
-    return pthread_mutex_trylock(&(this->mutex));
+    return pthread_mutex_trylock(&(this->_mutex));
 }
 
 int                     UnixMutex::unlock()
 {
-    return pthread_mutex_unlock(&(this->mutex));
+    return pthread_mutex_unlock(&(this->_mutex));
 }
 
 pthread_mutex_t *       UnixMutex::getMutex()
 {
-    return &this->mutex;
+    return &this->_mutex;
 }

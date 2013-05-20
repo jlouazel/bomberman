@@ -9,6 +9,8 @@
 #ifndef __BomberMan__BomberMan__
 #define __BomberMan__BomberMan__
 
+#include <iostream>
+
 namespace BomberMan
 {
 #include "Threads.hh"

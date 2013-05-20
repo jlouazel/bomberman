@@ -13,16 +13,17 @@
 
 class UnixMutex : public IMutex
 {
-    pthread_mutex_t       mutex;
-    size_t                id;
+    pthread_mutex_t	_mutex;
+    size_t          _id;
     
 public:
     UnixMutex(size_t);
 	~UnixMutex();
-    int   lock();
-    int   trylock();
-    int   unlock();
-    pthread_mutex_t * getMutex();
+    
+    int   				lock();
+    int  			 	trylock();
+    int   				unlock();
+    pthread_mutex_t *	getMutex();
 };
 
 #endif /* defined(__BomberMan__UnixMutex__) */

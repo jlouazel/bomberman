@@ -9,9 +9,9 @@
 #include "UnixThread.hh"
 
 UnixThread::UnixThread(pthread_attr_t *attr, void *(*func)(void *), void *arg, size_t id)
-: id(id)
+: _id(id)
 {
-    pthread_create(&(this->thread), attr, func, arg);
+    pthread_create(&(this->_thread), attr, func, arg);
 }
 
 UnixThread::~UnixThread()
@@ -20,7 +20,7 @@ UnixThread::~UnixThread()
     this->exit();
 }
 
-void    UnixThread::exit()
+void                    UnixThread::exit()
 {
     int     return_value;
     
@@ -28,17 +28,17 @@ void    UnixThread::exit()
     pthread_exit((void *)&return_value);
 }
 
-int     UnixThread::join()
+int                     UnixThread::join()
 {
-    return pthread_join(this->thread, NULL);
+    return pthread_join(this->_thread, NULL);
 }
 
-int     UnixThread::detach()
+int                     UnixThread::detach()
 {
-    return pthread_detach(this->thread);
+    return pthread_detach(this->_thread);
 }
 
 const pthread_t *       UnixThread::getThread() const
 {
-    return &(this->thread);
+    return &(this->_thread);
 }

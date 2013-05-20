@@ -14,8 +14,8 @@
 class UnixThread : public IThread
 {
 private:
-    pthread_t     thread;
-    size_t        id;
+    pthread_t	_thread;
+    size_t      _id;
     
 public:
     UnixThread(pthread_attr_t *attr, void *(*func)(void *), void *arg, size_t id);

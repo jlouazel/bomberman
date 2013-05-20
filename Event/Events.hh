@@ -9,7 +9,7 @@
 #ifndef BomberMan_Event_h
 #define BomberMan_Event_h
 
-namespace Event
+namespace Events
 {
 #include "Event.hh"
 #include "EventFactory.hh"
