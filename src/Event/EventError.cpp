@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 manour_m. All rights reserved.
 //
 
-#include "Error.hh"
+#include "EventError.hh"
 
 EventError::EventError(std::string & what, std::string & where, std::string & details)
 :   _what(what),
