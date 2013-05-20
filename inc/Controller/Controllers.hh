@@ -9,9 +9,12 @@
 #ifndef BomberMan_Controller_h
 #define BomberMan_Controller_h
 
-namespace Controller
+namespace Input
 {
+    namespace Controller
+    {
 #include "Error.hh"
+    }
 }
 
 #endif
