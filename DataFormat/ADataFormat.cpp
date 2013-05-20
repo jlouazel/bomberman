@@ -8,9 +8,10 @@
 
 #include "ADataFormat.hh"
 #include "Parser.hh"
+#include "Error.hh"
 
 ADataFormat::ADataFormat(eFormat format, std::string const & infile)
-  : _format(format),
+:   _format(format),
     _infile(infile.c_str()) {
   struct stat st;
   if (stat(infile.c_str(), &st) == 0) {
