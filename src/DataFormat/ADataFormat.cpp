@@ -16,7 +16,7 @@ ADataFormat::ADataFormat(eFormat format, std::string const & infile)
   struct stat st;
   if (stat(infile.c_str(), &st) == 0) {
       if(st.st_mode & S_IFDIR)
-	throw (Error("invalid format", "parser", "\"" + infile + "\" is a directory"));
+          throw (Error("invalid format", "parser", "\"" + infile + "\" is a directory"));
       else if(st.st_mode & S_IFREG) {
 	if (this->_infile.is_open() == false)
 	  throw (Error("invalid file", "parser", "unable to open \"" + infile + "\", maybe you don't have the permission to open it"));

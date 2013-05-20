@@ -1,11 +1,11 @@
-CC		= g++
+CC          = g++
 
-RM		= rm -f
+RM          = rm -f
 
 NAME		= BomberMan
 
 CPPFLAGS	+= -W -Wall -Wextra
-CPPFLAGS	+= -I
+CPPFLAGS	+= -Iinc/Controller inc/Core inc/DataFormat inc/Display inc/Event inc/Field inc/Unix inc
 
 SRC_DIR		= sources/
 

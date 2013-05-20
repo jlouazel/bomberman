@@ -14,7 +14,7 @@
 class GDLAsset : public AAsset
 {
 public:
-
+
 };
 
 #endif /* defined(__BomberMan__GDLAsset__) */

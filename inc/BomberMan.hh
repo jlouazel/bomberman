@@ -13,7 +13,7 @@
 
 namespace BomberMan
 {
-#include "Threads.hh"
+#include "Unix.hh"
 #include "Controllers.hh"
 #include "Core.hh"
 #include "DataFormat.hh"

@@ -15,7 +15,7 @@ Error::Error(std::string & what, std::string & where, std::string & details)
 {
 }
 
-Error::~Error()
+Error::~Error() throw()
 {
 }
 

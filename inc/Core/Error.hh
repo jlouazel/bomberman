@@ -20,7 +20,7 @@ class Error : public std::exception
     
 public:
     Error(std::string &, std::string &, std::string &);
-    ~Error();
+    ~Error() throw();
     
     std::string &   getWhat() const;
     std::string &   getWhere() const;

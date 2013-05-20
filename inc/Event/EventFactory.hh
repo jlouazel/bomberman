@@ -9,7 +9,7 @@
 #ifndef __BomberMan__EventFactory__
 #define __BomberMan__EventFactory__
 
-#include "IEvent.h"
+#include "IEvent.hh"
 
 class EventFactory
 {

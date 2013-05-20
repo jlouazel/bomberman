@@ -9,7 +9,7 @@
 #ifndef __BomberMan__AEvent__
 #define __BomberMan__AEvent__
 
-#include "IEvent.h"
+#include "IEvent.hh"
 
 class AEvent : public IEvent
 {
