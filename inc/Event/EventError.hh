@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 manour_m. All rights reserved.
 //
 
-#ifndef __BomberMan__Error__
-#define __BomberMan__Error__
+#ifndef __BomberMan_Event_Error__
+#define __BomberMan_Event_Error__
 
 #include <exception>
 #include <string>

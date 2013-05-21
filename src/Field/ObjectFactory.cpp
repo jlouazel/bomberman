@@ -7,6 +7,7 @@
 //
 
 #include "ObjectFactory.hh"
+#include "FieldError.hh"
 
 ObjectFactory::ObjectFactory()
 {

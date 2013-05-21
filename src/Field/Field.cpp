@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 manour_m. All rights reserved.
 //
 
-#include "Field.hh"
+#include "BomberMan.hh"
 
 Field::Field(unsigned int width, unsigned int height)
 :   _width(width),
@@ -36,12 +36,12 @@ unsigned int                    Field::getHeight() const
 {
     return this->height;
 }
-
 /*
+
 **
 **  Main de test
 **
-*/
+
 
 int main()
 {
@@ -68,5 +68,5 @@ int main()
     {
         std::cerr << "An error occured : " << e.getWhat() << " in " << e.getWhere() << " (" << e.getDetails() << ")" << std::endl;
     }
-    
 }
+*/

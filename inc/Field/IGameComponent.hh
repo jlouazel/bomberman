@@ -24,12 +24,12 @@ public:
     virtual void                    setX(float) = 0;
     virtual float               	getY() const = 0;
     virtual void                    setY(float) = 0;
-    virtual Display::IAsset *   	getAsset() const = 0;
-    virtual void                	setAsset(Display::IAsset *) = 0;
-    virtual Display::ISound *   	getSound() const = 0;
-    virtual void                	setSound(Display::ISound *) = 0;
-    virtual Display::IAnimation *   getAnimation() const = 0;
-    virtual void					setAnimation(Display::IAnimation *) = 0;
+    virtual IAsset *   	getAsset() const = 0;
+    virtual void                	setAsset(IAsset *) = 0;
+    virtual ISound *   	getSound() const = 0;
+    virtual void                	setSound(ISound *) = 0;
+    virtual IAnimation *   getAnimation() const = 0;
+    virtual void					setAnimation(IAnimation *) = 0;
 };
 
 #endif

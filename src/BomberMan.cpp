@@ -13,13 +13,6 @@ int		main()
     try
     {
     }
-    catch (ControllerError e)
-    {
-        std::cerr << "An error occured concerning controllers : " << e.getWhat()
-        << " in " << e.getWhere()
-        << " (" << e.getDetails()
-        << ")" << std::endl;
-    }
     catch (FieldError e)
     {
         std::cerr << "An error occured concerning the field : " << e.getWhat()
@@ -27,6 +20,14 @@ int		main()
         << " (" << e.getDetails()
         << ")" << std::endl;
     }
+    catch (ControllerError e)
+    {
+        std::cerr << "An error occured concerning controllers : " << e.getWhat()
+        << " in " << e.getWhere()
+        << " (" << e.getDetails()
+        << ")" << std::endl;
+    }
+    
     catch (EventError e)
     {
         std::cerr << "An error occured concerning events : " << e.getWhat()
@@ -55,5 +56,4 @@ int		main()
         << " (" << e.getDetails()
         << ")" << std::endl;
     }
-    
 }

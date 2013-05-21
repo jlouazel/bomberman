@@ -11,12 +11,12 @@
 
 #include <iostream>
 
-#include "Unix.hh"
+#include "Field.hh"
 #include "Controllers.hh"
+#include "Events.hh"
 #include "Core.hh"
 #include "DataFormat.hh"
-#include "Events.hh"
 #include "Display.hh"
-#include "Field.hh"
+#include "Unix.hh"
 
 #endif /* defined(__BomberMan__BomberMan__) */

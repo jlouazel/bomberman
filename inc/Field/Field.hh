@@ -19,9 +19,9 @@
 #include "Wall.hh"
 #include "Empty.hh"
 #include "Object.hh"
+#include "FieldError.hh"
 #include "ObjectFactory.hh"
 #include "Enums.hh"
-#include "FieldError.hh"
 
 class Field
 {
