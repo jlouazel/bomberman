@@ -11,19 +11,19 @@
 #include "eFormat.hh"
 #include "Xml.hh"
 
-static eBaliseState	parseBaliseState(::std::string const & str) {
-  return str[1] == '/' ? CLOSING : OPENING;
+static BomberMan::DataFormat::eBaliseState	parseBaliseState(::std::string const & str) {
+  return str[1] == '/' ? BomberMan::DataFormat::CLOSING : BomberMan::DataFormat::OPENING;
 }
 
 static bool		testIfBalise(::std::string const & str) {
   return str[0] == '<' ? true : false;
 }
 
-static ::std::string	parseBaliseName(::std::string const & str, eBaliseState state) {
+static ::std::string	parseBaliseName(::std::string const & str, BomberMan::DataFormat::eBaliseState state) {
   unsigned int i;
   ::std::string name;
 
-  if (state == OPENING)
+  if (state == BomberMan::DataFormat::OPENING)
     i = 1;
   else
     i = 2;
@@ -60,13 +60,13 @@ static void	checkConformity(::std::string const & infile, ::std::pair<int, ::std
       break;
     case ' ':
       if ((car == false && chev == true) || (i > 0 && line.second[i - 1] == '/'))
-	throw (Error("incorrect xml syntax", getEmplacement(infile, line), "invalid space caracter before balise name declaration"));
+          throw (BomberMan::DataFormat::FormatError("incorrect xml syntax", getEmplacement(infile, line), "invalid space caracter before balise name declaration"));
       break;
     case '>':
       if (chev == false)
-	throw (Error("incorrect xml syntax", getEmplacement(infile, line), "'<' is needed before closing one"));
+	throw (BomberMan::DataFormat::FormatError("incorrect xml syntax", getEmplacement(infile, line), "'<' is needed before closing one"));
       if (line.second[i - 1] == ' ')
-	throw (Error("incorrect xml syntax", getEmplacement(infile, line), "invalid space caracter before '>'"));
+	throw (BomberMan::DataFormat::FormatError("incorrect xml syntax", getEmplacement(infile, line), "invalid space caracter before '>'"));
       chev = false;
       break;
     default:
@@ -75,9 +75,9 @@ static void	checkConformity(::std::string const & infile, ::std::pair<int, ::std
     }
   }
   if (chev == true)
-    throw (Error("incorrect xml syntax", getEmplacement(infile, line), "missing '>' at the end of expression"));
+    throw (BomberMan::DataFormat::FormatError("incorrect xml syntax", getEmplacement(infile, line), "missing '>' at the end of expression"));
   if (quotes == true)
-    throw (Error("incorrect xml syntax", getEmplacement(infile, line), "mismatched '\"'"));
+    throw (BomberMan::DataFormat::FormatError("incorrect xml syntax", getEmplacement(infile, line), "mismatched '\"'"));
 }
 
 static bool isUseless(::std::string const &str) {
@@ -112,43 +112,45 @@ static void epurXmlDatas(::std::list<::std::pair<int, ::std::string> > & epur,
     epur.push_back(::std::make_pair(content.first, recup));
 }
 
-static Xml::Balise *getUpperNonClosed(::std::list<Xml::Balise *> const & balises, ::std::list<Xml::Balise *>::const_iterator it) {
-  Xml::Balise * tmp = 0;
-  for (::std::list<Xml::Balise *>::const_iterator it2 = balises.begin(); it2 != it; ++it2) {
-    if ((*it2)->Xml::Balise::getAssociated() == 0)
+static BomberMan::DataFormat::Xml::Balise *getUpperNonClosed(::std::list<BomberMan::DataFormat::Xml::Balise *> const & balises, ::std::list<BomberMan::DataFormat::Xml::Balise *>::const_iterator it)
+{
+  BomberMan::DataFormat::Xml::Balise * tmp = 0;
+  for (::std::list<BomberMan::DataFormat::Xml::Balise *>::const_iterator it2 = balises.begin(); it2 != it; ++it2) {
+    if ((*it2)->BomberMan::DataFormat::Xml::Balise::getAssociated() == 0)
       tmp = *it2;
   }
   return tmp;
 }
 
-static void assignAssociated(::std::list<Xml::Balise *> const & balises) {
-  for (::std::list<Xml::Balise *>::const_iterator it = balises.begin(); it != balises.end(); ++it) {
-    if ((*it)->Xml::Balise::getState() == CLOSING && (*it)->Xml::Balise::getAssociated() == 0)
-      for (::std::list<Xml::Balise *>::const_iterator it2 = balises.begin(); it2 != it; ++it2) {
-	if ((*it2)->Xml::Balise::getState() == OPENING && (*it2)->Xml::Balise::getName() == (*it)->Xml::Balise::getName()) {
-	  (*it)->Xml::Balise::setParent((*it2)->Xml::Balise::getParent());
-	  (*it2)->Xml::Balise::setAssociated(*it);
-	  (*it)->Xml::Balise::setAssociated(*it2);
-	  Xml::Balise *bal = getUpperNonClosed(balises, it2);
-	  (*it2)->Xml::Balise::setParent(bal);
-	  (*it)->Xml::Balise::setParent(bal);
-	  (*it)->Xml::Balise::setChildren((*it2)->Xml::Balise::getChilden());
+static void assignAssociated(::std::list<BomberMan::DataFormat::Xml::Balise *> const & balises)
+{
+  for (::std::list<BomberMan::DataFormat::Xml::Balise *>::const_iterator it = balises.begin(); it != balises.end(); ++it) {
+    if ((*it)->BomberMan::DataFormat::Xml::Balise::getState() == BomberMan::DataFormat::CLOSING && (*it)->BomberMan::DataFormat::Xml::Balise::getAssociated() == 0)
+      for (::std::list<BomberMan::DataFormat::Xml::Balise *>::const_iterator it2 = balises.begin(); it2 != it; ++it2) {
+	if ((*it2)->BomberMan::DataFormat::Xml::Balise::getState() == BomberMan::DataFormat::OPENING && (*it2)->BomberMan::DataFormat::Xml::Balise::getName() == (*it)->BomberMan::DataFormat::Xml::Balise::getName()) {
+	  (*it)->BomberMan::DataFormat::Xml::Balise::setParent((*it2)->BomberMan::DataFormat::Xml::Balise::getParent());
+	  (*it2)->BomberMan::DataFormat::Xml::Balise::setAssociated(*it);
+	  (*it)->BomberMan::DataFormat::Xml::Balise::setAssociated(*it2);
+	  BomberMan::DataFormat::Xml::Balise *bal = getUpperNonClosed(balises, it2);
+	  (*it2)->BomberMan::DataFormat::Xml::Balise::setParent(bal);
+	  (*it)->BomberMan::DataFormat::Xml::Balise::setParent(bal);
+	  (*it)->BomberMan::DataFormat::Xml::Balise::setChildren((*it2)->BomberMan::DataFormat::Xml::Balise::getChilden());
 	  if (bal) {
-	    bal->Xml::Balise::addChild(*it);
-	    bal->Xml::Balise::addChild(*it2);
+	    bal->BomberMan::DataFormat::Xml::Balise::addChild(*it);
+	    bal->BomberMan::DataFormat::Xml::Balise::addChild(*it2);
 	  }
 	}
       }
   }
 }
 
-::std::string const stateChar(Xml::Balise *balise) {
-  if (balise->Xml::Balise::getState() == CLOSING)
+::std::string const stateChar(BomberMan::DataFormat::Xml::Balise *balise) {
+  if (balise->BomberMan::DataFormat::Xml::Balise::getState() == BomberMan::DataFormat::CLOSING)
     return " (CLOSING)";
   return " (OPENING)";
 }
 
-Xml::Xml(::std::string const & infile) : ADataFormat(XML, infile) {
+BomberMan::DataFormat::Xml::Xml(::std::string const & infile) : ADataFormat(XML, infile) {
   ::std::map<int, ::std::string const>::const_iterator it;
   ::std::list<::std::pair<int, ::std::string> > epur;
 
@@ -161,13 +163,13 @@ Xml::Xml(::std::string const & infile) : ADataFormat(XML, infile) {
       eBaliseState eS = parseBaliseState(it2->second);
       ::std::string name = parseBaliseName(it2->second, eS);
       if (name.empty() == true)
-	throw (Error("invalid xml syntax", getEmplacement(infile, *it2), "balise name can't be empty"));
+	throw (BomberMan::DataFormat::FormatError("invalid xml syntax", getEmplacement(infile, *it2), "balise name can't be empty"));
       Balise *bal = new Balise(name, eS);
       this->_balises.push_back(bal);
     }
     else {
       if (this->_balises.back()->getState() == CLOSING)
-	throw (Error("invalid content declaration", getEmplacement(infile, *it2), "ambigous statement \"" + Parser::epurString(it2->second) + "\""));
+	throw (BomberMan::DataFormat::FormatError("invalid content declaration", getEmplacement(infile, *it2), "ambigous statement \"" + Parser::epurString(it2->second) + "\""));
       this->_balises.back()->setContent(Parser::epurString(it2->second));
     }
   }
@@ -175,9 +177,9 @@ Xml::Xml(::std::string const & infile) : ADataFormat(XML, infile) {
   for (::std::list<Balise *>::iterator it2 = this->_balises.begin(); it2 != this->_balises.end(); ++it2) {
     if ((*it2)->getAssociated() == 0) {
       if ((*it2)->getState() == OPENING)
-	throw (Error("invalid xml syntax", infile, "balise \"<" + (*it2)->getName() + ">\" has no related closing one"));
+	throw (BomberMan::DataFormat::FormatError("invalid xml syntax", infile, "balise \"<" + (*it2)->getName() + ">\" has no related closing one"));
       else
-	throw (Error("invalid xml syntax", infile, "balise \"</" + (*it2)->getName() + ">\" has no related opening one"));
+	throw (BomberMan::DataFormat::FormatError("invalid xml syntax", infile, "balise \"</" + (*it2)->getName() + ">\" has no related opening one"));
     }
   }
   // for (::std::list<Balise *>::iterator it2 = this->_balises.begin(); it2 != this->_balises.end(); ++it2) {
@@ -196,15 +198,15 @@ Xml::Xml(::std::string const & infile) : ADataFormat(XML, infile) {
   // }
 }
 
-static void	eraseBalises(Xml::Balise *bal) {
+static void	eraseBalises(BomberMan::DataFormat::Xml::Balise *bal) {
   delete bal;
 }
 
-Xml::~Xml() {
+BomberMan::DataFormat::Xml::~Xml() {
   ::std::for_each(this->_balises.begin(), this->_balises.end(), eraseBalises);
 }
 
-Xml::Balise::Balise(::std::string const & name, eBaliseState state)
+BomberMan::DataFormat::Xml::Balise::Balise(::std::string const & name, eBaliseState state)
   : _name(name),
     _state(state),
     _parent(0),
@@ -214,59 +216,59 @@ Xml::Balise::Balise(::std::string const & name, eBaliseState state)
 }
 
 
-Xml::Balise::~Balise() {
+BomberMan::DataFormat::Xml::Balise::~Balise() {
 }
 
-Xml::Balise *				Xml::Balise::getParent() const {
+BomberMan::DataFormat::Xml::Balise *				BomberMan::DataFormat::Xml::Balise::getParent() const {
   return this->_parent;
 }
 
-void					Xml::Balise::setParent(Balise *parent) {
+void					BomberMan::DataFormat::Xml::Balise::setParent(BomberMan::DataFormat::Xml::Balise *parent) {
   if (parent)
     this->_parent = parent;
 }
 
-::std::string const &			Xml::Balise::getName() const {
+::std::string const &			BomberMan::DataFormat::Xml::Balise::getName() const {
   return this->_name;
 }
 
-void					Xml::Balise::setName(::std::string const & name) {
+void					BomberMan::DataFormat::Xml::Balise::setName(::std::string const & name) {
   this->_name = name;
 }
 
-::std::string const &			Xml::Balise::getContent() const {
+::std::string const &			BomberMan::DataFormat::Xml::Balise::getContent() const {
   return this->_content;
 }
 
-void					Xml::Balise::setContent(::std::string const & content) {
+void					BomberMan::DataFormat::Xml::Balise::setContent(::std::string const & content) {
   this->_content = content;
 }
 
-::std::list<Xml::Balise *> const &	Xml::Balise::getChilden() const {
+::std::list<BomberMan::DataFormat::Xml::Balise *> const &	BomberMan::DataFormat::Xml::Balise::getChilden() const {
   return this->_children;
 }
 
-void					Xml::Balise::addChild(Balise *child) {
+void					BomberMan::DataFormat::Xml::Balise::addChild(Balise *child) {
   this->_children.push_back(child);
 }
 
-Xml::Balise *				Xml::Balise::getAssociated() const {
+BomberMan::DataFormat::Xml::Balise *				BomberMan::DataFormat::Xml::Balise::getAssociated() const {
   return this->_associated;
 }
 
-void					Xml::Balise::setAssociated(Balise *balise) {
+void					BomberMan::DataFormat::Xml::Balise::setAssociated(Balise *balise) {
   this->_associated = balise;
 }
 
-eBaliseState				Xml::Balise::getState() const {
+BomberMan::DataFormat::eBaliseState				BomberMan::DataFormat::Xml::Balise::getState() const {
   return this->_state;
 }
 
-void					Xml::Balise::setChildren(::std::list<Xml::Balise *> const & children) {
+void					BomberMan::DataFormat::Xml::Balise::setChildren(::std::list<BomberMan::DataFormat::Xml::Balise *> const & children) {
   this->_children = children;
 }
 
-void					Xml::generate(::std::string const & outFileName) const {
+void					BomberMan::DataFormat::Xml::generate(::std::string const & outFileName) const {
   ::std::ofstream file(outFileName.c_str(), ::std::ios::in | ::std::ios::trunc);
   if (file) {
     for (::std::list<Balise *>::const_iterator it = this->_balises.begin(); it != this->_balises.end(); ++it) {
@@ -281,5 +283,5 @@ void					Xml::generate(::std::string const & outFileName) const {
     file.close();
   }
   else
-    throw (Error("file error", "generate method", "the file " +  outFileName + " can't be openened"));
+    throw (BomberMan::DataFormat::FormatError("file error", "generate method", "the file " +  outFileName + " can't be openened"));
 }
