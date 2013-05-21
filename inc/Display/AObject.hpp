@@ -29,7 +29,7 @@ namespace BomberMan
             // protected:
             //   void		relativeRotation();
         public:
-            AObject(std::string &texture, Vector3f &position, Vector3f &len, Camera *camera);
+            AObject(std::string &texture, BomberMan::Display::Vector3f &position, BomberMan::Display::Vector3f &len, BomberMan::Display::Camera *camera);
             virtual void	initialize(void) = 0;
             virtual void	update(gdl::GameClock const &, gdl::Input &) = 0;
             virtual void	draw(void) = 0;

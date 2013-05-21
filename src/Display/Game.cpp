@@ -26,14 +26,14 @@ void	BomberMan::Display::MyGame::initialize()
     (*itb)->initialize();
 }
 
-void	BomberMan::Display::MyGame::addObject(std::string &texture, Vector3f &position, Vector3f &len)
+void	BomberMan::Display::MyGame::addObject(std::string &texture, BomberMan::Display::Vector3f &position, BomberMan::Display::Vector3f &len)
 {
   AObject *newObject = new Texture2d(texture, position, len, &this->camera_);
 
   this->objects_.push_back(newObject);
 }
 
-void	BomberMan::Display::MyGame::setMenu(const Menu &menu)
+void	BomberMan::Display::MyGame::setMenu(const BomberMan::Display::Menu &menu)
 {
   this->menu_ = menu;
 }

@@ -4,7 +4,7 @@
 #include "Game.hpp"
 #include "Camera.hpp"
 
-Camera::Camera(void)
+BomberMan::Display::Camera::Camera(void)
   : position_(100.0f, 300.0f, 300.0f), rotation_(0.0f, 0.0f, 0.0f), look_(0.0f, 0.0f, 0.0f)
 {
   this->angle_ = 3.14159265359 * 70.0 / 180.0;
@@ -12,7 +12,7 @@ Camera::Camera(void)
   this->widthScreen_ = (int)(((tanf(this->angle_ / 2.0) * 300.0) * 2.0));
 }
 
-void		Camera::initialize(void)
+void		BomberMan::Display::Camera::initialize(void)
 {
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
@@ -26,58 +26,58 @@ void		Camera::initialize(void)
   glDepthFunc(GL_LEQUAL);
 }
 
-void		Camera::update(gdl::GameClock const & gameClock, gdl::Input & input)
+void		BomberMan::Display::Camera::update(gdl::GameClock const & gameClock, gdl::Input & input)
 {
 }
 
-Vector3f	Camera::getPosition() const
+BomberMan::Display::Vector3f	BomberMan::Display::Camera::getPosition() const
 {
   return (this->position_);
 }
 
-Vector3f	Camera::getRotation() const
+BomberMan::Display::Vector3f	BomberMan::Display::Camera::getRotation() const
 {
   return (this->rotation_);
 }
 
-Vector3f	Camera::getLook() const
+BomberMan::Display::Vector3f	BomberMan::Display::Camera::getLook() const
 {
   return (this->look_);
 }
 
-float		Camera::getAngle() const
+float		BomberMan::Display::Camera::getAngle() const
 {
   return (this->angle_);
 }
 
-int		Camera::getHeightScreen() const
+int		BomberMan::Display::Camera::getHeightScreen() const
 {
   return (this->heightScreen_);
 }
 
-int		Camera::getWidthScreen() const
+int		BomberMan::Display::Camera::getWidthScreen() const
 {
   return (this->widthScreen_);
 }
 
-void		Camera::setPosition(Vector3f &position)
+void		BomberMan::Display::Camera::setPosition(BomberMan::Display::Vector3f &position)
 {
   this->position_ = position;
   this->heightScreen_ = (int)((tanf(this->angle_ / 2) * this->position_.getZ()) * 2);
   this->widthScreen_ = (int)((tanf(this->angle_ / 2) * this->position_.getZ()) * 2);
 }
 
-void		Camera::setRotation(Vector3f &rotation)
+void		BomberMan::Display::Camera::setRotation(BomberMan::Display::Vector3f &rotation)
 {
   this->rotation_ = rotation;
 }
 
-void		Camera::setLook(Vector3f &look)
+void		BomberMan::Display::Camera::setLook(BomberMan::Display::Vector3f &look)
 {
   this->look_ = look;
 }
 
-void		Camera::setAngle(float angle)
+void		BomberMan::Display::Camera::setAngle(float angle)
 {
   this->angle_ = 3.14159265359 * angle / 180;
   this->heightScreen_ = (int)((tanf(this->angle_ / 2) * this->position_.getZ()) * 2);
