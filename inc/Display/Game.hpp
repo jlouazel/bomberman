@@ -21,26 +21,31 @@
 #define WIDTH 1920
 #define HEIGHT 1080
 
-class MyGame : public gdl::Game
+namespace BomberMan
 {
-private:
-  std::list<AObject*>   objects_;
-  Camera		camera_;
-  Menu			menu_;
-
-public:
-  void		setMenu(const Menu &);
-  Menu		getMenu() const;
-  Camera	*getCamera();
-public:
-  MyGame() : gdl::Game()
-  {}
-  void  initialize();
-  void  update(void);
-  void	draw(void);
-  void	unload(void);
-  void	addObject(std::string &, Vector3f &, Vector3f &);
-};
-
+    namespace Display
+    {
+        class MyGame : public gdl::Game
+        {
+        private:
+            std::list<AObject*>   objects_;
+            Camera		camera_;
+            Menu			menu_;
+            
+        public:
+            void		setMenu(const Menu &);
+            Menu		getMenu() const;
+            Camera	*getCamera();
+        public:
+            MyGame() : gdl::Game()
+            {}
+            void  initialize();
+            void  update(void);
+            void	draw(void);
+            void	unload(void);
+            void	addObject(std::string &, Vector3f &, Vector3f &);
+        };
+    }
+}
 
 #endif

@@ -15,7 +15,7 @@
 #include "Vector.hpp"
 #include "Menu.hpp"
 
-void	MyGame::initialize()
+void	BomberMan::Display::MyGame::initialize()
 {
   window_.setWidth(WIDTH);
   window_.setHeight(HEIGHT);
@@ -26,29 +26,29 @@ void	MyGame::initialize()
     (*itb)->initialize();
 }
 
-void	MyGame::addObject(std::string &texture, Vector3f &position, Vector3f &len)
+void	BomberMan::Display::MyGame::addObject(std::string &texture, Vector3f &position, Vector3f &len)
 {
   AObject *newObject = new Texture2d(texture, position, len, &this->camera_);
 
   this->objects_.push_back(newObject);
 }
 
-void	MyGame::setMenu(const Menu &menu)
+void	BomberMan::Display::MyGame::setMenu(const Menu &menu)
 {
   this->menu_ = menu;
 }
 
-Menu	MyGame::getMenu() const
+BomberMan::Display::Menu	BomberMan::Display::MyGame::getMenu() const
 {
   return (this->menu_);
 }
 
-Camera  *MyGame::getCamera()
+BomberMan::Display::Camera  *BomberMan::Display::MyGame::getCamera()
 {
   return (&this->camera_);
 }
 
-void	MyGame::update(void)
+void	BomberMan::Display::MyGame::update(void)
 {
   std::list<AObject*>::iterator itb = this->objects_.begin();
   for (; itb != this->objects_.end(); ++itb)
@@ -56,7 +56,7 @@ void	MyGame::update(void)
   camera_.update(gameClock_, input_);
 }
 
-void	MyGame::draw(void)
+void	BomberMan::Display::MyGame::draw(void)
 {
   // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   // glClearColor(0.74f, 0.84f, 95.0f, 1.0f);
@@ -67,6 +67,6 @@ void	MyGame::draw(void)
   this->menu_.affAllOnglet();
 }
 
-void	MyGame::unload(void)
+void	BomberMan::Display::MyGame::unload(void)
 {
 }
