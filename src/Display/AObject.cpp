@@ -1,6 +1,8 @@
 #include <math.h>
 #include <iostream>
 #include <string>
+#include <GL/gl.h>
+#include <GL/glut.h>
 #include "MyGame.hpp"
 #include "AObject.hpp"
 #include "Vector.hpp"

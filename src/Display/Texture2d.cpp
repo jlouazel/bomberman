@@ -2,6 +2,8 @@
 #include <Image.hpp>
 #include <math.h>
 #include <unistd.h>
+#include <GL/gl.h>
+#include <GL/glut.h>
 #include "MyGame.hpp"
 #include "Texture2d.hpp"
 
