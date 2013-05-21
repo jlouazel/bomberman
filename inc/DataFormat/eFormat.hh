@@ -5,7 +5,8 @@ namespace BomberMan
 {
     namespace DataFormat
     {
-        enum eFormat {
+        enum eFormat
+        {
             XML,
             JSON
         };

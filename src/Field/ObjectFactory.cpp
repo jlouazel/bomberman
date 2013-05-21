@@ -26,7 +26,7 @@ void        BomberMan::Field::ObjectFactory::learn(::std::pair<BomberMan::Field:
     this->_objects.insert(::std::pair<type, object>);
 }
 
-BomberMan::Field::Object *    ObjectFactory::create(::std::pair<eObjectType, eBuffType> type) const
+BomberMan::Field::Object *    BomberMan::Field::ObjectFactory::create(::std::pair<eObjectType, eBuffType> type) const
 {
     ::std::map<::std::pair<eObjectType, eBuffType>, Object *>::iterator it;
     

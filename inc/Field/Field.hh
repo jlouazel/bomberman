@@ -31,7 +31,7 @@ namespace BomberMan
         {
             unsigned int								_width;
             unsigned int								_height;
-            ::std::vector<::std::list<IGameComponent *> > &	_map;
+            ::std::vector< ::std::list<IGameComponent *> > &	_map;
             
         public:
             Field(unsigned int width, unsigned int height);

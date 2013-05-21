@@ -21,7 +21,7 @@ namespace BomberMan
     {
         class ObjectFactory
         {
-            ::std::map<::std::pair<eObjectType, eBuffType>, Object *>   _objects;
+            ::std::map< ::std::pair<eObjectType, eBuffType>, Object *>   _objects;
             
         public:
             ObjectFactory();

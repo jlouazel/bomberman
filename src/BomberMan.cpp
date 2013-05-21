@@ -13,14 +13,14 @@ int		main()
     try
     {
     }
-    catch (BomberMan::FieldError e)
+    catch (BomberMan::Field::FieldError e)
     {
         ::std::cerr << "An error occured concerning the field : " << e.getWhat()
         << " in " << e.getWhere()
         << " (" << e.getDetails()
         << ")" << ::std::endl;
     }
-    catch (BomberMan::ControllerError e)
+    catch (BomberMan::Input::ControllerError e)
     {
         ::std::cerr << "An error occured concerning controllers : " << e.getWhat()
         << " in " << e.getWhere()
@@ -28,28 +28,28 @@ int		main()
         << ")" << ::std::endl;
     }
     
-    catch (BomberMan::EventError e)
+    catch (BomberMan::Event::EventError e)
     {
         ::std::cerr << "An error occured concerning events : " << e.getWhat()
         << " in " << e.getWhere()
         << " (" << e.getDetails()
         << ")" << ::std::endl;
     }
-    catch (BomberMan::CoreError e)
+    catch (BomberMan::Core::CoreError e)
     {
         ::std::cerr << "An error occured concerning the core : " << e.getWhat()
         << " in " << e.getWhere()
         << " (" << e.getDetails()
         << ")" << ::std::endl;
     }
-    catch (BomberMan::FormatError e)
+    catch (BomberMan::DataFormat::FormatError e)
     {
         ::std::cerr << "An error occured concerning data format : " << e.getWhat()
         << " in " << e.getWhere()
         << " (" << e.getDetails()
         << ")" << ::std::endl;
     }
-    catch (BomberMan::DisplayError e)
+    catch (BomberMan::Display::DisplayError e)
     {
         ::std::cerr << "An error occured concerning the display : " << e.getWhat()
         << " in " << e.getWhere()

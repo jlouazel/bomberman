@@ -12,7 +12,7 @@
 #include "Parser.hh"
 #include "FormatError.hh"
 
-ADataFormat::ADataFormat(eFormat format, ::std::string const & infile)
+BomberMan::DataFormat::ADataFormat::ADataFormat(eFormat format, ::std::string const & infile)
 :   _format(format),
 _infile(infile.c_str())
 {
@@ -22,13 +22,13 @@ _infile(infile.c_str())
         {
             ::std::stringstream str;
             str << "\"" << infile << "\" is a directory";
-            throw (FormatError(::std::string("invalid format"), ::std::string("parser"), ::std::string("\"" + infile + "\" is a directory")));
+            throw (BomberMan::DataFormat::FormatError(::std::string("invalid format"), ::std::string("parser"), ::std::string("\"" + infile + "\" is a directory")));
         }
         else if(st.st_mode & S_IFREG) {
             if (this->_infile.is_open() == false)
-                throw (FormatError("invalid file", "parser", "unable to open \"" + infile + "\", maybe you don't have the permission to open it"));
+                throw (BomberMan::DataFormat::FormatError("invalid file", "parser", "unable to open \"" + infile + "\", maybe you don't have the permission to open it"));
             if (Parser::checkExtend(format, infile) == false)
-                throw (FormatError("invalid file type", "parser", "this is not a " + Parser::typeToString(format) + " file"));
+                throw (BomberMan::DataFormat::FormatError("invalid file type", "parser", "this is not a " + Parser::typeToString(format) + " file"));
             char c;
             int line = 1;
             ::std::string recup;
@@ -46,24 +46,24 @@ _infile(infile.c_str())
             }
         }
         else
-            throw (FormatError("invalid format", "parser", "\"" + infile + "\" is an unknown format file"));
+            throw (BomberMan::DataFormat::FormatError("invalid format", "parser", "\"" + infile + "\" is an unknown format file"));
     }
     else
-        throw (FormatError("unknown file", "parser", "the file \"" + infile + "\" doesn't exists"));
+        throw (BomberMan::DataFormat::FormatError("unknown file", "parser", "the file \"" + infile + "\" doesn't exists"));
 }
 
-ADataFormat::~ADataFormat() {
+BomberMan::DataFormat::ADataFormat::~ADataFormat() {
     this->_infile.close();
 }
 
-eFormat 									ADataFormat::getFormat() const {
+BomberMan::DataFormat::eFormat 		BomberMan::DataFormat::ADataFormat::getFormat() const {
     return this->_format;
 }
 
-::std::ifstream const &						ADataFormat::getInFile() const {
+::std::ifstream const &						BomberMan::DataFormat::ADataFormat::getInFile() const {
     return this->_infile;
 }
 
-::std::map<int, ::std::string const> const &	ADataFormat::getContent() const {
+::std::map<int, ::std::string const> const &	BomberMan::DataFormat::ADataFormat::getContent() const {
     return this->_content;
 }
