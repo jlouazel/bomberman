@@ -14,8 +14,6 @@
 #include <utility>
 #include <list>
 
-namespace Field
-{
 #include "IGameComponent.hh"
 #include "Player.hh"
 #include "Wall.hh"
@@ -24,21 +22,20 @@ namespace Field
 #include "ObjectFactory.hh"
 #include "Enums.hh"
 #include "FieldError.hh"
+
+class Field
+{
+    unsigned int								_width;
+    unsigned int								_height;
+    std::vector<std::list<IGameComponent *> > &	_map;
     
-    class Field
-    {
-        unsigned int								_width;
-        unsigned int								_height;
-        std::vector<std::list<IGameComponent *> > &	_map;
-        
-    public:
-        Field(unsigned int width, unsigned int height);
-        ~Field();
-        
-        std::list<IGameComponent *>	&	get(unsigned int, unsigned int);
-        unsigned int					getWidth() const;
-        unsigned int                    getHeight() const;
-    };
-}
+public:
+    Field(unsigned int width, unsigned int height);
+    ~Field();
+    
+    std::list<IGameComponent *>	&	get(unsigned int, unsigned int);
+    unsigned int					getWidth() const;
+    unsigned int                    getHeight() const;
+};
 
 #endif /* defined(__BomberMan__Field__) */

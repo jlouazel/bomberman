@@ -9,13 +9,11 @@
 #ifndef BomberMan_DataFormat_hh
 #define BomberMan_DataFormat_hh
 
-namespace DataFormat
-{
-#include "IDataFormat.hh"
-#include "eFormat.hh"
 #include "FormatError.hh"
+#include "eFormat.hh"
+#include "IDataFormat.hh"
+#include "ADataFormat.hh"
 #include "Parser.hh"
 #include "Xml.hh"
-}
 
 #endif

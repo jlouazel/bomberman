@@ -9,12 +9,9 @@
 #ifndef BomberMan_Event_h
 #define BomberMan_Event_h
 
-namespace Events
-{
 #include "Event.hh"
 #include "EventFactory.hh"
 #include "EventError.hh"
 #include "Manager.hh"
-}
 
 #endif

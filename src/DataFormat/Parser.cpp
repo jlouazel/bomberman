@@ -4,8 +4,6 @@
 #include <algorithm>
 
 #include "Parser.hh"
-#include "FormatError.hh"
-#include "Xml.hh"
 
 std::string const 			Parser::typeToString(eFormat format) {
   switch (format) {

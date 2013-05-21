@@ -9,10 +9,7 @@
 #ifndef BomberMan_Threads_h
 #define BomberMan_Threads_h
 
-namespace Threads
-{
 #include "IThread.hh"
 #include "IMutex.hh"
-}
 
 #endif

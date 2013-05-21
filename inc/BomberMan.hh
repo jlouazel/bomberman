@@ -11,8 +11,6 @@
 
 #include <iostream>
 
-namespace BomberMan
-{
 #include "Unix.hh"
 #include "Controllers.hh"
 #include "Core.hh"
@@ -20,6 +18,5 @@ namespace BomberMan
 #include "Events.hh"
 #include "Display.hh"
 #include "Field.hh"
-}
 
 #endif /* defined(__BomberMan__BomberMan__) */

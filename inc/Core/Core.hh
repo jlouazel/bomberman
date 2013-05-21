@@ -9,9 +9,6 @@
 #ifndef BomberMan_Core_h
 #define BomberMan_Core_h
 
-namespace Core
-{
 #include "CoreError.hh"
-}
 
 #endif

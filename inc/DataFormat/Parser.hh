@@ -4,8 +4,10 @@
 #include <vector>
 #include <string>
 
+#include "FormatError.hh"
 #include "IDataFormat.hh"
 #include "eFormat.hh"
+#include "Xml.hh"
 
 class Parser {
 private:

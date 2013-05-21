@@ -9,8 +9,6 @@
 #ifndef BomberMan_Display_h
 #define BomberMan_Display_h
 
-namespace Display
-{
 #include "GDLAnimation.hh"
 #include "GDLAsset.hh"
 #include "GDLPicture.hh"
@@ -18,6 +16,5 @@ namespace Display
 #include "DisplayError.hh"
 #include "Manager.hh"
 #include "Resources.hh"
-}
 
 #endif
