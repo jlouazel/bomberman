@@ -5,8 +5,8 @@ RM          = rm -f
 NAME		= BomberMan
 
 CPPFLAGS	+= -W -Wall -Wextra
-CPPFLAGS	+= -Iinc/Controller/ -Iinc/Core/ -Iinc/DataFormat/ -Iinc/Display/ -Iinc/Event/ -Iinc/Field/ -Iinc/Unix/ -Iinc/ -I./libgdl/include -L./libgdl/lib -Wl,--rpath=./libgdl/lib -lgdl_gl -lGL -lGLU
-LDFLAGS		=  -lpthread
+CPPFLAGS	+= -Iinc/Controller/ -Iinc/Core/ -Iinc/DataFormat/ -Iinc/Display/ -Iinc/Event/ -Iinc/Field/ -Iinc/Unix/ -Iinc/ -I./libgdl/include
+LDFLAGS		=  -lpthread -L./libgdl/lib -Wl,--rpath=./libgdl/lib -lgdl_gl -lGL -lGLU
 
 SRC_DIR		= src/
 CONTROLLER  = Controller/
