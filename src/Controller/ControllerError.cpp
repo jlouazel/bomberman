@@ -8,28 +8,28 @@
 
 #include "ControllerError.hh"
 
-ControllerError::ControllerError(std::string & what, std::string & where, std::string & details)
+BomberMan::ControllerError::ControllerError(::std::string & what, ::std::string & where, ::std::string & details)
 :   _what(what),
     _where(where),
     _details(details)
 {
 }
 
-ControllerError::~ControllerError() throw()
+BomberMan::ControllerError::~ControllerError() throw()
 {
 }
 
-std::string &   ControllerError::getWhat() const
+::std::string & BomberMan::ControllerError::getWhat() const
 {
     return this->_what;
 }
 
-std::string &   ControllerError::getWhere() const
+::std::string & BomberMan::ControllerError::getWhere() const
 {
     return this->_where;
 }
 
-std::string &   ControllerError::getDetails() const
+::std::string & BomberMan::ControllerError::getDetails() const
 {
     return this->_details;
 }

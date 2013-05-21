@@ -23,19 +23,25 @@
 #include "ObjectFactory.hh"
 #include "Enums.hh"
 
-class Field
+namespace BomberMan
 {
-    unsigned int								_width;
-    unsigned int								_height;
-    std::vector<std::list<IGameComponent *> > &	_map;
-    
-public:
-    Field(unsigned int width, unsigned int height);
-    ~Field();
-    
-    std::list<IGameComponent *>	&	get(unsigned int, unsigned int);
-    unsigned int					getWidth() const;
-    unsigned int                    getHeight() const;
-};
+    namespace Field
+    {
+        class Field
+        {
+            unsigned int								_width;
+            unsigned int								_height;
+            ::std::vector<::std::list<IGameComponent *> > &	_map;
+            
+        public:
+            Field(unsigned int width, unsigned int height);
+            ~Field();
+            
+            ::std::list<IGameComponent *>	&	get(unsigned int, unsigned int);
+            unsigned int					getWidth() const;
+            unsigned int                    getHeight() const;
+        };
+    }
+}
 
 #endif /* defined(__BomberMan__Field__) */

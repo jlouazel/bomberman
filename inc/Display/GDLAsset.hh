@@ -11,10 +11,16 @@
 
 #include "AAsset.hh"
 
-class GDLAsset : public AAsset
+namespace BomberMan
 {
-public:
-
-};
+    namespace Display
+    {
+        class GDLAsset : public AAsset
+        {
+        public:
+            
+        };
+    }
+}
 
 #endif /* defined(__BomberMan__GDLAsset__) */

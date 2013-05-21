@@ -9,10 +9,16 @@
 #ifndef BomberMan_IAnimation_h
 #define BomberMan_IAnimation_h
 
-class IAnimation
+namespace BomberMan
 {
-public:
-    
-};
+    namespace Display
+    {
+        class IAnimation
+        {
+        public:
+            
+        };
+    }
+}
 
 #endif

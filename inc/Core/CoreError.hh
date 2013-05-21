@@ -12,19 +12,25 @@
 #include <exception>
 #include <string>
 
-class CoreError : public std::exception
+namespace BomberMan
 {
-    std::string &	_what;
-    std::string &   _where;
-    std::string &   _details;
-    
-public:
-    CoreError(std::string &, std::string &, std::string &);
-    ~CoreError() throw();
-    
-    std::string &   getWhat() const;
-    std::string &   getWhere() const;
-    std::string &   getDetails() const;
-};
+    namespace Core
+    {
+        class CoreError : public ::std::exception
+        {
+            ::std::string & _what;
+            ::std::string & _where;
+            ::std::string & _details;
+            
+        public:
+            CoreError(::std::string &, ::std::string &, ::std::string &);
+            ~CoreError() throw();
+            
+            ::std::string & getWhat() const;
+            ::std::string & getWhere() const;
+            ::std::string & getDetails() const;
+        };
+    }
+}
 
 #endif /* defined(__BomberMan__Error__) */

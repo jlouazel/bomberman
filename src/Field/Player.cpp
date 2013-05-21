@@ -8,76 +8,76 @@
 
 #include "Player.hh"
 
-Player::Player()
+BomberMan::Field::Player::Player()
 {
     this->_bomb = new Object(BOMB, NONE, 3, 3);
 }
 
-Player::~Player()
+BomberMan::Field::Player::~Player()
 {
 }
 
-void    Player::move()
+void    BomberMan::Field::Player::move()
 {
 }
 
-void    Player::setBomb()
+void    BomberMan::Field::Player::setBomb()
 {
 }
 
-void    Player::acquireObject()
+void    BomberMan::Field::Player::acquireObject()
 {
 }
 
-void    Player::run()
+void    BomberMan::Field::Player::run()
 {
 }
 
-int     Player::getNbBombMax() const
+int     BomberMan::Field::Player::getNbBombMax() const
 {
     return this->_nb_bomb_max;
 }
 
-void    Player::setNbBombMax(int nb)
+void    BomberMan::Field::Player::setNbBombMax(int nb)
 {
     this->_nb_bomb_max = nb;
 }
 
-int     Player::getNbBombSet() const
+int     BomberMan::Field::Player::getNbBombSet() const
 {
     return this->_nb_bomb_set;
 }
 
-float   Player::getSpeed() const
+float   BomberMan::Field::Player::getSpeed() const
 {
     return this->_speed;
 }
 
-void    Player::setSpeed(float speed)
+void    BomberMan::Field::Player::setSpeed(float speed)
 {
     this->_speed = speed;
 }
 
-Object *    Player::getBomb() const
+BomberMan::Field::Object *    BomberMan::Field::Player::getBomb() const
 {
     return this->_bomb;
 }
 
-int		Player::getPv() const
+int		BomberMan::Field::Player::getPv() const
 {
     return this->_pv;
 }
 
-void    Player::setPv(int pv)
+void    BomberMan::Field::Player::setPv(int pv)
 {
     this->_pv = pv;
 }
 
-void    Player::explode(int damages, eDirection direction)
+void    BomberMan::Field::Player::explode(int damages, eDirection direction)
 {
     this->setPv(this->_pv - damages);
     // animation dmg
     if (this->_pv <= 0)
-        std::cout << "J'suis mort" << std::endl;
+        ::std::cout << "J'suis mort" << ::std::endl;
     // propagation
 }

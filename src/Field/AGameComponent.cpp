@@ -8,52 +8,52 @@
 
 #include "AGameComponent.hh"
 
-float                   AGameComponent::getX() const
+float                   BomberMan::Field::AGameComponent::getX() const
 {
     return this->_x;
 }
 
-void                    AGameComponent::setX(float x)
+void                    BomberMan::Field::AGameComponent::setX(float x)
 {
     this->_x = x;
 }
 
-float                   AGameComponent::getY() const
+float                   BomberMan::Field::AGameComponent::getY() const
 {
     return this->_y;
 }
 
-void                    AGameComponent::setY(float y)
+void                    BomberMan::Field::AGameComponent::setY(float y)
 {
     this->_y = y;
 }
 
-IAsset *       AGameComponent::getAsset() const
+BomberMan::Display::IAsset *       BomberMan::Field::AGameComponent::getAsset() const
 {
     return this->_asset;
 }
 
-void                    AGameComponent::setAsset(IAsset * asset)
+void                    BomberMan::Field::AGameComponent::setAsset(Display::IAsset * asset)
 {
     this->_asset = asset;
 }
 
-ISound *       AGameComponent::getSound() const
+BomberMan::Display::ISound *       BomberMan::Field::AGameComponent::getSound() const
 {
     return this->_sound;
 }
 
-void                    AGameComponent::setSound(ISound * sound)
+void                    BomberMan::Field::AGameComponent::setSound(Display::ISound * sound)
 {
     this->_sound = sound;
 }
 
-IAnimation *   AGameComponent::getAnimation() const
+BomberMan::Display::IAnimation *   BomberMan::Field::AGameComponent::getAnimation() const
 {
     return this->_animation;
 }
 
-void                    AGameComponent::setAnimation(ISound *animation)
+void                    BomberMan::Field::AGameComponent::setAnimation(Display::IAnimation *animation)
 {
     this->_animation = animation;
 }

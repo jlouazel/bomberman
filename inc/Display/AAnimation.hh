@@ -11,10 +11,16 @@
 
 #include "IAnimation.hh"
 
-class AAnimation : public IAnimation
+namespace BomberMan
 {
-public:
-    
-};
+    namespace Display
+    {
+        class AAnimation : public IAnimation
+        {
+        public:
+            
+        };
+    }
+}
 
 #endif /* defined(__BomberMan__AAnimation__) */

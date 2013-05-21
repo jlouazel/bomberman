@@ -11,10 +11,16 @@
 
 #include "AAnimation.hh"
 
-class GDLAnimation : public AAnimation
+namespace BomberMan
 {
-public:
-    
-};
+    namespace Display
+    {
+        class GDLAnimation : public AAnimation
+        {
+        public:
+            
+        };
+    }
+}
 
 #endif /* defined(__BomberMan__GDLAnimation__) */

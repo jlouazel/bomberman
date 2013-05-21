@@ -17,21 +17,27 @@
 #include "IPicture.hh"
 #include "ISound.hh"
 
-class Ressources
+namespace BomberMan
 {
-    std::map<std::string, IPicture *>	_pictures;
-    std::map<std::string, IAsset *>		_assets;
-    std::map<std::string, IAnimation *>	_animations;
-    std::map<std::string, ISound *>		_sounds;
-    
-public:
-    Ressources();
-    ~Ressources();
-    
-    IPicture *		getPicture(const std::string &) const;
-    IAnimation *	getAnimation(const std::string &) const;
-    ISound *		getSound(const std::string &) const;
-    IAsset *		getAsset(const std::string &) const;
-};
+    namespace Display
+    {
+        class Ressources
+        {
+            ::std::map<::std::string, IPicture *>	_pictures;
+            ::std::map<::std::string, IAsset *>		_assets;
+            ::std::map<::std::string, IAnimation *>	_animations;
+            ::std::map<::std::string, ISound *>		_sounds;
+            
+        public:
+            Ressources();
+            ~Ressources();
+            
+            IPicture *		getPicture(const ::std::string &) const;
+            IAnimation *	getAnimation(const ::std::string &) const;
+            ISound *		getSound(const ::std::string &) const;
+            IAsset *		getAsset(const ::std::string &) const;
+        };
+    }
+}
 
 #endif /* defined(__BomberMan__Resources__) */

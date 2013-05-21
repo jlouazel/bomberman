@@ -11,10 +11,16 @@
 
 #include "IAsset.hh"
 
-class AAsset : public IAsset
+namespace BomberMan
 {
-public:
-    
-};
+    namespace Display
+    {
+        class AAsset : public IAsset
+        {
+        public:
+            
+        };
+    }
+}
 
 #endif /* defined(__BomberMan__AAsset__) */

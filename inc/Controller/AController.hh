@@ -11,10 +11,13 @@
 
 #include "IController.hh"
 
-class AController : public IController
+namespace BomberMan
 {
-public:
-
-};
+    class AController : public IController
+    {
+    public:
+        
+    };
+}
 
 #endif /* defined(__BomberMan__AController__) */

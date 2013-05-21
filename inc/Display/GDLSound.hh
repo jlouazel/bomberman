@@ -11,10 +11,16 @@
 
 #include "ASound.hh"
 
-class GDLSound
+namespace BomberMan
 {
-public:
-
-};
+    namespace Display
+    {
+        class GDLSound
+        {
+        public:
+            
+        };
+    }
+}
 
 #endif /* defined(__BomberMan__GDLSound__) */

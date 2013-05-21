@@ -9,10 +9,16 @@
 #ifndef BomberMan_IEvent_h
 #define BomberMan_IEvent_h
 
-class IEvent
+namespace BomberMan
 {
-public:
- 
-};
+    namespace Event
+    {
+        class IEvent
+        {
+        public:
+            
+        };
+    }
+}
 
 #endif

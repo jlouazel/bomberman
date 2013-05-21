@@ -12,19 +12,25 @@
 #include <exception>
 #include <string>
 
-class FormatError : public std::exception
+namespace BomberMan
 {
-    std::string &	_what;
-    std::string &   _where;
-    std::string &   _details;
-    
-public:
-    FormatError(std::string &, std::string &, std::string &);
-    ~FormatError() throw();
-    
-    std::string &   getWhat() const;
-    std::string &   getWhere() const;
-    std::string &   getDetails() const;
-};
+    namespace DataFormat
+    {
+        class FormatError : public ::std::exception
+        {
+            ::std::string &	_what;
+            ::std::string &   _where;
+            ::std::string &   _details;
+            
+        public:
+            FormatError(::std::string &, ::std::string &, ::std::string &);
+            ~FormatError() throw();
+            
+            ::std::string &   getWhat() const;
+            ::std::string &   getWhere() const;
+            ::std::string &   getDetails() const;
+        };
+    }
+}
 
 #endif /* defined(__BomberMan__Error__) */

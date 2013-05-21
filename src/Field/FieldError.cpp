@@ -8,28 +8,28 @@
 
 #include "FieldError.hh"
 
-FieldError::FieldError(std::string & what, std::string & where, std::string & details)
+BomberMan::Field::FieldError::FieldError(::std::string & what, ::std::string & where, ::std::string & details)
 :   _what(what),
     _where(where),
     _details(details)
 {
 }
 
-FieldError::~FieldError() throw()
+BomberMan::Field::FieldError::~FieldError() throw()
 {
 }
 
-std::string &   FieldError::getWhat() const
+::std::string &   BomberMan::Field::FieldError::getWhat() const
 {
     return this->_what;
 }
 
-std::string &   FieldError::getWhere() const
+::std::string &   BomberMan::Field::FieldError::getWhere() const
 {
     return this->_where;
 }
 
-std::string &   FieldError::getDetails() const
+::std::string &   BomberMan::Field::FieldError::getDetails() const
 {
     return this->_details;
 }

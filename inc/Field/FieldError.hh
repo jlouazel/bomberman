@@ -12,19 +12,25 @@
 #include <exception>
 #include <string>
 
-class FieldError : public std::exception
+namespace BomberMan
 {
-    std::string &	_what;
-    std::string &   _where;
-    std::string &   _details;
-    
-public:
-    FieldError(std::string &, std::string &, std::string &);
-    ~FieldError() throw();
-    
-    std::string &   getWhat() const;
-    std::string &   getWhere() const;
-    std::string &   getDetails() const;
-};
+    namespace Field
+    {
+        class FieldError : public ::std::exception
+        {
+            ::std::string &	_what;
+            ::std::string &   _where;
+            ::std::string &   _details;
+            
+        public:
+            FieldError(::std::string &, ::std::string &, ::std::string &);
+            ~FieldError() throw();
+            
+            ::std::string &   getWhat() const;
+            ::std::string &   getWhere() const;
+            ::std::string &   getDetails() const;
+        };
+    }
+}
 
 #endif /* defined(__BomberMan__Error__) */

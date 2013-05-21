@@ -11,20 +11,26 @@
 
 #include        "IThread.hh"
 
-class UnixThread : public IThread
+namespace BomberMan
 {
-private:
-  pthread_t_thread;
-  size_t      _id;
-    
-public:
-  UnixThread(pthread_attr_t *attr, void *(*func)(void *), void *arg, size_t id);
-  ~UnixThread();
-    
-  void                exit();
-  int                 join();
-  int                 detach();
-  const pthread_t *   getThread() const;
-};
+    namespace Unix
+    {
+        class UnixThread : public IThread
+        {
+        private:
+            pthread_t   _thread;
+            size_t      _id;
+            
+        public:
+            UnixThread(pthread_attr_t *attr, void *(*func)(void *), void *arg, size_t id);
+            ~UnixThread();
+            
+            void                exit();
+            int                 join();
+            int                 detach();
+            const pthread_t *   getThread() const;
+        };
+    }
+}
 
 #endif /* defined(__BomberMan__UnixThread__) */

@@ -8,28 +8,28 @@
 
 #include "FormatError.hh"
 
-FormatError::FormatError(std::string & what, std::string & where, std::string & details)
+BomberMan::DataFormat::FormatError::FormatError(::std::string & what, ::std::string & where, ::std::string & details)
 :   _what(what),
     _where(where),
     _details(details)
 {
 }
 
-FormatError::~FormatError() throw()
+BomberMan::DataFormat::FormatError::~FormatError() throw()
 {
 }
 
-std::string &   FormatError::getWhat() const
+::std::string &   BomberMan::DataFormat::FormatError::getWhat() const
 {
     return this->_what;
 }
 
-std::string &   FormatError::getWhere() const
+::std::string &   BomberMan::DataFormat::FormatError::getWhere() const
 {
     return this->_where;
 }
 
-std::string &   FormatError::getDetails() const
+::std::string &   BomberMan::DataFormat::FormatError::getDetails() const
 {
     return this->_details;
 }

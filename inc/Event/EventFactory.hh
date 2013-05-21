@@ -11,10 +11,16 @@
 
 #include "IEvent.hh"
 
-class EventFactory
+namespace BomberMan
 {
-public:
-
-};
+    namespace Event
+    {
+        class EventFactory
+        {
+        public:
+            
+        };
+    }
+}
 
 #endif /* defined(__BomberMan__EventFactory__) */

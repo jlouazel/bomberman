@@ -11,10 +11,16 @@
 
 #include "IPicture.hh"
 
-class APicture : public IPicture
+namespace BomberMan
 {
-public:
-    
-};
+    namespace Display
+    {
+        class APicture : public IPicture
+        {
+        public:
+            
+        };
+    }
+}
 
 #endif /* defined(__BomberMan__APicture__) */

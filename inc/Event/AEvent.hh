@@ -11,10 +11,16 @@
 
 #include "IEvent.hh"
 
-class AEvent : public IEvent
+namespace BomberMan
 {
-public:
-
-};
+    namespace Event
+    {
+        class AEvent : public IEvent
+        {
+        public:
+            
+        };
+    }
+}
 
 #endif /* defined(__BomberMan__AEvent__) */

@@ -8,26 +8,26 @@
 
 #include "Resources.hh"
 
-Ressources::Ressources()
+BomberMan::Display::Ressources::Ressources()
 {
 }
 
-Ressources::~Ressources()
+BomberMan::Display::Ressources::~Ressources()
 {
 }
 
-IPicture *		Ressources::getPicture(const std::string & name) const
+BomberMan::Display::IPicture *		BomberMan::Display::Ressources::getPicture(const ::std::string & name) const
 {
 }
 
-IAnimation *	Ressources::getAnimation(const std::string & name) const
+BomberMan::Display::IAnimation *	BomberMan::Display::Ressources::getAnimation(const ::std::string & name) const
 {
 }
 
-ISound *		Ressources::getSound(const std::string & name) const
+BomberMan::Display::ISound *		BomberMan::Display::Ressources::getSound(const ::std::string & name) const
 {
 }
 
-IAsset *		Ressources::getAsset(const std::string & name) const
+BomberMan::Display::IAsset *		BomberMan::Display::Ressources::getAsset(const ::std::string & name) const
 {
 }

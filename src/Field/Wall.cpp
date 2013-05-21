@@ -8,32 +8,32 @@
 
 #include "Wall.hh"
 
-Wall::Wall()
+BomberMan::Field::Wall::Wall()
 {
 }
 
-Wall::~Wall()
+BomberMan::Field::Wall::~Wall()
 {
 }
 
-int     Wall::getPv() const
+int     BomberMan::Field::Wall::getPv() const
 {
     return this->_pv;
 }
 
-void    Wall::setPv(int pv)
+void    BomberMan::Field::Wall::setPv(int pv)
 {
     this->_pv = pv;
 }
 
-void    Wall::explode(int damages, eDirection direction)
+void    BomberMan::Field::Wall::explode(int damages, eDirection direction)
 {
     if (this->_breakable == true)
     {
         this->_pv -= damages;
         // changement d'asset (breches?)
         if (this->_pv < 0)
-            std::cout << "Je casse" << std::endl;
+            ::std::cout << "Je casse" << ::std::endl;
     }
     // propagation
 }

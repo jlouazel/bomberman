@@ -11,7 +11,7 @@
 Field::Field(unsigned int width, unsigned int height)
 :   _width(width),
     _height(height),
-    _map(width * height, std::list<IGameComponent *>)
+    _map(width * height, ::::std::list<IGameComponent *>)
 {
 }
 
@@ -19,7 +19,7 @@ Field::~Field()
 {
 }
 
-std::list<IGameComponent *> &   Field::get(unsigned int x, unsigned int y)
+::::std::list<IGameComponent *> &   Field::get(unsigned int x, unsigned int y)
 {
     unsigned int    pos;
     
@@ -55,18 +55,18 @@ int main()
     
     try
     {
-        obj = factory.create(std::pair<Field::BOMB, Field::NONE>);
+        obj = factory.create(::std::pair<Field::BOMB, Field::NONE>);
         delete obj;
-        obj = factory.create(std::pair<Field::BUFF, Field::LIFE>);
+        obj = factory.create(::std::pair<Field::BUFF, Field::LIFE>);
         delete obj;
-        obj = factory.create(std::pair<Field::BUFF, Field::SPEED>);
+        obj = factory.create(::std::pair<Field::BUFF, Field::SPEED>);
         delete obj;
-        obj = factory.create(std::pair<Field::BUFF, Field::RANGE>);
+        obj = factory.create(::std::pair<Field::BUFF, Field::RANGE>);
         delete obj;
     }
     catch (Field::Error e)
     {
-        std::cerr << "An error occured : " << e.getWhat() << " in " << e.getWhere() << " (" << e.getDetails() << ")" << std::endl;
+        ::std::cerr << "An error occured : " << e.getWhat() << " in " << e.getWhere() << " (" << e.getDetails() << ")" << ::std::endl;
     }
 }
 */

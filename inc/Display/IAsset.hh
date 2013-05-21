@@ -9,10 +9,16 @@
 #ifndef BomberMan_IAsset_h
 #define BomberMan_IAsset_h
 
-class IAsset
+namespace BomberMan
 {
-public:
-    
-};
+    namespace Display
+    {
+        class IAsset
+        {
+        public:
+            
+        };
+    }
+}
 
 #endif

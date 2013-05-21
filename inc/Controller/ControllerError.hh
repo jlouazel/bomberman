@@ -12,19 +12,22 @@
 #include <exception>
 #include <string>
 
-class ControllerError : public std::exception
+namespace BomberMan
 {
-    std::string &	_what;
-    std::string &   _where;
-    std::string &   _details;
-    
-public:
-    ControllerError(std::string &, std::string &, std::string &);
-    ~ControllerError() throw();
-    
-    std::string &   getWhat() const;
-    std::string &   getWhere() const;
-    std::string &   getDetails() const;
-};
+    class ControllerError : public ::std::exception
+    {
+        ::std::string &	_what;
+        ::std::string &   _where;
+        ::std::string &   _details;
+        
+    public:
+        ControllerError(::std::string &, ::std::string &, ::std::string &);
+        ~ControllerError() throw();
+        
+        ::std::string &   getWhat() const;
+        ::std::string &   getWhere() const;
+        ::std::string &   getDetails() const;
+    };
+}
 
 #endif /* defined(__BomberMan__Error__) */

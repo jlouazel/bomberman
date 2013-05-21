@@ -8,19 +8,19 @@
 
 #include "UnixThread.hh"
 
-UnixThread::UnixThread(pthread_attr_t *attr, void *(*func)(void *), void *arg, size_t id)
+BomberMan::Unix::UnixThread::UnixThread(pthread_attr_t *attr, void *(*func)(void *), void *arg, size_t id)
   : _id(id)
 {
   pthread_create(&(this->_thread), attr, func, arg);
 }
 
-UnixThread::~UnixThread()
+BomberMan::Unix::UnixThread::~UnixThread()
 {
   this->detach();
   this->exit();
 }
 
-void                    UnixThread::exit()
+void                    BomberMan::Unix::UnixThread::exit()
 {
   int     return_value;
     
@@ -28,17 +28,17 @@ void                    UnixThread::exit()
   pthread_exit((void *)&return_value);
 }
 
-int                     UnixThread::join()
+int                     BomberMan::Unix::UnixThread::join()
 {
   return pthread_join(this->_thread, NULL);
 }
 
-int                     UnixThread::detach()
+int                     BomberMan::Unix::UnixThread::detach()
 {
   return pthread_detach(this->_thread);
 }
 
-const pthread_t *       UnixThread::getThread() const
+const pthread_t *       BomberMan::Unix::UnixThread::getThread() const
 {
   return &(this->_thread);
 }

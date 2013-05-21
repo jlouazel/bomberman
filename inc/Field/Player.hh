@@ -12,32 +12,38 @@
 #include "AGameComponent.hh"
 #include "Object.hh"
 
-class Player : public AGameComponent
+namespace BomberMan
 {
-protected:
-    int         _pv;
-    float       _speed;
-    int         _nb_bomb_max;
-    int         _nb_bomb_set;
-    Object *    _bomb;
-    
-public:
-    Player();
-    ~Player();
-    
-    void        move();
-    void    	setBomb();
-    void        acquireObject();
-    void        run();
-    int         getNbBombMax() const;
-    void        setNbBombMax(int);
-    int         getNbBombSet() const;
-    float       getSpeed() const;
-    void        setSpeed(float);
-    Object *    getBomb() const;
-    void        explode(int, eDirection);
-    int         getPv() const;
-    void        setPv(int);
-};
+    namespace Field
+    {
+        class Player : public AGameComponent
+        {
+        protected:
+            int         _pv;
+            float       _speed;
+            int         _nb_bomb_max;
+            int         _nb_bomb_set;
+            Object *    _bomb;
+            
+        public:
+            Player();
+            ~Player();
+            
+            void        move();
+            void    	setBomb();
+            void        acquireObject();
+            void        run();
+            int         getNbBombMax() const;
+            void        setNbBombMax(int);
+            int         getNbBombSet() const;
+            float       getSpeed() const;
+            void        setSpeed(float);
+            Object *    getBomb() const;
+            void        explode(int, eDirection);
+            int         getPv() const;
+            void        setPv(int);
+        };
+    }
+}
 
 #endif /* defined(__BomberMan__Player__) */

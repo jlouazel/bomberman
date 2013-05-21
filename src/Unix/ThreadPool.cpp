@@ -9,20 +9,20 @@
 #include "ThreadPool.hh"
 #include "UnixThread.hh"
 
-ThreadPool::ThreadPool()
+BomberMan::Unix::ThreadPool::ThreadPool()
 {
 }
 
-ThreadPool::~ThreadPool()
+BomberMan::Unix::ThreadPool::~ThreadPool()
 {
 }
 
-voidThreadPool::addThread()
+void    BomberMan::Unix::ThreadPool::addThread()
 {
   this->_count++;
 }
 
-size_tThreadPool::getNbThread() const
+size_t  BomberMan::Unix::ThreadPool::getNbThread() const
 {
   return this->_count;
 }

@@ -12,24 +12,30 @@
 #include "AGameComponent.hh"
 #include "Enums.hh"
 
-class Object : public AGameComponent
+namespace BomberMan
 {
-    eObjectType		_object_type;
-    eBuffType		_buff_type;
-    int             _power;
-    int             _timer;
-    
-public:
-    Object(eObjectType objectType, eBuffType buffType, int power, int timer);
-    Object(const Object &);
-    ~Object();
-    
-    eObjectType getObjectType() const;
-    eBuffType   getBuffType() const;
-    int         getPower() const;
-    void        setPower(int);
-    int         getTimer() const;
-    void        explode(int, eDirection);
-};
+    namespace Field
+    {
+        class Object : public AGameComponent
+        {
+            eObjectType		_object_type;
+            eBuffType		_buff_type;
+            int             _power;
+            int             _timer;
+            
+        public:
+            Object(eObjectType objectType, eBuffType buffType, int power, int timer);
+            Object(const Object &);
+            ~Object();
+            
+            eObjectType getObjectType() const;
+            eBuffType   getBuffType() const;
+            int         getPower() const;
+            void        setPower(int);
+            int         getTimer() const;
+            void        explode(int, eDirection);
+        };
+    }
+}
 
 #endif /* defined(__BomberMan__Object__) */

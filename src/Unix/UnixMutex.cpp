@@ -8,33 +8,33 @@
 
 #include "UnixMutex.hh"
 
-UnixMutex::UnixMutex(size_t id)
+BomberMan::Unix::UnixMutex::UnixMutex(size_t id)
   : _id(id)
 {
   pthread_mutex_init(&(this->_mutex), NULL);
 }
 
-UnixMutex::~UnixMutex()
+BomberMan::Unix::UnixMutex::~UnixMutex()
 {
   pthread_mutex_destroy(&(this->_mutex));
 }
 
-int                     UnixMutex::lock()
+int                     BomberMan::Unix::UnixMutex::lock()
 {
   return pthread_mutex_lock(&(this->_mutex));
 }
 
-int                     UnixMutex::trylock()
+int                     BomberMan::Unix::UnixMutex::trylock()
 {
   return pthread_mutex_trylock(&(this->_mutex));
 }
 
-int                     UnixMutex::unlock()
+int                     BomberMan::Unix::UnixMutex::unlock()
 {
   return pthread_mutex_unlock(&(this->_mutex));
 }
 
-pthread_mutex_t *       UnixMutex::getMutex()
+pthread_mutex_t *       BomberMan::Unix::UnixMutex::getMutex()
 {
   return &this->_mutex;
 }

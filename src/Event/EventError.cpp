@@ -8,28 +8,28 @@
 
 #include "EventError.hh"
 
-EventError::EventError(std::string & what, std::string & where, std::string & details)
+BomberMan::Event::EventError::EventError(::std::string & what, ::std::string & where, ::std::string & details)
 :   _what(what),
     _where(where),
     _details(details)
 {
 }
 
-EventError::~EventError() throw()
+BomberMan::Event::EventError::~EventError() throw()
 {
 }
 
-std::string &   EventError::getWhat() const
+::std::string &   BomberMan::Event::EventError::getWhat() const
 {
     return this->_what;
 }
 
-std::string &   EventError::getWhere() const
+::std::string &   BomberMan::Event::EventError::getWhere() const
 {
     return this->_where;
 }
 
-std::string &   EventError::getDetails() const
+::std::string &   BomberMan::Event::EventError::getDetails() const
 {
     return this->_details;
 }

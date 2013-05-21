@@ -15,16 +15,22 @@
 #include "Object.hh"
 #include "Enums.hh"
 
-class ObjectFactory
+namespace BomberMan
 {
-    std::map<std::pair<eObjectType, eBuffType>, Object *>   _objects;
-    
-public:
-    ObjectFactory();
-    ~ObjectFactory();
-    
-    void        learn(std::pair<eObjectType, eBuffType>, Object *);
-    Object *    create(std::pair<eObjectType, eBuffType>) const;
-};
+    namespace Field
+    {
+        class ObjectFactory
+        {
+            ::std::map<::std::pair<eObjectType, eBuffType>, Object *>   _objects;
+            
+        public:
+            ObjectFactory();
+            ~ObjectFactory();
+            
+            void        learn(::std::pair<eObjectType, eBuffType>, Object *);
+            Object *    create(::std::pair<eObjectType, eBuffType>) const;
+        };
+    }
+}
 
 #endif /* defined(__BomberMan__ObjectFactory__) */

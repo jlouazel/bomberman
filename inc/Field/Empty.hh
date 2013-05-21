@@ -11,13 +11,19 @@
 
 #include "AGameComponent.hh"
 
-class Empty : public AGameComponent
+namespace BomberMan
 {
-public:
-    Empty();
-    ~Empty();
-    
-    void	explode(int, eDirection);
-};
+    namespace Field
+    {
+        class Empty : public AGameComponent
+        {
+        public:
+            Empty();
+            ~Empty();
+            
+            void	explode(int, eDirection);
+        };
+    }
+}
 
 #endif /* defined(__BomberMan__Empty__) */

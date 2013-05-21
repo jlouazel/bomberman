@@ -9,6 +9,12 @@
 #ifndef __BomberMan__Manager__
 #define __BomberMan__Manager__
 
-
+namespace BomberMan
+{
+    namespace Event
+    {
+        
+    }
+}
 
 #endif /* defined(__BomberMan__Manager__) */

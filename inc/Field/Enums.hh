@@ -9,8 +9,14 @@
 #ifndef BomberMan_Enums_h
 #define BomberMan_Enums_h
 
-enum eObjectType    { BOMB, BUFF };
-enum eBuffType      { NONE, LIFE, SPEED, RANGE };
-enum eDirection     { UP, UPRIGHT, RIGHT, DOWNRIGHT, DOWN, DOWNLEFT, LEFT, UPLEFT };
+namespace BomberMan
+{
+    namespace Field
+    {
+        enum eObjectType    { BOMB, BUFF };
+        enum eBuffType      { NONE, LIFE, SPEED, RANGE };
+        enum eDirection     { UP, UPRIGHT, RIGHT, DOWNRIGHT, DOWN, DOWNLEFT, LEFT, UPLEFT };
+    }
+}
 
 #endif

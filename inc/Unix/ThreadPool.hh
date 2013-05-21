@@ -14,17 +14,23 @@
 
 #include "IThread.hh"
 
-class ThreadPool
+namespace BomberMan
 {
-  std::list<IThread *>_threads;
-  size_t_count;
-    
-public:
-  ThreadPool();
-  ~ThreadPool();
-    
-  voidaddThread();
-  size_tgetNbThread() const;
-};
+    namespace Unix
+    {
+        class ThreadPool
+        {
+            ::std::list<IThread *>_threads;
+            size_t  _count;
+            
+        public:
+            ThreadPool();
+            ~ThreadPool();
+            
+            void    addThread();
+            size_t  getNbThread() const;
+        };
+    }
+}
 
 #endif /* defined(__BomberMan__ThreadPool__) */

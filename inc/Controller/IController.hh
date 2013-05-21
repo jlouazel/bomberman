@@ -9,10 +9,13 @@
 #ifndef BomberMan_IController_h
 #define BomberMan_IController_h
 
-class IController
+namespace BomberMan
 {
-public:
-    
-};
+    class IController
+    {
+    public:
+        
+    };
+}
 
 #endif

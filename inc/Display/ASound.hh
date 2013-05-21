@@ -11,10 +11,16 @@
 
 #include "ISound.hh"
 
-class ASound : public ISound
+namespace BomberMan
 {
-public:
-    
-};
+    namespace Display
+    {
+        class ASound : public ISound
+        {
+        public:
+            
+        };
+    }
+}
 
 #endif /* defined(__BomberMan__ASound__) */

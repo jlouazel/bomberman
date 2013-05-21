@@ -8,7 +8,7 @@
 
 #include "Object.hh"
 
-Object::Object(eObjectType objectType, eBuffType buffType, int power, int timer)
+BomberMan::Field::Object::Object(eObjectType objectType, eBuffType buffType, int power, int timer)
 :   _object_type(objectType),
     _buff_type(buffType),
     _power(power),
@@ -16,7 +16,7 @@ Object::Object(eObjectType objectType, eBuffType buffType, int power, int timer)
 {
 }
 
-Object::Object(const Object & other)
+BomberMan::Field::Object::Object(const Object & other)
 :   _object_type(other._object_type),
     _buff_type(other._buff_type),
     _power(other._power),
@@ -24,36 +24,36 @@ Object::Object(const Object & other)
 {
 }
 
-Object::~Object()
+BomberMan::Field::Object::~Object()
 {
 }
 
-eObjectType Object::getObjectType() const
+BomberMan::Field::eObjectType BomberMan::Field::Object::getObjectType() const
 {
     return this->_object_type;
 }
 
-eBuffType   Object::getBuffType() const
+BomberMan::Field::eBuffType   BomberMan::Field::Object::getBuffType() const
 {
     return this->_buff_type;
 }
 
-void        Object::setPower(int power)
+void        BomberMan::Field::Object::setPower(int power)
 {
     this->_power = power;
 }
 
-int         Object::getPower() const
+int         BomberMan::Field::Object::getPower() const
 {
     return this->_power;
 }
 
-int         Object::getTimer() const
+int         BomberMan::Field::Object::getTimer() const
 {
     return this->_timer;
 }
 
-void        Object::explode(int damages, eDirection direction)
+void        BomberMan::Field::Object::explode(int damages, eDirection direction)
 {
     
 }

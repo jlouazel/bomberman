@@ -12,18 +12,24 @@
 #include "AGameComponent.hh"
 #include "Enums.hh"
 
-class Wall : public AGameComponent
+namespace BomberMan
 {
-    bool	_breakable;
-    int		_pv;
-    
-public:
-    Wall();
-    ~Wall();
-    
-    void	explode(int, eDirection);
-    int     getPv() const;
-    void    setPv(int);
-};
+    namespace Field
+    {
+        class Wall : public AGameComponent
+        {
+            bool	_breakable;
+            int		_pv;
+            
+        public:
+            Wall();
+            ~Wall();
+            
+            void	explode(int, eDirection);
+            int     getPv() const;
+            void    setPv(int);
+        };
+    }
+}
 
 #endif /* defined(__BomberMan__Wall__) */

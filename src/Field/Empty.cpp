@@ -8,15 +8,15 @@
 
 #include "Empty.hh"
 
-Empty::Empty()
+BomberMan::Field::Empty::Empty()
 {
 }
 
-Empty::~Empty() throw()
+BomberMan::Field::Empty::~Empty() throw()
 {
 }
 
-void    Empty::explode(int damages, eDirection direction)
+void    BomberMan::Field::Empty::explode(int damages, BomberMan::Field::eDirection direction)
 {
     // propagation
 }

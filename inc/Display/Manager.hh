@@ -9,10 +9,16 @@
 #ifndef __BomberMan__Manager__
 #define __BomberMan__Manager__
 
-class Manager
+namespace BomberMan
 {
-public:
-    
-};
+    namespace Display
+    {
+        class Manager
+        {
+        public:
+            
+        };
+    }
+}
 
 #endif /* defined(__BomberMan__Manager__) */

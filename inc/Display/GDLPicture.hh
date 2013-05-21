@@ -11,10 +11,16 @@
 
 #include "APicture.hh"
 
-class GDLPicture : public APicture
+namespace BomberMan
 {
-public:
-    
-};
+    namespace Display
+    {
+        class GDLPicture : public APicture
+        {
+        public:
+            
+        };
+    }
+}
 
 #endif /* defined(__BomberMan__GDLPicture__) */

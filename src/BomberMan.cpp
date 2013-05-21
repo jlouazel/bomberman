@@ -13,47 +13,47 @@ int		main()
     try
     {
     }
-    catch (FieldError e)
+    catch (BomberMan::FieldError e)
     {
-        std::cerr << "An error occured concerning the field : " << e.getWhat()
+        ::std::cerr << "An error occured concerning the field : " << e.getWhat()
         << " in " << e.getWhere()
         << " (" << e.getDetails()
-        << ")" << std::endl;
+        << ")" << ::std::endl;
     }
-    catch (ControllerError e)
+    catch (BomberMan::ControllerError e)
     {
-        std::cerr << "An error occured concerning controllers : " << e.getWhat()
+        ::std::cerr << "An error occured concerning controllers : " << e.getWhat()
         << " in " << e.getWhere()
         << " (" << e.getDetails()
-        << ")" << std::endl;
+        << ")" << ::std::endl;
     }
     
-    catch (EventError e)
+    catch (BomberMan::EventError e)
     {
-        std::cerr << "An error occured concerning events : " << e.getWhat()
+        ::std::cerr << "An error occured concerning events : " << e.getWhat()
         << " in " << e.getWhere()
         << " (" << e.getDetails()
-        << ")" << std::endl;
+        << ")" << ::std::endl;
     }
-    catch (CoreError e)
+    catch (BomberMan::CoreError e)
     {
-        std::cerr << "An error occured concerning the core : " << e.getWhat()
+        ::std::cerr << "An error occured concerning the core : " << e.getWhat()
         << " in " << e.getWhere()
         << " (" << e.getDetails()
-        << ")" << std::endl;
+        << ")" << ::std::endl;
     }
-    catch (FormatError e)
+    catch (BomberMan::FormatError e)
     {
-        std::cerr << "An error occured concerning data format : " << e.getWhat()
+        ::std::cerr << "An error occured concerning data format : " << e.getWhat()
         << " in " << e.getWhere()
         << " (" << e.getDetails()
-        << ")" << std::endl;
+        << ")" << ::std::endl;
     }
-    catch (DisplayError e)
+    catch (BomberMan::DisplayError e)
     {
-        std::cerr << "An error occured concerning the display : " << e.getWhat()
+        ::std::cerr << "An error occured concerning the display : " << e.getWhat()
         << " in " << e.getWhere()
         << " (" << e.getDetails()
-        << ")" << std::endl;
+        << ")" << ::std::endl;
     }
 }

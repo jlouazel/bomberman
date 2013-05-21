@@ -9,10 +9,16 @@
 #ifndef BomberMan_ISound_h
 #define BomberMan_ISound_h
 
-class ISound
+namespace BomberMan
 {
-public:
-    
-};
+    namespace Display
+    {
+        class ISound
+        {
+        public:
+            
+        };
+    }
+}
 
 #endif

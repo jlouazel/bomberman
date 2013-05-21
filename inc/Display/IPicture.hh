@@ -9,10 +9,16 @@
 #ifndef BomberMan_IPicture_h
 #define BomberMan_IPicture_h
 
-class IPicture
+namespace BomberMan
 {
-public:
-    
-};
+    namespace Display
+    {
+        class IPicture
+        {
+        public:
+            
+        };
+    }
+}
 
 #endif
