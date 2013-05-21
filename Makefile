@@ -23,7 +23,7 @@ SRCS		= $(SRC_DIR)BomberMan.cpp \
             $(SRC_DIR)$(CORE)CoreError.cpp \
             $(SRC_DIR)$(DATAFORMAT)ADataFormat.cpp \
             $(SRC_DIR)$(DATAFORMAT)FormatError.cpp \
-            $(SRC_DIR)$(DATAFORMAT)parser.cpp \
+            $(SRC_DIR)$(DATAFORMAT)Parser.cpp \
             $(SRC_DIR)$(DATAFORMAT)Xml.cpp \
             $(SRC_DIR)$(DISPLAY)AAnimation.cpp \
             $(SRC_DIR)$(DISPLAY)AAsset.cpp \

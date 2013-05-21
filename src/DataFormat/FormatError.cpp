@@ -8,7 +8,7 @@
 
 #include "FormatError.hh"
 
-BomberMan::DataFormat::FormatError::FormatError(::std::string & what, ::std::string & where, ::std::string & details)
+BomberMan::DataFormat::FormatError::FormatError(::std::string what, ::std::string where, ::std::string details)
 :   _what(what),
     _where(where),
     _details(details)

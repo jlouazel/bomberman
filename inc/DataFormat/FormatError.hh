@@ -21,14 +21,14 @@ namespace BomberMan
             ::std::string & _what;
             ::std::string & _where;
             ::std::string & _details;
-            
+
         public:
-            FormatError(::std::string &, ::std::string &, ::std::string &);
-            ~FormatError() throw();
-            
-            ::std::string & getWhat() const;
-            ::std::string & getWhere() const;
-            ::std::string & getDetails() const;
+	  FormatError(::std::string, ::std::string, ::std::string);
+	  ~FormatError() throw();
+
+	  ::std::string & getWhat() const;
+	  ::std::string & getWhere() const;
+	  ::std::string & getDetails() const;
         };
     }
 }

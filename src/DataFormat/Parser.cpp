@@ -1,9 +1,17 @@
 #include <map>
 #include <vector>
 #include <string>
+#include <sstream>
 #include <algorithm>
 
 #include "Parser.hh"
+
+::std::string				BomberMan::DataFormat::Parser::concatStr(::std::string const & s1, ::std::string const & s2, ::std::string const & s3) {
+  ::std::stringstream ss;
+
+    ss << s1 << s2 << s3;
+    return ss.str();
+}
 
 ::std::string const 			BomberMan::DataFormat::Parser::typeToString(eFormat format) {
   switch (format) {
