@@ -13,7 +13,7 @@ int		main()
     try
     {
     }
-    catch (ControllersError e)
+    catch (ControllerError e)
     {
         std::cerr << "An error occured concerning controllers : " << e.getWhat()
         << " in " << e.getWhere()

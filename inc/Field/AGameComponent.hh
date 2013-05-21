@@ -16,9 +16,9 @@ class AGameComponent : public IGameComponent
 protected:
     float                           _x;
     float                           _y;
-    Display::IAsset *               _asset;
-    Display::ISound *               _sound;
-    Display::IAnimation *			_animation;
+    IAsset *               _asset;
+    ISound *               _sound;
+    IAnimation *			_animation;
     
 public:
     virtual ~AGameComponent(){}
@@ -28,12 +28,12 @@ public:
     virtual void                    setX(float);
     virtual float                   getY() const;
     virtual void                    setY(float);
-    virtual Display::IAsset *       getAsset() const;
-    virtual void                    setAsset(Display::IAsset *);
-    virtual Display::ISound *       getSound() const;
-    virtual void                    setSound(Display::ISound *);
-    virtual Display::IAnimation *   getAnimation() const;
-    virtual void					setAnimation(Display::IAnimation *);
+    virtual IAsset *       getAsset() const;
+    virtual void                    setAsset(IAsset *);
+    virtual ISound *       getSound() const;
+    virtual void                    setSound(ISound *);
+    virtual IAnimation *   getAnimation() const;
+    virtual void					setAnimation(IAnimation *);
 };
 
 #endif /* defined(__BomberMan__AGameComponent__) */
