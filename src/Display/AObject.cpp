@@ -1,0 +1,23 @@
+#include <math.h>
+#include <iostream>
+#include <string>
+#include "Game.hpp"
+#include "AObject.hpp"
+#include "Vector.hpp"
+
+AObject::AObject(std::string &texture, Vector3f &position, Vector3f &len, Camera *camera)
+  : rotation_(0.0f, 0.0f, 0.0f), len_(len), camera_(camera)
+{
+  this->len_.setX((len.getX() * WIDTH / 100));
+  this->len_.setY((len.getY() * HEIGHT / 100));
+  this->len_.setZ(len.getZ());
+
+  float posX = position.getX() * WIDTH / 100;
+  float	posY = (HEIGHT - (position.getY() * HEIGHT / 100) - len_.getY());
+  Vector3f newVector(posX, posY, 0);
+
+  this->position_.setX(newVector.getX());
+  this->position_.setY(newVector.getY());
+  this->position_.setZ(newVector.getZ());
+  this->texture_ = gdl::Image::load(texture);
+}
