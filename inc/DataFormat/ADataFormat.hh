@@ -17,12 +17,12 @@ namespace BomberMan
             eFormat                                 _format;
             ::std::ifstream                         _infile;
             ::std::map<int, ::std::string const>    _content;
-            
+
             explicit ADataFormat(eFormat, ::std::string const &);
-            
+
         public:
             virtual ~ADataFormat();
-            
+
             eFormat                                         getFormat() const;
             ::std::ifstream const &                         getInFile() const;
             ::std::map<int, ::std::string const> const &    getContent() const;
