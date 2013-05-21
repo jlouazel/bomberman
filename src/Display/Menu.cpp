@@ -24,7 +24,7 @@ BomberMan::Display::IOnglet	*BomberMan::Display::Menu::getOneOnglet(int i) const
   return (this->_onglet.back());
 }
 
-std::vector <IOnglet *> Menu::getOnglet() const
+std::vector <BomberMan::Display::IOnglet *> BomberMan::Display::Menu::getOnglet() const
 {
   return (this->_onglet);
 }
