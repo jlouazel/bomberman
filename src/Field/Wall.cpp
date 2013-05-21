@@ -28,7 +28,8 @@ void    BomberMan::Field::Wall::setPv(int pv)
 
 void    BomberMan::Field::Wall::explode(int damages, eDirection direction)
 {
-    if (this->_breakable == true)
+   static_cast<void>(direction);
+   if (this->_breakable == true)
     {
         this->_pv -= damages;
         // changement d'asset (breches?)

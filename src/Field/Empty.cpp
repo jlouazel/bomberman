@@ -18,5 +18,7 @@ BomberMan::Field::Empty::~Empty()
 
 void    BomberMan::Field::Empty::explode(int damages, BomberMan::Field::eDirection direction)
 {
+  static_cast<void>(damages);
+  static_cast<void>(direction);
     // propagation
 }
