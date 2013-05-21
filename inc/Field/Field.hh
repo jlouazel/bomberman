@@ -27,17 +27,17 @@ namespace BomberMan
 {
     namespace Field
     {
-        class Field
+        class Manager
         {
             unsigned int								_width;
             unsigned int								_height;
-            ::std::vector< ::std::list<IGameComponent *> > &	_map;
+            ::std::vector< ::std::list<BomberMan::Field::IGameComponent *> > 	_map;
             
         public:
-            Field(unsigned int width, unsigned int height);
-            ~Field();
+            Manager(unsigned int width, unsigned int height);
+            ~Manager();
             
-            ::std::list<IGameComponent *>	&	get(unsigned int, unsigned int);
+            ::std::list<BomberMan::Field::IGameComponent *>	&	get(unsigned int, unsigned int);
             unsigned int					getWidth() const;
             unsigned int                    getHeight() const;
         };

@@ -87,7 +87,7 @@ static bool isUseless(::std::string const &str) {
   return true;
 }
 
-static void epurXmlDatas(::std::list<::std::pair<int, ::std::string> > & epur,
+static void epurXmlDatas(::std::list< ::std::pair<int, ::std::string> > & epur,
 			 ::std::pair<int, ::std::string const> content) {
   ::std::string recup;
   for (unsigned int i = 0; i < content.second.length(); i++) {
@@ -152,13 +152,13 @@ static void assignAssociated(::std::list<BomberMan::DataFormat::Xml::Balise *> c
 
 BomberMan::DataFormat::Xml::Xml(::std::string const & infile) : ADataFormat(XML, infile) {
   ::std::map<int, ::std::string const>::const_iterator it;
-  ::std::list<::std::pair<int, ::std::string> > epur;
+  ::std::list< ::std::pair<int, ::std::string> > epur;
 
   for (it = this->getContent().begin(); it != this->getContent().end(); ++it)
     epurXmlDatas(epur, *it);
-  for (::std::list<::std::pair<int, ::std::string> >::iterator it2 = epur.begin(); it2 != epur.end(); ++it2)
+  for (::std::list< ::std::pair<int, ::std::string> >::iterator it2 = epur.begin(); it2 != epur.end(); ++it2)
     checkConformity(infile, *it2);
-  for (::std::list<::std::pair<int, ::std::string> >::iterator it2 = epur.begin(); it2 != epur.end(); ++it2) {
+  for (::std::list< ::std::pair<int, ::std::string> >::iterator it2 = epur.begin(); it2 != epur.end(); ++it2) {
     if (testIfBalise(it2->second) == true) {
       eBaliseState eS = parseBaliseState(it2->second);
       ::std::string name = parseBaliseName(it2->second, eS);

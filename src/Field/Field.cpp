@@ -6,20 +6,24 @@
 //  Copyright (c) 2013 manour_m. All rights reserved.
 //
 
-#include "BomberMan.hh"
+#include <sys/types.h>
+#include <list>
 
-Field::Field(unsigned int width, unsigned int height)
+#include "IGameComponent.hh"
+#include "Field.hh"
+
+BomberMan::Field::Manager::Manager(unsigned int width, unsigned int height)
 :   _width(width),
     _height(height),
-    _map(width * height, ::::std::list<IGameComponent *>)
+    _map(width * height, ::std::list<BomberMan::Field::IGameComponent *>())
 {
 }
 
-Field::~Field()
+BomberMan::Field::Manager::~Manager()
 {
 }
 
-::::std::list<IGameComponent *> &   Field::get(unsigned int x, unsigned int y)
+::std::list<BomberMan::Field::IGameComponent *> &   BomberMan::Field::Manager::get(unsigned int x, unsigned int y)
 {
     unsigned int    pos;
     
@@ -27,14 +31,14 @@ Field::~Field()
     return this->_map[pos];
 }
 
-unsigned int                    Field::getWidth() const
+unsigned int                    BomberMan::Field::Manager::getWidth() const
 {
     return this->_width;
 }
 
-unsigned int                    Field::getHeight() const
+unsigned int                    BomberMan::Field::Manager::getHeight() const
 {
-    return this->height;
+    return this->_height;
 }
 /*
 

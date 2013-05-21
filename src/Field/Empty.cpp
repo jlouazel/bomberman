@@ -12,7 +12,7 @@ BomberMan::Field::Empty::Empty()
 {
 }
 
-BomberMan::Field::Empty::~Empty() throw()
+BomberMan::Field::Empty::~Empty()
 {
 }
 
