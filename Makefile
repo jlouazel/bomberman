@@ -5,7 +5,7 @@ RM          = rm -f
 NAME		= BomberMan
 
 CPPFLAGS	+= -W -Wall -Wextra
-CPPFLAGS	+= -Iinc/Controller/ -Iinc/Core/ -Iinc/DataFormat/ -Iinc/Display/ -Iinc/Event/ -Iinc/Field/ -Iinc/Unix/ -Iinc/
+CPPFLAGS	+= -Iinc/Controller/ -Iinc/Core/ -Iinc/DataFormat/ -Iinc/Display/ -Iinc/Event/ -Iinc/Field/ -Iinc/Unix/ -Iinc/ -lpthread
 
 SRC_DIR		= src/
 CONTROLLER  = Controller/
