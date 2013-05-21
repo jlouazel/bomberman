@@ -23,7 +23,7 @@ namespace BomberMan
     {
         class Ressources
         {
-            ::std::map< ::std::string, IPicture *>	_pictures;
+            ::std::map< ::std::string, IPicture *>      _pictures;
             ::std::map< ::std::string, IAsset *>		_assets;
             ::std::map< ::std::string, IAnimation *>	_animations;
             ::std::map< ::std::string, ISound *>		_sounds;
