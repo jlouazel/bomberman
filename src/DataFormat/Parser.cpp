@@ -36,7 +36,7 @@ IDataFormat *				BomberMan::DataFormat::Parser::getAppropriateContainer(::std::s
   ::std::vector< ::std::string>  parsedName = splitString(filename, ".");
   if (parsedName.back() == "xml")
     return new Xml(filename);
-    throw (BomberMan::DataFormat::FormatError("invalid format", "parser", "the format \"" + parsedName.back() + "\" is not managed by the parser"));
+    throw (FormatError("invalid format", "parser", "the format \"" + parsedName.back() + "\" is not managed by the parser"));
   return 0;
 }
 

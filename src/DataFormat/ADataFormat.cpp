@@ -22,13 +22,13 @@ _infile(infile.c_str())
         {
             ::std::stringstream str;
             str << "\"" << infile << "\" is a directory";
-            throw (BomberMan::DataFormat::FormatError(::std::string("invalid format"), ::std::string("parser"), Parser::concatStr(std::string("\""),::std::string(infile.c_str()),::std::string("\" is a directory"))));
+            throw (FormatError(::std::string("invalid format"), ::std::string("parser"), Parser::concatStr(std::string("\""),::std::string(infile.c_str()),::std::string("\" is a directory"))));
         }
         else if(st.st_mode & S_IFREG) {
             if (this->_infile.is_open() == false)
-	      throw (BomberMan::DataFormat::FormatError("invalid file", "parser", "unable to open \"" + infile + "\", maybe you don't have the permission to open it"));
+	      throw (FormatError("invalid file", "parser", "unable to open \"" + infile + "\", maybe you don't have the permission to open it"));
             if (Parser::checkExtend(format, infile) == false)
-                throw (BomberMan::DataFormat::FormatError("invalid file type", "parser", "this is not a " + Parser::typeToString(format) + " file"));
+                throw (FormatError("invalid file type", "parser", "this is not a " + Parser::typeToString(format) + " file"));
             char c;
             int line = 1;
             ::std::string recup;
@@ -46,10 +46,10 @@ _infile(infile.c_str())
             }
         }
         else
-            throw (BomberMan::DataFormat::FormatError("invalid format", "parser", "\"" + infile + "\" is an unknown format file"));
+            throw (FormatError("invalid format", "parser", "\"" + infile + "\" is an unknown format file"));
     }
     else
-        throw (BomberMan::DataFormat::FormatError("unknown file", "parser", "the file \"" + infile + "\" doesn't exists"));
+        throw (FormatError("unknown file", "parser", "the file \"" + infile + "\" doesn't exists"));
 }
 
 BomberMan::DataFormat::ADataFormat::~ADataFormat() {
