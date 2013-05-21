@@ -27,6 +27,11 @@ SRCS		= $(SRC_DIR)BomberMan.cpp \
             $(SRC_DIR)$(DATAFORMAT)Parser.cpp \
             $(SRC_DIR)$(DATAFORMAT)Xml.cpp \
             $(SRC_DIR)$(DISPLAY)AAnimation.cpp \
+            $(SRC_DIR)$(DISPLAY)AObject.cpp \
+            $(SRC_DIR)$(DISPLAY)Menu.cpp \
+            $(SRC_DIR)$(DISPLAY)OngletMenu.cpp \
+            $(SRC_DIR)$(DISPLAY)Texture2d.cpp \
+            $(SRC_DIR)$(DISPLAY)Vector.cpp \
             $(SRC_DIR)$(DISPLAY)AAsset.cpp \
             $(SRC_DIR)$(DISPLAY)APicture.cpp \
             $(SRC_DIR)$(DISPLAY)ASound.cpp \

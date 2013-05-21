@@ -5,15 +5,15 @@
 #include "Game.hpp"
 #include "Texture2d.hpp"
 
-void	Texture2d::initialize()
+void	BomberMan::Display::Texture2d::initialize()
 {
 }
 
-void	Texture2d::update(gdl::GameClock const &gameClock, gdl::Input &input)
+void	BomberMan::Display::Texture2d::update(gdl::GameClock const &gameClock, gdl::Input &input)
 {
 }
 
-void	Texture2d::draw(void)
+void	BomberMan::Display::Texture2d::draw(void)
 {
   this->texture_.bind();
   glMatrixMode (GL_PROJECTION);

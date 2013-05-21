@@ -5,7 +5,7 @@
 #include "AObject.hpp"
 #include "Vector.hpp"
 
-AObject::AObject(std::string &texture, Vector3f &position, Vector3f &len, Camera *camera)
+BomberMan::Display::AObject::AObject(std::string &texture, Vector3f &position, Vector3f &len, Camera *camera)
   : rotation_(0.0f, 0.0f, 0.0f), len_(len), camera_(camera)
 {
   this->len_.setX((len.getX() * WIDTH / 100));

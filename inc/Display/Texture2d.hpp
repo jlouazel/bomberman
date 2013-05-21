@@ -3,15 +3,21 @@
 
 #include "AObject.hpp"
 
-class Texture2d : public AObject
+namespace BomberMan
 {
-public:
-  Texture2d(std::string &texture, Vector3f &position, Vector3f len, Camera *camera) : AObject(texture, position, len, camera)
-  {}
-private:
-  void initialize();
-  void update(gdl::GameClock const &, gdl::Input &);
-  void draw(void);
-};
+    namespace Display
+    {
+        class Texture2d : public AObject
+        {
+        public:
+            Texture2d(std::string &texture, Vector3f &position, Vector3f len, Camera *camera) : AObject(texture, position, len, camera)
+            {}
+        private:
+            void initialize();
+            void update(gdl::GameClock const &, gdl::Input &);
+            void draw(void);
+        };
+    }
+}
 
 #endif

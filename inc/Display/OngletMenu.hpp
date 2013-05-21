@@ -6,22 +6,28 @@
 #include "Menu.hpp"
 #include "IOnglet.hpp"
 
-class	OngletMenu : public IOnglet
+namespace BomberMan
 {
-private:
-  Menu		*_menu;
-  std::string	_name;
-  AObject	*_image;
-private:
-  OngletMenu();
-public:
-  OngletMenu(Menu *menu, std::string,  AObject *);
-public:
-  Menu		*getContain() const;
-  std::string	getName() const;
-  void		setContain(Menu *newMenu);
-  void		setName(std::string newName);
-  void		affOnglet() const;
-};
+    namespace Display
+    {
+        class	OngletMenu : public IOnglet
+        {
+        private:
+            Menu		*_menu;
+            std::string	_name;
+            AObject	*_image;
+        private:
+            OngletMenu();
+        public:
+            OngletMenu(Menu *menu, std::string,  AObject *);
+        public:
+            Menu		*getContain() const;
+            std::string	getName() const;
+            void		setContain(Menu *newMenu);
+            void		setName(std::string newName);
+            void		affOnglet() const;
+        };
+    }
+}
 
 #endif

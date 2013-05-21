@@ -5,18 +5,24 @@
 #include "AObject.hpp"
 #include "IOnglet.hpp"
 
-class	Menu
+namespace BomberMan
 {
-private:
-  std::vector <IOnglet *>	_onglet;
-public:
-  Menu();
-  ~Menu();
-public:
-  void			  addOnglet(IOnglet *);
-  IOnglet		  *getOneOnglet(int) const;
-  std::vector <IOnglet *> getOnglet() const;
-  void			  affAllOnglet();
-};
+    namespace Display
+    {
+        class	Menu
+        {
+        private:
+            std::vector <IOnglet *>	_onglet;
+        public:
+            Menu();
+            ~Menu();
+        public:
+            void			  addOnglet(IOnglet *);
+            IOnglet		  *getOneOnglet(int) const;
+            std::vector <IOnglet *> getOnglet() const;
+            void			  affAllOnglet();
+        };
+    }
+}
 
 #endif
