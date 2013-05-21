@@ -13,6 +13,7 @@
 #include <cstdlib>
 #include <list>
 #include <string>
+
 #include "AObject.hpp"
 #include "Vector.hpp"
 #include "Camera.hpp"

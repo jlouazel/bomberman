@@ -1,7 +1,7 @@
 #include <math.h>
 #include <iostream>
 #include <string>
-#include "Game.hpp"
+#include "MyGame.hpp"
 #include "AObject.hpp"
 #include "Vector.hpp"
 

@@ -2,7 +2,7 @@
 #include <Image.hpp>
 #include <math.h>
 #include <unistd.h>
-#include "Game.hpp"
+#include "MyGame.hpp"
 #include "Texture2d.hpp"
 
 void	BomberMan::Display::Texture2d::initialize()

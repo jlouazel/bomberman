@@ -1,7 +1,7 @@
 #include <math.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
-#include "Game.hpp"
+#include "MyGame.hpp"
 #include "Camera.hpp"
 
 BomberMan::Display::Camera::Camera(void)

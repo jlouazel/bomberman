@@ -9,7 +9,7 @@
 #include <Model.hpp>
 #include <string>
 #include <iostream>
-#include "Game.hpp"
+#include "MyGame.hpp"
 #include "AObject.hpp"
 #include "Texture2d.hpp"
 #include "Vector.hpp"
