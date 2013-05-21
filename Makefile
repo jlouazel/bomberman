@@ -5,7 +5,8 @@ RM          = rm -f
 NAME		= BomberMan
 
 CPPFLAGS	+= -W -Wall -Wextra
-CPPFLAGS	+= -Iinc/Controller/ -Iinc/Core/ -Iinc/DataFormat/ -Iinc/Display/ -Iinc/Event/ -Iinc/Field/ -Iinc/Unix/ -Iinc/ -lpthread
+CPPFLAGS	+= -Iinc/Controller/ -Iinc/Core/ -Iinc/DataFormat/ -Iinc/Display/ -Iinc/Event/ -Iinc/Field/ -Iinc/Unix/ -Iinc/
+LDFLAGS		=  -lpthread
 
 SRC_DIR		= src/
 CONTROLLER  = Controller/
@@ -58,7 +59,7 @@ OBJS		= $(SRCS:.cpp=.o)
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-		$(CC) $(OBJS) -o $(NAME)
+		$(CC) $(OBJS) -o $(NAME) $(LDFLAGS)
 
 clean:
 		$(RM) $(OBJS)
