@@ -17,7 +17,7 @@ void	BomberMan::Display::Menu::addOnglet(BomberMan::Display::IOnglet *newOnglet)
   this->_onglet.push_back(newOnglet);
 }
 
-IOnglet	*BomberMan::Display::Menu::getOneOnglet(int i) const
+BomberMan::Display::IOnglet	*BomberMan::Display::Menu::getOneOnglet(int i) const
 {
   if (static_cast <unsigned int> (i) < this->_onglet.size())
     return (this->_onglet[i]);

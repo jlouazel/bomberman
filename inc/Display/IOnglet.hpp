@@ -1,11 +1,17 @@
 #ifndef __IONGLET_HPP__
 #define __IONGLET_HPP__
 
-class	IOnglet
+namespace BomberMan
 {
-public:
-  virtual ~IOnglet() {};
-  virtual void affOnglet() const = 0;
-};
+    namespace Display
+    {
+        class	IOnglet
+        {
+        public:
+            virtual ~IOnglet() {};
+            virtual void affOnglet() const = 0;
+        };
+    }
+}
 
 #endif

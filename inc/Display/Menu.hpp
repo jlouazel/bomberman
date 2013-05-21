@@ -12,14 +12,14 @@ namespace BomberMan
         class	Menu
         {
         private:
-            std::vector <IOnglet *>	_onglet;
+            std::vector <BomberMan::Display::IOnglet *>	_onglet;
         public:
             Menu();
             ~Menu();
         public:
-            void			  addOnglet(IOnglet *);
-            IOnglet		  *getOneOnglet(int) const;
-            std::vector <IOnglet *> getOnglet() const;
+            void			  addOnglet(BomberMan::Display::IOnglet *);
+            BomberMan::Display::IOnglet		  *getOneOnglet(int) const;
+            ::std::vector <BomberMan::Display::IOnglet *> getOnglet() const;
             void			  affAllOnglet();
         };
     }
