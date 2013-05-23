@@ -31,32 +31,32 @@ BomberMan::Field::Object::~Object()
 {
 }
 
-BomberMan::Field::eObjectType BomberMan::Field::Object::getObjectType() const
+BomberMan::Field::eObjectType   BomberMan::Field::Object::getObjectType() const
 {
     return this->_object_type;
 }
 
-BomberMan::Field::eBuffType   BomberMan::Field::Object::getBuffType() const
+BomberMan::Field::eBuffType     BomberMan::Field::Object::getBuffType() const
 {
     return this->_buff_type;
 }
 
-void        BomberMan::Field::Object::setPower(int power)
+void                            BomberMan::Field::Object::setPower(int power)
 {
     this->_power = power;
 }
 
-int         BomberMan::Field::Object::getPower() const
+int                             BomberMan::Field::Object::getPower() const
 {
     return this->_power;
 }
 
-int         BomberMan::Field::Object::getTimer() const
+int                             BomberMan::Field::Object::getTimer() const
 {
     return this->_timer;
 }
 
-void        BomberMan::Field::Object::explode(int damages, eDirection direction)
+void                            BomberMan::Field::Object::explode(int damages, eDirection direction)
 {
   static_cast<void>(damages);
   static_cast<void>(direction);

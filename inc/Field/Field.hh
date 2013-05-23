@@ -37,9 +37,9 @@ namespace BomberMan
             Manager(unsigned int width, unsigned int height);
             ~Manager();
             
-            ::std::list<BomberMan::Field::IGameComponent *>	&	get(unsigned int, unsigned int);
-            unsigned int                                        getWidth() const;
-            unsigned int                                        getHeight() const;
+            ::std::list<BomberMan::Field::IGameComponent *> &    get(unsigned int, unsigned int);
+            unsigned int                                                getWidth() const;
+            unsigned int                                                getHeight() const;
         };
     }
 }
