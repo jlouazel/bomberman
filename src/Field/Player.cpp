@@ -19,7 +19,7 @@ BomberMan::Field::Player::Player(int pv, float speed, int max, int set, float x,
     this->_animation = anim;
     this->_sound = sound;
     this->_asset = asset;
-    this->_bomb = new Object(BOMB, NONE, 3, 3);
+    this->_bomb = new Object(0.0, 0.0, 0, 0, 0, BOMB, NONE, 3, 3);
 }
 
 BomberMan::Field::Player::~Player()
