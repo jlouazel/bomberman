@@ -7,7 +7,7 @@
 //
 
 #include "Empty.hh"
-#include "Manager.hh"
+#include "FManager.hh"
 
 BomberMan::Field::Empty::Empty(float x, float y, BomberMan::Display::IAsset * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim)
 {
