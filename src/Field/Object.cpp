@@ -14,6 +14,9 @@ BomberMan::Field::Object::Object(eObjectType objectType, eBuffType buffType, int
     _power(power),
     _timer(timer)
 {
+    /*this->_asset = asset;
+    this->_sound = sound;
+    this->_animation = anim;*/
 }
 
 BomberMan::Field::Object::Object(const Object & other)
