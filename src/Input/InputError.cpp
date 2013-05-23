@@ -6,34 +6,34 @@
 //  Copyright (c) 2013 manour_m. All rights reserved.
 //
 
-#include "EventError.hh"
+#include "InputError.hh"
 
 namespace BomberMan
 {
-  namespace Event
+  namespace Input
   {
-    EventError::EventError(::std::string what, ::std::string where, ::std::string details)
+    InputError::InputError(::std::string what, ::std::string where, ::std::string details)
       :   _what(what),
 	  _where(where),
 	  _details(details)
     {
     }
 
-    EventError::~EventError() throw()
+    InputError::~InputError() throw()
     {
     }
 
-    ::std::string		EventError::getWhat() const
+    ::std::string		InputError::getWhat() const
     {
       return this->_what;
     }
 
-    ::std::string		EventError::getWhere() const
+    ::std::string		InputError::getWhere() const
     {
       return this->_where;
     }
 
-    ::std::string		EventError::getDetails() const
+    ::std::string		InputError::getDetails() const
     {
       return this->_details;
     }

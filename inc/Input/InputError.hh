@@ -6,25 +6,25 @@
 //  Copyright (c) 2013 manour_m. All rights reserved.
 //
 
-#ifndef __EVENTERROR_HH___
-#define __EVENTERROR_HH____
+#ifndef __INPUTERROR_HH___
+#define __INPUTERROR_HH____
 
 #include	<exception>
 #include	<string>
 
 namespace BomberMan
 {
-  namespace Event
+  namespace Input
   {
-    class EventError : public ::std::exception
+    class InputError : public ::std::exception
     {
       ::std::string   _what;
       ::std::string   _where;
       ::std::string   _details;
 
     public:
-      EventError(::std::string, ::std::string, ::std::string);
-      ~EventError() throw();
+      InputError(::std::string, ::std::string, ::std::string);
+      ~InputError() throw();
 
       ::std::string   getWhat() const;
       ::std::string   getWhere() const;

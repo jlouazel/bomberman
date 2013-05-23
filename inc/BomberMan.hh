@@ -12,8 +12,8 @@
 #include <iostream>
 
 #include "Field.hh"
-#include "Controllers.hh"
-#include "Events.hh"
+#include "InputManager.hh"
+#include "EventManager.hh"
 #include "Core.hh"
 #include "DataFormat.hh"
 #include "Display.hh"
