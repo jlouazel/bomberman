@@ -7,19 +7,23 @@
 #include "AObject.hpp"
 #include "Vector.hpp"
 
-BomberMan::Display::AObject::AObject(std::string &texture, BomberMan::Display::Vector3f &position, BomberMan::Display::Vector3f &len, Camera *camera)
-  : rotation_(0.0f, 0.0f, 0.0f), len_(len), camera_(camera)
+BomberMan::Display::AObject::AObject(std::string &texture, BomberMan::Display::Vector3f &position, BomberMan::Display::Vector3f &rotation, BomberMan::Display::Vector3f &len, Camera *camera)
+  : position_(position), rotation_(rotation), len_(len), camera_(camera)
 {
-  this->len_.setX((len.getX() * WIDTH / 100));
-  this->len_.setY((len.getY() * HEIGHT / 100));
-  this->len_.setZ(len.getZ());
+  this->stringTexture_ = texture;
+}
 
-  float posX = position.getX() * WIDTH / 100;
-  float	posY = (HEIGHT - (position.getY() * HEIGHT / 100) - len_.getY());
-  Vector3f newVector(posX, posY, 0);
+void    BomberMan::Display::AObject::setRotation(BomberMan::Display::Vector3f &rotation)
+{
+  this->rotation_ = rotation;
+}
 
-  this->position_.setX(newVector.getX());
-  this->position_.setY(newVector.getY());
-  this->position_.setZ(newVector.getZ());
-  this->texture_ = gdl::Image::load(texture);
+void    BomberMan::Display::AObject::setPosition(BomberMan::Display::Vector3f &position)
+{
+  this->position_ = position;
+}
+
+void    BomberMan::Display::AObject::setLen(BomberMan::Display::Vector3f &len)
+{
+  this->len_ = len;
 }

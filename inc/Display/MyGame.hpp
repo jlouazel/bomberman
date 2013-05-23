@@ -40,11 +40,12 @@ namespace BomberMan
     public:
       MyGame() : ::gdl::Game()
       {}
-      void  initialize();
-      void  update(void);
+      void	initialize();
+      void	update(void);
       void	draw(void);
       void	unload(void);
-      void	addObject(std::string &, BomberMan::Display::Vector3f &, BomberMan::Display::Vector3f &);
+      void	addObject3d(std::string &, BomberMan::Display::Vector3f &, BomberMan::Display::Vector3f &, BomberMan::Display::Vector3f &);
+      void	addObject2d(std::string &, BomberMan::Display::Vector3f &, BomberMan::Display::Vector3f &, BomberMan::Display::Vector3f &);
     };
   }
 }

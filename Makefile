@@ -31,6 +31,7 @@ SRCS		= $(SRC_DIR)BomberMan.cpp \
             $(SRC_DIR)$(DISPLAY)Menu.cpp \
             $(SRC_DIR)$(DISPLAY)OngletMenu.cpp \
             $(SRC_DIR)$(DISPLAY)Texture2d.cpp \
+            $(SRC_DIR)$(DISPLAY)Texture3d.cpp \
             $(SRC_DIR)$(DISPLAY)Vector.cpp \
             $(SRC_DIR)$(DISPLAY)AAsset.cpp \
             $(SRC_DIR)$(DISPLAY)APicture.cpp \

@@ -10,6 +10,7 @@ namespace BomberMan
         public:
             virtual ~IOnglet() {};
             virtual void affOnglet() const = 0;
+	    virtual void initialize() const = 0;
         };
     }
 }
