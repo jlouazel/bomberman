@@ -30,9 +30,7 @@ void    BomberMan::Field::Empty::explode(int damages, BomberMan::Field::eDirecti
     
     x = static_cast<int>(this->_x);
     y = static_cast<int>(this->_y);
-    
+        // recup item list en map[x][y]
     damages--;
-    
-  static_cast<void>(direction);
     // propagation
 }
