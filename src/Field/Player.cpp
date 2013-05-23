@@ -85,7 +85,7 @@ void                        BomberMan::Field::Player::setPv(int pv)
 
 void                        BomberMan::Field::Player::explode(int damages, eDirection direction)
 {
-  static_cast<void>(direction);
+    static_cast<void>(direction);
     this->setPv(this->_pv - damages);
     // animation dmg
     if (this->_pv <= 0)

@@ -65,6 +65,12 @@ int                             BomberMan::Field::Object::getTimer() const
 
 void                            BomberMan::Field::Object::explode(int damages, eDirection direction)
 {
-  static_cast<void>(damages);
-  static_cast<void>(direction);
+    if (this->_object_type == BomberMan::Field::BOMB)
+    {
+        // propagation++
+        static_cast<void>(damages);
+        static_cast<void>(direction);
+    }
+    // propagation
+    delete this;
 }
