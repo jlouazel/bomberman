@@ -10,7 +10,7 @@
 #include <list>
 
 #include "IGameComponent.hh"
-#include "Field.hh"
+#include "FManager.hh"
 
 BomberMan::Field::Manager::Manager(unsigned int width, unsigned int height)
 :   _width(width),

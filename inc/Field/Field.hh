@@ -9,11 +9,6 @@
 #ifndef __BomberMan__Field__
 #define __BomberMan__Field__
 
-#include <vector>
-#include <iostream>
-#include <utility>
-#include <list>
-
 #include "IGameComponent.hh"
 #include "Player.hh"
 #include "Wall.hh"
@@ -22,26 +17,6 @@
 #include "FieldError.hh"
 #include "ObjectFactory.hh"
 #include "Enums.hh"
-
-namespace BomberMan
-{
-    namespace Field
-    {
-        class Manager
-        {
-            unsigned int                                                        _width;
-            unsigned int                                                        _height;
-            ::std::vector< ::std::list<BomberMan::Field::IGameComponent *> > 	_map;
-            
-        public:
-            Manager(unsigned int width, unsigned int height);
-            ~Manager();
-            
-            ::std::list<BomberMan::Field::IGameComponent *> &    get(unsigned int, unsigned int);
-            unsigned int                                                getWidth() const;
-            unsigned int                                                getHeight() const;
-        };
-    }
-}
+#include "FManager.hh"
 
 #endif /* defined(__BomberMan__Field__) */

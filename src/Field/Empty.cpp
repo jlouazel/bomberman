@@ -7,6 +7,7 @@
 //
 
 #include "Empty.hh"
+#include "Manager.hh"
 
 BomberMan::Field::Empty::Empty(float x, float y, BomberMan::Display::IAsset * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim)
 {
@@ -23,7 +24,15 @@ BomberMan::Field::Empty::~Empty()
 
 void    BomberMan::Field::Empty::explode(int damages, BomberMan::Field::eDirection direction)
 {
-  static_cast<void>(damages);
+    BomberMan::Field::Manager *	field;
+    int	x;
+    int	y;
+    
+    x = static_cast<int>(this->_x);
+    y = static_cast<int>(this->_y);
+    
+    damages--;
+    
   static_cast<void>(direction);
     // propagation
 }
