@@ -8,15 +8,17 @@
 
 #include "Object.hh"
 
-BomberMan::Field::Object::Object(eObjectType objectType, eBuffType buffType, int power, int timer)
+BomberMan::Field::Object::Object(float x, float y, BomberMan::Display::IAsset * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim, eObjectType objectType, eBuffType buffType, int power, int timer)
 :   _object_type(objectType),
     _buff_type(buffType),
     _power(power),
     _timer(timer)
 {
-    /*this->_asset = asset;
+    this->_x = x;
+    this->_y = y;
+    this->_asset = asset;
     this->_sound = sound;
-    this->_animation = anim;*/
+    this->_animation = anim;
 }
 
 BomberMan::Field::Object::Object(const Object & other)
@@ -25,6 +27,11 @@ BomberMan::Field::Object::Object(const Object & other)
     _power(other._power),
     _timer(other._timer)
 {
+    this->_x = other._x;
+    this->_y = other._y;
+    this->_asset = other._asset;
+    this->_sound = other._sound;
+    this->_animation = other._animation;
 }
 
 BomberMan::Field::Object::~Object()

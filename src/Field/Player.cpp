@@ -8,12 +8,17 @@
 
 #include "Player.hh"
 
-BomberMan::Field::Player::Player(int pv, float speed, int max, float x, float y, BomberMan::Display::IAsset * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim)
+BomberMan::Field::Player::Player(int pv, float speed, int max, int set, float x, float y, BomberMan::Display::IAsset * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim)
 :   _pv(pv),
     _speed(speed),
     _nb_bomb_max(max),
-    _nb_bomb_set(0)
+    _nb_bomb_set(set)
 {
+    this->_x = x;
+    this->_y = y;
+    this->_animation = anim;
+    this->_sound = sound;
+    this->_asset = asset;
     this->_bomb = new Object(BOMB, NONE, 3, 3);
 }
 

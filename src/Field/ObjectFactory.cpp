@@ -13,10 +13,10 @@
 
 BomberMan::Field::ObjectFactory::ObjectFactory()
 {
-    this->learn(::std::pair<eObjectType, eBuffType>(BOMB, NONE), new Object(BOMB, NONE, 3, 3));
-    this->learn(::std::pair<eObjectType, eBuffType>(BUFF, LIFE), new Object(BUFF, LIFE, 2, 10));
-    this->learn(::std::pair<eObjectType, eBuffType>(BUFF, SPEED), new Object(BUFF, SPEED, 1, 10));
-    this->learn(::std::pair<eObjectType, eBuffType>(BUFF, RANGE), new Object(BUFF, RANGE, 1, 10));
+    this->learn(::std::pair<eObjectType, eBuffType>(BOMB, NONE), new Object(0.0, 0.0, 0, 0, 0, BOMB, NONE, 3, 5));
+    this->learn(::std::pair<eObjectType, eBuffType>(BUFF, LIFE), new Object(0.0, 0.0, 0, 0, 0, BUFF, LIFE, 2, 10));
+    this->learn(::std::pair<eObjectType, eBuffType>(BUFF, SPEED), new Object(0.0, 0.0, 0, 0, 0, BUFF, SPEED, 1, 10));
+    this->learn(::std::pair<eObjectType, eBuffType>(BUFF, RANGE), new Object(0.0, 0.0, 0, 0, 0, BUFF, RANGE, 1, 10));
 }
 
 BomberMan::Field::ObjectFactory::~ObjectFactory()
