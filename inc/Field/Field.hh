@@ -29,8 +29,8 @@ namespace BomberMan
     {
         class Manager
         {
-            unsigned int								_width;
-            unsigned int								_height;
+            unsigned int                                                        _width;
+            unsigned int                                                        _height;
             ::std::vector< ::std::list<BomberMan::Field::IGameComponent *> > 	_map;
             
         public:
@@ -38,8 +38,8 @@ namespace BomberMan
             ~Manager();
             
             ::std::list<BomberMan::Field::IGameComponent *>	&	get(unsigned int, unsigned int);
-            unsigned int					getWidth() const;
-            unsigned int                    getHeight() const;
+            unsigned int                                        getWidth() const;
+            unsigned int                                        getHeight() const;
         };
     }
 }

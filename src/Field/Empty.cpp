@@ -8,8 +8,13 @@
 
 #include "Empty.hh"
 
-BomberMan::Field::Empty::Empty()
+BomberMan::Field::Empty::Empty(float x, float y, BomberMan::Display::IAsset * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim)
 {
+    this->_x = x;
+    this->_y = y;
+    this->_asset = asset;
+    this->_sound = sound;
+    this->_animation = anim;
 }
 
 BomberMan::Field::Empty::~Empty()
