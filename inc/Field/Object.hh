@@ -10,7 +10,11 @@
 #define __BomberMan__Object__
 
 #include "AGameComponent.hh"
+
 #include "Enums.hh"
+#include "IAsset.hh"
+#include "IAnimation.hh"
+#include "ISound.hh"
 
 namespace BomberMan
 {
@@ -24,7 +28,7 @@ namespace BomberMan
             int             _timer;
             
         public:
-            Object(eObjectType objectType, eBuffType buffType, int power, int timer);
+            Object(eObjectType, eBuffType, int, int);
             Object(const Object &);
             ~Object();
             

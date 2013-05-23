@@ -1,26 +1,42 @@
 //
-//  AEvent.h
-//  BomberMan
+// Event.hh for bomberman in /home/fortin_j/tek2/projects/bomberman/event
 //
-//  Created by manour_m on 20/05/13.
-//  Copyright (c) 2013 manour_m. All rights reserved.
+// Made by julien fortin
+// Login   <fortin_j@epitech.net>
+//
+// Started on  Tue May 14 17:55:11 2013 julien fortin
+// Last update Thu May 23 10:37:15 2013 julien fortin
 //
 
-#ifndef __BomberMan__AEvent__
-#define __BomberMan__AEvent__
+#ifndef	__AEVENT_HH__
+#define	__AEVENT_HH__
 
-#include "IEvent.hh"
+#include	"IEvent.hh"
 
 namespace BomberMan
 {
-    namespace Event
+  namespace Event
+  {
+    class AEvent : public IEvent
     {
-        class AEvent : public IEvent
-        {
-        public:
-            
-        };
-    }
+    private:
+      int					_x;
+      int					_y;
+      EventType::eEventType		_type;
+      EventDirection::eEventDirection	_direction;
+
+    protected:
+    public:
+      virtual ~AEvent();
+      AEvent(int, int, EventType::eEventType, EventDirection::eEventDirection);
+
+      virtual void				interaction() const = 0;
+      virtual int					getX() const;
+      virtual int					getY() const;
+      virtual EventType::eEventType		getType() const;
+      virtual EventDirection::eEventDirection	getDirection() const;
+    };
+  }
 }
 
-#endif /* defined(__BomberMan__AEvent__) */
+#endif

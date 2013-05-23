@@ -12,6 +12,7 @@
 #include <iostream>
 
 #include "Display.hh"
+
 #include "Enums.hh"
 
 namespace BomberMan

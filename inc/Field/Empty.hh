@@ -11,6 +11,10 @@
 
 #include "AGameComponent.hh"
 
+#include "IAsset.hh"
+#include "IAnimation.hh"
+#include "ISound.hh"
+
 namespace BomberMan
 {
     namespace Field
@@ -18,7 +22,7 @@ namespace BomberMan
         class Empty : public AGameComponent
         {
         public:
-            Empty();
+            Empty(float x, float y, BomberMan::Display::IAsset * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim);
             ~Empty();
             
             void	explode(int, eDirection);
