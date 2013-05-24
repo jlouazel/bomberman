@@ -22,18 +22,19 @@ namespace BomberMan
         class    AObject
         {
         protected:
-            Vector3f	position_;
-            Vector3f	rotation_;
-            Vector3f	len_;
-            gdl::Image	texture_;
-            Camera	*camera_;
-            // protected:
-            //   void		relativeRotation();
+	    std::string		stringTexture_;
+            Vector3f		position_;
+            Vector3f		rotation_;
+            Vector3f		len_;
+            Camera		*camera_;
         public:
-            AObject(std::string &texture, BomberMan::Display::Vector3f &position, BomberMan::Display::Vector3f &len, BomberMan::Display::Camera *camera);
+	  AObject(std::string &texture, BomberMan::Display::Vector3f &position, BomberMan::Display::Vector3f &rotation, BomberMan::Display::Vector3f &len, BomberMan::Display::Camera *camera);
             virtual void	initialize(void) = 0;
             virtual void	update(gdl::GameClock const &, gdl::Input &) = 0;
             virtual void	draw(void) = 0;
+	    void		setRotation(Vector3f &);
+	    void		setPosition(Vector3f &);
+	    void		setLen(Vector3f &);
         };
     }
 }

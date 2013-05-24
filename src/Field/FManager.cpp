@@ -1,8 +1,8 @@
 //
-//  Field.cpp
+//  Manager.cpp
 //  BomberMan
 //
-//  Created by manour_m on 17/05/13.
+//  Created by manour_m on 23/05/13.
 //  Copyright (c) 2013 manour_m. All rights reserved.
 //
 
@@ -14,8 +14,8 @@
 
 BomberMan::Field::Manager::Manager(unsigned int width, unsigned int height)
 :   _width(width),
-    _height(height),
-    _map(width * height, ::std::list<BomberMan::Field::IGameComponent *>())
+_height(height),
+_map(width * height, ::std::list<BomberMan::Field::IGameComponent *>())
 {
 }
 

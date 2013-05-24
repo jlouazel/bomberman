@@ -5,7 +5,7 @@
 #include "Camera.hpp"
 
 BomberMan::Display::Camera::Camera(void)
-  : position_(100.0f, 300.0f, 300.0f), rotation_(0.0f, 0.0f, 0.0f), look_(0.0f, 0.0f, 0.0f)
+  : position_(0.0f, 0.0f, 1000.0f), rotation_(0.0f, 0.0f, 0.0f), look_(0.0f, 0.0f, 0.0f)
 {
   this->angle_ = 3.14159265359 * 70.0 / 180.0;
   this->heightScreen_ = (int)(((tanf(this->angle_ / 2.0) * 300.0) * 2.0));

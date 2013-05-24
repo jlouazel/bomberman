@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 manour_m. All rights reserved.
 //
 
-#ifndef __BomberMan__Manager__
-#define __BomberMan__Manager__
+#ifndef __BomberMan_Display_Manager__
+#define __BomberMan_Display_Manager__
 
 namespace BomberMan
 {

@@ -9,6 +9,18 @@
 
 void	BomberMan::Display::Texture2d::initialize()
 {
+  this->len_.setX((this->len_.getX() * WIDTH / 100));
+  this->len_.setY((this->len_.getY() * HEIGHT / 100));
+  this->len_.setZ(this->len_.getZ());
+
+  float posX = this->position_.getX() * WIDTH / 100;
+  float posY = (HEIGHT - (this->position_.getY() * HEIGHT / 100) - this->len_.getY());
+  BomberMan::Display::Vector3f newVector(posX, posY, 0);
+
+  this->position_.setX(newVector.getX());
+  this->position_.setY(newVector.getY());
+  this->position_.setZ(newVector.getZ());
+  this->texture_ = gdl::Image::load(this->stringTexture_);
 }
 
 void	BomberMan::Display::Texture2d::update(gdl::GameClock const &gameClock, gdl::Input &input)
@@ -21,8 +33,6 @@ void	BomberMan::Display::Texture2d::draw(void)
   glMatrixMode (GL_PROJECTION);
   glLoadIdentity();
   gluOrtho2D(0, WIDTH, 0, HEIGHT);
-  // std::cout << this->position_.getX() << std::endl;
-  // std::cout << this->position_.getY() << std::endl;
   glBegin(GL_QUADS);
   glTexCoord2f(0.0f, 0.0f);
   glVertex3f(this->position_.getX(), this->position_.getY() + this->len_.getY(), 0.0f);

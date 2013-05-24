@@ -8,8 +8,15 @@
 
 #include "Wall.hh"
 
-BomberMan::Field::Wall::Wall()
+BomberMan::Field::Wall::Wall(bool breakable, int pv, float x, float y, BomberMan::Display::IAsset * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim)
+:   _breakable(breakable),
+    _pv(pv)
 {
+    this->_x = x;
+    this->_y = y;
+    this->_asset = asset;
+    this->_sound = sound;
+    this->_animation = anim;
 }
 
 BomberMan::Field::Wall::~Wall()
@@ -28,8 +35,8 @@ void    BomberMan::Field::Wall::setPv(int pv)
 
 void    BomberMan::Field::Wall::explode(int damages, eDirection direction)
 {
-   static_cast<void>(direction);
-   if (this->_breakable == true)
+    static_cast<void>(direction);
+    if (this->_breakable == true)
     {
         this->_pv -= damages;
         // changement d'asset (breches?)

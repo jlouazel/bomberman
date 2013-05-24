@@ -28,7 +28,7 @@ namespace BomberMan
             int             _timer;
             
         public:
-            Object(eObjectType, eBuffType, int, int);
+            Object(float x, float y, BomberMan::Display::IAsset * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim, eObjectType, eBuffType, int, int);
             Object(const Object &);
             ~Object();
             

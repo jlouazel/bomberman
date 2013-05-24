@@ -26,6 +26,11 @@ void	BomberMan::Display::OngletMenu::setName(::std::string newName)
   this->_name = newName;
 }
 
+void    BomberMan::Display::OngletMenu::initialize() const
+{
+  this->_image->initialize();
+}
+
 void	BomberMan::Display::OngletMenu::affOnglet() const
 {
   this->_image->draw();

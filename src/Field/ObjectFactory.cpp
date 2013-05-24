@@ -13,22 +13,22 @@
 
 BomberMan::Field::ObjectFactory::ObjectFactory()
 {
-    this->learn(::std::pair<eObjectType, eBuffType>(BOMB, NONE), new Object(BOMB, NONE, 3, 3));
-    this->learn(::std::pair<eObjectType, eBuffType>(BUFF, LIFE), new Object(BUFF, LIFE, 2, 10));
-    this->learn(::std::pair<eObjectType, eBuffType>(BUFF, SPEED), new Object(BUFF, SPEED, 1, 10));
-    this->learn(::std::pair<eObjectType, eBuffType>(BUFF, RANGE), new Object(BUFF, RANGE, 1, 10));
+    this->learn(::std::pair<eObjectType, eBuffType>(BOMB, NONE), new Object(0.0, 0.0, 0, 0, 0, BOMB, NONE, 3, 5));
+    this->learn(::std::pair<eObjectType, eBuffType>(BUFF, LIFE), new Object(0.0, 0.0, 0, 0, 0, BUFF, LIFE, 2, 10));
+    this->learn(::std::pair<eObjectType, eBuffType>(BUFF, SPEED), new Object(0.0, 0.0, 0, 0, 0, BUFF, SPEED, 1, 10));
+    this->learn(::std::pair<eObjectType, eBuffType>(BUFF, RANGE), new Object(0.0, 0.0, 0, 0, 0, BUFF, RANGE, 1, 10));
 }
 
 BomberMan::Field::ObjectFactory::~ObjectFactory()
 {
 }
 
-void        BomberMan::Field::ObjectFactory::learn(::std::pair<eObjectType, eBuffType> type, Object * object)
+void                        BomberMan::Field::ObjectFactory::learn(::std::pair<eObjectType, eBuffType> type, Object * object)
 {
     this->_objects.insert(::std::pair< ::std::pair<eObjectType, eBuffType>, Object *>(type, object));
 }
 
-BomberMan::Field::Object *    BomberMan::Field::ObjectFactory::create(::std::pair<eObjectType, eBuffType> type) const
+BomberMan::Field::Object *  BomberMan::Field::ObjectFactory::create(::std::pair<eObjectType, eBuffType> type) const
 {
     if (this->_objects.find(type) != this->_objects.end())
         return new Object(*(this->_objects.find(type))->second);

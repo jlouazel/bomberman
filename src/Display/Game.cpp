@@ -26,9 +26,16 @@ void	BomberMan::Display::MyGame::initialize()
     (*itb)->initialize();
 }
 
-void	BomberMan::Display::MyGame::addObject(std::string &texture, BomberMan::Display::Vector3f &position, BomberMan::Display::Vector3f &len)
+void	BomberMan::Display::MyGame::addObject2d(std::string &texture, BomberMan::Display::Vector3f &position, BomberMan::Display::Vector3f &rotation, BomberMan::Display::Vector3f &len)
 {
   AObject *newObject = new Texture2d(texture, position, len, &this->camera_);
+
+  this->objects_.push_back(newObject);
+}
+
+void	BomberMan::Display::MyGame::addObject3d(std::string &texture, BomberMan::Display::Vector3f &position, BomberMan::Display::Vector3f &rotation, BomberMan::Display::Vector3f &len)
+{
+  AObject *newObject = new Texture3d(texture, position, len, &this->camera_);
 
   this->objects_.push_back(newObject);
 }

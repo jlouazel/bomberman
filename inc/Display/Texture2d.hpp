@@ -9,9 +9,11 @@ namespace BomberMan
     {
         class Texture2d : public AObject
         {
+	private:
+	  gdl::Image    texture_;
         public:
-            Texture2d(std::string &texture, Vector3f &position, Vector3f len, Camera *camera) : AObject(texture, position, len, camera)
-            {}
+	  Texture2d(std::string &texture, Vector3f &position,  Vector3f &rotation, Vector3f &len, Camera *camera) : AObject(texture, position, rotation, len, camera)
+	  {}
         private:
             void initialize();
             void update(gdl::GameClock const &, gdl::Input &);

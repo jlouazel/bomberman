@@ -26,7 +26,7 @@ namespace BomberMan
             Object *    _bomb;
             
         public:
-            Player(int pv, float speed, int max, float x, float y, BomberMan::Display::IAsset * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim);
+            Player(int pv, float speed, int max, int set, float x, float y, BomberMan::Display::IAsset * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim);
             ~Player();
             
             void        move();
