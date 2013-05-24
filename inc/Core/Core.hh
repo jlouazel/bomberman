@@ -11,4 +11,26 @@
 
 #include "CoreError.hh"
 
+namespace BomberMan
+{
+  namespace Core
+  {
+    class Core
+    {
+    private:
+      Core(Core const&);
+      Core        &operator=(Core const&);
+
+      int	_run();
+
+    protected:
+    public:
+      ~Core();
+      Core();
+
+      int run();
+    };
+  }
+}
+
 #endif

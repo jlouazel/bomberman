@@ -26,11 +26,13 @@ DISPLAY     = Display/
 FIELD       = Field/
 INPUT	    = Input/
 CONTROLLER  = Controller/
+EVENT	    = Event/
 UNIX        = Unix/
 
 SRCS		= $(SRC_DIR)BomberMan.cpp \
 
 SRCS_CORE	= $(SRC_DIR)$(CORE)CoreError.cpp \
+		$(SRC_DIR)$(CORE)Core.cpp \
 
 SRCS_DATA	= $(SRC_DIR)$(DATAFORMAT)ADataFormat.cpp \
 		$(SRC_DIR)$(DATAFORMAT)FormatError.cpp \
@@ -42,7 +44,6 @@ SRCS_DISPLAY	= $(SRC_DIR)$(DISPLAY)AAnimation.cpp \
 		$(SRC_DIR)$(DISPLAY)Menu.cpp \
 		$(SRC_DIR)$(DISPLAY)OngletMenu.cpp \
 		$(SRC_DIR)$(DISPLAY)Texture2d.cpp \
-		$(SRC_DIR)$(DISPLAY)Texture3d.cpp \
 		$(SRC_DIR)$(DISPLAY)Vector.cpp \
 		$(SRC_DIR)$(DISPLAY)AAsset.cpp \
 		$(SRC_DIR)$(DISPLAY)APicture.cpp \
@@ -71,9 +72,19 @@ SRCS_CTLLR	= $(SRC_DIR)$(INPUT)$(CONTROLLER)KeyBoardManager.cpp \
 		$(SRC_DIR)$(INPUT)$(CONTROLLER)XBoxController.cpp \
 		$(SRC_DIR)$(INPUT)$(CONTROLLER)ControllerError.cpp \
 
+SRCS_EVENT	= $(SRC_DIR)$(EVENT)AEvent.cpp \
+		$(SRC_DIR)$(EVENT)EventManager.cpp \
+		$(SRC_DIR)$(EVENT)EventError.cpp \
+		$(SRC_DIR)$(EVENT)Move.cpp \
+		$(SRC_DIR)$(EVENT)DropItem.cpp \
+		$(SRC_DIR)$(EVENT)GetHit.cpp \
+		$(SRC_DIR)$(EVENT)GetItem.cpp \
+
+
 SRCS_UNIX	= $(SRC_DIR)$(UNIX)UnixMutex.cpp \
 		$(SRC_DIR)$(UNIX)UnixThread.cpp \
-		$(SRC_DIR)$(UNIX)ThreadPool.cpp
+		$(SRC_DIR)$(UNIX)ThreadPool.cpp \
+		$(SRC_DIR)$(UNIX)Fd.cpp \
 
 OBJS		= $(SRCS:.cpp=.o) \
 		$(SRCS_CORE:.cpp=.o) \
@@ -81,6 +92,9 @@ OBJS		= $(SRCS:.cpp=.o) \
 		$(SRCS_DISPLAY:.cpp=.o) \
 		$(SRCS_FIELD:.cpp=.o) \
 		$(SRCS_UNIX:.cpp=.o) \
+		$(SRCS_INPUT:.cpp=.o) \
+		$(SRCS_CTLLR:.cpp=.o) \
+		$(SRCS_EVENT:.cpp=.o) \
 
 all:		$(NAME)
 

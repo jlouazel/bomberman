@@ -6,7 +6,9 @@
 //  Copyright (c) 2013 manour_m. All rights reserved.
 //
 
-#include "UnixThread.hh"
+#include	<unistd.h>
+#include	<signal.h>
+#include	"UnixThread.hh"
 
 BomberMan::Unix::UnixThread::UnixThread(pthread_attr_t *attr, void *(*func)(void *), void *arg, size_t id)
   : _id(id)
@@ -16,14 +18,13 @@ BomberMan::Unix::UnixThread::UnixThread(pthread_attr_t *attr, void *(*func)(void
 
 BomberMan::Unix::UnixThread::~UnixThread()
 {
-  this->detach();
   this->exit();
 }
 
 void                    BomberMan::Unix::UnixThread::exit()
 {
   int     return_value;
-    
+
   return_value = 0;
   pthread_exit((void *)&return_value);
 }

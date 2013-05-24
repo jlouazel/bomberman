@@ -6,60 +6,68 @@
 //  Copyright (c) 2013 manour_m. All rights reserved.
 //
 
-#include "BomberMan.hh"
+#include	"BomberMan.hh"
 
 int		main()
 {
-    try
+  try
     {
+      BomberMan::Core::Core	core;
+
+      return core.run();
     }
-    catch (BomberMan::Field::FieldError& e)
+  catch (BomberMan::Core::CoreError& e)
     {
-        ::std::cerr << "An error occured concerning the field : " << e.getWhat()
-        << " in " << e.getWhere()
-        << " (" << e.getDetails()
-        << ")" << ::std::endl;
-    }
-    catch (BomberMan::Input::InputError& e)
-    {
-        ::std::cerr << "An error occured concerning inputs : " << e.getWhat()
-        << " in " << e.getWhere()
-        << " (" << e.getDetails()
-        << ")" << ::std::endl;
-    }
-    catch (BomberMan::Input::Controller::ControllerError& e)
-    {
-        ::std::cerr << "An error occured concerning controllers : " << e.getWhat()
-        << " in " << e.getWhere()
-        << " (" << e.getDetails()
-        << ")" << ::std::endl;
-    }
-    catch (BomberMan::Event::EventError& e)
-    {
-        ::std::cerr << "An error occured concerning events : " << e.getWhat()
-        << " in " << e.getWhere()
-        << " (" << e.getDetails()
-        << ")" << ::std::endl;
-    }
-    catch (BomberMan::Core::CoreError& e)
-    {
-        ::std::cerr << "An error occured concerning the core : " << e.getWhat()
-        << " in " << e.getWhere()
-        << " (" << e.getDetails()
-        << ")" << ::std::endl;
-    }
-    catch (BomberMan::DataFormat::FormatError& e)
-    {
-        ::std::cerr << "An error occured concerning data format : " << e.getWhat()
-        << " in " << e.getWhere()
-        << " (" << e.getDetails()
-        << ")" << ::std::endl;
-    }
-    catch (BomberMan::Display::DisplayError& e)
-    {
-        ::std::cerr << "An error occured concerning the display : " << e.getWhat()
-        << " in " << e.getWhere()
-        << " (" << e.getDetails()
-        << ")" << ::std::endl;
+      ::std::cerr << "An error occured concerning the core : " << e.getWhat()
+		  << " in " << e.getWhere()
+		  << " (" << e.getDetails()
+		  << ")" << ::std::endl;
     }
 }
+
+
+
+
+
+    // catch (BomberMan::Field::FieldError& e)
+    // {
+    //     ::std::cerr << "An error occured concerning the field : " << e.getWhat()
+    //     << " in " << e.getWhere()
+    //     << " (" << e.getDetails()
+    //     << ")" << ::std::endl;
+    // }
+    // catch (BomberMan::Input::InputError& e)
+    // {
+    //     ::std::cerr << "An error occured concerning inputs : " << e.getWhat()
+    //     << " in " << e.getWhere()
+    //     << " (" << e.getDetails()
+    //     << ")" << ::std::endl;
+    // }
+    // catch (BomberMan::Input::Controller::ControllerError& e)
+    // {
+    //     ::std::cerr << "An error occured concerning controllers : " << e.getWhat()
+    //     << " in " << e.getWhere()
+    //     << " (" << e.getDetails()
+    //     << ")" << ::std::endl;
+    // }
+    // catch (BomberMan::Event::EventError& e)
+    // {
+    //     ::std::cerr << "An error occured concerning events : " << e.getWhat()
+    //     << " in " << e.getWhere()
+    //     << " (" << e.getDetails()
+    //     << ")" << ::std::endl;
+    // }
+    // catch (BomberMan::DataFormat::FormatError& e)
+    // {
+    //     ::std::cerr << "An error occured concerning data format : " << e.getWhat()
+    //     << " in " << e.getWhere()
+    //     << " (" << e.getDetails()
+    //     << ")" << ::std::endl;
+    // }
+    // catch (BomberMan::Display::DisplayError& e)
+    // {
+    //     ::std::cerr << "An error occured concerning the display : " << e.getWhat()
+    //     << " in " << e.getWhere()
+    //     << " (" << e.getDetails()
+    //     << ")" << ::std::endl;
+    // }

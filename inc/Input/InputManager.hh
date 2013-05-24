@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Wed May 15 16:55:15 2013 julien fortin
-// Last update Thu May 23 10:50:02 2013 julien fortin
+// Last update Fri May 24 13:06:19 2013 julien fortin
 //
 
 #ifndef	__INPUTMANAGER_HH__
@@ -36,10 +36,11 @@ namespace BomberMan
       static InputManager*			_inputManager;
 
       std::list<const Controller::IController*>	_controller;
+      Unix::IThread*				_detectionThread;
       fd_set					_rfd;
+      int					_leaveMe;
 
-      Unix::IThread*	_detectionThread;
-      Unix::IThread*	_inputThread;
+      void		_shouldILeave();
 
       int		_initInputSelect();
       bool       	_getInputFromController(const Controller::IController*);
@@ -65,9 +66,9 @@ namespace BomberMan
       static void			init();
 
       static InputManager*	getInputManager();
-      static void			deleteInputManager();
-      static void			deleteController(const Controller::IController*);
-      static void			deleteAndRemoveController(const Controller::IController*);
+      static void		deleteInputManager();
+      static void		deleteController(const Controller::IController*);
+      static void		deleteAndRemoveController(const Controller::IController*);
     };
   }
 }

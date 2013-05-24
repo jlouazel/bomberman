@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 21 16:18:25 2013 julien fortin
-// Last update Wed May 22 19:35:06 2013 julien fortin
+// Last update Thu May 23 13:14:48 2013 julien fortin
 //
 
 #ifndef	__MOVE_HH__
@@ -13,22 +13,25 @@
 
 #include	"AEvent.hh"
 
-namespace Event
+namespace BomberMan
 {
-  class Move : public AEvent
+  namespace Event
   {
-  private:
-    float	_angle;
+    class Move : public AEvent
+    {
+    private:
+      float	_angle;
 
-  protected:
-  public:
-    virtual ~Move();
+    protected:
+    public:
+      virtual ~Move();
 
-    Move(int, int, EventDirection::eEventDirection, float);
+      Move(int, int, EventDirection::eEventDirection, float);
 
-    virtual void	interaction() const;
-    int			getAngle() const;
-  };
+      virtual void	interaction() const;
+      int			getAngle() const;
+    };
+  }
 }
 
 #endif

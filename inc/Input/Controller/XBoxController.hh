@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Fri May 17 12:53:01 2013 julien fortin
-// Last update Thu May 23 10:25:34 2013 julien fortin
+// Last update Thu May 23 13:12:03 2013 julien fortin
 //
 
 #ifndef	__XBoxController__HH__
@@ -54,7 +54,7 @@ namespace BomberMan
       class XBoxController : public IController
       {
       private:
-	Fd		_fd;
+	Unix::Fd	_fd;
 	std::string	_path;
 
       private:

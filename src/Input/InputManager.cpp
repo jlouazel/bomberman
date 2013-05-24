@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Wed May 15 16:55:05 2013 julien fortin
-// Last update Thu May 23 10:19:08 2013 julien fortin
+// Last update Fri May 24 13:06:09 2013 julien fortin
 //
 
 #include	<string>
@@ -20,6 +20,8 @@
 #include	"KeyBoardManager.hh"
 #include	<exception>
 #include	<iostream>
+
+#include	<unistd.h>
 
 namespace BomberMan
 {
@@ -42,12 +44,14 @@ namespace BomberMan
 
     InputManager::InputManager()
     {
+      this->_leaveMe = 0;
     }
 
     InputManager::~InputManager()
     {
-      delete this->_detectionThread;
-      delete this->_inputThread;
+      this->_leaveMe = 1;
+      while (this->_leaveMe != 42)
+	usleep(100);
       Controller::KeyBoardManager::deleteKeyBoardManager();
       std::for_each(this->_controller.begin(), this->_controller.end(), &InputManager::deleteController);
     }
@@ -75,7 +79,7 @@ namespace BomberMan
       c = 0;
     }
 
-    void  InputManager::deleteAndRemoveController(const Controller::IController* c)
+    void	InputManager::deleteAndRemoveController(const Controller::IController* c)
     {
       InputManager::getInputManager()->_controller.remove(c);
       if (c)
@@ -83,7 +87,16 @@ namespace BomberMan
       c = 0;
     }
 
-    int	InputManager::_initInputSelect()
+    void	InputManager::_shouldILeave()
+    {
+      if (this->_leaveMe)
+	{
+	  this->_leaveMe = 42;
+	  delete this->_detectionThread;
+	}
+    }
+
+    int		InputManager::_initInputSelect()
     {
       int	mfd = -1;
 
@@ -106,6 +119,7 @@ namespace BomberMan
       static int	failSelect = 0;
       int		res = -1;
 
+      this->_shouldILeave();
       if ((res = select(mfd + 1, &this->_rfd, 0, 0, timeout)) < 0)
 	{
 	  if (failSelect > 15)
@@ -114,7 +128,10 @@ namespace BomberMan
 	  std::cout << "Fail select";
 	}
       else if (res > 0 && this->_controller.size() > 0)
-	this->_getInputEvent();
+	{
+	  this->_shouldILeave();
+	  this->_getInputEvent();
+	}
     }
 
     void	InputManager::_getInputEvent()
@@ -288,6 +305,7 @@ namespace BomberMan
       timeout.tv_usec = 10000000;
       while (true)
 	{
+	  this->_shouldILeave();
 	  if ((scan = scandir(Controller::INPUT_CONTROLLER_PATH.c_str(),
 			      &dirp, &InputManager::_filterJS, alphasort)) < 0)
 	    {
@@ -299,12 +317,16 @@ namespace BomberMan
 		}
 	      failScan++;
 	    }
+	  this->_shouldILeave();
 	  this->_checkForUnplugController(dirp, scan);
+	  this->_shouldILeave();
 	  this->_checkForNewController(dirp, scan);
+	  this->_shouldILeave();
 	  this->_deleteScanDir(dirp, scan);
 	  selectCount = 0;
 	  while (selectCount++ < 10)
 	    {
+	      this->_shouldILeave();
 	      mfd = this->_initInputSelect();
 	      if (mfd != -1)
 		this->_getInputSelect(mfd, &timeout);

@@ -5,11 +5,11 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 21 20:26:12 2013 julien fortin
-// Last update Thu May 23 10:22:49 2013 julien fortin
+// Last update Thu May 23 13:19:13 2013 julien fortin
 //
 
 //#include	<GL/glew.h>
-//#include	<GL/glut.h>
+#include	<GL/glut.h>
 
 #include	"EventManager.hh"
 #include	"KeyBoardManager.hh"
@@ -37,9 +37,9 @@ namespace BomberMan
 
       KeyBoardManager::KeyBoardManager()
       {
-	//glutKeyboardFunc(&KeyBoardManager::keyPressed);
-	//glutSpecialFunc(&KeyBoardManager::specialKeyPressed);
-	//glutMouseFunc(&KeyBoardManager::onMouseClic);
+	// glutKeyboardFunc(&KeyBoardManager::keyPressed);
+	// glutSpecialFunc(&KeyBoardManager::specialKeyPressed);
+	// glutMouseFunc(&KeyBoardManager::onMouseClick);
       }
 
       KeyBoardManager::~KeyBoardManager()
