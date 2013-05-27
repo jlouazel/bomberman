@@ -7,8 +7,8 @@
 #include "AObject.hpp"
 #include "Texture3d.hpp"
 
-BomberMan::Display::Texture3d::Texture3d(std::string &model, BomberMan::Display::Vector3f &position, BomberMan::Display::Vector3f &rotation, BomberMan::Display::Vector3f &len, BomberMan::Display::Camera *camera)
-  : AObject(model, position, rotation, len, camera)
+BomberMan::Display::Texture3d::Texture3d(std::string &model, BomberMan::Display::Vector3f &position, BomberMan::Display::Vector3f &rotation, BomberMan::Display::Vector3f &len)
+  : AObject(model, position, rotation, len)
 {
 }
 
@@ -20,7 +20,6 @@ BomberMan::Display::Texture3d::~Texture3d()
 void	BomberMan::Display::Texture3d::initialize()
 {
   this->model_ = gdl::Model::load(this->stringTexture_);
-  std::cout << "LALALA" << std::endl;
 }
 
 void	BomberMan::Display::Texture3d::update(gdl::GameClock const & gameClock, gdl::Input & input)
@@ -40,4 +39,9 @@ void	BomberMan::Display::Texture3d::draw()
   this->model_.draw();
   gdl::Model::End();
   glPopMatrix();
+}
+
+void    BomberMan::Display::Texture3d::info()
+{
+  this->model_.infos();
 }
