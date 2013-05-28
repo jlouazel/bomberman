@@ -5,13 +5,14 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 14 15:29:41 2013 julien fortin
-// Last update Thu May 23 10:35:57 2013 julien fortin
+// Last update Tue May 28 11:41:26 2013 julien fortin
 //
 
 #include	<algorithm>
-#include	"EventManager.hh"
+#include	"Events.hh"
 #include	"IEvent.hh"
 #include	"UnixMutex.hh"
+#include	"EventManager.hh"
 
 #include	<iostream>
 
@@ -68,19 +69,6 @@ namespace BomberMan
       EventManager::getEventManager()->_menuMode = b;
     }
 
-    void		EventManager::addEvent(const IEvent* event)
-    {
-      if (!EventManager::getEventManager()->_eventListMutex->trylock())
-	{
-	  if (EventManager::getEventManager()->_menuMode)
-	    EventManager::getEventManager()->_eventMenu.push(event);
-	  else
-	    EventManager::getEventManager()->_event.push(event);
-	  std::cout << "#" << EventManager::getEventManager()->_event.size() << "=PUSHEVENT\n";
-	  EventManager::getEventManager()->_eventListMutex->unlock();
-	}
-    }
-
     const IEvent*	EventManager::getEvent()
     {
       const IEvent*	event = 0;
@@ -99,6 +87,27 @@ namespace BomberMan
 	  EventManager::getEventManager()->_eventListMutex->unlock();
 	}
       return event;
+    }
+
+    void		EventManager::addEvent(const IEvent* event)
+    {
+      if (!EventManager::getEventManager()->_eventListMutex->trylock())
+	{
+	  if (EventManager::getEventManager()->_menuMode)
+	    EventManager::getEventManager()->_eventMenu.push(event);
+	  else
+	    EventManager::getEventManager()->_event.push(event);
+	  EventManager::getEventManager()->_eventListMutex->unlock();
+	}
+      std::cout << "#" << EventManager::getEventManager()->_event.size() << "\n";
+    }
+
+    void		EventManager::moveEvent(EventDirection::eEventDirection direction,
+						float angle, float x, float y)
+    {
+      EventContext::eEventContext	context;  // Core::getContext();
+
+      EventManager::addEvent(new Move(context, direction, angle, x, y));
     }
   }
 }

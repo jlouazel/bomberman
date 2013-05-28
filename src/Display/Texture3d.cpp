@@ -7,8 +7,8 @@
 #include "AObject.hpp"
 #include "Texture3d.hpp"
 
-BomberMan::Display::Texture3d::Texture3d(std::string &model, BomberMan::Display::Vector3f &position, BomberMan::Display::Vector3f &rotation, BomberMan::Display::Vector3f &len, BomberMan::Display::Camera *camera)
-  : AObject(model, position, rotation, len, camera)
+BomberMan::Display::Texture3d::Texture3d(std::string &model, BomberMan::Display::Vector3f &position, BomberMan::Display::Vector3f &rotation, BomberMan::Display::Vector3f &len)
+  : AObject(model, position, rotation, len)
 {
 }
 
@@ -20,12 +20,31 @@ BomberMan::Display::Texture3d::~Texture3d()
 void	BomberMan::Display::Texture3d::initialize()
 {
   this->model_ = gdl::Model::load(this->stringTexture_);
-  std::cout << "LALALA" << std::endl;
 }
 
 void	BomberMan::Display::Texture3d::update(gdl::GameClock const & gameClock, gdl::Input & input)
 {
   this->model_.update(gameClock);
+}
+
+void    BomberMan::Display::Texture3d::play(std::string const & name, char state)
+{
+  this->model_.play(name, state);
+}
+
+void    BomberMan::Display::Texture3d::stop(std::string const & name)
+{
+  this->model_.stop_animation(name);
+}
+
+double  BomberMan::Display::Texture3d::get_anim_speed(std::string const &name)
+{
+  return (this->model_.get_anim_speed(name));
+}
+
+void    BomberMan::Display::Texture3d::set_anim_speed(std::string const &name, double speed)
+{
+  this->model_.set_anim_speed(name, speed);
 }
 
 void	BomberMan::Display::Texture3d::draw()
@@ -40,4 +59,9 @@ void	BomberMan::Display::Texture3d::draw()
   this->model_.draw();
   gdl::Model::End();
   glPopMatrix();
+}
+
+void    BomberMan::Display::Texture3d::info()
+{
+  this->model_.infos();
 }

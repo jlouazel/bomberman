@@ -57,6 +57,7 @@ BomberMan::Display::Camera  *BomberMan::Display::MyGame::getCamera()
 
 void	BomberMan::Display::MyGame::update(void)
 {
+  /* Core::update();*/
   std::list<AObject*>::iterator itb = this->objects_.begin();
   for (; itb != this->objects_.end(); ++itb)
     (*itb)->update(gameClock_, input_);

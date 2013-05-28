@@ -32,6 +32,7 @@ namespace BomberMan
       std::list<AObject*>   objects_;
       Camera		camera_;
       Menu			menu_;
+      /* Core * _core */
 
     public:
       void		setMenu(const BomberMan::Display::Menu &);
@@ -40,7 +41,7 @@ namespace BomberMan
     public:
       MyGame() : ::gdl::Game()
       {}
-      void	initialize();
+      void	initialize(); /* Instanciation du Core */
       void	update(void);
       void	draw(void);
       void	unload(void);

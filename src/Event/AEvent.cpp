@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 21 16:15:08 2013 julien fortin
-// Last update Thu May 23 10:35:03 2013 julien fortin
+// Last update Tue May 28 11:09:55 2013 julien fortin
 //
 
 #include	"AEvent.hh"
@@ -14,29 +14,45 @@ namespace BomberMan
 {
   namespace Event
   {
-    AEvent::AEvent(int x, int y, EventType::eEventType type, EventDirection::eEventDirection dir)
+    AEvent::AEvent(EventCategory::eEventCategory category,
+		   EventContext::eEventContext context,
+		   EventType::eEventType type,
+		   EventDirection::eEventDirection direction,
+		   float x, float y)
     {
+      this->_category = category;
+      this->_context = context;
+      this->_direction = direction;
+      this->_type = type;
       this->_x = x;
       this->_y = y;
-      this->_type = type;
-      this->_direction = dir;
     }
 
     AEvent::~AEvent()
     {
     }
 
-    int	AEvent::getX() const
+    float	AEvent::getX() const
     {
       return this->_x;
     }
 
-    int	AEvent::getY() const
+    float	AEvent::getY() const
     {
       return this->_y;
     }
 
-    EventType::eEventType	AEvent::getType() const
+    EventCategory::eEventCategory	AEvent::getCategory() const
+    {
+      return this->_category;
+    }
+
+    EventContext::eEventContext		AEvent::getContext() const
+    {
+      return this->_context;
+    }
+
+    EventType::eEventType		AEvent::getType() const
     {
       return this->_type;
     }

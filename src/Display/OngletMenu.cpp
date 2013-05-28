@@ -21,6 +21,11 @@ void	BomberMan::Display::OngletMenu::setContain(BomberMan::Display::Menu *newMen
   return (this->_name);
 }
 
+BomberMan::Display::AObject       *BomberMan::Display::OngletMenu::getImage() const
+{
+  return (this->_image);
+}
+
 void	BomberMan::Display::OngletMenu::setName(::std::string newName)
 {
   this->_name = newName;
@@ -34,4 +39,9 @@ void    BomberMan::Display::OngletMenu::initialize() const
 void	BomberMan::Display::OngletMenu::affOnglet() const
 {
   this->_image->draw();
+}
+
+void    BomberMan::Display::OngletMenu::setPosition(Vector3f &position)
+{
+  this->_image->setPosition(position);
 }

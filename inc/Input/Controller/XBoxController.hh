@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Fri May 17 12:53:01 2013 julien fortin
-// Last update Thu May 23 13:12:03 2013 julien fortin
+// Last update Tue May 28 11:51:25 2013 julien fortin
 //
 
 #ifndef	__XBoxController__HH__
@@ -41,9 +41,9 @@
 #define JS_LT           2
 #define JS_RT           5
 
-#define JS_BUTTON 0x01 /* button pressed/released */
-#define JS_AXIS 0x02 /* joystick moved */
-#define JS_INIT 0x80 /* initial state of device */
+#define JS_BUTTON 0x01
+#define JS_AXIS 0x02
+#define JS_INIT 0x80
 
 namespace BomberMan
 {
@@ -114,7 +114,7 @@ namespace BomberMan
 	void	_axisJS_LT();
 	void	_axisJS_RT();
 
-	void	_makeEvent(Event::EventDirection::eEventDirection, float) const;
+	void	_makeEventMove(Event::EventDirection::eEventDirection, float);
 
       protected:
       public:

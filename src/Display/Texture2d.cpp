@@ -29,6 +29,8 @@ void	BomberMan::Display::Texture2d::update(gdl::GameClock const &gameClock, gdl:
 
 void	BomberMan::Display::Texture2d::draw(void)
 {
+  glEnable(GL_BLEND);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   this->texture_.bind();
   glMatrixMode (GL_PROJECTION);
   glLoadIdentity();

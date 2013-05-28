@@ -16,5 +16,6 @@
 #include "DisplayError.hh"
 #include "Manager.hh"
 #include "Resources.hh"
+#include "MyGame.hpp"
 
 #endif

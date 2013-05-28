@@ -16,12 +16,13 @@ namespace BomberMan
     private:
       gdl::Model model_;
     public:
-      Texture3d(std::string &, Vector3f &, Vector3f &, Vector3f &, Camera *);
+      Texture3d(std::string &, Vector3f &, Vector3f &, Vector3f &);
       ~Texture3d();
 
       void	initialize();
       void	update(gdl::GameClock const &, gdl::Input &);
       void	draw();
+      void	info();
     };
   }
 }

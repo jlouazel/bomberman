@@ -27,6 +27,8 @@ namespace BomberMan
 	  void		setName(std::string newName);
 	  void		affOnglet() const;
 	  void          initialize() const;
+	  AObject       *getImage() const;
+	  void          setPosition(Vector3f &);
         };
     }
 }
