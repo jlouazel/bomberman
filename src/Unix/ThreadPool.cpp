@@ -9,20 +9,26 @@
 #include "ThreadPool.hh"
 #include "UnixThread.hh"
 
-BomberMan::Unix::ThreadPool::ThreadPool()
+namespace BomberMan
 {
-}
-
-BomberMan::Unix::ThreadPool::~ThreadPool()
-{
-}
-
-void    BomberMan::Unix::ThreadPool::addThread()
-{
-  this->_count++;
-}
-
-size_t  BomberMan::Unix::ThreadPool::getNbThread() const
-{
-  return this->_count;
+    namespace Unix
+    {
+        ThreadPool::ThreadPool()
+        {
+        }
+        
+        ThreadPool::~ThreadPool()
+        {
+        }
+        
+        void    ThreadPool::addThread()
+        {
+            this->_count++;
+        }
+        
+        size_t  ThreadPool::getNbThread() const
+        {
+            return this->_count;
+        }
+    }
 }

@@ -13,9 +13,7 @@ namespace BomberMan
   namespace Event
   {
     EventError::EventError(::std::string what, ::std::string where, ::std::string details)
-      :   _what(what),
-	  _where(where),
-	  _details(details)
+      :   _what(what), _where(where), _details(details)
     {
     }
 
