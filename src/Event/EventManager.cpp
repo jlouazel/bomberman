@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 14 15:29:41 2013 julien fortin
-// Last update Tue May 28 22:26:22 2013 julien fortin
+// Last update Tue May 28 23:37:04 2013 julien fortin
 //
 
 #include	<algorithm>
@@ -75,15 +75,19 @@ namespace BomberMan
 
       if (!EventManager::getEventManager()->_eventListMutex->trylock())
 	{
-	  if (EventManager::getEventManager()->_menuMode)
+	  if (EventManager::getEventManager()->_menuMode
+	      && EventManager::getEventManager()->_eventMenu.size() > 0)
 	    {
 	      event = EventManager::getEventManager()->_eventMenu.front();
 	      EventManager::getEventManager()->_eventMenu.pop();
 	      EventManager::getEventManager()->_eventListMutex->unlock();
 	      return event;
 	    }
-	  event = EventManager::getEventManager()->_event.front();
-	  EventManager::getEventManager()->_event.pop();
+	  else if (EventManager::getEventManager()->_event.size() > 0)
+	    {
+	      event = EventManager::getEventManager()->_event.front();
+	      EventManager::getEventManager()->_event.pop();
+	    }
 	  EventManager::getEventManager()->_eventListMutex->unlock();
 	}
       return event;
