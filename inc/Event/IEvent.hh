@@ -15,24 +15,24 @@
 
 namespace BomberMan
 {
-  namespace Event
-  {
-    class IEvent
+    namespace Event
     {
-    private:
-    protected:
-    public:
-      virtual ~IEvent() {}
-
-      virtual void								interaction() const = 0;
-      virtual float								getX() const = 0;
-      virtual float								getY() const = 0;
-      virtual EventType::eEventType				getType() const = 0;
-      virtual EventContext::eEventContext		getContext() const = 0;
-      virtual EventCategory::eEventCategory		getCategory() const = 0;
-      virtual EventDirection::eEventDirection	getDirection() const = 0;
-    };
-  }
+        class IEvent
+        {
+        private:
+        protected:
+        public:
+            virtual ~IEvent() {}
+            
+            virtual void								interaction() const = 0;
+            virtual float								getX() const = 0;
+            virtual float								getY() const = 0;
+            virtual EventType::eEventType				getType() const = 0;
+            virtual EventContext::eEventContext		getContext() const = 0;
+            virtual EventCategory::eEventCategory		getCategory() const = 0;
+            virtual EventDirection::eEventDirection	getDirection() const = 0;
+        };
+    }
 }
 
 #endif

@@ -14,23 +14,23 @@
 
 namespace BomberMan
 {
-  namespace Event
-  {
-    class EventError : public std::exception
+    namespace Event
     {
-      std::string	_what;
-      std::string   _where;
-      std::string   _details;
-
-    public:
-      EventError(std::string, std::string, std::string);
-      ~EventError() throw();
-
-      std::string   getWhat() const;
-      std::string   getWhere() const;
-      std::string   getDetails() const;
-    };
-  }
+        class EventError : public std::exception
+        {
+            std::string	_what;
+            std::string	_where;
+            std::string	_details;
+            
+        public:
+            EventError(std::string, std::string, std::string);
+            ~EventError() throw();
+            
+            std::string	getWhat() const;
+            std::string	getWhere() const;
+            std::string	getDetails() const;
+        };
+    }
 }
 
 #endif /* defined(__BomberMan__Error__) */
