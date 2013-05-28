@@ -17,7 +17,7 @@ namespace BomberMan
             gdl::Model model_;
             
         public:
-            Texture3d(std::string &, Vector3f &, Vector3f &, Vector3f &);
+            Texture3d(const std::string &, Vector3f &, Vector3f &, Vector3f &);
             ~Texture3d();
             
             void	initialize();

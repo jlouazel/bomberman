@@ -17,14 +17,15 @@ namespace BomberMan
             AObject *				_textureFond;
 
         public:
-            Menu(std::string &);
-            Menu();
-            ~Menu();
+	  Menu(const std::string &);
+	  Menu();
+	  ~Menu();
 
-            void					addOnglet(IOnglet *);
-            IOnglet *				getOneOnglet(int) const;
-            std::vector <IOnglet *>	getOnglet() const;
-            void					affAllOnglet();
+	  void				addOnglet(IOnglet *);
+	  IOnglet *			getOneOnglet(int) const;
+	  std::vector <IOnglet *>	getOnglet() const;
+	  void				affAllOnglet();
+	  void				initialize();
         };
     }
 }

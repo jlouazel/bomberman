@@ -15,6 +15,9 @@ int		main()
   try
     {
       BomberMan::Display::MyGame game;
+
+      game.initialize();
+      game.run();
     }
   catch (BomberMan::Core::CoreError& e)
     {

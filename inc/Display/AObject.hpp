@@ -27,8 +27,8 @@ namespace BomberMan
             Vector3f		rotation_;
             Vector3f		len_;
         public:
-            AObject(std::string &texture, Vector3f &position, Vector3f &rotation, Vector3f &len);
-            
+            AObject(const std::string &texture, Vector3f &position, Vector3f &rotation, Vector3f &len);
+
             virtual void	initialize(void) = 0;
             virtual void	update(gdl::GameClock const &, gdl::Input &) = 0;
             virtual void	draw(void) = 0;

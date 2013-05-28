@@ -13,26 +13,27 @@ namespace BomberMan
     {
         void	Texture2d::initialize()
         {
+	  std::cout << "lalala : " << this->stringTexture_ << std::endl;
             this->len_.setX((this->len_.getX() * WIDTH / 100));
             this->len_.setY((this->len_.getY() * HEIGHT / 100));
             this->len_.setZ(this->len_.getZ());
-            
+
             float posX = this->position_.getX() * WIDTH / 100;
             float posY = (HEIGHT - (this->position_.getY() * HEIGHT / 100) - this->len_.getY());
             Vector3f newVector(posX, posY, 0);
-            
+
             this->position_.setX(newVector.getX());
             this->position_.setY(newVector.getY());
             this->position_.setZ(newVector.getZ());
             this->texture_ = gdl::Image::load(this->stringTexture_);
         }
-        
+
         void	Texture2d::update(gdl::GameClock const &gameClock, gdl::Input &input)
         {
             (void)gameClock;
             (void)input;
         }
-        
+
         void	Texture2d::draw(void)
         {
             glEnable(GL_BLEND);

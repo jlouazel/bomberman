@@ -11,7 +11,7 @@ namespace BomberMan
 {
     namespace Display
     {
-        AObject::AObject(std::string &texture, Vector3f &position, Vector3f &rotation, Vector3f &len)
+        AObject::AObject(const std::string &texture, Vector3f &position, Vector3f &rotation, Vector3f &len)
         : position_(position), rotation_(rotation), len_(len)
         {
             this->stringTexture_ = texture;

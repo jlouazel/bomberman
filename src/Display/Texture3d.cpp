@@ -11,7 +11,7 @@ namespace BomberMan
 {
     namespace Display
     {
-        Texture3d::Texture3d(std::string &model, Vector3f &position, Vector3f &rotation, Vector3f &len)
+        Texture3d::Texture3d(const std::string &model, Vector3f &position, Vector3f &rotation, Vector3f &len)
         : AObject(model, position, rotation, len)
         {
         }

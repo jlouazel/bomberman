@@ -37,7 +37,8 @@ namespace BomberMan
         
         void    OngletMenu::initialize() const
         {
-            this->_image->initialize();
+	  this->_image->initialize();
+	  this->_menu->initialize();
         }
         
         void	OngletMenu::affOnglet() const

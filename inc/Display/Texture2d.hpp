@@ -13,7 +13,7 @@ namespace BomberMan
             gdl::Image    texture_;
             
         public:
-            Texture2d(std::string &texture, Vector3f &position,  Vector3f &rotation, Vector3f &len) : AObject(texture, position, rotation, len){}
+            Texture2d(const std::string &texture, Vector3f &position,  Vector3f &rotation, Vector3f &len) : AObject(texture, position, rotation, len){}
             
         private:
             void	initialize();
