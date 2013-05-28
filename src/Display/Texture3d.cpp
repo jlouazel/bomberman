@@ -18,46 +18,47 @@ namespace BomberMan
         : AObject(model, position, rotation, len)
         {
         }
-        
+
         Texture3d::~Texture3d()
         {
             // delete this->model_;
         }
-        
+
         void	Texture3d::initialize()
         {
             this->model_ = gdl::Model::load(this->stringTexture_);
         }
-        
+
         void	Texture3d::update(gdl::GameClock const & gameClock, gdl::Input &)
         {
 	  this->model_.update(gameClock);
-	  const Event::IEvent* event = Event::EventManager::getEvent();
+
+	  //const Event::IEvent* event = Event::EventManager::getEvent();
 
 	  // const Event::Move *move = (const Event::Move *)event;
 	  // std::cout << "Angle:" << move->getAngle() << std::endl;
         }
-        
+
         void    Texture3d::play(std::string const & name, char state)
         {
             this->model_.play(name, state);
         }
-        
+
         void    Texture3d::stop(std::string const & name)
         {
             this->model_.stop_animation(name);
         }
-        
+
         double  Texture3d::get_anim_speed(std::string const &name)
         {
             return (this->model_.get_anim_speed(name));
         }
-        
+
         void    Texture3d::set_anim_speed(std::string const &name, double speed)
         {
             this->model_.set_anim_speed(name, speed);
         }
-        
+
         void	Texture3d::draw()
         {
             glLoadIdentity();
@@ -71,7 +72,7 @@ namespace BomberMan
             gdl::Model::End();
             glPopMatrix();
         }
-        
+
         void    Texture3d::info()
         {
             this->model_.infos();
