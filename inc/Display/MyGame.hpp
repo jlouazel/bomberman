@@ -42,8 +42,8 @@ namespace BomberMan
       void      update(void);
       void		draw(void);
       void		unload(void);
-      void		addObject3d(std::string &, Vector3f &, Vector3f &, Vector3f &);
-      void		addObject2d(std::string &, Vector3f &, Vector3f &, Vector3f &);
+      void		addObject3d(const std::string &, Vector3f &, Vector3f &, Vector3f &);
+      void		addObject2d(const std::string &, Vector3f &, Vector3f &, Vector3f &);
       void		setMenu(const Menu &);
       Menu		getMenu() const;
       Camera *	getCamera();

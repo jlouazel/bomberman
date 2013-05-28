@@ -5,6 +5,9 @@
 #include "Menu.hpp"
 #include "Texture2d.hpp"
 
+// #include	"EventManager.hh"
+// #include	"Move.hh"
+
 namespace BomberMan
 {
     namespace Display
@@ -34,7 +37,12 @@ namespace BomberMan
         Menu::~Menu()
         {
         }
-        
+
+      void	Menu::update()
+      {
+	// Move* event = Event::EventManager::getEvent();
+      }
+
         void	Menu::addOnglet(IOnglet *newOnglet)
         {
 	  this->_onglet.push_back(newOnglet);

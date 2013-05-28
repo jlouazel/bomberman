@@ -26,6 +26,7 @@ namespace BomberMan
 	  std::vector <IOnglet *>	getOnglet() const;
 	  void				affAllOnglet();
 	  void				initialize();
+	  void				update();
         };
     }
 }

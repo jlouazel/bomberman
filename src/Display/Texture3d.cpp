@@ -7,6 +7,9 @@
 #include "AObject.hpp"
 #include "Texture3d.hpp"
 
+#include	"EventManager.hh"
+#include	"Move.hh"
+
 namespace BomberMan
 {
     namespace Display
@@ -26,9 +29,13 @@ namespace BomberMan
             this->model_ = gdl::Model::load(this->stringTexture_);
         }
         
-        void	Texture3d::update(gdl::GameClock const & gameClock, gdl::Input & input)
+        void	Texture3d::update(gdl::GameClock const & gameClock, gdl::Input &)
         {
-            this->model_.update(gameClock);
+	  this->model_.update(gameClock);
+	  const Event::IEvent* event = Event::EventManager::getEvent();
+
+	  // const Event::Move *move = (const Event::Move *)event;
+	  // std::cout << "Angle:" << move->getAngle() << std::endl;
         }
         
         void    Texture3d::play(std::string const & name, char state)
@@ -56,10 +63,10 @@ namespace BomberMan
             glLoadIdentity();
             glPushMatrix();
             gdl::Model::Begin();
-            glTranslatef(this->position_.getX(), this->position_.getY(), this->position_.getZ());
             glRotatef(this->rotation_.getX(), 1, 0, 0);
             glRotatef(this->rotation_.getY(), 0, 1, 0);
             glRotatef(this->rotation_.getZ(), 0, 0, 1);
+            glTranslatef(this->position_.getX(), this->position_.getY(), this->position_.getZ());
             this->model_.draw();
             gdl::Model::End();
             glPopMatrix();

@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Thu May 23 12:10:00 2013 julien fortin
-// Last update Mon May 27 17:25:38 2013 Jean-Baptiste Louazel
+// Last update Tue May 28 23:13:52 2013 Happy
 //
 
 #include	"BomberMan.hh"
@@ -19,7 +19,8 @@ namespace BomberMan
         {
             Input::InputManager::getInputManager();
             Input::InputManager::init();
-            
+	    Event::EventManager::getEventManager();
+
             /* Thread video intro */
             /* Initialisation ressources GDL */
             /* Initialise Display */

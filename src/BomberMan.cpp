@@ -13,21 +13,21 @@ int		main()
 {
   try
     {
-      // BomberMan::Display::MyGame game;
+      BomberMan::Display::MyGame game;
 
-      // game.initialize();
-      // game.run();
+      game.initialize();
+      game.run();
 
-      BomberMan::Event::EventManager::getEventManager();
-      BomberMan::Input::InputManager::getInputManager();
-      BomberMan::Input::InputManager::init();
+      // BomberMan::Event::EventManager::getEventManager();
+      // BomberMan::Input::InputManager::getInputManager();
+      // BomberMan::Input::InputManager::init();
 
-      const BomberMan::Event::IEvent*	event;
-      while (42)
-	{
-	  usleep(100);
-	  event = BomberMan::Event::EventManager::getEvent();
-	}
+      // const BomberMan::Event::IEvent*	event;
+      // while (42)
+      // 	{
+      // 	  usleep(100);
+      // 	  event = BomberMan::Event::EventManager::getEvent();
+      // 	}
 
     }
   catch (BomberMan::Core::CoreError& e)

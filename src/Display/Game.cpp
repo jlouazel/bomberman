@@ -25,8 +25,11 @@ namespace BomberMan
     {
         void	MyGame::initialize()
         {
-	  Vector3f      vectorPosition(25, 15, 0);
-	  Vector3f      vectorLen(50.0, 8.0, 0.0);
+	  // Vector3f      vectorPosition(25, 15, 0);
+	  // Vector3f      vectorLen(50.0, 8.0, 0.0);
+	  // Vector3f      vectorRotation(0.0, 0.0, 0.0);
+	  Vector3f      vectorPosition(500, 0, -500);
+	  Vector3f      vectorLen(0.0, 0.0, 0.0);
 	  Vector3f      vectorRotation(0.0, 0.0, 0.0);
 	  IOnglet       *newOnglet;
 
@@ -54,19 +57,20 @@ namespace BomberMan
 	  firstMenu->addOnglet(newOnglet);
 	  this->menu_ = *firstMenu;
 	  this->menu_.initialize();
+	  this->addObject3d("libgdl/assets/marvin.fbx", vectorPosition, vectorRotation, vectorLen);
 	  std::list<AObject*>::iterator itb = this->objects_.begin();
 	  for (; itb != this->objects_.end(); ++itb)
 	    (*itb)->initialize();
         }
-      
-        void	MyGame::addObject2d(std::string &texture, Vector3f &position, Vector3f &rotation, Vector3f &len)
+
+        void	MyGame::addObject2d(const std::string &texture, Vector3f &position, Vector3f &rotation, Vector3f &len)
         {
             AObject *newObject = new Texture2d(texture, position, rotation, len);
             
             this->objects_.push_back(newObject);
         }
         
-        void	MyGame::addObject3d(std::string &texture, Vector3f &position, Vector3f &rotation, Vector3f &len)
+        void	MyGame::addObject3d(const std::string &texture, Vector3f &position, Vector3f &rotation, Vector3f &len)
         {
             AObject *newObject = new Texture3d(texture, position, rotation, len);
             
@@ -90,22 +94,23 @@ namespace BomberMan
         
         void	MyGame::update(void)
         {
-            /* Core::update();*/
-            std::list<AObject*>::iterator itb = this->objects_.begin();
-            for (; itb != this->objects_.end(); ++itb)
-                (*itb)->update(gameClock_, input_);
-            camera_.update(gameClock_, input_);
+	  /* Core::update();*/
+	  std::list<AObject*>::iterator itb = this->objects_.begin();
+	  for (; itb != this->objects_.end(); ++itb)
+	    (*itb)->update(gameClock_, input_);
+	  camera_.update(gameClock_, input_);
+	  this->menu_.update();
         }
         
         void	MyGame::draw(void)
         {
-	  // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	  // glClearColor(0.74f, 0.84f, 95.0f, 1.0f);
-	  // glClearDepth(1.0f);
-	  // std::list<AObject*>::iterator itb = this->objects_.begin();
-	  // for (; itb != this->objects_.end(); ++itb)
-	  //   (*itb)->draw();
-	  this->menu_.affAllOnglet();
+	  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	  glClearColor(0.74f, 0.84f, 95.0f, 1.0f);
+	  glClearDepth(1.0f);
+	  std::list<AObject*>::iterator itb = this->objects_.begin();
+	  for (; itb != this->objects_.end(); ++itb)
+	    (*itb)->draw();
+	  // this->menu_.affAllOnglet();
         }
 
         void	MyGame::unload(void)
