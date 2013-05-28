@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 14 15:29:41 2013 julien fortin
-// Last update Tue May 28 11:41:26 2013 julien fortin
+// Last update Tue May 28 17:47:56 2013 julien fortin
 //
 
 #include	<algorithm>
@@ -108,6 +108,29 @@ namespace BomberMan
       EventContext::eEventContext	context;  // Core::getContext();
 
       EventManager::addEvent(new Move(context, direction, angle, x, y));
+    }
+
+    void		EventManager::actionEvent(EventDirection::eEventDirection direction,
+						  float x, float y)
+    {
+      EventContext::eEventContext	context; //Core::getContext();
+
+      if (context == EventContext::MENU)
+	{ /* VALIDATION DE MENU */ }
+      else if (context == EventContext::GAME)
+	{ /* POSAGE DE BOMB */ }
+      else
+	{ /* PENDANT UN CHARGEMENT */ }
+    }
+
+    void		EventManager::gameEvent(EventDirection::eEventDirection direction,
+						EventType::eEventType type,
+						float x, float y)
+    {
+    }
+
+    void		EventManager::coreEvent(EventType::eEventType type)
+    {
     }
   }
 }

@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 14 15:29:51 2013 julien fortin
-// Last update Tue May 28 11:50:53 2013 julien fortin
+// Last update Tue May 28 22:19:47 2013 julien fortin
 //
 
 #ifndef	__EVENTMANAGER_HH__
@@ -50,8 +50,15 @@ namespace BomberMan
       static void			deleteEventManager();
 
       static void			addEvent(const IEvent*);
+
       static void			moveEvent(EventDirection::eEventDirection,
 						  float, float, float);
+      static void			actionEvent(EventDirection::eEventDirection,
+						    float, float);
+      static void			gameEvent(EventDirection::eEventDirection,
+						  EventType::eEventType,
+						  float, float);
+      static void			coreEvent(EventType::eEventType);
     };
   }
 }

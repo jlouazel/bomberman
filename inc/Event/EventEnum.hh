@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat May 25 10:47:04 2013 julien fortin
-// Last update Mon May 27 00:38:55 2013 julien fortin
+// Last update Tue May 28 17:32:58 2013 julien fortin
 //
 
 #ifndef	__EVENT_ENUM_HH__
@@ -15,15 +15,26 @@ namespace BomberMan
 {
   namespace Event
   {
+    struct EventContext
+    {
+      enum eEventContext
+	{
+	  LOADING,
+	  MENU,
+	  GAME
+	};
+    };
+
     struct EventCategory
     {
-      enum eEventCategory { ACTION, MOVE, CORE };
+      enum eEventCategory { ACTION, MOVE, GAME, CORE };
     };
 
     struct EventType
     {
       enum eEventType
 	{
+	  VALIDATION,
 	  MOVE,
 	  DROP_ITEM,
 	  GET_ITEM,
@@ -35,16 +46,6 @@ namespace BomberMan
 	  JOIN_CONTROLLER,
 	  DETACH_CONTROLLER,
 	  FAIL_INPUT, //fail select et ou scandir
-	};
-    };
-
-    struct EventContext
-    {
-      enum eEventContext
-	{
-	  LOADING,
-	  MENU,
-	  GAME
 	};
     };
 
