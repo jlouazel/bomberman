@@ -10,30 +10,30 @@
 
 namespace BomberMan
 {
-  namespace Event
-  {
-    EventError::EventError(std::string what, std::string where, std::string details)
-      :   _what(what), _where(where), _details(details)
+    namespace Event
     {
+        EventError::EventError(std::string what, std::string where, std::string details)
+        :   _what(what), _where(where), _details(details)
+        {
+        }
+        
+        EventError::~EventError() throw()
+        {
+        }
+        
+        std::string		EventError::getWhat() const
+        {
+            return this->_what;
+        }
+        
+        std::string		EventError::getWhere() const
+        {
+            return this->_where;
+        }
+        
+        std::string		EventError::getDetails() const
+        {
+            return this->_details;
+        }
     }
-
-    EventError::~EventError() throw()
-    {
-    }
-
-    std::string		EventError::getWhat() const
-    {
-      return this->_what;
-    }
-
-    std::string		EventError::getWhere() const
-    {
-      return this->_where;
-    }
-
-    std::string		EventError::getDetails() const
-    {
-      return this->_details;
-    }
-  }
 }

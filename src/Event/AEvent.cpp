@@ -12,54 +12,54 @@
 
 namespace BomberMan
 {
-  namespace Event
-  {
-    AEvent::AEvent(EventCategory::eEventCategory category,
-		   EventContext::eEventContext context,
-		   EventType::eEventType type,
-		   EventDirection::eEventDirection direction,
-		   float x, float y)
+    namespace Event
     {
-      this->_category = category;
-      this->_context = context;
-      this->_direction = direction;
-      this->_type = type;
-      this->_x = x;
-      this->_y = y;
+        AEvent::AEvent(EventCategory::eEventCategory category,
+                       EventContext::eEventContext context,
+                       EventType::eEventType type,
+                       EventDirection::eEventDirection direction,
+                       float x, float y)
+        {
+            this->_category = category;
+            this->_context = context;
+            this->_direction = direction;
+            this->_type = type;
+            this->_x = x;
+            this->_y = y;
+        }
+        
+        AEvent::~AEvent()
+        {
+        }
+        
+        float	AEvent::getX() const
+        {
+            return this->_x;
+        }
+        
+        float	AEvent::getY() const
+        {
+            return this->_y;
+        }
+        
+        EventCategory::eEventCategory	AEvent::getCategory() const
+        {
+            return this->_category;
+        }
+        
+        EventContext::eEventContext		AEvent::getContext() const
+        {
+            return this->_context;
+        }
+        
+        EventType::eEventType		AEvent::getType() const
+        {
+            return this->_type;
+        }
+        
+        EventDirection::eEventDirection	AEvent::getDirection() const
+        {
+            return this->_direction;
+        }
     }
-
-    AEvent::~AEvent()
-    {
-    }
-
-    float	AEvent::getX() const
-    {
-      return this->_x;
-    }
-
-    float	AEvent::getY() const
-    {
-      return this->_y;
-    }
-
-    EventCategory::eEventCategory	AEvent::getCategory() const
-    {
-      return this->_category;
-    }
-
-    EventContext::eEventContext		AEvent::getContext() const
-    {
-      return this->_context;
-    }
-
-    EventType::eEventType		AEvent::getType() const
-    {
-      return this->_type;
-    }
-
-    EventDirection::eEventDirection	AEvent::getDirection() const
-    {
-      return this->_direction;
-    }
-  }
 }

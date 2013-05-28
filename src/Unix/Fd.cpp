@@ -15,32 +15,32 @@
 
 namespace BomberMan
 {
-  namespace Unix
-  {
-    Fd::Fd(std::string const &path, int flag, mode_t mode)
+    namespace Unix
     {
-      this->_fd = open(path.c_str(), flag, mode);
-      write(1, "new fd\n", 7);
+        Fd::Fd(std::string const &path, int flag, mode_t mode)
+        {
+            this->_fd = open(path.c_str(), flag, mode);
+            write(1, "new fd\n", 7);
+        }
+        
+        Fd::Fd(int fd)
+        {
+            this->_fd = fd;
+        }
+        
+        Fd::~Fd()
+        {
+            this->closeFd();
+        }
+        
+        int	Fd::getFd() const
+        {
+            return this->_fd;
+        }
+        
+        void	Fd::closeFd() const
+        {
+            close(this->_fd);
+        }
     }
-
-    Fd::Fd(int fd)
-    {
-      this->_fd = fd;
-    }
-
-    Fd::~Fd()
-    {
-      this->closeFd();
-    }
-
-    int	Fd::getFd() const
-    {
-      return this->_fd;
-    }
-
-    void	Fd::closeFd() const
-    {
-      close(this->_fd);
-    }
-  }
 }

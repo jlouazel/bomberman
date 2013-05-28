@@ -13,21 +13,21 @@
 
 namespace BomberMan
 {
-  namespace Core
-  {
-    Core::Core()
+    namespace Core
     {
-      Input::InputManager::getInputManager();
-      Input::InputManager::init();
-
-      /* Thread video intro */
-      /* Initialisation ressources GDL */
-      /* Initialise Display */
+        Core::Core()
+        {
+            Input::InputManager::getInputManager();
+            Input::InputManager::init();
+            
+            /* Thread video intro */
+            /* Initialisation ressources GDL */
+            /* Initialise Display */
+        }
+        
+        Core::~Core()
+        {
+            Input::InputManager::deleteInputManager();
+        }
     }
-
-    Core::~Core()
-    {
-      Input::InputManager::deleteInputManager();
-    }
-  }
 }
