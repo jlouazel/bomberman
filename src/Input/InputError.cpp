@@ -12,7 +12,7 @@ namespace BomberMan
 {
   namespace Input
   {
-    InputError::InputError(::std::string what, ::std::string where, ::std::string details)
+    InputError::InputError(std::string what, std::string where, std::string details)
       :   _what(what),
 	  _where(where),
 	  _details(details)
@@ -23,17 +23,17 @@ namespace BomberMan
     {
     }
 
-    ::std::string		InputError::getWhat() const
+    std::string		InputError::getWhat() const
     {
       return this->_what;
     }
 
-    ::std::string		InputError::getWhere() const
+    std::string		InputError::getWhere() const
     {
       return this->_where;
     }
 
-    ::std::string		InputError::getDetails() const
+    std::string		InputError::getDetails() const
     {
       return this->_details;
     }

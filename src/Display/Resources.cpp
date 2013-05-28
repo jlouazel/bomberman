@@ -16,25 +16,25 @@ BomberMan::Display::Ressources::~Ressources()
 {
 }
 
-BomberMan::Display::IPicture *		BomberMan::Display::Ressources::getPicture(const ::std::string & name) const
+BomberMan::Display::IPicture *		BomberMan::Display::Ressources::getPicture(const std::string & name) const
 {
   static_cast<void>(name);
   return 0;
 }
 
-BomberMan::Display::IAnimation *	BomberMan::Display::Ressources::getAnimation(const ::std::string & name) const
+BomberMan::Display::IAnimation *	BomberMan::Display::Ressources::getAnimation(const std::string & name) const
 {
   static_cast<void>(name);
   return 0;
 }
 
-BomberMan::Display::ISound *		BomberMan::Display::Ressources::getSound(const ::std::string & name) const
+BomberMan::Display::ISound *		BomberMan::Display::Ressources::getSound(const std::string & name) const
 {
   static_cast<void>(name);
   return 0;
 }
 
-BomberMan::Display::IAsset *		BomberMan::Display::Ressources::getAsset(const ::std::string & name) const
+BomberMan::Display::IAsset *		BomberMan::Display::Ressources::getAsset(const std::string & name) const
 {
   static_cast<void>(name);
   return 0;

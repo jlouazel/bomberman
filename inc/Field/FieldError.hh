@@ -16,19 +16,19 @@ namespace BomberMan
 {
     namespace Field
     {
-        class FieldError : public ::std::exception
+        class FieldError : public std::exception
         {
-            ::std::string	_what;
-            ::std::string   _where;
-            ::std::string   _details;
+            std::string _what;
+            std::string _where;
+            std::string _details;
             
         public:
-            FieldError(::std::string, ::std::string, ::std::string);
+            FieldError(std::string, std::string, std::string);
             ~FieldError() throw();
             
-            ::std::string   getWhat() const;
-            ::std::string   getWhere() const;
-            ::std::string   getDetails() const;
+            std::string getWhat() const;
+            std::string getWhere() const;
+            std::string getDetails() const;
         };
     }
 }

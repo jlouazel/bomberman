@@ -14,7 +14,7 @@ namespace BomberMan
   {
     namespace Controller
     {
-      ControllerError::ControllerError(::std::string what, ::std::string where, ::std::string details)
+      ControllerError::ControllerError(std::string what, std::string where, std::string details)
 	:   _what(what),
 	    _where(where),
 	    _details(details)
@@ -25,17 +25,17 @@ namespace BomberMan
       {
       }
 
-      ::std::string	ControllerError::getWhat() const
+      std::string	ControllerError::getWhat() const
       {
 	return this->_what;
       }
 
-      ::std::string	ControllerError::getWhere() const
+      std::string	ControllerError::getWhere() const
       {
 	return this->_where;
       }
 
-      ::std::string	ControllerError::getDetails() const
+      std::string	ControllerError::getDetails() const
       {
 	return this->_details;
       }

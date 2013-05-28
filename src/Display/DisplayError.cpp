@@ -8,7 +8,7 @@
 
 #include "DisplayError.hh"
 
-BomberMan::Display::DisplayError::DisplayError(::std::string & what, ::std::string & where, ::std::string & details)
+BomberMan::Display::DisplayError::DisplayError(std::string & what, std::string & where, std::string & details)
 :   _what(what), _where(where), _details(details)
 {
 }
@@ -17,17 +17,17 @@ BomberMan::Display::DisplayError::~DisplayError() throw()
 {
 }
 
-::std::string &   BomberMan::Display::DisplayError::getWhat() const
+std::string &   BomberMan::Display::DisplayError::getWhat() const
 {
     return this->_what;
 }
 
-::std::string &   BomberMan::Display::DisplayError::getWhere() const
+std::string &   BomberMan::Display::DisplayError::getWhere() const
 {
     return this->_where;
 }
 
-::std::string &   BomberMan::Display::DisplayError::getDetails() const
+std::string &   BomberMan::Display::DisplayError::getDetails() const
 {
     return this->_details;
 }

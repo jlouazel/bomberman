@@ -21,14 +21,14 @@ namespace BomberMan
     {
         class ObjectFactory
         {
-            ::std::map< ::std::pair<BomberMan::Field::eObjectType, BomberMan::Field::eBuffType>, BomberMan::Field::Object *>   _objects;
+            std::map<std::pair<BomberMan::Field::eObjectType, BomberMan::Field::eBuffType>, BomberMan::Field::Object *>   _objects;
             
         public:
             ObjectFactory();
             ~ObjectFactory();
             
-            void        learn(::std::pair<BomberMan::Field::eObjectType, BomberMan::Field::eBuffType>, Object *);
-            Object *    create(::std::pair<BomberMan::Field::eObjectType, BomberMan::Field::eBuffType>) const;
+            void        learn(std::pair<BomberMan::Field::eObjectType, BomberMan::Field::eBuffType>, Object *);
+            Object *    create(std::pair<BomberMan::Field::eObjectType, BomberMan::Field::eBuffType>) const;
         };
     }
 }

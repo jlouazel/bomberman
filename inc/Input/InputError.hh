@@ -16,19 +16,19 @@ namespace BomberMan
 {
   namespace Input
   {
-    class InputError : public ::std::exception
+    class InputError : public std::exception
     {
-      ::std::string   _what;
-      ::std::string   _where;
-      ::std::string   _details;
+      std::string   _what;
+      std::string   _where;
+      std::string   _details;
 
     public:
-      InputError(::std::string, ::std::string, ::std::string);
+      InputError(std::string, std::string, std::string);
       ~InputError() throw();
 
-      ::std::string   getWhat() const;
-      ::std::string   getWhere() const;
-      ::std::string   getDetails() const;
+      std::string   getWhat() const;
+      std::string   getWhere() const;
+      std::string   getDetails() const;
     };
   }
 }

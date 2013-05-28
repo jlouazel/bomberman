@@ -12,7 +12,7 @@ namespace BomberMan
 {
   namespace Event
   {
-    EventError::EventError(::std::string what, ::std::string where, ::std::string details)
+    EventError::EventError(std::string what, std::string where, std::string details)
       :   _what(what), _where(where), _details(details)
     {
     }
@@ -21,17 +21,17 @@ namespace BomberMan
     {
     }
 
-    ::std::string		EventError::getWhat() const
+    std::string		EventError::getWhat() const
     {
       return this->_what;
     }
 
-    ::std::string		EventError::getWhere() const
+    std::string		EventError::getWhere() const
     {
       return this->_where;
     }
 
-    ::std::string		EventError::getDetails() const
+    std::string		EventError::getDetails() const
     {
       return this->_details;
     }

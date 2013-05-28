@@ -8,7 +8,7 @@
 
 #include "CoreError.hh"
 
-BomberMan::Core::CoreError::CoreError(::std::string & what, ::std::string & where, ::std::string & details)
+BomberMan::Core::CoreError::CoreError(std::string & what, std::string & where, std::string & details)
 :   _what(what), _where(where), _details(details)
 {
 }
@@ -17,17 +17,17 @@ BomberMan::Core::CoreError::~CoreError() throw()
 {
 }
 
-::std::string & BomberMan::Core::CoreError::getWhat() const
+std::string & BomberMan::Core::CoreError::getWhat() const
 {
     return this->_what;
 }
 
-::std::string & BomberMan::Core::CoreError::getWhere() const
+std::string & BomberMan::Core::CoreError::getWhere() const
 {
     return this->_where;
 }
 
-::std::string & BomberMan::Core::CoreError::getDetails() const
+std::string & BomberMan::Core::CoreError::getDetails() const
 {
     return this->_details;
 }

@@ -14,26 +14,26 @@
 
 namespace BomberMan
 {
-  namespace Input
-  {
-    namespace Controller
+    namespace Input
     {
-      class ControllerError : public ::std::exception
-      {
-	::std::string   _what;
-	::std::string   _where;
-	::std::string   _details;
-
-      public:
-	ControllerError(::std::string, ::std::string, ::std::string);
-	~ControllerError() throw();
-
-	::std::string   getWhat() const;
-	::std::string   getWhere() const;
-	::std::string   getDetails() const;
-      };
+        namespace Controller
+        {
+            class ControllerError : public std::exception
+            {
+                std::string   _what;
+                std::string   _where;
+                std::string   _details;
+                
+            public:
+                ControllerError(std::string, std::string, std::string);
+                ~ControllerError() throw();
+                
+                std::string   getWhat() const;
+                std::string   getWhere() const;
+                std::string   getDetails() const;
+            };
+        }
     }
-  }
 }
 
 #endif /* defined(__BomberMan__Error__) */
