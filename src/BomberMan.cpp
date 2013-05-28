@@ -8,12 +8,13 @@
 
 #include	<GL/glew.h>
 #include	"BomberMan.hh"
+#include	"MyGame.hpp"
 
 int		main()
 {
   try
     {
-      BomberMan::Display::MyGame * game = new BomberMan::Display::MyGame;
+      BomberMan::Display::MyGame *game = new BomberMan::Display::MyGame;
       // game->initialize();
       // game->run();
     }

@@ -25,6 +25,8 @@ void	BomberMan::Display::Texture2d::initialize()
 
 void	BomberMan::Display::Texture2d::update(gdl::GameClock const &gameClock, gdl::Input &input)
 {
+  (void)gameClock;
+  (void)input;
 }
 
 void	BomberMan::Display::Texture2d::draw(void)
