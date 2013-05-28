@@ -67,6 +67,7 @@ SRCS_FIELD	= $(SRC_DIR)$(FIELD)AGameComponent.cpp \
 
 SRCS_INPUT	= $(SRC_DIR)$(INPUT)InputManager.cpp \
 		$(SRC_DIR)$(INPUT)InputError.cpp \
+		$(SRC_DIR)$(INPUT)InputJS.cpp \
 
 SRCS_CTLLR	= $(SRC_DIR)$(INPUT)$(CONTROLLER)KeyBoardManager.cpp \
 		$(SRC_DIR)$(INPUT)$(CONTROLLER)XBoxController.cpp \
@@ -76,10 +77,6 @@ SRCS_EVENT	= $(SRC_DIR)$(EVENT)AEvent.cpp \
 		$(SRC_DIR)$(EVENT)EventManager.cpp \
 		$(SRC_DIR)$(EVENT)EventError.cpp \
 		$(SRC_DIR)$(EVENT)Move.cpp \
-		$(SRC_DIR)$(EVENT)DropItem.cpp \
-		$(SRC_DIR)$(EVENT)GetHit.cpp \
-		$(SRC_DIR)$(EVENT)GetItem.cpp \
-
 
 SRCS_UNIX	= $(SRC_DIR)$(UNIX)UnixMutex.cpp \
 		$(SRC_DIR)$(UNIX)UnixThread.cpp \

@@ -12,7 +12,10 @@ int		main()
 {
   try
     {
-      /* Instancie un MyGame, initalize & run */
+      // BomberMan::Input::InputManager::getInputManager();
+      // BomberMan::Input::InputManager::init();
+      // sleep(10);
+      // BomberMan::Input::InputManager::deleteInputManager();
     }
   catch (BomberMan::Core::CoreError& e)
     {

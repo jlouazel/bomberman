@@ -5,14 +5,16 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 14 15:29:51 2013 julien fortin
-// Last update Thu May 23 10:52:25 2013 julien fortin
+// Last update Tue May 28 11:18:07 2013 julien fortin
 //
 
 #ifndef	__EVENTMANAGER_HH__
 #define	__EVENTMANAGER_HH__
 
 #include	<queue>
+#include	"EventEnum.hh"
 #include	"EventError.hh"
+#include	"IInput.hh"
 #include	"IEvent.hh"
 #include	"IMutex.hh"
 
@@ -34,8 +36,8 @@ namespace BomberMan
 
       std::queue<const IEvent*>	_event;
       std::queue<const IEvent*>	_eventMenu;
-      bool			_menuMode;
       BomberMan::Unix::IMutex*	_eventListMutex;
+      bool			_menuMode;
 
     protected:
     public:
@@ -44,11 +46,13 @@ namespace BomberMan
 
       static void			setMenuMode(bool);
 
-      static const IEvent*	getEvent();
-      static EventManager*	getEventManager();
+      static const IEvent*		getEvent();
+      static EventManager*		getEventManager();
       static void			deleteEventManager();
 
       static void			addEvent(const IEvent*);
+      static void			moveEvent(EventDirection::eEventDirection,
+						  float, float, float);
     };
   }
 }
