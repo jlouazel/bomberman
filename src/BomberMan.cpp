@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 manour_m. All rights reserved.
 //
 
-#include	<GL/glew.h>
+//#include	<GL/glew.h>
 #include	"BomberMan.hh"
 
 int		main()
