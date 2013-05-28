@@ -9,9 +9,7 @@
 #include "DisplayError.hh"
 
 BomberMan::Display::DisplayError::DisplayError(::std::string & what, ::std::string & where, ::std::string & details)
-:   _what(what),
-    _where(where),
-    _details(details)
+:   _what(what), _where(where), _details(details)
 {
 }
 
