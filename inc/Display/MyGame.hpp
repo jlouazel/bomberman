@@ -36,9 +36,9 @@ namespace BomberMan
       Core::Core * _core;
 
     public:
-      void		setMenu(const BomberMan::Display::Menu &);
-      BomberMan::Display::Menu		getMenu() const;
-      BomberMan::Display::Camera	*getCamera();
+      void		setMenu(const Menu &);
+      Menu		getMenu() const;
+      Camera	*getCamera();
     public:
       MyGame() : ::gdl::Game()
       {}
@@ -46,8 +46,8 @@ namespace BomberMan
       void	update(void);
       void	draw(void);
       void	unload(void);
-      void	addObject3d(std::string &, BomberMan::Display::Vector3f &, BomberMan::Display::Vector3f &, BomberMan::Display::Vector3f &);
-      void	addObject2d(std::string &, BomberMan::Display::Vector3f &, BomberMan::Display::Vector3f &, BomberMan::Display::Vector3f &);
+      void	addObject3d(std::string &, Vector3f &, Vector3f &, Vector3f &);
+      void	addObject2d(std::string &, Vector3f &, Vector3f &, Vector3f &);
     };
   }
 }

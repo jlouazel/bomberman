@@ -21,9 +21,9 @@ namespace BomberMan
         public:
             Camera(void);
         public:
-            BomberMan::Display::Vector3f	getPosition() const;
-            BomberMan::Display::Vector3f	getRotation() const;
-            BomberMan::Display::Vector3f      getLook() const;
+            Vector3f	getPosition() const;
+            Vector3f	getRotation() const;
+            Vector3f      getLook() const;
             float		getAngle() const;
             int		getHeightScreen() const;
             int		getWidthScreen() const;

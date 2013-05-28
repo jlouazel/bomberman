@@ -22,7 +22,7 @@ namespace BomberMan
         class Empty : public AGameComponent
         {
         public:
-            Empty(float x, float y, BomberMan::Display::IAsset * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim);
+            Empty(float x, float y, Display::IAsset * asset, Display::ISound * sound, Display::IAnimation * anim);
             ~Empty();
             
             void	explode(int, eDirection);

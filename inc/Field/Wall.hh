@@ -22,7 +22,7 @@ namespace BomberMan
             int		_pv;
             
         public:
-            Wall(bool breakable, int pv, float x, float y, BomberMan::Display::IAsset * asset, BomberMan::Display::ISound * sound = 0, BomberMan::Display::IAnimation * anim = 0);
+            Wall(bool breakable, int pv, float x, float y, Display::IAsset * asset, Display::ISound * sound = 0, Display::IAnimation * anim = 0);
             ~Wall();
             
             void	explode(int, eDirection);

@@ -22,17 +22,17 @@ namespace BomberMan
     {
         class Manager
         {
-            unsigned int                                                _width;
-            unsigned int                                                _height;
-            std::vector<std::list<BomberMan::Field::IGameComponent *> > _map;
+            unsigned int              	                _width;
+            unsigned int                             	_height;
+            std::vector<std::list<IGameComponent *> >	_map;
             
         public:
             Manager(unsigned int width, unsigned int height);
             ~Manager();
             
-            std::list<BomberMan::Field::IGameComponent *> & get(unsigned int, unsigned int);
-            unsigned int                                    getWidth() const;
-            unsigned int                                    getHeight() const;
+            std::list<IGameComponent *> &	get(unsigned int, unsigned int);
+            unsigned int   	                getWidth() const;
+            unsigned int                   	getHeight() const;
         };
     }
 }

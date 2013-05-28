@@ -27,7 +27,7 @@ namespace BomberMan
             Vector3f		rotation_;
             Vector3f		len_;
         public:
-            AObject(std::string &texture, BomberMan::Display::Vector3f &position, BomberMan::Display::Vector3f &rotation, BomberMan::Display::Vector3f &len);
+            AObject(std::string &texture, Vector3f &position, Vector3f &rotation, Vector3f &len);
             
             virtual void	initialize(void) = 0;
             virtual void	update(gdl::GameClock const &, gdl::Input &) = 0;

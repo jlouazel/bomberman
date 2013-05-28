@@ -12,18 +12,18 @@ namespace BomberMan
         class	Menu
         {
         private:
-            std::vector <BomberMan::Display::IOnglet *>	_onglet;
-            std::string									_stringTextureFond;
-            BomberMan::Display::AObject *				_textureFond;
+            std::vector <IOnglet *>	_onglet;
+            std::string				_stringTextureFond;
+            AObject *				_textureFond;
         public:
             Menu(std::string &);
             Menu();
             ~Menu();
         public:
-            void			  							addOnglet(BomberMan::Display::IOnglet *);
-            BomberMan::Display::IOnglet *				getOneOnglet(int) const;
-            std::vector <BomberMan::Display::IOnglet *>	getOnglet() const;
-            void			  							affAllOnglet();
+            void			  		addOnglet(IOnglet *);
+            IOnglet *				getOneOnglet(int) const;
+            std::vector <IOnglet *>	getOnglet() const;
+            void					affAllOnglet();
         };
     }
 }
