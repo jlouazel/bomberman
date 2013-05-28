@@ -8,34 +8,40 @@
 
 #include "Resources.hh"
 
-BomberMan::Display::Ressources::Ressources()
+namespace BomberMan
 {
-}
-
-BomberMan::Display::Ressources::~Ressources()
-{
-}
-
-BomberMan::Display::IPicture *		BomberMan::Display::Ressources::getPicture(const std::string & name) const
-{
-  static_cast<void>(name);
-  return 0;
-}
-
-BomberMan::Display::IAnimation *	BomberMan::Display::Ressources::getAnimation(const std::string & name) const
-{
-  static_cast<void>(name);
-  return 0;
-}
-
-BomberMan::Display::ISound *		BomberMan::Display::Ressources::getSound(const std::string & name) const
-{
-  static_cast<void>(name);
-  return 0;
-}
-
-BomberMan::Display::IAsset *		BomberMan::Display::Ressources::getAsset(const std::string & name) const
-{
-  static_cast<void>(name);
-  return 0;
+    namespace Display
+    {
+        Ressources::Ressources()
+        {
+        }
+        
+        Ressources::~Ressources()
+        {
+        }
+        
+        IPicture *		Ressources::getPicture(const std::string & name) const
+        {
+            static_cast<void>(name);
+            return 0;
+        }
+        
+        IAnimation *	Ressources::getAnimation(const std::string & name) const
+        {
+            static_cast<void>(name);
+            return 0;
+        }
+        
+        ISound *		Ressources::getSound(const std::string & name) const
+        {
+            static_cast<void>(name);
+            return 0;
+        }
+        
+        IAsset *		Ressources::getAsset(const std::string & name) const
+        {
+            static_cast<void>(name);
+            return 0;
+        }
+    }
 }

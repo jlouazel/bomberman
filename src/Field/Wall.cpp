@@ -21,21 +21,21 @@ namespace BomberMan
             this->_sound = sound;
             this->_animation = anim;
         }
-        
+
         Wall::~Wall()
         {
         }
-        
+
         int     Wall::getPv() const
         {
             return this->_pv;
         }
-        
+
         void    Wall::setPv(int pv)
         {
             this->_pv = pv;
         }
-        
+
         void    Wall::explode(int damages, eDirection direction)
         {
             static_cast<void>(direction);
