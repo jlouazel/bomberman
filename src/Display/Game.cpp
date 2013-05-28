@@ -12,8 +12,10 @@
 #include "MyGame.hpp"
 #include "AObject.hpp"
 #include "Texture2d.hpp"
+#include "Texture3d.hpp"
 #include "Vector.hpp"
 #include "Menu.hpp"
+#include "Camera.hpp"
 
 void	BomberMan::Display::MyGame::initialize()
 {
@@ -28,14 +30,14 @@ void	BomberMan::Display::MyGame::initialize()
 
 void	BomberMan::Display::MyGame::addObject2d(std::string &texture, BomberMan::Display::Vector3f &position, BomberMan::Display::Vector3f &rotation, BomberMan::Display::Vector3f &len)
 {
-  AObject *newObject = new Texture2d(texture, position, len, &this->camera_);
+  BomberMan::Display::AObject *newObject = new BomberMan::Display::Texture2d(texture, position, rotation, len);
 
   this->objects_.push_back(newObject);
 }
 
 void	BomberMan::Display::MyGame::addObject3d(std::string &texture, BomberMan::Display::Vector3f &position, BomberMan::Display::Vector3f &rotation, BomberMan::Display::Vector3f &len)
 {
-  AObject *newObject = new Texture3d(texture, position, len, &this->camera_);
+  BomberMan::Display::AObject *newObject = new BomberMan::Display::Texture3d(texture, position, rotation, len);
 
   this->objects_.push_back(newObject);
 }

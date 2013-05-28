@@ -40,10 +40,12 @@ SRCS_DATA	= $(SRC_DIR)$(DATAFORMAT)ADataFormat.cpp \
 		$(SRC_DIR)$(DATAFORMAT)Xml.cpp \
 
 SRCS_DISPLAY	= $(SRC_DIR)$(DISPLAY)AAnimation.cpp \
+		$(SRC_DIR)$(DISPLAY)Game.cpp \
 		$(SRC_DIR)$(DISPLAY)AObject.cpp \
 		$(SRC_DIR)$(DISPLAY)Menu.cpp \
 		$(SRC_DIR)$(DISPLAY)OngletMenu.cpp \
 		$(SRC_DIR)$(DISPLAY)Texture2d.cpp \
+		$(SRC_DIR)$(DISPLAY)Texture3d.cpp \
 		$(SRC_DIR)$(DISPLAY)Vector.cpp \
 		$(SRC_DIR)$(DISPLAY)AAsset.cpp \
 		$(SRC_DIR)$(DISPLAY)APicture.cpp \
@@ -55,6 +57,7 @@ SRCS_DISPLAY	= $(SRC_DIR)$(DISPLAY)AAnimation.cpp \
 		$(SRC_DIR)$(DISPLAY)GDLPicture.cpp \
 		$(SRC_DIR)$(DISPLAY)Manager.cpp \
 		$(SRC_DIR)$(DISPLAY)Resources.cpp \
+		$(SRC_DIR)$(DISPLAY)Camera.cpp
 
 SRCS_FIELD	= $(SRC_DIR)$(FIELD)AGameComponent.cpp \
 		$(SRC_DIR)$(FIELD)Empty.cpp \

@@ -22,6 +22,10 @@ namespace BomberMan
       void	initialize();
       void	update(gdl::GameClock const &, gdl::Input &);
       void	draw();
+      void      play(std::string const & _name, char state);
+      void      stop(std::string const & name);
+      double    get_anim_speed(std::string const &name);
+      void      set_anim_speed(std::string const &name, double speed);
       void	info();
     };
   }
