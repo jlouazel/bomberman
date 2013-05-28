@@ -14,11 +14,10 @@
 #include "Texture2d.hpp"
 #include "Texture3d.hpp"
 #include "Vector.hpp"
-#include "Menu.hpp"
-#include "Camera.hpp"
 
 void	BomberMan::Display::MyGame::initialize()
 {
+  this->_core = new Core::Core;
   window_.setWidth(WIDTH);
   window_.setHeight(HEIGHT);
   window_.create();
