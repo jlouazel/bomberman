@@ -16,28 +16,28 @@
 
 namespace BomberMan
 {
-  namespace Input
-  {
-    namespace Controller
+    namespace Input
     {
-      static std::string	INPUT_CONTROLLER_PATH = "/dev/input/";
-
-      enum eControllerType { XBOX };
-
-      class IController
-      {
-      private:
-      protected:
-      public:
-	virtual ~IController() {}
-
-	virtual const std::string&		getPath() const = 0;
-	virtual eControllerType			getType() const = 0;
-	virtual int				getFd() const = 0;
-	virtual void				getEvent() = 0;
-      };
+        namespace Controller
+        {
+            static std::string	INPUT_CONTROLLER_PATH = "/dev/input/";
+            
+            enum eControllerType { XBOX };
+            
+            class IController
+            {
+            private:
+            protected:
+            public:
+                virtual ~IController() {}
+                
+                virtual const std::string&	getPath() const = 0;
+                virtual eControllerType		getType() const = 0;
+                virtual int					getFd() const = 0;
+                virtual void				getEvent() = 0;
+            };
+        }
     }
-  }
 }
 
 #endif

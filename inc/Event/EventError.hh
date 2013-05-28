@@ -18,7 +18,7 @@ namespace BomberMan
   {
     class EventError : public std::exception
     {
-      std::string   _what;
+      std::string	_what;
       std::string   _where;
       std::string   _details;
 

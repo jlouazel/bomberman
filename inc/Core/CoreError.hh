@@ -18,17 +18,17 @@ namespace BomberMan
     {
         class CoreError : public std::exception
         {
-            std::string &   _what;
-            std::string &   _where;
-            std::string &   _details;
+            std::string	_what;
+            std::string	_where;
+            std::string	_details;
             
         public:
-            CoreError(std::string &, std::string &, std::string &);
+            CoreError(std::string, std::string, std::string);
             ~CoreError() throw();
             
-            std::string &   getWhat() const;
-            std::string &   getWhere() const;
-            std::string &   getDetails() const;
+            std::string	getWhat() const;
+            std::string	getWhere() const;
+            std::string	getDetails() const;
         };
     }
 }

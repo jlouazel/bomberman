@@ -12,7 +12,7 @@ namespace BomberMan
 {
     namespace Display
     {
-        DisplayError::DisplayError(std::string & what, std::string & where, std::string & details)
+        DisplayError::DisplayError(std::string what, std::string where, std::string details)
         :   _what(what), _where(where), _details(details)
         {
         }
@@ -21,17 +21,17 @@ namespace BomberMan
         {
         }
         
-        std::string &   DisplayError::getWhat() const
+        std::string	DisplayError::getWhat() const
         {
             return this->_what;
         }
         
-        std::string &   DisplayError::getWhere() const
+        std::string	DisplayError::getWhere() const
         {
             return this->_where;
         }
         
-        std::string &   DisplayError::getDetails() const
+        std::string	DisplayError::getDetails() const
         {
             return this->_details;
         }

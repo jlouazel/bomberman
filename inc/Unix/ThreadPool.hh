@@ -20,15 +20,15 @@ namespace BomberMan
     {
         class ThreadPool
         {
-            std::list<IThread *>_threads;
-            size_t  _count;
+            std::list<IThread *>	_threads;
+            size_t  				_count;
             
         public:
             ThreadPool();
             ~ThreadPool();
             
-            void    addThread();
-            size_t  getNbThread() const;
+            void	addThread();
+            size_t	getNbThread() const;
         };
     }
 }

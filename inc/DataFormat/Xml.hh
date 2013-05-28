@@ -25,12 +25,12 @@ namespace BomberMan
             class Balise {
             private:
                 std::string			_name;
-                eBaliseState        _state;
-                Balise *            _parent;
+                eBaliseState		_state;
+                Balise *			_parent;
                 std::string			_content;
-                std::list<Balise *> _children;
+                std::list<Balise *>	_children;
                 std::string			_attribute;
-                Balise *            _associated;
+                Balise *			_associated;
                 std::string			_attributeName;
                 
             public:
@@ -38,21 +38,21 @@ namespace BomberMan
                 ~Balise();
                 
                 std::string	const &			getName() const;
-                eBaliseState                getState() const;
-                Balise *                    getParent() const;
+                eBaliseState				getState() const;
+                Balise *					getParent() const;
                 std::string const &			getContent() const;
-                std::list<Balise *> const & getChilden() const;
-                Balise *                    getAssociated() const;
+                std::list<Balise *> const &	getChilden() const;
+                Balise *					getAssociated() const;
                 
-                void    addChild(Balise *);
-                void    setParent(Balise *);
-                void    setAssociated(Balise *);
-                void    setName(std::string const &);
-                void    setContent(std::string const &);
-                void    setChildren(std::list<Balise *> const &);
+                void	addChild(Balise *);
+                void	setParent(Balise *);
+                void	setAssociated(Balise *);
+                void	setName(std::string const &);
+                void	setContent(std::string const &);
+                void	setChildren(std::list<Balise *> const &);
             };
             
-            virtual void generate(std::string const &) const;
+            virtual void	generate(std::string const &) const;
             
         private:
             std::list<Balise *>		_balises;

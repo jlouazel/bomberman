@@ -19,9 +19,8 @@ namespace BomberMan
     {
     private:
       Core(Core const&);
-      Core        &operator=(Core const&);
+      Core &	operator=(Core const&);
 
-    protected:
     public:
       ~Core();
       Core();

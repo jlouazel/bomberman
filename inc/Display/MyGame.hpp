@@ -30,24 +30,24 @@ namespace BomberMan
     class MyGame : public gdl::Game
     {
     private:
-      std::list<AObject*>   objects_;
-      Camera			camera_;
-      Menu			menu_;
-      Core::Core * _core;
+      std::list<AObject*>	objects_;
+      Camera				camera_;
+      Menu					menu_;
+      Core::Core *			_core;
 
     public:
+      MyGame() : ::gdl::Game(){}
+        
+      void		initialize();
+      void      update(void);
+      void		draw(void);
+      void		unload(void);
+      void		addObject3d(std::string &, Vector3f &, Vector3f &, Vector3f &);
+      void		addObject2d(std::string &, Vector3f &, Vector3f &, Vector3f &);
       void		setMenu(const Menu &);
       Menu		getMenu() const;
-      Camera	*getCamera();
-    public:
-      MyGame() : ::gdl::Game()
-      {}
-      void	initialize();
-      void	update(void);
-      void	draw(void);
-      void	unload(void);
-      void	addObject3d(std::string &, Vector3f &, Vector3f &, Vector3f &);
-      void	addObject2d(std::string &, Vector3f &, Vector3f &, Vector3f &);
+      Camera *	getCamera();
+
     };
   }
 }

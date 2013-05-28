@@ -18,17 +18,17 @@ namespace BomberMan
     {
         class DisplayError : public std::exception
         {
-            std::string &	_what;
-            std::string &   _where;
-            std::string &   _details;
+            std::string	_what;
+            std::string	_where;
+            std::string	_details;
             
         public:
-            DisplayError(std::string &, std::string &, std::string &);
+            DisplayError(std::string, std::string, std::string);
             ~DisplayError() throw();
             
-            std::string &   getWhat() const;
-            std::string &   getWhere() const;
-            std::string &   getDetails() const;
+            std::string	getWhat() const;
+            std::string	getWhere() const;
+            std::string	getDetails() const;
         };
     }
 }

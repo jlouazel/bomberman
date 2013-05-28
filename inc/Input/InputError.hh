@@ -14,23 +14,23 @@
 
 namespace BomberMan
 {
-  namespace Input
-  {
-    class InputError : public std::exception
+    namespace Input
     {
-      std::string   _what;
-      std::string   _where;
-      std::string   _details;
-
-    public:
-      InputError(std::string, std::string, std::string);
-      ~InputError() throw();
-
-      std::string   getWhat() const;
-      std::string   getWhere() const;
-      std::string   getDetails() const;
-    };
-  }
+        class InputError : public std::exception
+        {
+            std::string	_what;
+            std::string	_where;
+            std::string	_details;
+            
+        public:
+            InputError(std::string, std::string, std::string);
+            ~InputError() throw();
+            
+            std::string	getWhat() const;
+            std::string	getWhere() const;
+            std::string	getDetails() const;
+        };
+    }
 }
 
 #endif /* defined(__BomberMan__Error__) */

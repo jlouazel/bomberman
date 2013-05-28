@@ -33,42 +33,41 @@ namespace BomberMan
       InputManager	&operator=(InputManager const&);
 
     private:
-      static InputManager*			_inputManager;
+      static InputManager*						_inputManager;
 
       std::list<const Controller::IController*>	_controller;
-      Unix::IThread*				_detectionThread;
-      fd_set					_rfd;
-      int					_leaveMe;
+      Unix::IThread*							_detectionThread;
+      fd_set									_rfd;
+      int										_leaveMe;
 
-      void		_shouldILeave();
+      void			_shouldILeave();
 
-      int		_initInputSelect();
-      bool       	_getInputFromController(const Controller::IController*);
+      int			_initInputSelect();
+      bool			_getInputFromController(const Controller::IController*);
 
-      void	_getInputSelect(int, struct timeval*);
-      void	_getInputEvent();
+      void			_getInputSelect(int, struct timeval*);
+      void			_getInputEvent();
 
-      void	_deleteScanDir(struct dirent**, int) const;
+      void			_deleteScanDir(struct dirent**, int) const;
 
-      void	_newController(const std::string*);
-      void	_checkForNewController(struct dirent**, int);
+      void			_newController(const std::string*);
+      void			_checkForNewController(struct dirent**, int);
 
-      void	_checkForUnplugController(struct dirent**, int);
-      void	_unplugController(const Controller::IController*);
+      void			_checkForUnplugController(struct dirent**, int);
+      void			_unplugController(const Controller::IController*);
 
       static int	_filterJS(const struct dirent*);
 
-    protected:
     public:
       void	detection();
       void	getInput();
 
-      static void			init();
+      static void	init();
 
-      static InputManager*	getInputManager();
-      static void		deleteInputManager();
-      static void		deleteController(const Controller::IController*);
-      static void		deleteAndRemoveController(const Controller::IController*);
+      static InputManager *	getInputManager();
+      static void			deleteInputManager();
+      static void			deleteController(const Controller::IController*);
+      static void			deleteAndRemoveController(const Controller::IController*);
     };
   }
 }

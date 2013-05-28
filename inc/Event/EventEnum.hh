@@ -13,58 +13,58 @@
 
 namespace BomberMan
 {
-  namespace Event
-  {
-    struct EventCategory
+    namespace Event
     {
-      enum eEventCategory { ACTION, MOVE, CORE };
-    };
-
-    struct EventType
-    {
-      enum eEventType
-	{
-	  MOVE,
-	  DROP_ITEM,
-	  GET_ITEM,
-	  GET_HIT,
-	  COLLISION,
-	  DEATH,
-	  PAUSE,
-	  QUIT,
-	  JOIN_CONTROLLER,
-	  DETACH_CONTROLLER,
-	  FAIL_INPUT, //fail select et ou scandir
-	};
-    };
-
-    struct EventContext
-    {
-      enum eEventContext
-	{
-	  LOADING,
-	  MENU,
-	  GAME
-	};
-    };
-
-    struct EventDirection
-    {
-      enum eEventDirection
-	{
-	  NO,
-	  EVRWH,
-	  UP,
-	  DOWN,
-	  LEFT,
-	  RIGHT,
-	  UP_LEFT,
-	  UP_RIGHT,
-	  DOWN_LEFT,
-	  DOWN_RIGHT
-	};
-    };
-  }
+        struct EventCategory
+        {
+            enum eEventCategory { ACTION, MOVE, CORE };
+        };
+        
+        struct EventType
+        {
+            enum eEventType
+            {
+                MOVE,
+                DROP_ITEM,
+                GET_ITEM,
+                GET_HIT,
+                COLLISION,
+                DEATH,
+                PAUSE,
+                QUIT,
+                JOIN_CONTROLLER,
+                DETACH_CONTROLLER,
+                FAIL_INPUT, //fail select et ou scandir
+            };
+        };
+        
+        struct EventContext
+        {
+            enum eEventContext
+            {
+                LOADING,
+                MENU,
+                GAME
+            };
+        };
+        
+        struct EventDirection
+        {
+            enum eEventDirection
+            {
+                NO,
+                EVRWH,
+                UP,
+                DOWN,
+                LEFT,
+                RIGHT,
+                UP_LEFT,
+                UP_RIGHT,
+                DOWN_LEFT,
+                DOWN_RIGHT
+            };
+        };
+    }
 }
 
 #endif

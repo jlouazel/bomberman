@@ -20,14 +20,13 @@ namespace BomberMan
     class AEvent : public IEvent
     {
     private:
-      float					_x;
-      float					_y;
-      EventType::eEventType			_type;
+      float								_x;
+      float								_y;
+      EventType::eEventType				_type;
       EventContext::eEventContext		_context;
-      EventDirection::eEventDirection		_direction;
+      EventDirection::eEventDirection	_direction;
       EventCategory::eEventCategory		_category;
 
-    protected:
     public:
       virtual ~AEvent();
 
@@ -37,13 +36,13 @@ namespace BomberMan
 	     EventDirection::eEventDirection,
 	     float, float);
 
-      virtual void                              interaction() const = 0;
-      virtual float                             getX() const;
-      virtual float                             getY() const;
-      virtual EventType::eEventType             getType() const;
+      virtual void								interaction() const = 0;
+      virtual float								getX() const;
+      virtual float								getY() const;
+      virtual EventType::eEventType				getType() const;
       virtual EventDirection::eEventDirection	getDirection() const;
-      virtual EventContext::eEventContext       getContext() const;
-      virtual EventCategory::eEventCategory     getCategory() const;
+      virtual EventContext::eEventContext		getContext() const;
+      virtual EventCategory::eEventCategory		getCategory() const;
     };
   }
 }

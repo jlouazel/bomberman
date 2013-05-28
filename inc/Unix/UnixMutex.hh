@@ -17,7 +17,7 @@ namespace BomberMan
     {
         class UnixMutex : public IMutex
         {
-            pthread_mutex_t _mutex;
+            pthread_mutex_t	_mutex;
             size_t          _id;
             
         public:
@@ -27,7 +27,8 @@ namespace BomberMan
             int   lock();
             int   trylock();
             int   unlock();
-            pthread_mutex_t *getMutex();
+            
+            pthread_mutex_t *	getMutex();
         };
     }
 }

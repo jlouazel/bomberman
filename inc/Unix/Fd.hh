@@ -27,7 +27,7 @@ namespace BomberMan
 
     private:
       Fd();
-      Fd	&operator=(Fd const&);
+      Fd &	operator=(Fd const&);
 
     protected:
     public:
