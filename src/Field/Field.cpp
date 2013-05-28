@@ -20,24 +20,24 @@ namespace BomberMan
         :   _width(width), _height(height), _map(width * height, std::list<IGameComponent *>())
         {
         }
-        
+
         Manager::~Manager()
         {
         }
-        
+
         std::list<IGameComponent *> &   Manager::get(unsigned int x, unsigned int y)
         {
             unsigned int    pos;
-            
+
             pos = y * this->_width + x;
             return this->_map[pos];
         }
-        
+
         unsigned int                    Manager::getWidth() const
         {
             return this->_width;
         }
-        
+
         unsigned int                    Manager::getHeight() const
         {
             return this->_height;

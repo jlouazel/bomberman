@@ -16,21 +16,21 @@ namespace BomberMan
         :   _what(what), _where(where), _details(details)
         {
         }
-        
+
         FieldError::~FieldError() throw()
         {
         }
-        
+
         std::string   FieldError::getWhat() const
         {
             return this->_what;
         }
-        
+
         std::string   FieldError::getWhere() const
         {
             return this->_where;
         }
-        
+
         std::string   FieldError::getDetails() const
         {
             return this->_details;

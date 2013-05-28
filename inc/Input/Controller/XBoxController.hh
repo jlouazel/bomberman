@@ -47,87 +47,87 @@
 
 namespace BomberMan
 {
-  namespace Input
-  {
-    namespace Controller
+    namespace Input
     {
-      class XBoxController : public IController
-      {
-      private:
-	Unix::Fd	_fd;
-	std::string	_path;
-
-      private:
-	struct XBoxAxis
-	{
-	  enum eXBoxAxis { NO, UP, DOWN, LEFT, RIGHT };
-	};
-	struct XBoxButtonStatus
-	{
-	  enum eXBoxButtonStatus { PRESSED, RELEASED };
-	};
-
-	XBoxAxis::eXBoxAxis	_currentX;
-	XBoxAxis::eXBoxAxis	_currentY;
-
-      private:
-	struct t_data
-	{
-	  unsigned int		time; /* event timestamp in milliseconds */
-	  short			value; /* value */
-	  unsigned char		type; /* event type */
-	  unsigned char		number;
-	};
-	t_data		_data;
-
-      private:
-	std::map<int, XBoxButtonStatus::eXBoxButtonStatus>	_status;
-	std::map<int, void (XBoxController::*)()>			_button;
-	std::map<int, void (XBoxController::*)()>			_axis;
-
-      private:
-	XBoxController();
-	XBoxController(XBoxController const&);
-
-	XBoxController	&operator=(XBoxController const&);
-
-	void	_handleButton();
-	void	_handleAxis();
-
-	void	_execAction(std::map<int, void (XBoxController::*)()>&, int);
-
-	void	_buttonA();
-	void	_buttonB();
-	void	_buttonY();
-	void	_buttonX();
-	void	_buttonLB();
-	void	_buttonRB();
-	void	_buttonSELECT();
-	void	_buttonSTART();
-
-	void	_axisJS_LS_X();
-	void	_axisJS_LS_Y();
-	void	_axisJS_RS_X();
-	void	_axisJS_RS_Y();
-	void	_axisJS_CROSS_X();
-	void	_axisJS_CROSS_Y();
-	void	_axisJS_LT();
-	void	_axisJS_RT();
-
-	void	_makeEventMove(Event::EventDirection::eEventDirection, float);
-
-      protected:
-      public:
-	~XBoxController();
-	XBoxController(std::string const&);
-
-	virtual const std::string&	getPath() const;
-	virtual eControllerType		getType() const;
-	virtual int			getFd() const;
-	virtual void			getEvent();
-      };
+        namespace Controller
+        {
+            class XBoxController : public IController
+            {
+            private:
+                Unix::Fd	_fd;
+                std::string	_path;
+                
+            private:
+                struct XBoxAxis
+                {
+                    enum eXBoxAxis { NO, UP, DOWN, LEFT, RIGHT };
+                };
+                struct XBoxButtonStatus
+                {
+                    enum eXBoxButtonStatus { PRESSED, RELEASED };
+                };
+                
+                XBoxAxis::eXBoxAxis	_currentX;
+                XBoxAxis::eXBoxAxis	_currentY;
+                
+            private:
+                struct t_data
+                {
+                    unsigned int		time; /* event timestamp in milliseconds */
+                    short			value; /* value */
+                    unsigned char		type; /* event type */
+                    unsigned char		number;
+                };
+                t_data		_data;
+                
+            private:
+                std::map<int, XBoxButtonStatus::eXBoxButtonStatus>	_status;
+                std::map<int, void (XBoxController::*)()>			_button;
+                std::map<int, void (XBoxController::*)()>			_axis;
+                
+            private:
+                XBoxController();
+                XBoxController(XBoxController const&);
+                
+                XBoxController	&operator=(XBoxController const&);
+                
+                void	_handleButton();
+                void	_handleAxis();
+                
+                void	_execAction(std::map<int, void (XBoxController::*)()>&, int);
+                
+                void	_buttonA();
+                void	_buttonB();
+                void	_buttonY();
+                void	_buttonX();
+                void	_buttonLB();
+                void	_buttonRB();
+                void	_buttonSELECT();
+                void	_buttonSTART();
+                
+                void	_axisJS_LS_X();
+                void	_axisJS_LS_Y();
+                void	_axisJS_RS_X();
+                void	_axisJS_RS_Y();
+                void	_axisJS_CROSS_X();
+                void	_axisJS_CROSS_Y();
+                void	_axisJS_LT();
+                void	_axisJS_RT();
+                
+                void	_makeEventMove(Event::EventDirection::eEventDirection, float);
+                
+            protected:
+            public:
+                ~XBoxController();
+                XBoxController(std::string const&);
+                
+                virtual const std::string&	getPath() const;
+                virtual eControllerType		getType() const;
+                virtual int			getFd() const;
+                virtual void			getEvent();
+            };
+        }
     }
-  }
 }
 
 #endif

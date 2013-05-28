@@ -15,28 +15,25 @@
 
 namespace BomberMan
 {
-  namespace Event
-  {
-    class Move : public AEvent
+    namespace Event
     {
-    private:
-      EventDirection::eEventDirection	_direction;
-      float				_angle;
-
-    protected:
-    public:
-      virtual ~Move();
-
-      Move(EventContext::eEventContext,
-	   EventDirection::eEventDirection,
-	   float, float, float);
-
-      virtual void	interaction() const;
-
-      int				getAngle() const;
-      EventDirection::eEventDirection	getDirection() const;
-    };
-  }
+        class Move : public AEvent
+        {
+        private:
+            EventDirection::eEventDirection	_direction;
+            float							_angle;
+            
+        protected:
+        public:
+            Move(EventContext::eEventContext, EventDirection::eEventDirection, float, float, float);
+            virtual ~Move();
+            
+            
+            virtual void					interaction() const;
+            int								getAngle() const;
+            EventDirection::eEventDirection	getDirection() const;
+        };
+    }
 }
 
 #endif

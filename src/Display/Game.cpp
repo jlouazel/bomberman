@@ -1,3 +1,5 @@
+#include <string>
+#include <iostream>
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <Clock.hpp>
@@ -14,69 +16,100 @@
 #include "Texture2d.hpp"
 #include "Texture3d.hpp"
 #include "Vector.hpp"
-#include "Menu.hpp"
-#include "Camera.hpp"
+#include "IOnglet.hpp"
+#include "OngletMenu.hpp"
 
-void	BomberMan::Display::MyGame::initialize()
+namespace BomberMan
 {
-  window_.setWidth(WIDTH);
-  window_.setHeight(HEIGHT);
-  window_.create();
-  camera_.initialize();
-  std::list<AObject*>::iterator itb = this->objects_.begin();
-  for (; itb != this->objects_.end(); ++itb)
-    (*itb)->initialize();
-}
+    namespace Display
+    {
+        void	MyGame::initialize()
+        {
+	  Vector3f      vectorPosition(25, 15, 0);
+	  Vector3f      vectorLen(50.0, 8.0, 0.0);
+	  Vector3f      vectorRotation(0.0, 0.0, 0.0);
+	  IOnglet       *newOnglet;
 
-void	BomberMan::Display::MyGame::addObject2d(std::string &texture, BomberMan::Display::Vector3f &position, BomberMan::Display::Vector3f &rotation, BomberMan::Display::Vector3f &len)
-{
-  BomberMan::Display::AObject *newObject = new BomberMan::Display::Texture2d(texture, position, rotation, len);
+	  this->_core = new Core::Core;
+	  window_.setWidth(WIDTH);
+	  window_.setHeight(HEIGHT);
+	  window_.create();
+	  camera_.initialize();
+	  Menu	*firstMenu = new Menu("texture/Fond.jpg");
+	  Menu	*continueGame = new Menu("texture/Fond.jpg");
 
-  this->objects_.push_back(newObject);
-}
+	  newOnglet = new OngletMenu(continueGame, "continueGame", new Texture2d("texture/continuegame.png", vectorPosition, vectorRotation, vectorLen));
+	  firstMenu->addOnglet(newOnglet);
+	  vectorPosition.setY(28);
+	  newOnglet = new OngletMenu(continueGame, "newGame", new Texture2d("texture/newgame.png", vectorPosition, vectorRotation, vectorLen));
+	  firstMenu->addOnglet(newOnglet);
+	  vectorPosition.setY(41);
+	  newOnglet = new OngletMenu(continueGame, "option", new Texture2d("texture/options.png", vectorPosition, vectorRotation, vectorLen));
+	  firstMenu->addOnglet(newOnglet);
+	  vectorPosition.setY(54);
+	  newOnglet = new OngletMenu(continueGame, "credit", new Texture2d("texture/credits.png", vectorPosition, vectorRotation, vectorLen));
+	  firstMenu->addOnglet(newOnglet);
+	  vectorPosition.setY(67);
+	  newOnglet = new OngletMenu(continueGame, "quit", new Texture2d("texture/quit.png", vectorPosition, vectorRotation, vectorLen));
+	  firstMenu->addOnglet(newOnglet);
+	  this->menu_ = *firstMenu;
+	  this->menu_.initialize();
+	  std::list<AObject*>::iterator itb = this->objects_.begin();
+	  for (; itb != this->objects_.end(); ++itb)
+	    (*itb)->initialize();
+        }
+      
+        void	MyGame::addObject2d(std::string &texture, Vector3f &position, Vector3f &rotation, Vector3f &len)
+        {
+            AObject *newObject = new Texture2d(texture, position, rotation, len);
+            
+            this->objects_.push_back(newObject);
+        }
+        
+        void	MyGame::addObject3d(std::string &texture, Vector3f &position, Vector3f &rotation, Vector3f &len)
+        {
+            AObject *newObject = new Texture3d(texture, position, rotation, len);
+            
+            this->objects_.push_back(newObject);
+        }
+        
+        void	MyGame::setMenu(const Menu &menu)
+        {
+            this->menu_ = menu;
+        }
+        
+        Menu	MyGame::getMenu() const
+        {
+            return (this->menu_);
+        }
+        
+        Camera  *MyGame::getCamera()
+        {
+            return (&this->camera_);
+        }
+        
+        void	MyGame::update(void)
+        {
+            /* Core::update();*/
+            std::list<AObject*>::iterator itb = this->objects_.begin();
+            for (; itb != this->objects_.end(); ++itb)
+                (*itb)->update(gameClock_, input_);
+            camera_.update(gameClock_, input_);
+        }
+        
+        void	MyGame::draw(void)
+        {
+	  // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	  // glClearColor(0.74f, 0.84f, 95.0f, 1.0f);
+	  // glClearDepth(1.0f);
+	  // std::list<AObject*>::iterator itb = this->objects_.begin();
+	  // for (; itb != this->objects_.end(); ++itb)
+	  //   (*itb)->draw();
+	  this->menu_.affAllOnglet();
+        }
 
-void	BomberMan::Display::MyGame::addObject3d(std::string &texture, BomberMan::Display::Vector3f &position, BomberMan::Display::Vector3f &rotation, BomberMan::Display::Vector3f &len)
-{
-  BomberMan::Display::AObject *newObject = new BomberMan::Display::Texture3d(texture, position, rotation, len);
-
-  this->objects_.push_back(newObject);
-}
-
-void	BomberMan::Display::MyGame::setMenu(const BomberMan::Display::Menu &menu)
-{
-  this->menu_ = menu;
-}
-
-BomberMan::Display::Menu	BomberMan::Display::MyGame::getMenu() const
-{
-  return (this->menu_);
-}
-
-BomberMan::Display::Camera  *BomberMan::Display::MyGame::getCamera()
-{
-  return (&this->camera_);
-}
-
-void	BomberMan::Display::MyGame::update(void)
-{
-  /* Core::update();*/
-  std::list<AObject*>::iterator itb = this->objects_.begin();
-  for (; itb != this->objects_.end(); ++itb)
-    (*itb)->update(gameClock_, input_);
-  camera_.update(gameClock_, input_);
-}
-
-void	BomberMan::Display::MyGame::draw(void)
-{
-  // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  // glClearColor(0.74f, 0.84f, 95.0f, 1.0f);
-  // glClearDepth(1.0f);
-  // std::list<AObject*>::iterator itb = this->objects_.begin();
-  // for (; itb != this->objects_.end(); ++itb)
-  //   (*itb)->draw();
-  this->menu_.affAllOnglet();
-}
-
-void	BomberMan::Display::MyGame::unload(void)
-{
+        void	MyGame::unload(void)
+        {
+        }
+    }
 }

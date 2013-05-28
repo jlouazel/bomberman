@@ -18,16 +18,17 @@ namespace BomberMan
         class UnixThread : public IThread
         {
         private:
-            pthread_t   _thread;
-            size_t      _id;
+            pthread_t	_thread;
+            size_t		_id;
             
         public:
             UnixThread(pthread_attr_t *attr, void *(*func)(void *), void *arg, size_t id);
             ~UnixThread();
             
-            void                exit();
-            int                 join();
-            int                 detach();
+            void	exit();
+            int		join();
+            int		detach();
+            
             const pthread_t *   getThread() const;
         };
     }

@@ -8,26 +8,32 @@
 
 #include "DisplayError.hh"
 
-BomberMan::Display::DisplayError::DisplayError(::std::string & what, ::std::string & where, ::std::string & details)
-:   _what(what), _where(where), _details(details)
+namespace BomberMan
 {
-}
-
-BomberMan::Display::DisplayError::~DisplayError() throw()
-{
-}
-
-::std::string &   BomberMan::Display::DisplayError::getWhat() const
-{
-    return this->_what;
-}
-
-::std::string &   BomberMan::Display::DisplayError::getWhere() const
-{
-    return this->_where;
-}
-
-::std::string &   BomberMan::Display::DisplayError::getDetails() const
-{
-    return this->_details;
+    namespace Display
+    {
+        DisplayError::DisplayError(std::string what, std::string where, std::string details)
+        :   _what(what), _where(where), _details(details)
+        {
+        }
+        
+        DisplayError::~DisplayError() throw()
+        {
+        }
+        
+        std::string	DisplayError::getWhat() const
+        {
+            return this->_what;
+        }
+        
+        std::string	DisplayError::getWhere() const
+        {
+            return this->_where;
+        }
+        
+        std::string	DisplayError::getDetails() const
+        {
+            return this->_details;
+        }
+    }
 }

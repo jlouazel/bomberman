@@ -18,27 +18,27 @@
 
 namespace BomberMan
 {
-  namespace Unix
-  {
-    class Fd
+    namespace Unix
     {
-    private:
-      int	_fd;
-
-    private:
-      Fd();
-      Fd	&operator=(Fd const&);
-
-    protected:
-    public:
-      ~Fd();
-      Fd(int);
-      Fd(std::string const&, int, mode_t = 0);
-
-      int	getFd() const;
-      void	closeFd() const;
-    };
-  }
+        class Fd
+        {
+        private:
+            int	_fd;
+            
+        private:
+            Fd();
+            Fd &	operator=(Fd const&);
+            
+        protected:
+        public:
+            ~Fd();
+            Fd(int);
+            Fd(std::string const&, int, mode_t = 0);
+            
+            int		getFd() const;
+            void	closeFd() const;
+        };
+    }
 }
 
 #endif

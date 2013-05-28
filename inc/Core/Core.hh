@@ -13,20 +13,19 @@
 
 namespace BomberMan
 {
-  namespace Core
-  {
-    class Core
+    namespace Core
     {
-    private:
-      Core(Core const&);
-      Core        &operator=(Core const&);
-
-    protected:
-    public:
-      ~Core();
-      Core();
-    };
-  }
+        class Core
+        {
+        private:
+            Core(Core const&);
+            Core &	operator=(Core const&);
+            
+        public:
+            ~Core();
+            Core();
+        };
+    }
 }
 
 #endif

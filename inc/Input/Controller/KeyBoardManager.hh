@@ -13,32 +13,32 @@
 
 namespace BomberMan
 {
-  namespace Input
-  {
-    namespace Controller
+    namespace Input
     {
-      class KeyBoardManager
-      {
-      private:
-	KeyBoardManager(KeyBoardManager const&);
-	KeyBoardManager	&operator=(KeyBoardManager const&);
-
-      private:
-	static KeyBoardManager*	_keyboardManager;
-
-      public:
-	~KeyBoardManager();
-	KeyBoardManager();
-
-	static KeyBoardManager*	getKeyBoardManager();
-	static void		deleteKeyBoardManager();
-
-	static void		keyPressed(unsigned char, int, int);
-	static void		specialKeyPressed(int, int, int);
-	static void		onMouseClick(int, int, int, int);
-      };
+        namespace Controller
+        {
+            class KeyBoardManager
+            {
+            private:
+                KeyBoardManager(KeyBoardManager const&);
+                KeyBoardManager	&operator=(KeyBoardManager const&);
+                
+            private:
+                static KeyBoardManager *	_keyboardManager;
+                
+            public:
+                ~KeyBoardManager();
+                KeyBoardManager();
+                
+                static KeyBoardManager *	getKeyBoardManager();
+                static void					deleteKeyBoardManager();
+                
+                static void		keyPressed(unsigned char, int, int);
+                static void		specialKeyPressed(int, int, int);
+                static void		onMouseClick(int, int, int, int);
+            };
+        }
     }
-  }
 }
 
 #endif

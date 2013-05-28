@@ -18,6 +18,7 @@
 #include "Vector.hpp"
 #include "Camera.hpp"
 #include "Menu.hpp"
+#include "Core.hh"
 
 #define WIDTH 1920
 #define HEIGHT 1080
@@ -29,24 +30,24 @@ namespace BomberMan
     class MyGame : public gdl::Game
     {
     private:
-      std::list<AObject*>   objects_;
-      Camera		camera_;
-      Menu			menu_;
-      /* Core * _core */
+      std::list<AObject*>	objects_;
+      Camera				camera_;
+      Menu					menu_;
+      Core::Core *			_core;
 
     public:
-      void		setMenu(const BomberMan::Display::Menu &);
-      BomberMan::Display::Menu		getMenu() const;
-      BomberMan::Display::Camera	*getCamera();
-    public:
-      MyGame() : ::gdl::Game()
-      {}
-      void	initialize(); /* Instanciation du Core */
-      void	update(void);
-      void	draw(void);
-      void	unload(void);
-      void	addObject3d(std::string &, BomberMan::Display::Vector3f &, BomberMan::Display::Vector3f &, BomberMan::Display::Vector3f &);
-      void	addObject2d(std::string &, BomberMan::Display::Vector3f &, BomberMan::Display::Vector3f &, BomberMan::Display::Vector3f &);
+      MyGame() : ::gdl::Game(){}
+        
+      void		initialize();
+      void      update(void);
+      void		draw(void);
+      void		unload(void);
+      void		addObject3d(std::string &, Vector3f &, Vector3f &, Vector3f &);
+      void		addObject2d(std::string &, Vector3f &, Vector3f &, Vector3f &);
+      void		setMenu(const Menu &);
+      Menu		getMenu() const;
+      Camera *	getCamera();
+
     };
   }
 }

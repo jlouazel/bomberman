@@ -12,36 +12,36 @@
 
 namespace BomberMan
 {
-  namespace Event
-  {
-    Move::Move(EventContext::eEventContext context,
-	       EventDirection::eEventDirection direction,
-	       float angle, float x, float y)
-      : AEvent(EventCategory::MOVE,
-	       context,
-	       EventType::MOVE,
-	       direction, x, y)
+    namespace Event
     {
-      this->_angle = angle;
-      this->_direction = direction;
+        Move::Move(EventContext::eEventContext context,
+                   EventDirection::eEventDirection direction,
+                   float angle, float x, float y)
+        : AEvent(EventCategory::MOVE,
+                 context,
+                 EventType::MOVE,
+                 direction, x, y)
+        {
+            this->_angle = angle;
+            this->_direction = direction;
+        }
+        
+        Move::~Move()
+        {
+        }
+        
+        EventDirection::eEventDirection	Move::getDirection() const
+        {
+            return this->_direction;
+        }
+        
+        int	Move::getAngle() const
+        {
+            return this->_angle;
+        }
+        
+        void	Move::interaction() const
+        {
+        }
     }
-
-    Move::~Move()
-    {
-    }
-
-    EventDirection::eEventDirection	Move::getDirection() const
-    {
-      return this->_direction;
-    }
-
-    int	Move::getAngle() const
-    {
-      return this->_angle;
-    }
-
-    void	Move::interaction() const
-    {
-    }
-  }
 }

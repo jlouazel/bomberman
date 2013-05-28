@@ -18,12 +18,13 @@ namespace BomberMan
         class IMutex
         {
         public:
-            virtual       ~IMutex(){}
+            virtual ~IMutex(){}
             
             virtual int   lock() = 0;
             virtual int   trylock() = 0;
             virtual int   unlock() = 0;
-            virtual pthread_mutex_t *getMutex() = 0;
+            
+            virtual pthread_mutex_t *	getMutex() = 0;
         };
     }
 }

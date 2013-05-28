@@ -22,16 +22,16 @@ namespace BomberMan
             this->learn(std::pair<eObjectType, eBuffType>(BUFF, SPEED), new Object(0.0, 0.0, 0, 0, 0, BUFF, SPEED, 1, 10));
             this->learn(std::pair<eObjectType, eBuffType>(BUFF, RANGE), new Object(0.0, 0.0, 0, 0, 0, BUFF, RANGE, 1, 10));
         }
-        
+
         ObjectFactory::~ObjectFactory()
         {
         }
-        
+
         void        ObjectFactory::learn(std::pair<eObjectType, eBuffType> type, Object * object)
         {
             this->_objects.insert(std::pair<std::pair<eObjectType, eBuffType>, Object *>(type, object));
         }
-        
+
         Object *    ObjectFactory::create(std::pair<eObjectType, eBuffType> type) const
         {
             if (this->_objects.find(type) != this->_objects.end())

@@ -19,43 +19,43 @@ namespace BomberMan
         
         class Xml : public ADataFormat {
         public:
-            explicit Xml(::std::string const &);
+            explicit Xml(std::string const &);
             virtual ~Xml();
             
             class Balise {
             private:
-                ::std::string			_name;
-                eBaliseState            _state;
-                Balise *                _parent;
-                ::std::string			_content;
-                ::std::list<Balise *>	_children;
-                ::std::string			_attribute;
-                Balise *                _associated;
-                ::std::string			_attributeName;
+                std::string			_name;
+                eBaliseState		_state;
+                Balise *			_parent;
+                std::string			_content;
+                std::list<Balise *>	_children;
+                std::string			_attribute;
+                Balise *			_associated;
+                std::string			_attributeName;
                 
             public:
-                explicit Balise(::std::string const &, eBaliseState);
+                explicit Balise(std::string const &, eBaliseState);
                 ~Balise();
                 
-                ::std::string	const &			getName() const;
-                eBaliseState                    getState() const;
-                Balise *                        getParent() const;
-                ::std::string const &			getContent() const;
-                ::std::list<Balise *> const &	getChilden() const;
-                Balise *                        getAssociated() const;
+                std::string	const &			getName() const;
+                eBaliseState				getState() const;
+                Balise *					getParent() const;
+                std::string const &			getContent() const;
+                std::list<Balise *> const &	getChilden() const;
+                Balise *					getAssociated() const;
                 
-                void			addChild(Balise *);
-                void			setParent(Balise *);
-                void			setAssociated(Balise *);
-                void			setName(::std::string const &);
-                void			setContent(::std::string const &);
-                void			setChildren(::std::list<Balise *> const &);
+                void	addChild(Balise *);
+                void	setParent(Balise *);
+                void	setAssociated(Balise *);
+                void	setName(std::string const &);
+                void	setContent(std::string const &);
+                void	setChildren(std::list<Balise *> const &);
             };
             
-            virtual void generate(::std::string const &) const;
+            virtual void	generate(std::string const &) const;
             
         private:
-            ::std::list<Balise *>		_balises;
+            std::list<Balise *>		_balises;
         };
     }
 }

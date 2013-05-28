@@ -21,23 +21,23 @@ namespace BomberMan
             this->_sound = sound;
             this->_animation = anim;
         }
-        
+
         Empty::~Empty()
         {
         }
-        
+
         void    Empty::explode(int damages, eDirection direction)
         {
             Manager *	field;
             int	x;
             int	y;
-            
+
             x = static_cast<int>(this->_x);
             y = static_cast<int>(this->_y);
             // recup item list en map[x][y]
             // si items > 0
             // traitement specifique
-            
+
             // si 0 items
             damages--;
             // propagation
