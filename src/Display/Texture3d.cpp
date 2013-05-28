@@ -27,6 +27,26 @@ void	BomberMan::Display::Texture3d::update(gdl::GameClock const & gameClock, gdl
   this->model_.update(gameClock);
 }
 
+void    BomberMan::Display::Texture3d::play(std::string const & name, char state)
+{
+  this->model_.play(name, state);
+}
+
+void    BomberMan::Display::Texture3d::stop(std::string const & name)
+{
+  this->model_.stop_animation(name);
+}
+
+double  BomberMan::Display::Texture3d::get_anim_speed(std::string const &name)
+{
+  return (this->model_.get_anim_speed(name));
+}
+
+void    BomberMan::Display::Texture3d::set_anim_speed(std::string const &name, double speed)
+{
+  this->model_.set_anim_speed(name, speed);
+}
+
 void	BomberMan::Display::Texture3d::draw()
 {
   glLoadIdentity();

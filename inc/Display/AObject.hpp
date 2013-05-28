@@ -31,6 +31,11 @@ namespace BomberMan
 	  virtual void	initialize(void) = 0;
 	  virtual void	update(gdl::GameClock const &, gdl::Input &) = 0;
 	  virtual void	draw(void) = 0;
+	  virtual void  play(std::string const & _name, char state) = 0;
+	  virtual void          stop(std::string const & name) = 0;
+	  virtual double        get_anim_speed(std::string const &name) = 0;
+	  virtual void          set_anim_speed(std::string const &name, double speed) = 0;
+	  virtual void		info() = 0;
 	  void		setRotation(Vector3f &);
 	  void		setPosition(Vector3f &);
 	  void		setLen(Vector3f &);
