@@ -18,15 +18,15 @@ namespace BomberMan
         static eBaliseState	parseBaliseState(std::string const & str) {
             return str[1] == '/' ? CLOSING : OPENING;
         }
-        
+
         static bool		testIfBalise(std::string const & str) {
             return str[0] == '<' ? true : false;
         }
-        
+
         static std::string	parseBaliseName(std::string const & str, eBaliseState state) {
             unsigned int i;
             std::string name;
-            
+
             if (state == OPENING)
                 i = 1;
             else
@@ -43,13 +43,13 @@ namespace BomberMan
             }
             return name;
         }
-        
+
         static std::string const getEmplacement(std::string const & infile, std::pair<int, std::string const> line) {
             std::stringstream s;
             s << infile << ":" << line.first << ":";
             return s.str();
         }
-        
+
         static void	checkConformity(std::string const & infile, std::pair<int, std::string const> line) {
             bool chev = false, quotes = false, car = false;
             for (unsigned int i = 0; i != line.second.length(); i++) {
@@ -83,14 +83,14 @@ namespace BomberMan
             if (quotes == true)
                 throw (FormatError("incorrect xml syntax", getEmplacement(infile, line), "mismatched '\"'"));
         }
-        
+
         static bool isUseless(std::string const &str) {
             for (unsigned int i = 0; i < str.length(); i++)
                 if (str[i] != ' ')
                     return false;
             return true;
         }
-        
+
         static void epurXmlDatas(std::list< std::pair<int, std::string> > & epur,
                                  std::pair<int, std::string const> content) {
             std::string recup;
@@ -115,7 +115,7 @@ namespace BomberMan
             if (recup.empty() == false && isUseless(recup) == false)
                 epur.push_back(std::make_pair(content.first, recup));
         }
-        
+
         static Xml::Balise *getUpperNonClosed(std::list<Xml::Balise *> const & balises, std::list<Xml::Balise *>::const_iterator it)
         {
             Xml::Balise * tmp = 0;
@@ -125,7 +125,7 @@ namespace BomberMan
             }
             return tmp;
         }
-        
+
         static void assignAssociated(std::list<Xml::Balise *> const & balises)
         {
             for (std::list<Xml::Balise *>::const_iterator it = balises.begin(); it != balises.end(); ++it) {
@@ -147,17 +147,17 @@ namespace BomberMan
                     }
             }
         }
-        
+
         std::string const stateChar(Xml::Balise *balise) {
             if (balise->Xml::Balise::getState() == CLOSING)
                 return " (CLOSING)";
             return " (OPENING)";
         }
-        
+
         Xml::Xml(std::string const & infile) : ADataFormat(XML, infile) {
             std::map<int, std::string const>::const_iterator it;
             std::list< std::pair<int, std::string> > epur;
-            
+
             for (it = this->getContent().begin(); it != this->getContent().end(); ++it)
                 epurXmlDatas(epur, *it);
             for (std::list< std::pair<int, std::string> >::iterator it2 = epur.begin(); it2 != epur.end(); ++it2)
@@ -201,15 +201,15 @@ namespace BomberMan
             //   std::cout << std::endl;
             // }
         }
-        
+
         static void	eraseBalises(Xml::Balise *bal) {
             delete bal;
         }
-        
+
         Xml::~Xml() {
             std::for_each(this->_balises.begin(), this->_balises.end(), eraseBalises);
         }
-        
+
         Xml::Balise::Balise(std::string const & name, eBaliseState state)
         : _name(name),
         _state(state),
@@ -218,60 +218,60 @@ namespace BomberMan
         _associated(0)
         {
         }
-        
-        
+
+
         Xml::Balise::~Balise() {
         }
-        
+
         Xml::Balise *				Xml::Balise::getParent() const {
             return this->_parent;
         }
-        
+
         void					Xml::Balise::setParent(Xml::Balise *parent) {
             if (parent)
                 this->_parent = parent;
         }
-        
+
         std::string const &			Xml::Balise::getName() const {
             return this->_name;
         }
-        
+
         void					Xml::Balise::setName(std::string const & name) {
             this->_name = name;
         }
-        
+
         std::string const &			Xml::Balise::getContent() const {
             return this->_content;
         }
-        
+
         void					Xml::Balise::setContent(std::string const & content) {
             this->_content = content;
         }
-        
+
         std::list<Xml::Balise *> const &	Xml::Balise::getChilden() const {
             return this->_children;
         }
-        
+
         void					Xml::Balise::addChild(Balise *child) {
             this->_children.push_back(child);
         }
-        
+
         Xml::Balise *				Xml::Balise::getAssociated() const {
             return this->_associated;
         }
-        
+
         void					Xml::Balise::setAssociated(Balise *balise) {
             this->_associated = balise;
         }
-        
+
         eBaliseState				Xml::Balise::getState() const {
             return this->_state;
         }
-        
+
         void					Xml::Balise::setChildren(std::list<Xml::Balise *> const & children) {
             this->_children = children;
         }
-        
+
         void					Xml::generate(std::string const & outFileName) const {
             std::ofstream file(outFileName.c_str(), std::ios::in | std::ios::trunc);
             if (file) {
