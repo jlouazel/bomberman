@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sun May 19 00:17:06 2013 julien fortin
-// Last update Thu May 23 10:24:58 2013 julien fortin
+// Last update Tue May 28 11:52:24 2013 julien fortin
 //
 
 #include	<string>
@@ -20,16 +20,14 @@
 #include	"Move.hh"
 #include	"Fd.hh"
 
-#include	<iostream>
-#include	<stdlib.h>
-
 namespace BomberMan
 {
   namespace Input
   {
     namespace Controller
     {
-      XBoxController::XBoxController(std::string const &path) : _fd(path, O_RDONLY)
+      XBoxController::XBoxController(std::string const &path)
+	: _fd(path, O_RDONLY)
       {
 	this->_path = path;
 
@@ -182,57 +180,33 @@ namespace BomberMan
 	if (this->_data.value > 0)
 	  {
 	    if (this->_currentX == XBoxAxis::LEFT)
-	      {
-		this->_makeEvent(Event::EventDirection::DOWN_LEFT,
-				 ((float)(180 + 90.0 * ((JS_MAX - this->_data.value + 0.0) / JS_MAX))));
-		std::cout << "DOWN_LEFT=" << ((float)(180 + 90.0 * ((JS_MAX - this->_data.value + 0.0) / JS_MAX)))<< "\n";
-	      }
+	      this->_makeEventMove(Event::EventDirection::DOWN_LEFT,
+				   ((float)(180 + 90.0 * ((JS_MAX - this->_data.value + 0.0) / JS_MAX))));
 	    else if (this->_currentX == XBoxAxis::RIGHT)
-	      {
-		this->_makeEvent(Event::EventDirection::DOWN_RIGHT,
-				 ((float)(90.0 + 90.0 * ((this->_data.value + 0.0) / JS_MAX))));
-		std::cout << "DOWN_RIGHT=" << ((float)(90.0 + 90.0 * ((this->_data.value + 0.0) / JS_MAX))) << "\n";
-	      }
+	      this->_makeEventMove(Event::EventDirection::DOWN_RIGHT,
+				   ((float)(90.0 + 90.0 * ((this->_data.value + 0.0) / JS_MAX))));
 	    else
-	      {
-		this->_makeEvent(Event::EventDirection::DOWN, 180.0);
-		std::cout << "DOWN_\n";
-	      }
+	      this->_makeEventMove(Event::EventDirection::DOWN, 180.0);
 	    this->_currentY = XBoxAxis::DOWN;
 	  }
 	else if (this->_data.value < 0)
 	  {
 	    if (this->_currentX == XBoxAxis::LEFT)
-	      {
-		this->_makeEvent(Event::EventDirection::UP_LEFT,
-				 ((float)(270 + 90.0 * ((-this->_data.value + 0.0) / JS_MAX))));
-		std::cout << "UP_LEFT=" << ((float)(270 + 90.0 * ((-this->_data.value + 0.0) / JS_MAX)))<< "\n";
-	      }
+	      this->_makeEventMove(Event::EventDirection::UP_LEFT,
+				   ((float)(270 + 90.0 * ((-this->_data.value + 0.0) / JS_MAX))));
 	    else if (this->_currentX == XBoxAxis::RIGHT)
-	      {
-		this->_makeEvent(Event::EventDirection::UP_RIGHT,
-				 ((float)(90.0 * ((JS_MAX + this->_data.value + 0.0) / JS_MAX))));
-		std::cout << "UP_RIGHT=" << ((float)(90.0 * ((JS_MAX + this->_data.value + 0.0) / JS_MAX)))<< "\n";
-	      }
+	      this->_makeEventMove(Event::EventDirection::UP_RIGHT,
+				   ((float)(90.0 * ((JS_MAX + this->_data.value + 0.0) / JS_MAX))));
 	    else
-	      {
-		this->_makeEvent(Event::EventDirection::UP, 0);
-		std::cout << "UP_\n";
-	      }
+	      this->_makeEventMove(Event::EventDirection::UP, 0);
 	    this->_currentY = XBoxAxis::UP;
 	  }
 	else
 	  {
 	    if (this->_currentX == XBoxAxis::LEFT)
-	      {
-		this->_makeEvent(Event::EventDirection::LEFT, 270);
-		std::cout << "LEFTGO LEFT\n";
-	      }
+	      this->_makeEventMove(Event::EventDirection::LEFT, 270);
 	    else if (this->_currentX == XBoxAxis::RIGHT)
-	      {
-		this->_makeEvent(Event::EventDirection::RIGHT, 90);
-		std::cout << "LEFTGO RIGHT\n";
-	      }
+	      this->_makeEventMove(Event::EventDirection::RIGHT, 90);
 	    this->_currentY = XBoxAxis::NO;
 	  }
       }
@@ -249,19 +223,16 @@ namespace BomberMan
       {
 	if (this->_data.value < 0)
 	  {
-	    this->_makeEvent(Event::EventDirection::LEFT, 270.0);
-	    std::cout << "#LEFT\n";
+	    this->_makeEventMove(Event::EventDirection::LEFT, 270.0);
 	    this->_currentX = XBoxAxis::LEFT;
 	  }
 	else if (this->_data.value > 0)
 	  {
-	    this->_makeEvent(Event::EventDirection::RIGHT, 90.0);
-	    std::cout << "#RIGHT\n";
+	    this->_makeEventMove(Event::EventDirection::RIGHT, 90.0);
 	    this->_currentX = XBoxAxis::RIGHT;
 	  }
 	else
 	  {
-	    std::cout << "#STOP\n";
 	    this->_currentX = XBoxAxis::NO;
 	  }
       }
@@ -271,46 +242,25 @@ namespace BomberMan
 	if (this->_data.value > 0)
 	  {
 	    if (this->_currentX == XBoxAxis::LEFT)
-	      {
-		this->_makeEvent(Event::EventDirection::DOWN_LEFT, 225.0);
-		std::cout << "#DOWN_LEFT\n";
-	      }
+	      this->_makeEventMove(Event::EventDirection::DOWN_LEFT, 225.0);
 	    else if (this->_currentX == XBoxAxis::RIGHT)
-	      {
-		this->_makeEvent(Event::EventDirection::DOWN_RIGHT, 135.0);
-		std::cout << "#DOWN_RIGHT\n";
-	      }
+	      this->_makeEventMove(Event::EventDirection::DOWN_RIGHT, 135.0);
 	    else
-	      {
-		this->_makeEvent(Event::EventDirection::DOWN, 180.0);
-		std::cout << "#DOWN_\n";
-	      }
+	      this->_makeEventMove(Event::EventDirection::DOWN, 180.0);
 	    this->_currentY = XBoxAxis::DOWN;
 	  }
 	else if (this->_data.value < 0)
 	  {
 	    if (this->_currentX == XBoxAxis::LEFT)
-	      {
-		this->_makeEvent(Event::EventDirection::UP_LEFT, 315.0);
-		std::cout << "#UP_LEFT\n";
-	      }
+	      this->_makeEventMove(Event::EventDirection::UP_LEFT, 315.0);
 	    else if (this->_currentX == XBoxAxis::RIGHT)
-	      {
-		this->_makeEvent(Event::EventDirection::UP_RIGHT, 45.0);
-		std::cout << "#UP_RIGHT\n";
-	      }
+	      this->_makeEventMove(Event::EventDirection::UP_RIGHT, 45.0);
 	    else
-	      {
-		this->_makeEvent(Event::EventDirection::UP, 0);
-		std::cout << "#UP\n";
-	      }
+	      this->_makeEventMove(Event::EventDirection::UP, 0);
 	    this->_currentY = XBoxAxis::UP;
 	  }
 	else
-	  {
-	    this->_currentY = XBoxAxis::NO;
-	    std::cout << "#STOP\n";
-	  }
+	  this->_currentY = XBoxAxis::NO;
       }
 
       void	XBoxController::_axisJS_LT()
@@ -321,9 +271,9 @@ namespace BomberMan
       {
       }
 
-      void	XBoxController::_makeEvent(Event::EventDirection::eEventDirection dir, float angle) const
+      void	XBoxController::_makeEventMove(Event::EventDirection::eEventDirection dir, float angle)
       {
-	Event::EventManager::addEvent(new const Event::Move(42, 42, dir, angle));
+	Event::EventManager::moveEvent(dir, angle, 42, 42);
       }
     }
   }

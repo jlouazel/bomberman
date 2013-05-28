@@ -21,14 +21,10 @@ namespace BomberMan
       Core(Core const&);
       Core        &operator=(Core const&);
 
-      int	_run();
-
     protected:
     public:
       ~Core();
       Core();
-
-      int run();
     };
   }
 }
