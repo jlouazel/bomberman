@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 14 15:29:51 2013 julien fortin
-// Last update Tue May 28 11:18:07 2013 julien fortin
+// Last update Tue May 28 11:50:53 2013 julien fortin
 //
 
 #ifndef	__EVENTMANAGER_HH__
@@ -14,7 +14,6 @@
 #include	<queue>
 #include	"EventEnum.hh"
 #include	"EventError.hh"
-#include	"IInput.hh"
 #include	"IEvent.hh"
 #include	"IMutex.hh"
 

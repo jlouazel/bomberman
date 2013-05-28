@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sun May 19 00:17:06 2013 julien fortin
-// Last update Tue May 28 11:39:31 2013 julien fortin
+// Last update Tue May 28 11:52:24 2013 julien fortin
 //
 
 #include	<string>
@@ -27,8 +27,7 @@ namespace BomberMan
     namespace Controller
     {
       XBoxController::XBoxController(std::string const &path)
-	: _fd(path, O_RDONLY),
-	  _input(0, Event::EventDirection::NO)
+	: _fd(path, O_RDONLY)
       {
 	this->_path = path;
 

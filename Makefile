@@ -67,7 +67,6 @@ SRCS_FIELD	= $(SRC_DIR)$(FIELD)AGameComponent.cpp \
 
 SRCS_INPUT	= $(SRC_DIR)$(INPUT)InputManager.cpp \
 		$(SRC_DIR)$(INPUT)InputError.cpp \
-		$(SRC_DIR)$(INPUT)InputJS.cpp \
 
 SRCS_CTLLR	= $(SRC_DIR)$(INPUT)$(CONTROLLER)KeyBoardManager.cpp \
 		$(SRC_DIR)$(INPUT)$(CONTROLLER)XBoxController.cpp \

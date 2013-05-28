@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Fri May 17 12:53:01 2013 julien fortin
-// Last update Tue May 28 11:21:39 2013 julien fortin
+// Last update Tue May 28 11:51:25 2013 julien fortin
 //
 
 #ifndef	__XBoxController__HH__
@@ -13,7 +13,6 @@
 
 #include	<string>
 #include	<map>
-#include	"InputJS.hh"
 #include	"EventManager.hh"
 #include	"IController.hh"
 #include	"Fd.hh"
@@ -57,7 +56,6 @@ namespace BomberMan
       private:
 	Unix::Fd	_fd;
 	std::string	_path;
-	InputJS		_input;
 
       private:
 	struct XBoxAxis

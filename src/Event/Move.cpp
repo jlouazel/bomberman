@@ -5,10 +5,9 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 21 16:21:04 2013 julien fortin
-// Last update Tue May 28 11:08:01 2013 julien fortin
+// Last update Tue May 28 11:52:57 2013 julien fortin
 //
 
-#include	"InputJS.hh"
 #include	"Move.hh"
 
 namespace BomberMan
