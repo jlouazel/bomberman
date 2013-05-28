@@ -14,9 +14,7 @@ int		main()
 {
   try
     {
-      BomberMan::Display::MyGame *game = new BomberMan::Display::MyGame;
-      // game->initialize();
-      // game->run();
+      BomberMan::Display::MyGame game;
     }
   catch (BomberMan::Core::CoreError& e)
     {
@@ -67,4 +65,5 @@ int		main()
         << " (" << e.getDetails()
         << ")" << std::endl;
     }
+  return 0;
 }
