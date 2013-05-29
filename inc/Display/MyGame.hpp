@@ -37,7 +37,7 @@ namespace BomberMan
 
     public:
       MyGame() : ::gdl::Game(){}
-        
+
       void		initialize();
       void      update(void);
       void		draw(void);
