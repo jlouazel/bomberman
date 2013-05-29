@@ -41,9 +41,9 @@ namespace BomberMan
 	  this->_menu->initialize();
         }
         
-        void	OngletMenu::affOnglet() const
+      void	OngletMenu::affOnglet() const
         {
-            this->_image->draw();
+	  this->_image->draw();
         }
         
         void    OngletMenu::setPosition(Vector3f &position)

@@ -1,3 +1,5 @@
+#include <iostream>
+#include <string>
 #include <algorithm>
 #include <vector>
 #include "AObject.hpp"
@@ -68,7 +70,10 @@ namespace BomberMan
 	this->_textureFond->draw();
 	std::vector<IOnglet *>::iterator it = this->_onglet.begin();
 	for (; it != this->_onglet.end(); ++it)
-	  (*it)->affOnglet();
+	  {
+	    std::cout << "lalala" << std::endl;
+	    (*it)->affOnglet();
+	  }
       }
       void      Menu::initialize()
       {

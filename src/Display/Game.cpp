@@ -25,12 +25,12 @@ namespace BomberMan
     {
         void	MyGame::initialize()
         {
-	  // Vector3f      vectorPosition(25, 15, 0);
-	  // Vector3f      vectorLen(50.0, 8.0, 0.0);
-	  // Vector3f      vectorRotation(0.0, 0.0, 0.0);
-	  Vector3f      vectorPosition(500, 0, -500);
-	  Vector3f      vectorLen(0.0, 0.0, 0.0);
+	  Vector3f      vectorPosition(25, 15, 0);
+	  Vector3f      vectorLen(50.0, 8.0, 0.0);
 	  Vector3f      vectorRotation(0.0, 0.0, 0.0);
+	  // Vector3f      vectorPosition(500, 0, -500);
+	  // Vector3f      vectorLen(0.0, 0.0, 0.0);
+	  // Vector3f      vectorRotation(0.0, 0.0, 0.0);
 	  IOnglet       *newOnglet;
 
 	  this->_core = new Core::Core;
