@@ -71,7 +71,7 @@ namespace BomberMan
 	std::vector<IOnglet *>::iterator it = this->_onglet.begin();
 	for (; it != this->_onglet.end(); ++it)
 	  {
-	    std::cout << "lalala" << std::endl;
+	    // std::cout << "lalala" << std::endl;
 	    (*it)->affOnglet();
 	  }
       }

@@ -36,7 +36,7 @@ namespace BomberMan
 
       void	Texture2d::draw(void)
       {
-	std::cout << this->stringTexture_ << std::endl;
+	// std::cout << this->stringTexture_ << std::endl;
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	this->texture_.bind();
