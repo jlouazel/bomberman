@@ -15,7 +15,7 @@ int		main()
     {
       BomberMan::Display::MyGame game;
 
-      game.initialize();
+      //      game.initialize();
       game.run();
 
       // BomberMan::Event::EventManager::getEventManager();
