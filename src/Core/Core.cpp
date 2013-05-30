@@ -3,25 +3,25 @@
 
 namespace BomberMan
 {
-    namespace Core
+  namespace Core
+  {
+    Core::Core()
     {
-        Core::Core()
-        {
-            Input::InputManager::getInputManager();
-            Input::InputManager::init();
-	    Event::EventManager::getEventManager();
+      Input::InputManager::getInputManager();
+      Input::InputManager::init();
+      Event::EventManager::getEventManager();
 
-            /* Thread video intro */
-            /* Initialisation ressources GDL */
-            /* Initialise Display */
-        }
-        Core::~Core()
-        {
-            Input::InputManager::deleteInputManager();
-        }
-
-      void Core::update() {
-	std::cout << "core update" << std::endl;
-      }
+      /* Thread video intro */
+      /* Initialisation ressources GDL */
+      /* Initialise Display */
     }
+    Core::~Core()
+    {
+      Input::InputManager::deleteInputManager();
+    }
+
+    void Core::update() {
+      std::cout << "core update" << std::endl;
+    }
+  }
 }

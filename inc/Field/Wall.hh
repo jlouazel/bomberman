@@ -1,11 +1,3 @@
-//
-//  Wall.h
-//  BomberMan
-//
-//  Created by manour_m on 17/05/13.
-//  Copyright (c) 2013 manour_m. All rights reserved.
-//
-
 #ifndef __BomberMan__Wall__
 #define __BomberMan__Wall__
 
@@ -32,4 +24,4 @@ namespace BomberMan
     }
 }
 
-#endif /* defined(__BomberMan__Wall__) */
+#endif
