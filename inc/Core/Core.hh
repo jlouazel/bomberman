@@ -15,7 +15,7 @@ namespace BomberMan
     class Core
     {
     private:
-      //Field::Manager * _manager;
+      Field::Manager * _manager;
 
 
     public:
