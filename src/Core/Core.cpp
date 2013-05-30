@@ -21,7 +21,7 @@ namespace BomberMan
     }
 
     void Core::update() {
-      std::cout << "core update" << std::endl;
+      //std::cout << "core update" << std::endl;
     }
   }
 }
