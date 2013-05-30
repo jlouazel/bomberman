@@ -4,6 +4,7 @@
 #include <Clock.hpp>
 #include <Color.hpp>
 #include <Model.hpp>
+#include <math.h>
 #include "AObject.hpp"
 #include "Texture3d.hpp"
 
@@ -33,10 +34,23 @@ namespace BomberMan
       {
 	this->model_.update(gameClock);
 
-	//const Event::IEvent* event = Event::EventManager::getEvent();
+	const Event::IEvent* event = Event::EventManager::getEvent();
+	if (event != NULL)
+	  {
+	    const Event::Move *move = (const Event::Move *)event;
+	    std::cout << "Angle:" << move->getAngle() << std::endl;
+	    float	angle =  (move->getAngle() + 270) % 360;	 
+	    float	x = cosf(angle * 3.14159265359 / 180) * 10;
+	    float	z = sinf(angle * 3.14159265359 / 180) * 10;
+   
+	    std::cout << "angle : " << angle << std::endl;
 
-	// const Event::Move *move = (const Event::Move *)event;
-	// std::cout << "Angle:" << move->getAngle() << std::endl;
+	    this->position_.setX(this->position_.getX() + x);
+	    this->position_.setZ(this->position_.getZ() + z);
+	    this->rotation_.setY((float)-((int)(angle + 270) % 360));
+	    this->info();
+	    this->play("Take 001", 1);
+	  }
       }
 
       void    Texture3d::play(std::string const & name, char state)
@@ -64,10 +78,10 @@ namespace BomberMan
 	glLoadIdentity();
 	glPushMatrix();
 	gdl::Model::Begin();
+	glTranslatef(this->position_.getX(), this->position_.getY(), this->position_.getZ());
 	glRotatef(this->rotation_.getX(), 1, 0, 0);
 	glRotatef(this->rotation_.getY(), 0, 1, 0);
 	glRotatef(this->rotation_.getZ(), 0, 0, 1);
-	glTranslatef(this->position_.getX(), this->position_.getY(), this->position_.getZ());
 	this->model_.draw();
 	gdl::Model::End();
 	glPopMatrix();
