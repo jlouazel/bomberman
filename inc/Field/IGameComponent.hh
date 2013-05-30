@@ -3,9 +3,10 @@
 
 #include <iostream>
 
-#include "Display.hh"
-
 #include "Enums.hh"
+#include "IAsset.hh"
+#include "ISound.hh"
+#include "IAnimation.hh"
 
 namespace BomberMan
 {
@@ -29,6 +30,15 @@ namespace BomberMan
             virtual void					setAnimation(Display::IAnimation *) = 0;
         };
     }
+}
+
+#else
+namespace BomberMan
+{
+  namespace Field
+  {
+    class IGameComponent;
+  }
 }
 
 #endif

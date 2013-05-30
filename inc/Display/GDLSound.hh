@@ -23,4 +23,13 @@ namespace BomberMan
     }
 }
 
+#else
+namespace BomberMan
+{
+  namespace Display
+  {
+    class GDLSound;
+  }
+}
+
 #endif /* defined(__BomberMan__GDLSound__) */

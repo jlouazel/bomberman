@@ -33,4 +33,13 @@ namespace BomberMan
     }
 }
 
+#else
+namespace BomberMan
+{
+  namespace Field
+  {
+    class ObjectFactory;
+  }
+}
+
 #endif /* defined(__BomberMan__ObjectFactory__) */

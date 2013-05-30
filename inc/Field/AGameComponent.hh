@@ -42,4 +42,13 @@ namespace BomberMan
     }
 }
 
+#else
+namespace BomberMan
+{
+  namespace Field
+  {
+    class AGameComponent;
+  }
+}
+
 #endif /* defined(__BomberMan__AGameComponent__) */

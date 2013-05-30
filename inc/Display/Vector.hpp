@@ -24,4 +24,13 @@ namespace BomberMan
     }
 }
 
+#else
+namespace BomberMan
+{
+  namespace Display
+  {
+    class Vector3f;
+  }
+}
+
 #endif

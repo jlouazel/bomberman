@@ -23,4 +23,13 @@ namespace BomberMan
     }
 }
 
+#else
+namespace BomberMan
+{
+  namespace Display
+  {
+    class GDLAnimation;
+  }
+}
+
 #endif /* defined(__BomberMan__GDLAnimation__) */

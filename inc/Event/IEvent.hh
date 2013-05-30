@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat May 18 18:23:52 2013 julien fortin
-// Last update Mon May 27 10:12:38 2013 julien fortin
+// Last update Thu May 30 18:39:01 2013 Jean-Baptiste Louazel
 //
 
 #ifndef	__IEVENT_HH__
@@ -33,6 +33,15 @@ namespace BomberMan
             virtual EventDirection::eEventDirection	getDirection() const = 0;
         };
     }
+}
+
+#else
+namespace BomberMan
+{
+  namespace Event
+  {
+    class IEvent;
+  }
 }
 
 #endif

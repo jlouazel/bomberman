@@ -31,4 +31,13 @@ namespace BomberMan
     }
 }
 
+#else
+namespace BomberMan
+{
+  namespace Display
+  {
+    class Menu;
+  }
+}
+
 #endif

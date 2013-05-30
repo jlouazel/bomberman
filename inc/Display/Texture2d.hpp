@@ -28,4 +28,13 @@ namespace BomberMan
   }
 }
 
+#else
+namespace BomberMan
+{
+  namespace Display
+  {
+    class Texture2d;
+  }
+}
+
 #endif

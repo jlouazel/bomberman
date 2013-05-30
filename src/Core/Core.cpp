@@ -1,9 +1,8 @@
-#include	"BomberMan.hh"
-#include	"Core.hh"
+#include "Core.hh"
 
 namespace BomberMan
 {
-  namespace Core
+  namespace Engine
   {
     Core::Core()
     {

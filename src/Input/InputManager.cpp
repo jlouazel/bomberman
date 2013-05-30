@@ -1,13 +1,3 @@
-//
-// InputManager.cpp for bomberman in /home/fortin_j/tek2/projects/bomberman/input
-//
-// Made by julien fortin
-// Login   <fortin_j@epitech.net>
-//
-// Started on  Wed May 15 16:55:05 2013 julien fortin
-// Last update Fri May 24 13:06:09 2013 julien fortin
-//
-
 #include	<string>
 #include	<algorithm>
 #include	<functional>

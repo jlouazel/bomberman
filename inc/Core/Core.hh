@@ -2,11 +2,15 @@
 #define BomberMan_Core_h
 
 #include <list>
+
+#include "InputManager.hh"
+#include "EventManager.hh"
 #include "CoreError.hh"
+#include "FManager.hh"
 
 namespace BomberMan
 {
-  namespace Core
+  namespace Engine
   {
     class Core
     {
@@ -20,6 +24,15 @@ namespace BomberMan
 
       void	update();
     };
+  }
+}
+
+#else
+namespace BomberMan
+{
+  namespace Engine
+  {
+    class Core;
   }
 }
 

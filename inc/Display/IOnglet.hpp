@@ -16,4 +16,13 @@ namespace BomberMan
     }
 }
 
+#else
+namespace BomberMan
+{
+  namespace Display
+  {
+    class IOnglet;
+  }
+}
+
 #endif

@@ -33,4 +33,13 @@ namespace BomberMan
     }
 }
 
+#else
+namespace BomberMan
+{
+  namespace Input
+  {
+    class InputError;
+  }
+}
+
 #endif /* defined(__BomberMan__Error__) */

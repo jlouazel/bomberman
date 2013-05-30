@@ -34,4 +34,13 @@ namespace BomberMan
     }
 }
 
+#else
+namespace BomberMan
+{
+  namespace Unix
+  {
+    class UnixThread;
+  }
+}
+
 #endif /* defined(__BomberMan__UnixThread__) */

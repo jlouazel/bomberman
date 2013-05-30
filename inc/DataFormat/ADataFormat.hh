@@ -26,10 +26,19 @@ namespace BomberMan
             eFormat					getFormat() const;
             std::ifstream const &	getInFile() const;
             virtual void			generate(std::string const &) const = 0;
-            
+
             std::map<int, std::string const> const &	getContent() const;
         };
     }
+}
+
+#else
+namespace BomberMan
+{
+  namespace DataFormat
+  {
+    class DataFormat;
+  }
 }
 
 #endif

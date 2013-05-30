@@ -33,4 +33,13 @@ namespace BomberMan
     }
 }
 
+#else
+namespace BomberMan
+{
+  namespace Field
+  {
+    class FieldError;
+  }
+}
+
 #endif /* defined(__BomberMan__Error__) */

@@ -24,4 +24,13 @@ namespace BomberMan
     }
 }
 
+#else
+namespace BomberMan
+{
+  namespace Field
+  {
+    class Wall;
+  }
+}
+
 #endif

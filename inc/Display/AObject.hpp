@@ -47,4 +47,13 @@ namespace BomberMan
     }
 }
 
+#else
+namespace BomberMan
+{
+  namespace Display
+  {
+    class AObject;
+  }
+}
+
 #endif

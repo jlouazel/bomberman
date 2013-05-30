@@ -21,4 +21,13 @@ namespace BomberMan
     }
 }
 
+#else
+namespace BomberMan
+{
+  namespace Display
+  {
+    class IAsset;
+  }
+}
+
 #endif

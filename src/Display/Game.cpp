@@ -1,24 +1,7 @@
-#include <string>
 #include <iostream>
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include <Clock.hpp>
-#include <Color.hpp>
-#include <Game.hpp>
-#include <GameClock.hpp>
-#include <Image.hpp>
-#include <Input.hpp>
-#include <Model.hpp>
-#include <string>
-#include <algorithm>
-#include <iostream>
+
 #include "MyGame.hpp"
-#include "AObject.hpp"
-#include "Texture2d.hpp"
-#include "Texture3d.hpp"
-#include "Vector.hpp"
-#include "IOnglet.hpp"
-#include "OngletMenu.hpp"
+#include "Core.hh"
 
 namespace BomberMan
 {
@@ -34,7 +17,8 @@ namespace BomberMan
 	  // Vector3f      vectorRotation(0.0, 0.0, 0.0);
 	  IOnglet       *newOnglet;
 
-	  this->_core = new Core::Core;
+	  this->_core = new Engine::Core;
+
 	  window_.setWidth(WIDTH);
 	  window_.setHeight(HEIGHT);
 	  window_.create();
