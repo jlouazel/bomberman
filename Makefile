@@ -4,7 +4,7 @@ RM          = rm -f
 
 NAME		= BomberMan
 
-CPPFLAGS	+= -W -Wall -Wextra -g3
+CPPFLAGS	+= -W -Wall -Wextra
 
 CPPFLAGS	+= -I./inc/
 CPPFLAGS	+= -I./inc/Core/
@@ -62,11 +62,11 @@ SRCS_DISPLAY	= $(SRC_DIR)$(DISPLAY)AAnimation.cpp \
 SRCS_FIELD	= $(SRC_DIR)$(FIELD)AGameComponent.cpp \
 		$(SRC_DIR)$(FIELD)Empty.cpp \
 		$(SRC_DIR)$(FIELD)FieldError.cpp \
-		$(SRC_DIR)$(FIELD)Field.cpp \
 		$(SRC_DIR)$(FIELD)Object.cpp \
 		$(SRC_DIR)$(FIELD)ObjectFactory.cpp \
 		$(SRC_DIR)$(FIELD)Player.cpp \
 		$(SRC_DIR)$(FIELD)Wall.cpp \
+		$(SRC_DIR)$(FIELD)FManager.cpp
 
 SRCS_INPUT	= $(SRC_DIR)$(INPUT)InputManager.cpp \
 		$(SRC_DIR)$(INPUT)InputError.cpp \

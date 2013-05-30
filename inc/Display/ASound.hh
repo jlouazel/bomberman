@@ -23,4 +23,13 @@ namespace BomberMan
     }
 }
 
+#else
+namespace BomberMan
+{
+  namespace Display
+  {
+    class ASound;
+  }
+}
+
 #endif /* defined(__BomberMan__ASound__) */

@@ -33,4 +33,13 @@ namespace BomberMan
     }
 }
 
+#else
+namespace BomberMan
+{
+  namespace Unix
+  {
+    class ThreadPool;
+  }
+}
+
 #endif /* defined(__BomberMan__ThreadPool__) */

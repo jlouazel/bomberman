@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 21 20:23:08 2013 julien fortin
-// Last update Thu May 23 10:23:14 2013 julien fortin
+// Last update Thu May 30 18:43:26 2013 Jean-Baptiste Louazel
 //
 
 #ifndef	__KEYBOARDMANAGER_HH__
@@ -39,6 +39,18 @@ namespace BomberMan
             };
         }
     }
+}
+
+#else
+namespace BomberMan
+{
+  namespace Input
+  {
+    namespace Controller
+    {
+      class KeyBoardManager;
+    }
+  }
 }
 
 #endif

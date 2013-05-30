@@ -40,4 +40,13 @@ namespace BomberMan
     }
 }
 
+#else
+namespace BomberMan
+{
+  namespace Display
+  {
+    class Resources;
+  }
+}
+
 #endif /* defined(__BomberMan__Resources__) */

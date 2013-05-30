@@ -1,19 +1,9 @@
-//
-// EventManager.hh for bomberman in /home/fortin_j/tek2/projects/bomberman/event
-//
-// Made by julien fortin
-// Login   <fortin_j@epitech.net>
-//
-// Started on  Tue May 14 15:29:51 2013 julien fortin
-// Last update Tue May 28 22:29:33 2013 julien fortin
-//
-
 #ifndef	__EVENTMANAGER_HH__
 #define	__EVENTMANAGER_HH__
 
 #include	<queue>
+
 #include	"EventEnum.hh"
-#include	"EventError.hh"
 #include	"IEvent.hh"
 #include	"IMutex.hh"
 
@@ -60,6 +50,15 @@ namespace BomberMan
 						  float, float);
       static void			coreEvent(EventType::eEventType);
     };
+  }
+}
+
+#else
+namespace BomberMan
+{
+  namespace Event
+  {
+    class EventManager;
   }
 }
 

@@ -29,4 +29,13 @@ namespace BomberMan
     }
 }
 
+#else
+namespace BomberMan
+{
+  namespace Unix
+  {
+    class IMutex;
+  }
+}
+
 #endif

@@ -23,4 +23,13 @@ namespace BomberMan
     }
 }
 
+#else
+namespace BomberMan
+{
+  namespace Display
+  {
+    class GDLAsset;
+  }
+}
+
 #endif /* defined(__BomberMan__GDLAsset__) */

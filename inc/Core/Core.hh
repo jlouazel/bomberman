@@ -1,31 +1,39 @@
-//
-//  Core.h
-//  BomberMan
-//
-//  Created by manour_m on 18/05/13.
-//  Copyright (c) 2013 manour_m. All rights reserved.
-//
-
 #ifndef BomberMan_Core_h
 #define BomberMan_Core_h
 
+#include <list>
+
+#include "InputManager.hh"
+#include "EventManager.hh"
 #include "CoreError.hh"
+#include "FManager.hh"
 
 namespace BomberMan
 {
-    namespace Core
+  namespace Engine
+  {
+    class Core
     {
-        class Core
-        {
-        private:
-            Core(Core const&);
-            Core &	operator=(Core const&);
-            
-        public:
-            ~Core();
-            Core();
-        };
-    }
+    private:
+      Field::Manager * _manager;
+
+
+    public:
+      Core();
+      ~Core();
+
+      void	update();
+    };
+  }
+}
+
+#else
+namespace BomberMan
+{
+  namespace Engine
+  {
+    class Core;
+  }
 }
 
 #endif

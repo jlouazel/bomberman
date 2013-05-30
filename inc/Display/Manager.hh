@@ -21,4 +21,13 @@ namespace BomberMan
     }
 }
 
+#else
+namespace BomberMan
+{
+  namespace Display
+  {
+    class Manager;
+  }
+}
+
 #endif /* defined(__BomberMan__Manager__) */

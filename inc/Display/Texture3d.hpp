@@ -31,4 +31,14 @@ namespace BomberMan
         };
     }
 }
+
+#else
+namespace BomberMan
+{
+  namespace Display
+  {
+    class Texture3d;
+  }
+}
+
 #endif

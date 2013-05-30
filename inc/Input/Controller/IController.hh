@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Wed May  8 17:54:29 2013 julien fortin
-// Last update Thu May 23 10:50:27 2013 julien fortin
+// Last update Thu May 30 18:43:12 2013 Jean-Baptiste Louazel
 //
 
 #ifndef	__ICONTROLLER_HH__
@@ -38,6 +38,18 @@ namespace BomberMan
             };
         }
     }
+}
+
+#else
+namespace BomberMan
+{
+  namespace Input
+  {
+    namespace Controller
+    {
+      class IController;
+    }
+  }
 }
 
 #endif

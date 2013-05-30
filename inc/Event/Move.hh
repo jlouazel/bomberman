@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 21 16:18:25 2013 julien fortin
-// Last update Tue May 28 11:07:32 2013 julien fortin
+// Last update Thu May 30 18:39:09 2013 Jean-Baptiste Louazel
 //
 
 #ifndef	__MOVE_HH__
@@ -34,6 +34,15 @@ namespace BomberMan
             EventDirection::eEventDirection	getDirection() const;
         };
     }
+}
+
+#else
+namespace BomberMan
+{
+  namespace Event
+  {
+    class Move;
+  }
 }
 
 #endif

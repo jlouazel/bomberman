@@ -1,11 +1,3 @@
-//
-//  Player.h
-//  BomberMan
-//
-//  Created by manour_m on 17/05/13.
-//  Copyright (c) 2013 manour_m. All rights reserved.
-//
-
 #ifndef __BomberMan__Player__
 #define __BomberMan__Player__
 
@@ -24,11 +16,11 @@ namespace BomberMan
             int         _nb_bomb_max;
             int         _nb_bomb_set;
             Object *    _bomb;
-            
+
         public:
             Player(int pv, float speed, int max, int set, float x, float y, Display::IAsset * asset, Display::ISound * sound, Display::IAnimation * anim);
             ~Player();
-            
+
             void        move();
             void    	setBomb();
             void        acquireObject();
@@ -46,4 +38,13 @@ namespace BomberMan
     }
 }
 
-#endif /* defined(__BomberMan__Player__) */
+#else
+namespace BomberMan
+{
+  namespace Field
+  {
+    class Player;
+  }
+}
+
+#endif

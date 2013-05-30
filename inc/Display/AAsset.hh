@@ -23,4 +23,13 @@ namespace BomberMan
     }
 }
 
+#else
+namespace BomberMan
+{
+  namespace Display
+  {
+    class AAsset;
+  }
+}
+
 #endif /* defined(__BomberMan__AAsset__) */

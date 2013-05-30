@@ -1,11 +1,3 @@
-//
-//  APicture.h
-//  BomberMan
-//
-//  Created by manour_m on 20/05/13.
-//  Copyright (c) 2013 manour_m. All rights reserved.
-//
-
 #ifndef __BomberMan__APicture__
 #define __BomberMan__APicture__
 
@@ -13,14 +5,23 @@
 
 namespace BomberMan
 {
-    namespace Display
+  namespace Display
+  {
+    class APicture : public IPicture
     {
-        class APicture : public IPicture
-        {
-        public:
-            
-        };
-    }
+    public:
+
+    };
+  }
 }
 
-#endif /* defined(__BomberMan__APicture__) */
+#else
+namespace BomberMan
+{
+  namespace Display
+  {
+    class APicture;
+  }
+}
+
+#endif

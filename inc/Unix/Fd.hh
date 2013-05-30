@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat May 18 17:12:50 2013 julien fortin
-// Last update Thu May 23 13:08:30 2013 julien fortin
+// Last update Thu May 30 18:45:23 2013 Jean-Baptiste Louazel
 //
 
 #ifndef	__FD_HH__
@@ -39,6 +39,15 @@ namespace BomberMan
             void	closeFd() const;
         };
     }
+}
+
+#else
+namespace BomberMan
+{
+  namespace Unix
+  {
+    class Fd;
+  }
 }
 
 #endif

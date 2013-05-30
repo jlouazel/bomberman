@@ -1,18 +1,8 @@
-//
-// EventManager.cpp for bomberman in /home/fortin_j/tek2/projects/bomberman/event
-//
-// Made by julien fortin
-// Login   <fortin_j@epitech.net>
-//
-// Started on  Tue May 14 15:29:41 2013 julien fortin
-// Last update Tue May 28 23:37:04 2013 julien fortin
-//
-
 #include	<algorithm>
-#include	"Events.hh"
 #include	"IEvent.hh"
 #include	"UnixMutex.hh"
 #include	"EventManager.hh"
+#include	"Move.hh"
 
 #include	<iostream>
 

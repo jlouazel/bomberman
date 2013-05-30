@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Fri May 17 12:53:01 2013 julien fortin
-// Last update Tue May 28 11:51:25 2013 julien fortin
+// Last update Thu May 30 18:43:47 2013 Jean-Baptiste Louazel
 //
 
 #ifndef	__XBoxController__HH__
@@ -128,6 +128,18 @@ namespace BomberMan
             };
         }
     }
+}
+
+#else
+namespace BomberMan
+{
+  namespace Input
+  {
+    namespace Controller
+    {
+      class XBoxController;
+    }
+  }
 }
 
 #endif

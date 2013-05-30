@@ -36,4 +36,16 @@ namespace BomberMan
     }
 }
 
+#else
+namespace BomberMan
+{
+  namespace Input
+  {
+    namespace Controller
+    {
+      class ControllerError;
+    }
+  }
+}
+
 #endif /* defined(__BomberMan__Error__) */
