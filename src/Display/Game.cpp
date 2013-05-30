@@ -42,7 +42,7 @@ namespace BomberMan
 	  firstMenu->addOnglet(newOnglet);
 	  this->menu_ = *firstMenu;
 	  this->menu_.initialize();
-	  this->addObject3d("texture/ExplodingBomb.fbx", vectorPosition, vectorRotation, vectorLen);
+	  this->addObject3d("libgdl/assets/marvin.fbx", vectorPosition, vectorRotation, vectorLen);
 	  std::list<AObject*>::iterator itb = this->objects_.begin();
 	  for (; itb != this->objects_.end(); ++itb)
 	    (*itb)->initialize();
