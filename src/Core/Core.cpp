@@ -4,6 +4,21 @@ namespace BomberMan
 {
   namespace Engine
   {
+    Core*	Core::_core = 0;
+
+    Core*	Core::getCore()
+    {
+      if (!Core::_core)
+	Core::_core = new Core;
+      return Core::_core;
+    }
+
+    void	Core::deleteCore()
+    {
+      delete Core::_core;
+      Core::_core = 0;
+    }
+
     Core::Core()
     {
       Input::InputManager::getInputManager();
@@ -19,7 +34,8 @@ namespace BomberMan
       Input::InputManager::deleteInputManager();
     }
 
-    void Core::update() {
+    void Core::update()
+    {
       //std::cout << "core update" << std::endl;
     }
   }

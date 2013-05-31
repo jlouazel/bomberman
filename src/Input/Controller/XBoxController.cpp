@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sun May 19 00:17:06 2013 julien fortin
-// Last update Thu May 30 23:52:17 2013 julien fortin
+// Last update Fri May 31 15:43:54 2013 julien fortin
 //
 
 #include	<string>
@@ -173,7 +173,6 @@ namespace BomberMan
       void	XBoxController::_axisJS_LS_X()
       {
 	this->_valueX = this->_data.value;
-	//std::cout << "X:" << this->_data.value << "\n";
 	if (this->_data.value < 0)
 	  this->_currentX = XBoxAxis::LEFT;
 	else if (this->_data.value > 0)
@@ -185,7 +184,6 @@ namespace BomberMan
       void	XBoxController::_axisJS_LS_Y()
       {
 	this->_valueY = this->_data.value;
-	//std::cout << "Y:" << this->_data.value << "\n";
 	if (this->_data.value > 0)
 	  {
 	    if (this->_currentX == XBoxAxis::LEFT)
@@ -283,44 +281,23 @@ namespace BomberMan
       void	XBoxController::getPushingEvent()
       {
 	this->_data.value = this->_valueY;
+	if (this->_valueX > -4000 && this->_valueX < 4000)
+	  {
+	    if (this->_valueY < -28000)
+	      {
+		this->_makeEventMove(Event::EventDirection::UP, 0);
+		return ;
+	      }
+	    else if (this->_valueY > 28000)
+	      {
+		this->_makeEventMove(Event::EventDirection::DOWN, 180.0);
+		return ;
+	      }
+	  }
 	if (this->_currentX == XBoxAxis::RIGHT && this->_valueX > 5000)
-	  {
-	    this->_axisJS_LS_Y();
-	    // if (this->_currentY == XBoxAxis::UP)
-	    //   std::cout << "UPRIGHT\n";
-	    // else if (this->_currentY == XBoxAxis::DOWN)
-	    //   std::cout << "DOWNRIGHT\n";
-	  }
+	  this->_axisJS_LS_Y();
 	else if (this->_currentX == XBoxAxis::LEFT && this->_valueX < -5000)
-	  {
-	    this->_axisJS_LS_Y();
-	    // if (this->_currentY == XBoxAxis::UP)
-	    //   std::cout << "UPLEFT\n";
-	    // else if (this->_currentY == XBoxAxis::DOWN)
-	    //   std::cout << "DOWNLEFT\n";
-	  }
-	else if (this->_currentX > -2000 && this->_currentX < 2000)
-	  {
-	    exit(1);
-	    if (this->_currentY < -28000)
-	      std::cout << "UP\n";
-	    else if (this->_currentY > 28000)
-	      std::cout << "DOWN\n";
-
-	  }
-	// if (this->_valueY > 5000)
-	//   std::cout << "DOWN\n";
-	// else if (this->_valueY < -5000)
-	//   std::cout << "UP\n";
-
-
-
-	// if (this->_valueX > 5000 && this->_valueY < -5000)
-	//   std::cout <<
-	// else if (this->_valueX > 5000 && this->_valueY < 5000)
-	//   std::cout << "PUSH BITCH\n";
-
-
+	  this->_axisJS_LS_Y();
       }
 
       void	XBoxController::_makeEventMove(Event::EventDirection::eEventDirection dir, float angle)
