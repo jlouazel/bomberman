@@ -17,7 +17,7 @@ namespace BomberMan
 	  // Vector3f      vectorRotation(0.0, 0.0, 0.0);
 	  IOnglet       *newOnglet;
 
-	  this->_core = new Engine::Core;
+	  this->_core = Engine::Core::getCore();
 
 	  window_.setWidth(WIDTH);
 	  window_.setHeight(HEIGHT);

@@ -15,12 +15,18 @@ namespace BomberMan
     class Core
     {
     private:
-      Field::Manager * _manager;
+      Core();
+      ~Core();
+
+    private:
+      static Core*	_core;
+
+      Field::Manager*	_manager;
 
 
     public:
-      Core();
-      ~Core();
+      static Core*	getCore();
+      static void	deleteCore();
 
       void	update();
     };
