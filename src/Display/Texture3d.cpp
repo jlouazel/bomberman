@@ -30,9 +30,13 @@ namespace BomberMan
 	this->model_ = gdl::Model::load(this->stringTexture_);
       }
 
-      void	Texture3d::update(gdl::GameClock const & gameClock, gdl::Input &)
+      void	Texture3d::update(gdl::GameClock const & gameClock, gdl::Input &input)
       {
 	this->model_.update(gameClock);
+
+
+	Input::Controller::KeyBoardManager::treatInput(input);
+
 
 	const Event::IEvent* event = Event::EventManager::getEvent();
 	if (event != NULL)
