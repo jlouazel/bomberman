@@ -38,18 +38,19 @@ namespace BomberMan
 	if (event != NULL)
 	  {
 	    const Event::Move *move = (const Event::Move *)event;
-	    std::cout << "Angle:" << move->getAngle() << std::endl;
-	    float	angle =  (move->getAngle() + 270) % 360;	 
+	    // std::cout << "Angle:" << move->getAngle() << std::endl;
+	    float	angle =  (move->getAngle() + 270) % 360;
 	    float	x = cosf(angle * 3.14159265359 / 180) * 10;
 	    float	z = sinf(angle * 3.14159265359 / 180) * 10;
-   
-	    std::cout << "angle : " << angle << std::endl;
+
+	    //std::cout << "angle : " << angle << std::endl;
 
 	    this->position_.setX(this->position_.getX() + x);
 	    this->position_.setZ(this->position_.getZ() + z);
 	    this->rotation_.setY((float)-((int)(angle + 270) % 360));
-	    this->info();
+	    //this->info();
 	    this->play("Take 001", 1);
+	    delete move;
 	  }
       }
 
