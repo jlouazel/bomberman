@@ -28,19 +28,26 @@ namespace BomberMan
 
         void    Empty::explode(int damages, eDirection direction)
         {
-            Manager *	field;
-            int	x;
-            int	y;
+            Manager *					field;
+            unsigned int				x;
+            unsigned int				y;
+            std::list<IGameComponent *>	objects;
 
+            field = Field::Manager::getInstance();
             x = static_cast<int>(this->_x);
             y = static_cast<int>(this->_y);
-            // recup item list en map[x][y]
-            // si items > 0
-            // traitement specifique
-
-            // si 0 items
-            damages--;
-            // propagation
+            objects = field->get(x, y);
+            if (objects.size() > 1)
+            {
+                // traitement specifique
+                // boucle obj
+                // si != Empty -> explode
+            }
+            else
+            {
+                damages--;
+                //propagation
+            }
         }
     }
 }
