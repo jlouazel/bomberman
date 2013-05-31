@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sun May 19 00:17:06 2013 julien fortin
-// Last update Thu May 30 21:41:09 2013 julien fortin
+// Last update Thu May 30 23:52:17 2013 julien fortin
 //
 
 #include	<string>
@@ -20,6 +20,7 @@
 #include	"Move.hh"
 #include	"Fd.hh"
 
+#include	<stdlib.h>
 #include	<iostream>
 
 namespace BomberMan
@@ -297,6 +298,15 @@ namespace BomberMan
 	    //   std::cout << "UPLEFT\n";
 	    // else if (this->_currentY == XBoxAxis::DOWN)
 	    //   std::cout << "DOWNLEFT\n";
+	  }
+	else if (this->_currentX > -2000 && this->_currentX < 2000)
+	  {
+	    exit(1);
+	    if (this->_currentY < -28000)
+	      std::cout << "UP\n";
+	    else if (this->_currentY > 28000)
+	      std::cout << "DOWN\n";
+
 	  }
 	// if (this->_valueY > 5000)
 	//   std::cout << "DOWN\n";
