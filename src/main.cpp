@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 01:21:17 2013 julien fortin
-// Last update Sat Jun  1 16:34:19 2013 julien fortin
+// Last update Sat Jun  1 18:09:20 2013 julien fortin
 //
 
 #include	<iostream>
@@ -20,6 +20,6 @@ int	main()
     }
   catch (...)
     {
-      std::cerr << "Ema Watson occured." << std::endl;
+      std::cerr << "An `Emma Watson` occured." << std::endl;
     }
 }

@@ -43,6 +43,8 @@ SRCS_DATA	= $(SRC_DIR)$(DATAFORMAT)ADataFormat.cpp \
 		$(SRC_DIR)$(DATAFORMAT)Xml.cpp \
 
 SRCS_DISPLAY	= $(SRC_DIR)$(DISPLAY)AAnimation.cpp \
+		$(SRC_DIR)$(DISPLAY)MenuManager.cpp \
+		$(SRC_DIR)$(DISPLAY)MainMenu.cpp \
 		$(SRC_DIR)$(DISPLAY)Game.cpp \
 		$(SRC_DIR)$(DISPLAY)AObject.cpp \
 		$(SRC_DIR)$(DISPLAY)Menu.cpp \

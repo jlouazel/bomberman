@@ -5,13 +5,15 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 01:48:53 2013 julien fortin
-// Last update Sat Jun  1 17:57:49 2013 julien fortin
+// Last update Sat Jun  1 22:32:16 2013 julien fortin
 //
 
-#include	<exception>
 #include	"EventManager.hh"
 #include	"InputManager.hh"
+#include	"MenuManager.hh"
 #include	"BomberMan.hh"
+#include	"EndOfBomberMan.hh"
+
 #include	<iostream>
 
 namespace BomberMan
@@ -23,7 +25,7 @@ namespace BomberMan
     if (!BomberMan::_bomberMan)
       BomberMan::_bomberMan = new BomberMan;
     if (!BomberMan::_bomberMan)
-      throw std::exception(); //
+      throw EndOfBomberMan("BomberMan", "getBomberMan", "NULL pointer");
     return BomberMan::_bomberMan;
   }
 
@@ -73,8 +75,7 @@ namespace BomberMan
 
   void	BomberMan::_initializeInput() const
   {
-    Input::InputManager::getInputManager();
-    Input::InputManager::init();
+    Input::InputManager::getInputManager()->init();
   }
 
   void	BomberMan::_initializeEvent() const
@@ -84,11 +85,13 @@ namespace BomberMan
 
   void	BomberMan::_initializeMenu() const
   {
-    //Menu::MenuManager::getMenuManager();
+    Display::MenuManager::getMenuManager();
   }
 
   void	BomberMan::update(void)
   {
+    // transformer this->input_ en EVENT;
+
     if (this->_intro)
       this->_updateIntro();
     else
@@ -103,22 +106,15 @@ namespace BomberMan
   void	BomberMan::_updateIntro()
   {
     std::cout << "UPDATE INTRO\n";
-
-    // Condition Intro fini
-    {
-      //this->_intro = false;
-
-      // Lancer le menu d'accueil
-      {
-
-      }
-    }
+    this->_intro = false;
+    this->_menu = true;
+    Display::MenuManager::getMenuManager()->menu(Display::Menu::MAIN);
   }
 
   void	BomberMan::_updateMenu()
   {
     std::cout << "UPDATE MENU\n";
-    //Menu::MenuManager::update();
+    Display::MenuManager::getMenuManager()->update();
   }
 
   void	BomberMan::_updateGame()
@@ -147,6 +143,7 @@ namespace BomberMan
 
   void	BomberMan::_drawMenu() const
   {
+    Display::MenuManager::getMenuManager()->draw();
   }
 
   void	BomberMan::_drawGame() const
@@ -157,5 +154,6 @@ namespace BomberMan
   {
     Input::InputManager::deleteInputManager();
     Event::EventManager::deleteEventManager();
+    Display::MenuManager::deleteMenuManager();
   }
 }

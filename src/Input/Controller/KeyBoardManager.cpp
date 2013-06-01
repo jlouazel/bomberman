@@ -5,14 +5,12 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 21 20:26:12 2013 julien fortin
-// Last update Fri May 31 16:59:44 2013 julien fortin
+// Last update Sat Jun  1 22:21:22 2013 julien fortin
 //
-
-//#include	<GL/glew.h>
-#include	<GL/glut.h>
 
 #include	"EventManager.hh"
 #include	"KeyBoardManager.hh"
+#include	"EndOfBomberMan.hh"
 
 namespace BomberMan
 {
@@ -26,6 +24,8 @@ namespace BomberMan
       {
 	if (!KeyBoardManager::_keyboardManager)
 	  KeyBoardManager::_keyboardManager = new KeyBoardManager();
+	if (!KeyBoardManager::_keyboardManager)
+	  throw EndOfBomberMan("KeyBoardManager", "getKeyBoardManager", "NULL pointer");
 	return KeyBoardManager::_keyboardManager;
       }
 
@@ -37,9 +37,6 @@ namespace BomberMan
 
       KeyBoardManager::KeyBoardManager()
       {
-	// glutKeyboardFunc(&KeyBoardManager::keyPressed);
-	// glutSpecialFunc(&KeyBoardManager::specialKeyPressed);
-	// glutMouseFunc(&KeyBoardManager::onMouseClick);
       }
 
       KeyBoardManager::~KeyBoardManager()

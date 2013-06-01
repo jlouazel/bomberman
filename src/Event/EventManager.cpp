@@ -1,8 +1,19 @@
+//
+// EventManager.cpp for bomberman in /home/fortin_j/tek2/projects/bomberman
+//
+// Made by julien fortin
+// Login   <fortin_j@epitech.net>
+//
+// Started on  Sat Jun  1 22:23:19 2013 julien fortin
+// Last update Sat Jun  1 22:25:08 2013 julien fortin
+//
+
 #include	<algorithm>
 #include	"IEvent.hh"
 #include	"UnixMutex.hh"
 #include	"EventManager.hh"
 #include	"Move.hh"
+#include	"EndOfBomberMan.hh"
 
 #include	<iostream>
 
@@ -14,9 +25,11 @@ namespace BomberMan
 
     EventManager*	EventManager::getEventManager()
     {
-      if (!_eventManager)
+      if (!EventManager::_eventManager)
 	_eventManager = new EventManager();
-      return _eventManager;
+      if (!EventManager::_eventManager)
+	throw EndOfBomberMan("EventManager", "getEventManager", "NULL pointer");
+      return EventManager::_eventManager;
     }
 
     void		EventManager::deleteEventManager()
@@ -104,8 +117,8 @@ namespace BomberMan
       EventManager::addEvent(new Move(context, direction, angle, x, y));
     }
 
-    void		EventManager::actionEvent(EventDirection::eEventDirection direction,
-						  float x, float y)
+    void		EventManager::actionEvent(EventDirection::eEventDirection,
+						  float, float)
     {
       EventContext::eEventContext	context; //Core::getContext();
 
@@ -117,13 +130,13 @@ namespace BomberMan
 	{ /* PENDANT UN CHARGEMENT */ }
     }
 
-    void		EventManager::gameEvent(EventDirection::eEventDirection direction,
-						EventType::eEventType type,
-						float x, float y)
+    void		EventManager::gameEvent(EventDirection::eEventDirection,
+						EventType::eEventType,
+						float, float)
     {
     }
 
-    void		EventManager::coreEvent(EventType::eEventType type)
+    void		EventManager::coreEvent(EventType::eEventType)
     {
     }
   }

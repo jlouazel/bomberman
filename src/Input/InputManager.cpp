@@ -1,3 +1,13 @@
+//
+// InputManager.cpp for bomberman in /home/fortin_j/tek2/projects/bomberman
+//
+// Made by julien fortin
+// Login   <fortin_j@epitech.net>
+//
+// Started on  Sat Jun  1 22:20:00 2013 julien fortin
+// Last update Sat Jun  1 22:20:16 2013 julien fortin
+//
+
 #include	<string>
 #include	<algorithm>
 #include	<functional>
@@ -8,10 +18,9 @@
 #include	"IController.hh"
 #include	"XBoxController.hh"
 #include	"KeyBoardManager.hh"
-#include	<exception>
-#include	<iostream>
+#include	"EndOfBomberMan.hh"
 
-#include	<unistd.h>
+#include	<iostream>
 
 namespace BomberMan
 {
@@ -23,6 +32,8 @@ namespace BomberMan
     {
       if (!InputManager::_inputManager)
 	InputManager::_inputManager = new InputManager();
+      if (!InputManager::_inputManager)
+        throw EndOfBomberMan("InputManager", "getInputManager", "NULL pointer");
       return InputManager::_inputManager;
     }
 
