@@ -5,12 +5,10 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 01:48:53 2013 julien fortin
-// Last update Sat Jun  1 17:33:29 2013 julien fortin
+// Last update Sat Jun  1 17:57:49 2013 julien fortin
 //
 
 #include	<exception>
-#include	<GL/gl.h>
-#include	<GL/glu.h>
 #include	"EventManager.hh"
 #include	"InputManager.hh"
 #include	"BomberMan.hh"
@@ -42,7 +40,6 @@ namespace BomberMan
     this->_game = false;
 
     this->_currentGame = 0;
-    this->_introAVI = 0;
   }
 
   BomberMan::~BomberMan()
@@ -72,8 +69,6 @@ namespace BomberMan
   void	BomberMan::_initializeIntro()
   {
     this->_intro = true;
-    if (!(this->_introAVI = cvCaptureFromAVI("./ressources/intro/introBreakingBad.avi")))
-      this->_intro = false;
   }
 
   void	BomberMan::_initializeInput() const
@@ -135,46 +130,28 @@ namespace BomberMan
 
   void	BomberMan::draw(void)
   {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-    glClearDepth(1.0f);
-
-    if (this->_intro && cvGrabFrame(this->_introAVI))
-      {
-	IplImage* image = cvRetrieveFrame(this->_introAVI);
-
-	cvCvtColor(image, image, CV_BGR2RGB);
-	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, image->width,
-			  image->height, GL_RGB, GL_UNSIGNED_BYTE, image->imageData);
-	glEnable(GL_TEXTURE_2D);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluOrtho2D(0, 1600, 800, 0);
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-
-	glBegin(GL_QUADS);
-	glTexCoord2f(0.0f, 1.0f);
-	glVertex2f(0.0f, 0.0f);
-	glTexCoord2f(1.0f, 1.0f);
-	glVertex2f(1600, 0.0f);
-	glTexCoord2f(1.0f, 0.0f);
-	glVertex2f(1600, 800);
-	glTexCoord2f(0.0f, 0.0f);
-	glVertex2f(0.0f, 800);
-	glEnd();
-      }
+    if (this->_intro)
+      this->_drawIntro();
     else
       {
-	// if (this->_intro)
-	//   {
-	//     cvReleaseCapture(&this->_introAVI);
-	//     this->_intro = false;
-	//   }
+	if (this->_menu)
+	  this->_drawMenu();
+	else if (this->_game)
+	  this->_drawGame();
       }
-    this->window_.display();
   }
 
+  void	BomberMan::_drawIntro() const
+  {
+  }
+
+  void	BomberMan::_drawMenu() const
+  {
+  }
+
+  void	BomberMan::_drawGame() const
+  {
+  }
 
   void	BomberMan::unload(void)
   {
