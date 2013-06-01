@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 01:48:53 2013 julien fortin
-// Last update Sat Jun  1 16:54:48 2013 julien fortin
+// Last update Sat Jun  1 17:03:25 2013 julien fortin
 //
 
 #include	<exception>
@@ -119,12 +119,13 @@ namespace BomberMan
 
   void	BomberMan::_updateMenu()
   {
-    std::cout << "UPDATE INTRO\n";
+    std::cout << "UPDATE MENU\n";
+    //Menu::MenuManager::update();
   }
 
   void	BomberMan::_updateGame()
   {
-    std::cout << "UPDATE INTRO\n";
+    std::cout << "UPDATE GAME\n";
     // if (this->_currentGame)
     //   {}
   }
