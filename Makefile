@@ -30,12 +30,10 @@ EVENT	    = Event/
 UNIX        = Unix/
 
 SRCS		= $(SRC_DIR)main.cpp \
-		$(SRC_DIR)BomberMan.cpp \
-		$(SRC_DIR)BomberGame.cpp \
-		$(SRC_DIR)EndOfBomberMan.cpp \
 
-SRCS_CORE	= $(SRC_DIR)$(CORE)CoreError.cpp \
-		$(SRC_DIR)$(CORE)Core.cpp \
+SRCS_CORE	= $(SRC_DIR)$(CORE)BomberMan.cpp \
+		$(SRC_DIR)$(CORE)BomberGame.cpp \
+		$(SRC_DIR)$(CORE)EndOfBomberMan.cpp \
 
 SRCS_DATA	= $(SRC_DIR)$(DATAFORMAT)ADataFormat.cpp \
 		$(SRC_DIR)$(DATAFORMAT)FormatError.cpp \

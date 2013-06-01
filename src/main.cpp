@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 01:21:17 2013 julien fortin
-// Last update Sat Jun  1 18:09:20 2013 julien fortin
+// Last update Sat Jun  1 23:32:24 2013 julien fortin
 //
 
 #include	<iostream>
@@ -16,7 +16,7 @@ int	main()
 {
   try
     {
-      BomberMan::BomberMan::getBomberMan()->run();
+      BomberMan::Core::BomberMan::getBomberMan()->run();
     }
   catch (...)
     {
