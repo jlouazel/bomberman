@@ -39,7 +39,6 @@ namespace BomberMan
             objects = field->get(x, y);
             if (objects.size() > 1)
             {
-                // traitement specifique
                 // boucle obj
                 // si != Empty -> explode
             }

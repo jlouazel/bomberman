@@ -42,7 +42,7 @@ namespace BomberMan
             if (this->_breakable == true)
             {
                 this->_pv -= damages;
-                // changement d'asset (breches?)
+                // changement d'asset
                 if (this->_pv < 0)
                 {
                     delete this;
