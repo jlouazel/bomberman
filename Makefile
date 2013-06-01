@@ -16,7 +16,7 @@ CPPFLAGS	+= -I./libgdl/include
 CPPFLAGS	+= -I./inc/Input/ -I./inc/Input/Controller/
 CPPFLAGS	+= -I./inc/Event/
 
-LDFLAGS		=  -lpthread -L./libgdl/lib -Wl,--rpath=./libgdl/lib -lgdl_gl -lGL -lGLU
+LDFLAGS		=  -lpthread -L./libgdl/lib -Wl,--rpath=./libgdl/lib -lgdl_gl -lGL -lGLU -lopencv_imgproc -lopencv_highgui
 
 SRC_DIR		= src/
 
@@ -29,7 +29,10 @@ CONTROLLER  = Controller/
 EVENT	    = Event/
 UNIX        = Unix/
 
-SRCS		= $(SRC_DIR)BomberMan.cpp \
+SRCS		= $(SRC_DIR)main.cpp \
+		$(SRC_DIR)BomberMan.cpp \
+		$(SRC_DIR)BomberGame.cpp \
+		$(SRC_DIR)EndOfBomberMan.cpp \
 
 SRCS_CORE	= $(SRC_DIR)$(CORE)CoreError.cpp \
 		$(SRC_DIR)$(CORE)Core.cpp \

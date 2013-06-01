@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sun May 19 00:17:06 2013 julien fortin
-// Last update Fri May 31 15:43:54 2013 julien fortin
+// Last update Fri May 31 16:54:34 2013 julien fortin
 //
 
 #include	<string>
@@ -184,7 +184,7 @@ namespace BomberMan
       void	XBoxController::_axisJS_LS_Y()
       {
 	this->_valueY = this->_data.value;
-	if (this->_data.value > 0)
+	if (this->_data.value > 2000)
 	  {
 	    if (this->_currentX == XBoxAxis::LEFT)
 	      this->_makeEventMove(Event::EventDirection::DOWN_LEFT,

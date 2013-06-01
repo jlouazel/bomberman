@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 21 20:23:08 2013 julien fortin
-// Last update Thu May 30 18:43:26 2013 Jean-Baptiste Louazel
+// Last update Sat Jun  1 02:35:26 2013 julien fortin
 //
 
 #ifndef	__KEYBOARDMANAGER_HH__
@@ -13,32 +13,29 @@
 
 namespace BomberMan
 {
-    namespace Input
+  namespace Input
+  {
+    namespace Controller
     {
-        namespace Controller
-        {
-            class KeyBoardManager
-            {
-            private:
-                KeyBoardManager(KeyBoardManager const&);
-                KeyBoardManager	&operator=(KeyBoardManager const&);
-                
-            private:
-                static KeyBoardManager *	_keyboardManager;
-                
-            public:
-                ~KeyBoardManager();
-                KeyBoardManager();
-                
-                static KeyBoardManager *	getKeyBoardManager();
-                static void					deleteKeyBoardManager();
-                
-                static void		keyPressed(unsigned char, int, int);
-                static void		specialKeyPressed(int, int, int);
-                static void		onMouseClick(int, int, int, int);
-            };
-        }
+      class KeyBoardManager
+      {
+      private:
+	KeyBoardManager(KeyBoardManager const&);
+	KeyBoardManager	&operator=(KeyBoardManager const&);
+
+      private:
+	static KeyBoardManager *	_keyboardManager;
+
+      public:
+	~KeyBoardManager();
+	KeyBoardManager();
+
+	static KeyBoardManager*	getKeyBoardManager();
+	static void		deleteKeyBoardManager();
+	//static void		treatInput(const gl::Input&);
+      };
     }
+  }
 }
 
 #else
