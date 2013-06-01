@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 21 20:23:08 2013 julien fortin
-// Last update Fri May 31 17:34:49 2013 julien fortin
+// Last update Sat Jun  1 02:35:26 2013 julien fortin
 //
 
 #ifndef	__KEYBOARDMANAGER_HH__
@@ -32,7 +32,7 @@ namespace BomberMan
 
 	static KeyBoardManager*	getKeyBoardManager();
 	static void		deleteKeyBoardManager();
-	static void		treatInput(const gl::Input&);
+	//static void		treatInput(const gl::Input&);
       };
     }
   }

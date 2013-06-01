@@ -35,7 +35,7 @@ namespace BomberMan
 	this->model_.update(gameClock);
 
 
-	Input::Controller::KeyBoardManager::treatInput(input);
+	//Input::Controller::KeyBoardManager::treatInput(input);
 
 
 	const Event::IEvent* event = Event::EventManager::getEvent();

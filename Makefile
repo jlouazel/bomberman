@@ -29,7 +29,10 @@ CONTROLLER  = Controller/
 EVENT	    = Event/
 UNIX        = Unix/
 
-SRCS		= $(SRC_DIR)BomberMan.cpp \
+SRCS		= $(SRC_DIR)main.cpp \
+		$(SRC_DIR)BomberMan.cpp \
+		$(SRC_DIR)BomberGame.cpp \
+		$(SRC_DIR)EndOfBomberMan.cpp \
 
 SRCS_CORE	= $(SRC_DIR)$(CORE)CoreError.cpp \
 		$(SRC_DIR)$(CORE)Core.cpp \
