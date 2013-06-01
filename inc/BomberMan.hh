@@ -5,12 +5,14 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 01:44:06 2013 julien fortin
-// Last update Sat Jun  1 16:54:33 2013 julien fortin
+// Last update Sat Jun  1 17:23:10 2013 julien fortin
 //
 
 #ifndef	__BOMBERMAN_HH__
 #define	__BOMBERMAN_HH__
 
+#include	<opencv/cv.h>
+#include	<opencv/highgui.h>
 #include	<Game.hpp>
 #include	"BomberGame.hh"
 
@@ -35,7 +37,9 @@ namespace BomberMan
     bool	_game;
 
   private:
-    BomberGame*			_currentGame;
+    CvCapture*		_introAVI;
+    BomberGame*		_currentGame;
+
     //std::map<IPlayer*, IController*>	_playerController;
 
   private:

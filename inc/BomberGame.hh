@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 02:46:34 2013 julien fortin
-// Last update Sat Jun  1 02:49:56 2013 julien fortin
+// Last update Sat Jun  1 17:37:40 2013 julien fortin
 //
 
 #ifndef	__BOMBERGAME_HH__
@@ -24,7 +24,7 @@ namespace BomberMan
   protected:
   public:
     ~BomberGame();
-    BomberGame();
+    BomberGame(/*vector de player*/);
   };
 }
 
