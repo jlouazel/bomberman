@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 22:23:19 2013 julien fortin
-// Last update Sat Jun  1 22:25:08 2013 julien fortin
+// Last update Sun Jun  2 20:26:13 2013 julien fortin
 //
 
 #include	<algorithm>
@@ -28,7 +28,7 @@ namespace BomberMan
       if (!EventManager::_eventManager)
 	_eventManager = new EventManager();
       if (!EventManager::_eventManager)
-	throw EndOfBomberMan("EventManager", "getEventManager", "NULL pointer");
+	throw Core::EndOfBomberMan("EventManager", "getEventManager", "NULL pointer");
       return EventManager::_eventManager;
     }
 

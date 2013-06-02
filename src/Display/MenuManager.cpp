@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 18:26:57 2013 julien fortin
-// Last update Sat Jun  1 22:15:41 2013 julien fortin
+// Last update Sun Jun  2 20:17:06 2013 julien fortin
 //
 
 #include	"Menus.hh"
@@ -23,7 +23,7 @@ namespace BomberMan
       if (!MenuManager::_menuManager)
 	MenuManager::_menuManager = new MenuManager;
       if (!MenuManager::_menuManager)
-	throw EndOfBomberMan("MenuManager", "getMenuManager", "NULL pointer");
+	throw Core::EndOfBomberMan("MenuManager", "getMenuManager", "NULL pointer");
       return MenuManager::_menuManager;
     }
 

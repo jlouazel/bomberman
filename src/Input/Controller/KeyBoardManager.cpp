@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 21 20:26:12 2013 julien fortin
-// Last update Sat Jun  1 22:21:22 2013 julien fortin
+// Last update Sun Jun  2 20:26:30 2013 julien fortin
 //
 
 #include	"EventManager.hh"
@@ -25,7 +25,7 @@ namespace BomberMan
 	if (!KeyBoardManager::_keyboardManager)
 	  KeyBoardManager::_keyboardManager = new KeyBoardManager();
 	if (!KeyBoardManager::_keyboardManager)
-	  throw EndOfBomberMan("KeyBoardManager", "getKeyBoardManager", "NULL pointer");
+	  throw Core::EndOfBomberMan("KeyBoardManager", "getKeyBoardManager", "NULL pointer");
 	return KeyBoardManager::_keyboardManager;
       }
 

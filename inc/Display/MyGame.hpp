@@ -23,7 +23,6 @@
 #include "Camera.hpp"
 #include "Vector.hpp"
 #include "Menu.hpp"
-#include "Core.hh"
 
 #define WIDTH 1920
 #define HEIGHT 1080
@@ -38,7 +37,7 @@ namespace BomberMan
       std::list<AObject*>	objects_;
       Camera			camera_;
       Menu			menu_;
-      Engine::Core *		_core;
+      //Engine::Core *		_core;
 
     public:
       MyGame() : ::gdl::Game(){}

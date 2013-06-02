@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 22:20:00 2013 julien fortin
-// Last update Sat Jun  1 22:20:16 2013 julien fortin
+// Last update Sun Jun  2 20:26:02 2013 julien fortin
 //
 
 #include	<string>
@@ -33,7 +33,7 @@ namespace BomberMan
       if (!InputManager::_inputManager)
 	InputManager::_inputManager = new InputManager();
       if (!InputManager::_inputManager)
-        throw EndOfBomberMan("InputManager", "getInputManager", "NULL pointer");
+        throw Core::EndOfBomberMan("InputManager", "getInputManager", "NULL pointer");
       return InputManager::_inputManager;
     }
 
