@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 01:48:53 2013 julien fortin
-// Last update Mon Jun  3 13:45:53 2013 Jean-Baptiste Louazel
+// Last update Mon Jun  3 18:09:13 2013 Happy
 //
 
 #include	<algorithm>
@@ -74,6 +74,7 @@ namespace BomberMan
       this->window_.setHeight(BOMBER_HEIGHT);
       this->window_.setWidth(BOMBER_WIDTH);
       this->window_.create();
+      this->camera_.initialize();
     }
 
     void	BomberMan::_initializeResources() const
@@ -134,15 +135,25 @@ namespace BomberMan
     {
       if (this->_currentGame)
         {
+	  // this->_currentGame->update();
+	  this->_currentGame->getManager()->Field::Manager::get(0, 0).front()->getAsset()->update(gameClock_);
 	}
     }
 
     void	BomberMan::draw(void)
     {
+      camera_.update(gameClock_, input_);
       if (this->_intro)
 	this->_drawIntro();
       else
 	{
+	  if (this->_menu || this->_game)
+	    {
+	      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	      glClearColor(0.74f, 0.84f, 95.0f, 1.0f);
+	      glClearDepth(1.0f);
+	      glMatrixMode(GL_MODELVIEW);
+	    }
 	  if (this->_menu)
 	    this->_drawMenu();
 	  else if (this->_game)
@@ -163,16 +174,22 @@ namespace BomberMan
     {
       if (dynamic_cast<Field::Empty *>(comp) == comp)
 	{
-	  std::cout << "Empty (" << comp->getX() << ";" << comp->getY() << ")" << std::endl;
+	  comp->getAsset()->draw();
+	  // std::cout << "Empty (" << comp->getX() << ";" << comp->getY() << ")" << std::endl;
+	  // std::cout << "-------> " << comp->getAsset()->getPosition().getX() << std::endl;
+	  // std::cout << "-------> " << comp->getAsset()->getPosition().getY() << std::endl;
+	  // std::cout << "-------> " << comp->getAsset()->getPosition().getZ() << std::endl;
 	}
     }
 
     void	BomberMan::_drawGame() const
     {
-      for (unsigned int y = 0; y != this->_currentGame->getManager()->Field::Manager::getHeight(); y++)
-	for (unsigned int x = 0; x != this->_currentGame->getManager()->Field::Manager::getWidth(); x++)
-	  std::for_each(this->_currentGame->getManager()->Field::Manager::get(x, y).begin(), this->_currentGame->getManager()->Field::Manager::get(x, y).end(), affObjs);
-      std::cout << "--DRAW GAME--" << std::endl;
+      // std::cout << "--START DRAW GAME--" << std::endl;
+      // for (unsigned int y = 0; y != this->_currentGame->getManager()->Field::Manager::getHeight(); y++)
+      // 	for (unsigned int x = 0; x != this->_currentGame->getManager()->Field::Manager::getWidth(); x++)
+      // 	  std::for_each(this->_currentGame->getManager()->Field::Manager::get(x, y).begin(), this->_currentGame->getManager()->Field::Manager::get(x, y).end(), affObjs);
+      this->_currentGame->getManager()->Field::Manager::get(0, 0).front()->getAsset()->draw();
+      // std::cout << "--DRAW GAME--" << std::endl;
     }
 
     void	BomberMan::unload(void)

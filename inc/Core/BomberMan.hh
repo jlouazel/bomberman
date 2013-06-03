@@ -5,13 +5,14 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 01:44:06 2013 julien fortin
-// Last update Mon Jun  3 11:28:21 2013 Jean-Baptiste Louazel
+// Last update Mon Jun  3 16:34:30 2013 Happy
 //
 
 #ifndef	__BOMBERMAN_HH__
 #define	__BOMBERMAN_HH__
 
 #include	<Game.hpp>
+#include	<Camera.hpp>
 #include	"BomberGame.hh"
 
 namespace BomberMan
@@ -30,6 +31,7 @@ namespace BomberMan
 
     private:
       static BomberMan*	_bomberMan;
+      Display::Camera                camera_;
 
     private:
       bool	_intro;

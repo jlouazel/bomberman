@@ -3,6 +3,7 @@
 #include <GL/glu.h>
 #include "MyGame.hpp"
 #include "Camera.hpp"
+#include <iostream>
 
 namespace BomberMan
 {
@@ -20,6 +21,7 @@ namespace BomberMan
         {
             glMatrixMode(GL_PROJECTION);
             glLoadIdentity();
+	    std::cout << "ANGLE : " << this->angle_ << std::endl;
             gluPerspective((this->angle_ * 180.0) / 3.14159265359, WIDTH/HEIGHT, 1.0f, 10000.0f);
             gluLookAt(position_.getX(), position_.getY(), position_.getZ(),
                       this->look_.getX(), this->look_.getY(), this->look_.getZ(),

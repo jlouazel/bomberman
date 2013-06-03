@@ -12,6 +12,7 @@
 #include "IGameComponent.hh"
 #include "FManager.hh"
 #include "Empty.hh"
+#include "Resources.hh"
 
 namespace BomberMan
 {
@@ -27,7 +28,9 @@ namespace BomberMan
 
       for (it = this->_map.begin(); it != this->_map.end(); it++)
 	{
-	  // (*it).push_front(new Empty(i / width, i % width));
+	  Display::Resources *Resources = Display::Resources::getResources();
+	  if (Resources)
+	    (*it).push_front(new Empty(i / width, i % width, Resources->getAsset("walterWalking"), 0, 0));
 	  i++;
 	}
     }

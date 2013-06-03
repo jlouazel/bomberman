@@ -6,41 +6,44 @@
 //  Copyright (c) 2013 manour_m. All rights reserved.
 //
 
+#include "Vector.hpp"
 #include "Empty.hh"
 #include "FManager.hh"
 
 namespace BomberMan
 {
-    namespace Field
+  namespace Field
     {
-        Empty::Empty(float x, float y, BomberMan::Display::AObject * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim)
-        {
-            this->_x = x;
-            this->_y = y;
-            this->_asset = asset;
-            this->_sound = sound;
-            this->_animation = anim;
-        }
+      Empty::Empty(float x, float y, BomberMan::Display::AObject * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim)
+      {
+	this->_x = x;
+	this->_y = y;
+	// Display::Vector3f newVec(x, y, 0);
+	this->_asset = asset;
+	// this->_asset->setPosition(newVec);
+	this->_sound = sound;
+	this->_animation = anim;
+      }
 
-        Empty::~Empty()
-        {
-        }
+      Empty::~Empty()
+      {
+      }
 
-        void    Empty::explode(int damages, eDirection direction)
-        {
-            Manager *	field;
-            int	x;
-            int	y;
+      void    Empty::explode(int damages, eDirection direction)
+      {
+	Manager *	field;
+	int	x;
+	int	y;
 
-            x = static_cast<int>(this->_x);
-            y = static_cast<int>(this->_y);
-            // recup item list en map[x][y]
-            // si items > 0
-            // traitement specifique
+	x = static_cast<int>(this->_x);
+	y = static_cast<int>(this->_y);
+	// recup item list en map[x][y]
+	// si items > 0
+	// traitement specifique
 
-            // si 0 items
-            damages--;
-            // propagation
-        }
-    }
+	// si 0 items
+	damages--;
+	// propagation
+      }
+  }
 }
