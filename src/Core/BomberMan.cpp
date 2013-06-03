@@ -5,14 +5,14 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 01:48:53 2013 julien fortin
-// Last update Mon Jun  3 13:45:53 2013 Jean-Baptiste Louazel
+// Last update Mon Jun  3 15:25:53 2013 julien fortin
 //
 
 #include	<algorithm>
-
 #include	"IGameComponent.hh"
 #include	"EventManager.hh"
 #include	"InputManager.hh"
+#include	"KeyBoardManager.hh"
 #include	"MenuManager.hh"
 #include	"Resources.hh"
 #include	"BomberMan.hh"
@@ -103,8 +103,7 @@ namespace BomberMan
 
     void	BomberMan::update(void)
     {
-      // transformer this->input_ en EVENT;
-
+      Input::Controller::KeyBoardManager::getKeyBoardManager()->treatInput(this->input_);
       if (this->_intro)
 	this->_updateIntro();
       else
@@ -169,6 +168,8 @@ namespace BomberMan
 
     void	BomberMan::_drawGame() const
     {
+      //this->_currentGame->draw();
+
       for (unsigned int y = 0; y != this->_currentGame->getManager()->Field::Manager::getHeight(); y++)
 	for (unsigned int x = 0; x != this->_currentGame->getManager()->Field::Manager::getWidth(); x++)
 	  std::for_each(this->_currentGame->getManager()->Field::Manager::get(x, y).begin(), this->_currentGame->getManager()->Field::Manager::get(x, y).end(), affObjs);
