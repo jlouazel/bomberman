@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 02:46:34 2013 julien fortin
-// Last update Mon Jun  3 11:51:07 2013 Jean-Baptiste Louazel
+// Last update Mon Jun  3 12:07:38 2013 Jean-Baptiste Louazel
 //
 
 #ifndef	__BOMBERGAME_HH__
@@ -31,6 +31,8 @@ namespace BomberMan
       public:
       ~BomberGame();
       BomberGame(/*vector de player*/);
+
+      Field::Manager * getManager() const;
     };
   }
 }

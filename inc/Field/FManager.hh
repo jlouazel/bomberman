@@ -26,11 +26,11 @@ namespace BomberMan
             ~Manager();
 
         public:
-            std::list<IGameComponent *> &	get(unsigned int, unsigned int);
-            unsigned int					getWidth() const;
-            unsigned int					getHeight() const;
-            static Manager *    getInstance();
-            static void			initInstance(unsigned int width, unsigned int height);
+	  std::list<IGameComponent *> &	get(unsigned int, unsigned int);
+	  unsigned int				       getWidth() const;
+	  unsigned int					getHeight() const;
+	  static Manager *    getInstance();
+	  static void			initInstance(unsigned int width, unsigned int height);
         };
     }
 }
