@@ -5,12 +5,14 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 02:46:34 2013 julien fortin
-// Last update Mon Jun  3 11:22:19 2013 Jean-Baptiste Louazel
+// Last update Mon Jun  3 11:51:07 2013 Jean-Baptiste Louazel
 //
 
 #ifndef	__BOMBERGAME_HH__
 #define	__BOMBERGAME_HH__
 
+#include <list>
+#include "Player.hh"
 #include "FManager.hh"
 
 namespace BomberMan
@@ -20,9 +22,9 @@ namespace BomberMan
     class BomberGame
     {
     private:
-      Field::Manager *	_manager;
+      Field::Manager *			_manager;
+      std::list<Field::Player *>	_players;
       // Object score
-      // playerList = Si on veut jouer en solo ou a plusieurs
       // camera + bordel opengl
 
       protected:

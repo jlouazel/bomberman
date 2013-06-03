@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 01:48:53 2013 julien fortin
-// Last update Mon Jun  3 11:32:28 2013 Jean-Baptiste Louazel
+// Last update Mon Jun  3 11:52:35 2013 Jean-Baptiste Louazel
 //
 
 #include	"EventManager.hh"
@@ -42,7 +42,7 @@ namespace BomberMan
     {
       this->_intro = false;
       this->_menu = false;
-      this->_game = false;
+      this->_game = true;
 
       this->_currentGame = new BomberGame;
     }
@@ -128,9 +128,9 @@ namespace BomberMan
 
     void	BomberMan::_updateGame()
     {
-      std::cout << "UPDATE GAME\n";
-      // if (this->_currentGame)
-      //   {}
+      if (this->_currentGame)
+        {
+	}
     }
 
     void	BomberMan::draw(void)
@@ -157,6 +157,7 @@ namespace BomberMan
 
     void	BomberMan::_drawGame() const
     {
+      std::cout << "DRAW GAME" << std::endl;
     }
 
     void	BomberMan::unload(void)
