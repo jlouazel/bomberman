@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 01:44:06 2013 julien fortin
-// Last update Sat Jun  1 23:19:56 2013 julien fortin
+// Last update Mon Jun  3 01:39:39 2013 julien fortin
 //
 
 #ifndef	__BOMBERMAN_HH__
@@ -18,7 +18,7 @@ namespace BomberMan
 {
   namespace Core
   {
-    const	int	BOMBER_WIDTH	= 1920;
+    const int	BOMBER_WIDTH	= 1920;
     const int	BOMBER_HEIGHT	= 1080;
 
     class BomberMan : public gdl::Game
@@ -47,6 +47,7 @@ namespace BomberMan
       void	_updateGame();
 
       void	_initializeWindow();
+      void	_initializeResources() const;
       void	_initializeIntro();
       void	_initializeInput() const;
       void	_initializeEvent() const;

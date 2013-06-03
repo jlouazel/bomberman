@@ -5,12 +5,13 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 01:48:53 2013 julien fortin
-// Last update Sat Jun  1 23:34:58 2013 julien fortin
+// Last update Mon Jun  3 01:41:22 2013 julien fortin
 //
 
 #include	"EventManager.hh"
 #include	"InputManager.hh"
 #include	"MenuManager.hh"
+#include	"Resources.hh"
 #include	"BomberMan.hh"
 #include	"EndOfBomberMan.hh"
 
@@ -54,6 +55,7 @@ namespace BomberMan
     {
       this->_initializeWindow();
       this->_initializeIntro();
+      this->_initializeResources();
       this->_initializeInput();
       this->_initializeEvent();
       this->_initializeMenu();
@@ -68,6 +70,11 @@ namespace BomberMan
       this->window_.setHeight(BOMBER_HEIGHT);
       this->window_.setWidth(BOMBER_WIDTH);
       this->window_.create();
+    }
+
+    void	BomberMan::_initializeResources() const
+    {
+      Display::Resources::getResources();
     }
 
     void	BomberMan::_initializeIntro()
@@ -157,6 +164,7 @@ namespace BomberMan
       Input::InputManager::deleteInputManager();
       Event::EventManager::deleteEventManager();
       Display::MenuManager::deleteMenuManager();
+      Display::Resources::deleteResources();
     }
   }
 }

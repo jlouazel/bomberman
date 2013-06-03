@@ -5,9 +5,10 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 21:25:38 2013 julien fortin
-// Last update Sat Jun  1 22:35:11 2013 julien fortin
+// Last update Mon Jun  3 01:59:54 2013 julien fortin
 //
 
+#include	"Resources.hh"
 #include	"MainMenu.hh"
 
 namespace BomberMan
@@ -16,6 +17,7 @@ namespace BomberMan
   {
     MainMenu::MainMenu()
     {
+
     }
 
     MainMenu::~MainMenu()

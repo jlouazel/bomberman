@@ -40,8 +40,7 @@ SRCS_DATA	= $(SRC_DIR)$(DATAFORMAT)ADataFormat.cpp \
 		$(SRC_DIR)$(DATAFORMAT)Parser.cpp \
 		$(SRC_DIR)$(DATAFORMAT)Xml.cpp \
 
-SRCS_DISPLAY	= $(SRC_DIR)$(DISPLAY)AAnimation.cpp \
-		$(SRC_DIR)$(DISPLAY)MenuManager.cpp \
+SRCS_DISPLAY	= $(SRC_DIR)$(DISPLAY)MenuManager.cpp \
 		$(SRC_DIR)$(DISPLAY)MainMenu.cpp \
 		$(SRC_DIR)$(DISPLAY)AObject.cpp \
 		$(SRC_DIR)$(DISPLAY)Menu.cpp \
@@ -49,15 +48,9 @@ SRCS_DISPLAY	= $(SRC_DIR)$(DISPLAY)AAnimation.cpp \
 		$(SRC_DIR)$(DISPLAY)Texture2d.cpp \
 		$(SRC_DIR)$(DISPLAY)Texture3d.cpp \
 		$(SRC_DIR)$(DISPLAY)Vector.cpp \
-		$(SRC_DIR)$(DISPLAY)AAsset.cpp \
-		$(SRC_DIR)$(DISPLAY)APicture.cpp \
 		$(SRC_DIR)$(DISPLAY)ASound.cpp \
 		$(SRC_DIR)$(DISPLAY)DisplayError.cpp \
-		$(SRC_DIR)$(DISPLAY)GDLAnimation.cpp \
-		$(SRC_DIR)$(DISPLAY)GDLAsset.cpp \
 		$(SRC_DIR)$(DISPLAY)GDLSound.cpp \
-		$(SRC_DIR)$(DISPLAY)GDLPicture.cpp \
-		$(SRC_DIR)$(DISPLAY)Manager.cpp \
 		$(SRC_DIR)$(DISPLAY)Resources.cpp \
 		$(SRC_DIR)$(DISPLAY)Camera.cpp
 

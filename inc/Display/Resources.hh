@@ -12,32 +12,35 @@
 #include <map>
 #include <string>
 
-#include "IAnimation.hh"
-#include "IAsset.hh"
-#include "IPicture.hh"
+#include "AObject.hpp"
 #include "ISound.hh"
 
 namespace BomberMan
 {
-    namespace Display
+  namespace Display
+  {
+    class Resources
     {
-        class Ressources
-        {
-            std::map<std::string, IPicture *>	_pictures;
-            std::map<std::string, IAsset *>		_assets;
-            std::map<std::string, IAnimation *>	_animations;
-            std::map<std::string, ISound *>		_sounds;
-            
-        public:
-            Ressources();
-            ~Ressources();
-            
-            IPicture *		getPicture(const std::string &) const;
-            IAnimation *	getAnimation(const std::string &) const;
-            ISound *		getSound(const std::string &) const;
-            IAsset *		getAsset(const std::string &) const;
-        };
-    }
+    private:
+      Resources();
+      ~Resources();
+      Resources(Resources const&);
+      Resources	&operator=(Resources const&);
+
+    private:
+      static Resources*	_ressources;
+
+      std::map<std::string, AObject *>		_assets;
+      std::map<std::string, ISound *>		_sounds;
+
+    public:
+      ISound*		getSound(const std::string &);
+      AObject*		getAsset(const std::string &);
+
+      static Resources*	getResources();
+      static void	deleteResources();
+    };
+  }
 }
 
 #else
@@ -48,5 +51,4 @@ namespace BomberMan
     class Resources;
   }
 }
-
 #endif /* defined(__BomberMan__Resources__) */
