@@ -5,12 +5,15 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 21 20:26:12 2013 julien fortin
-// Last update Sun Jun  2 20:26:30 2013 julien fortin
+// Last update Mon Jun  3 17:43:33 2013 julien fortin
 //
 
 #include	"EventManager.hh"
 #include	"KeyBoardManager.hh"
 #include	"EndOfBomberMan.hh"
+
+#include	<iostream>
+#include <unistd.h>
 
 namespace BomberMan
 {
@@ -37,9 +40,92 @@ namespace BomberMan
 
       KeyBoardManager::KeyBoardManager()
       {
+	// BomberMan::getBomberMan()->getPlayer(0);
+	// BomberMan::getBomberMan()->getPlayer(1);
+
+	this->initMapping(true);
+
+	this->_keys[gdl::Keys::W] = &KeyBoardManager::_up;
+	this->_keys[gdl::Keys::A] = &KeyBoardManager::_left;
+	this->_keys[gdl::Keys::D] = &KeyBoardManager::_right;
+	this->_keys[gdl::Keys::S] = &KeyBoardManager::_down;
+	this->_keys[gdl::Keys::Space] = &KeyBoardManager::_action;
+
+	this->_keys[gdl::Keys::Z] = &KeyBoardManager::_up;
+	this->_keys[gdl::Keys::Q] = &KeyBoardManager::_left;
+
+
+	this->_keys[gdl::Keys::Up] = &KeyBoardManager::_up;
+	this->_keys[gdl::Keys::Left] = &KeyBoardManager::_left;
+	this->_keys[gdl::Keys::Right] = &KeyBoardManager::_right;
+	this->_keys[gdl::Keys::Down] = &KeyBoardManager::_down;
+	this->_keys[gdl::Keys::Return] = &KeyBoardManager::_action;
       }
 
       KeyBoardManager::~KeyBoardManager()
+      {
+      }
+
+      void	KeyBoardManager::initMapping(bool qwerty)
+      {
+	this->_mappingP2.push_back(gdl::Keys::Up);
+	this->_mappingP2.push_back(gdl::Keys::Left);
+	this->_mappingP2.push_back(gdl::Keys::Right);
+	this->_mappingP2.push_back(gdl::Keys::Down);
+	this->_mappingP2.push_back(gdl::Keys::Return);
+
+	this->_mappingP1.push_back(gdl::Keys::D);
+	this->_mappingP1.push_back(gdl::Keys::S);
+	this->_mappingP1.push_back(gdl::Keys::Space);
+	if (qwerty)
+	  {
+	    this->_mappingP1.push_back(gdl::Keys::W);
+	    this->_mappingP1.push_back(gdl::Keys::A);
+	  }
+	else
+	  {
+	    this->_mappingP1.push_back(gdl::Keys::Z);
+	    this->_mappingP1.push_back(gdl::Keys::Q);
+	  }
+      }
+
+      void	KeyBoardManager::_treatInputForPlayer(gdl::Input& input,
+						      const std::list<gdl::Keys::Key>& playerMapping)
+      {
+	for (std::list<gdl::Keys::Key>::const_iterator it = playerMapping.begin();
+	     it != playerMapping.end() ; ++it)
+	  {
+	    if (input.isKeyDown(*it))
+	      {
+		if (this->_keys.count(*it) > 0)
+		  (this->*(this->_keys[*it]))(0);
+	      }
+	  }
+      }
+
+      void	KeyBoardManager::treatInput(gdl::Input& input)
+      {
+	this->_treatInputForPlayer(input, this->_mappingP1);
+	this->_treatInputForPlayer(input, this->_mappingP2);
+      }
+
+      void	KeyBoardManager::_up(const Field::Player* const) const
+      {
+      }
+
+      void	KeyBoardManager::_left(const Field::Player* const) const
+      {
+      }
+
+      void	KeyBoardManager::_right(const Field::Player* const) const
+      {
+      }
+
+      void	KeyBoardManager::_down(const Field::Player* const) const
+      {
+      }
+
+      void	KeyBoardManager::_action(const Field::Player* const) const
       {
       }
     }

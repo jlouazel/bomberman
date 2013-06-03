@@ -5,14 +5,18 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 01:48:53 2013 julien fortin
+<<<<<<< HEAD
 // Last update Mon Jun  3 18:09:13 2013 Happy
+=======
+// Last update Mon Jun  3 15:25:53 2013 julien fortin
+>>>>>>> f5f7b220b34c7c13c072c936d2a7803cb4de0c19
 //
 
 #include	<algorithm>
-
 #include	"IGameComponent.hh"
 #include	"EventManager.hh"
 #include	"InputManager.hh"
+#include	"KeyBoardManager.hh"
 #include	"MenuManager.hh"
 #include	"Resources.hh"
 #include	"BomberMan.hh"
@@ -104,8 +108,7 @@ namespace BomberMan
 
     void	BomberMan::update(void)
     {
-      // transformer this->input_ en EVENT;
-
+      Input::Controller::KeyBoardManager::getKeyBoardManager()->treatInput(this->input_);
       if (this->_intro)
 	this->_updateIntro();
       else
@@ -184,12 +187,21 @@ namespace BomberMan
 
     void	BomberMan::_drawGame() const
     {
+<<<<<<< HEAD
       // std::cout << "--START DRAW GAME--" << std::endl;
       // for (unsigned int y = 0; y != this->_currentGame->getManager()->Field::Manager::getHeight(); y++)
       // 	for (unsigned int x = 0; x != this->_currentGame->getManager()->Field::Manager::getWidth(); x++)
       // 	  std::for_each(this->_currentGame->getManager()->Field::Manager::get(x, y).begin(), this->_currentGame->getManager()->Field::Manager::get(x, y).end(), affObjs);
       this->_currentGame->getManager()->Field::Manager::get(0, 0).front()->getAsset()->draw();
       // std::cout << "--DRAW GAME--" << std::endl;
+=======
+      //this->_currentGame->draw();
+
+      for (unsigned int y = 0; y != this->_currentGame->getManager()->Field::Manager::getHeight(); y++)
+	for (unsigned int x = 0; x != this->_currentGame->getManager()->Field::Manager::getWidth(); x++)
+	  std::for_each(this->_currentGame->getManager()->Field::Manager::get(x, y).begin(), this->_currentGame->getManager()->Field::Manager::get(x, y).end(), affObjs);
+      std::cout << "--DRAW GAME--" << std::endl;
+>>>>>>> f5f7b220b34c7c13c072c936d2a7803cb4de0c19
     }
 
     void	BomberMan::unload(void)
