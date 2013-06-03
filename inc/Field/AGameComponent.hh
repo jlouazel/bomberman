@@ -23,10 +23,10 @@ namespace BomberMan
             Display::IAsset *		_asset;
             Display::ISound *		_sound;
             Display::IAnimation *	_animation;
-            
+
         public:
             virtual ~AGameComponent(){}
-            
+
             virtual void					explode(int, eDirection) = 0;
             virtual float					getX() const;
             virtual void					setX(float);

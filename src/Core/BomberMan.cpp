@@ -5,15 +5,19 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 01:48:53 2013 julien fortin
-// Last update Mon Jun  3 11:52:35 2013 Jean-Baptiste Louazel
+// Last update Mon Jun  3 13:45:53 2013 Jean-Baptiste Louazel
 //
 
+#include	<algorithm>
+
+#include	"IGameComponent.hh"
 #include	"EventManager.hh"
 #include	"InputManager.hh"
 #include	"MenuManager.hh"
 #include	"Resources.hh"
 #include	"BomberMan.hh"
 #include	"EndOfBomberMan.hh"
+#include	"Empty.hh"
 
 #include	<iostream>
 
@@ -155,9 +159,20 @@ namespace BomberMan
       Display::MenuManager::getMenuManager()->draw();
     }
 
+    static void	affObjs(Field::IGameComponent * comp)
+    {
+      if (dynamic_cast<Field::Empty *>(comp) == comp)
+	{
+	  std::cout << "Empty (" << comp->getX() << ";" << comp->getY() << ")" << std::endl;
+	}
+    }
+
     void	BomberMan::_drawGame() const
     {
-      std::cout << "DRAW GAME" << std::endl;
+      for (unsigned int y = 0; y != this->_currentGame->getManager()->Field::Manager::getHeight(); y++)
+	for (unsigned int x = 0; x != this->_currentGame->getManager()->Field::Manager::getWidth(); x++)
+	  std::for_each(this->_currentGame->getManager()->Field::Manager::get(x, y).begin(), this->_currentGame->getManager()->Field::Manager::get(x, y).end(), affObjs);
+      std::cout << "--DRAW GAME--" << std::endl;
     }
 
     void	BomberMan::unload(void)
