@@ -41,14 +41,14 @@ namespace BomberMan
 
       static void			addEvent(const IEvent*);
 
-      static void			moveEvent(EventDirection::eEventDirection,
+      void			moveEvent(EventDirection::eEventDirection,
 						  float, float, float);
-      static void			actionEvent(EventDirection::eEventDirection,
+      void			actionEvent(EventDirection::eEventDirection,
 						    float, float);
-      static void			gameEvent(EventDirection::eEventDirection,
+      void			gameEvent(EventDirection::eEventDirection,
 						  EventType::eEventType,
 						  float, float);
-      static void			coreEvent(EventType::eEventType);
+      void			coreEvent(EventType::eEventType);
     };
   }
 }

@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sun May 19 00:17:06 2013 julien fortin
-// Last update Fri May 31 16:54:34 2013 julien fortin
+// Last update Mon Jun  3 18:23:01 2013 julien fortin
 //
 
 #include	<string>
@@ -302,7 +302,7 @@ namespace BomberMan
 
       void	XBoxController::_makeEventMove(Event::EventDirection::eEventDirection dir, float angle)
       {
-	Event::EventManager::moveEvent(dir, angle, 42, 42);
+	Event::EventManager::getEventManager()->moveEvent(dir, angle, 42, 42);
       }
     }
   }

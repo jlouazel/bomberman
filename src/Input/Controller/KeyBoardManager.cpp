@@ -5,14 +5,15 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 21 20:26:12 2013 julien fortin
-// Last update Mon Jun  3 17:43:33 2013 julien fortin
+// Last update Mon Jun  3 18:24:54 2013 julien fortin
 //
 
 #include	"EventManager.hh"
 #include	"KeyBoardManager.hh"
 #include	"EndOfBomberMan.hh"
 
-#include	<iostream>
+
+#include <iostream>
 #include <unistd.h>
 
 namespace BomberMan
@@ -111,18 +112,22 @@ namespace BomberMan
 
       void	KeyBoardManager::_up(const Field::Player* const) const
       {
+	Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::UP, 0, 0, 0);
       }
 
       void	KeyBoardManager::_left(const Field::Player* const) const
       {
+	Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::LEFT, 270.0, 0, 0);
       }
 
       void	KeyBoardManager::_right(const Field::Player* const) const
       {
+	Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::RIGHT, 90.0, 0, 0);
       }
 
       void	KeyBoardManager::_down(const Field::Player* const) const
       {
+	Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::DOWN, 180.0, 0, 0);
       }
 
       void	KeyBoardManager::_action(const Field::Player* const) const
