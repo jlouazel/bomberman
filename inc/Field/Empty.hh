@@ -3,7 +3,7 @@
 
 #include "AGameComponent.hh"
 
-#include "IAsset.hh"
+#include "AObject.hpp"
 #include "IAnimation.hh"
 #include "ISound.hh"
 
@@ -14,7 +14,7 @@ namespace BomberMan
         class Empty : public AGameComponent
         {
         public:
-            Empty(float x, float y, Display::IAsset * asset = 0, Display::ISound * sound = 0, Display::IAnimation * anim = 0);
+            Empty(float x, float y, Display::AObject * asset, Display::ISound * sound, Display::IAnimation * anim);
             ~Empty();
 
             void	explode(int, eDirection);

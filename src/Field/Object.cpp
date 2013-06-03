@@ -12,7 +12,7 @@ namespace BomberMan
 {
     namespace Field
     {
-        Object::Object(float x, float y, BomberMan::Display::IAsset * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim, eObjectType objectType, eBuffType buffType, int power, int timer)
+        Object::Object(float x, float y, BomberMan::Display::AObject * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim, eObjectType objectType, eBuffType buffType, int power, int timer)
         :   _object_type(objectType), _buff_type(buffType), _power(power), _timer(timer)
         {
             this->_x = x;

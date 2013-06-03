@@ -13,7 +13,7 @@ namespace BomberMan
 {
     namespace Field
     {
-        Empty::Empty(float x, float y, BomberMan::Display::IAsset * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim)
+        Empty::Empty(float x, float y, BomberMan::Display::AObject * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim)
         {
             this->_x = x;
             this->_y = y;
@@ -28,25 +28,19 @@ namespace BomberMan
 
         void    Empty::explode(int damages, eDirection direction)
         {
-            Manager *					field;
-            unsigned int				x;
-            unsigned int				y;
-            std::list<IGameComponent *>	objects;
+            Manager *	field;
+            int	x;
+            int	y;
 
-            field = Field::Manager::getInstance();
             x = static_cast<int>(this->_x);
             y = static_cast<int>(this->_y);
-            objects = field->get(x, y);
-            if (objects.size() > 1)
-            {
-                // boucle obj
-                // si != Empty -> explode
-            }
-            else
-            {
-                damages--;
-                //propagation
-            }
+            // recup item list en map[x][y]
+            // si items > 0
+            // traitement specifique
+
+            // si 0 items
+            damages--;
+            // propagation
         }
     }
 }

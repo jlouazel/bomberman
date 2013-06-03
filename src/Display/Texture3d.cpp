@@ -30,7 +30,7 @@ namespace BomberMan
 	this->model_ = gdl::Model::load(this->stringTexture_);
       }
 
-      void	Texture3d::update(gdl::GameClock const & gameClock, gdl::Input &input)
+      void	Texture3d::update(gdl::GameClock const & gameClock)
       {
 	this->model_.update(gameClock);
 

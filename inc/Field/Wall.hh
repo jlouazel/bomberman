@@ -14,7 +14,7 @@ namespace BomberMan
             int		_pv;
 
         public:
-            Wall(bool breakable, int pv, float x, float y, Display::IAsset * asset, Display::ISound * sound = 0, Display::IAnimation * anim = 0);
+            Wall(bool breakable, int pv, float x, float y, Display::AObject * asset, Display::ISound * sound = 0, Display::IAnimation * anim = 0);
             ~Wall();
 
             void	explode(int, eDirection);

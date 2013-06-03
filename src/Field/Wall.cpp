@@ -12,7 +12,7 @@ namespace BomberMan
 {
     namespace Field
     {
-        Wall::Wall(bool breakable, int pv, float x, float y, BomberMan::Display::IAsset * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim)
+        Wall::Wall(bool breakable, int pv, float x, float y, BomberMan::Display::AObject * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim)
         :   _breakable(breakable), _pv(pv)
         {
             this->_x = x;
@@ -42,7 +42,7 @@ namespace BomberMan
             if (this->_breakable == true)
             {
                 this->_pv -= damages;
-                // changement d'asset
+                // changement d'asset (breches?)
                 if (this->_pv < 0)
                 {
                     delete this;

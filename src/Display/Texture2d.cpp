@@ -28,10 +28,9 @@ namespace BomberMan
 	  this->texture_ = gdl::Image::load(this->stringTexture_);
         }
 
-      void	Texture2d::update(gdl::GameClock const &gameClock, gdl::Input &input)
+      void	Texture2d::update(gdl::GameClock const &gameClock)
       {
 	(void)gameClock;
-	(void)input;
       }
 
       void	Texture2d::draw(void)

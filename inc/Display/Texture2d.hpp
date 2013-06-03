@@ -17,7 +17,7 @@ namespace BomberMan
 
     private:
       void	initialize();
-      void	update(gdl::GameClock const &, gdl::Input &);
+      void	update(gdl::GameClock const &);
       void	draw(void);
       void	play(std::string const & _name, char state) {};
       void	stop(std::string const & name) {};

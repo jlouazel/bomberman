@@ -10,6 +10,7 @@
 #define __BomberMan__AGameComponent__
 
 #include "IGameComponent.hh"
+#include "AObject.hpp"
 
 namespace BomberMan
 {
@@ -20,7 +21,7 @@ namespace BomberMan
         protected:
             float					_x;
             float					_y;
-            Display::IAsset *		_asset;
+            Display::AObject *		_asset;
             Display::ISound *		_sound;
             Display::IAnimation *	_animation;
             
@@ -32,8 +33,8 @@ namespace BomberMan
             virtual void					setX(float);
             virtual float					getY() const;
             virtual void					setY(float);
-            virtual Display::IAsset *		getAsset() const;
-            virtual void					setAsset(Display::IAsset *);
+            virtual Display::AObject *		getAsset() const;
+            virtual void					setAsset(Display::AObject *);
             virtual Display::ISound *		getSound() const;
             virtual void					setSound(Display::ISound *);
             virtual Display::IAnimation *   getAnimation() const;
