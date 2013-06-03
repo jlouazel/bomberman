@@ -21,7 +21,7 @@ namespace BomberMan
             ~Texture3d();
             
             void	initialize();
-            void	update(gdl::GameClock const &, gdl::Input &);
+            void	update(gdl::GameClock const &);
             void	draw();
             void	play(std::string const & _name, char state);
             void	stop(std::string const & name);

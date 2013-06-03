@@ -27,35 +27,38 @@ namespace BomberMan
 
       void	Texture3d::initialize()
       {
+	std::cout << "I initialize Model : " << this->stringTexture_ << std::endl;
 	this->model_ = gdl::Model::load(this->stringTexture_);
       }
 
-      void	Texture3d::update(gdl::GameClock const & gameClock, gdl::Input &input)
+      void	Texture3d::update(gdl::GameClock const & gameClock)
       {
+	std::cout << "lalala0" << std::endl;
 	this->model_.update(gameClock);
+	std::cout << "lalala1" << std::endl;
+        this->play("Take 001", 1);
+	std::cout << "lalala2" << std::endl;
+	// Input::Controller::KeyBoardManager::treatInput(input);
 
 
-	//Input::Controller::KeyBoardManager::treatInput(input);
+	// const Event::IEvent* event = Event::EventManager::getEvent();
+	// if (event != NULL)
+	//   {
+	//     const Event::Move *move = (const Event::Move *)event;
+	//     // std::cout << "Angle:" << move->getAngle() << std::endl;
+	//     float	angle =  (move->getAngle() + 270) % 360;
+	//     float	x = cosf(angle * 3.14159265359 / 180) * 10;
+	//     float	z = sinf(angle * 3.14159265359 / 180) * 10;
 
+	//     //std::cout << "angle : " << angle << std::endl;
 
-	const Event::IEvent* event = Event::EventManager::getEvent();
-	if (event != NULL)
-	  {
-	    const Event::Move *move = (const Event::Move *)event;
-	    // std::cout << "Angle:" << move->getAngle() << std::endl;
-	    float	angle =  (move->getAngle() + 270) % 360;
-	    float	x = cosf(angle * 3.14159265359 / 180) * 10;
-	    float	z = sinf(angle * 3.14159265359 / 180) * 10;
-
-	    //std::cout << "angle : " << angle << std::endl;
-
-	    this->position_.setX(this->position_.getX() + x);
-	    this->position_.setZ(this->position_.getZ() + z);
-	    this->rotation_.setY((float)-((int)(angle + 270) % 360));
-	    //this->info();
-	    this->play("Take 001", 1);
-	    delete move;
-	  }
+	//     this->position_.setX(this->position_.getX() + x);
+	//     this->position_.setZ(this->position_.getZ() + z);
+	//     this->rotation_.setY((float)-((int)(angle + 270) % 360));
+	//     //this->info();
+	//     this->play("Take 001", 1);
+	//     delete move;
+	//   }
       }
 
       void    Texture3d::play(std::string const & name, char state)
@@ -80,16 +83,21 @@ namespace BomberMan
 
       void	Texture3d::draw()
       {
+	std::cout << "kaka" << std::endl;
 	glLoadIdentity();
+	glEnable(GL_BLEND);
 	glPushMatrix();
 	gdl::Model::Begin();
 	glTranslatef(this->position_.getX(), this->position_.getY(), this->position_.getZ());
 	glRotatef(this->rotation_.getX(), 1, 0, 0);
 	glRotatef(this->rotation_.getY(), 0, 1, 0);
 	glRotatef(this->rotation_.getZ(), 0, 0, 1);
+	std::cout << "kaka1" << std::endl;
 	this->model_.draw();
 	gdl::Model::End();
 	glPopMatrix();
+	// 	std::cout << "Je draw une texture mother fucker" << std::endl;
+	std::cout << "kaka2" << std::endl;
       }
 
       void    Texture3d::info()

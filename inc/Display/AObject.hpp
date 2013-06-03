@@ -30,7 +30,7 @@ namespace BomberMan
             AObject(const std::string &texture, Vector3f &position, Vector3f &rotation, Vector3f &len);
 
             virtual void	initialize(void) = 0;
-            virtual void	update(gdl::GameClock const &, gdl::Input &) = 0;
+            virtual void	update(gdl::GameClock const &) = 0;
             virtual void	draw(void) = 0;
             virtual void	play(std::string const & _name, char state) = 0;
             virtual void	stop(std::string const & name) = 0;

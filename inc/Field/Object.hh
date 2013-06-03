@@ -12,7 +12,7 @@
 #include "AGameComponent.hh"
 
 #include "Enums.hh"
-#include "IAsset.hh"
+#include "AObject.hpp"
 #include "IAnimation.hh"
 #include "ISound.hh"
 
@@ -28,7 +28,7 @@ namespace BomberMan
             int             _timer;
             
         public:
-            Object(float x, float y, Display::IAsset * asset, Display::ISound * sound, Display::IAnimation * anim, eObjectType, eBuffType, int, int);
+            Object(float x, float y, Display::AObject * asset, Display::ISound * sound, Display::IAnimation * anim, eObjectType, eBuffType, int, int);
             Object(const Object &);
             ~Object();
             

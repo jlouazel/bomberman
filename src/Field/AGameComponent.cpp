@@ -32,12 +32,12 @@ namespace BomberMan
             this->_y = y;
         }
 
-        BomberMan::Display::IAsset *        AGameComponent::getAsset() const
+        BomberMan::Display::AObject *        AGameComponent::getAsset() const
         {
             return this->_asset;
         }
 
-        void                                AGameComponent::setAsset(Display::IAsset * asset)
+        void                                AGameComponent::setAsset(Display::AObject * asset)
         {
             this->_asset = asset;
         }

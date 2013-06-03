@@ -1,41 +1,53 @@
 #ifndef __BomberMan__Player__
 #define __BomberMan__Player__
 
+#include <Clock.hpp>
+#include <Color.hpp>
+#include <Model.hpp>
+#include <math.h>
+#include "EventManager.hh"
+#include "AEvent.hh"
+#include "IEvent.hh"
+#include "EventEnum.hh"
+#include "EventError.hh"
+#include "Move.hh"
 #include "AGameComponent.hh"
 #include "Object.hh"
+#include "AObject.hpp"
 
 namespace BomberMan
 {
-    namespace Field
+  namespace Field
+  {
+    class Player : public AGameComponent
     {
-        class Player : public AGameComponent
-        {
-        protected:
-            int         _pv;
-            float       _speed;
-            int         _nb_bomb_max;
-            int         _nb_bomb_set;
-            Object *    _bomb;
+    protected:
+      int         _pv;
+      float       _speed;
+      int         _nb_bomb_max;
+      int         _nb_bomb_set;
+      Object *    _bomb;
 
-        public:
-            Player(int pv, float speed, int max, int set, float x, float y, Display::IAsset * asset, Display::ISound * sound, Display::IAnimation * anim);
-            ~Player();
+    public:
+      Player(int pv, float speed, int max, int set, float x, float y, Display::AObject * asset, Display::ISound * sound, Display::IAnimation * anim);
+      ~Player();
 
-            void        move();
-            void    	setBomb();
-            void        acquireObject();
-            void        run();
-            int         getNbBombMax() const;
-            void        setNbBombMax(int);
-            int         getNbBombSet() const;
-            float       getSpeed() const;
-            void        setSpeed(float);
-            Object *    getBomb() const;
-            void        explode(int, eDirection);
-            int         getPv() const;
-            void        setPv(int);
-        };
-    }
+      void        move();
+      void	  setBomb();
+      void        acquireObject();
+      void        run();
+      int         getNbBombMax() const;
+      void        setNbBombMax(int);
+      int         getNbBombSet() const;
+      float       getSpeed() const;
+      void        setSpeed(float);
+      Object *    getBomb() const;
+      void        explode(int, eDirection);
+      int         getPv() const;
+      void        setPv(int);
+      void	  update(gdl::GameClock const &);
+    };
+  }
 }
 
 #else

@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 02:50:41 2013 julien fortin
-// Last update Mon Jun  3 12:10:30 2013 Jean-Baptiste Louazel
+// Last update Mon Jun  3 16:22:30 2013 Happy
 //
 
 #include	"BomberGame.hh"
@@ -16,7 +16,7 @@ namespace BomberMan
   {
     BomberGame::BomberGame()
     {
-      Field::Manager::initInstance(10, 10);
+      Field::Manager::initInstance(1, 1);
       this->_manager = Field::Manager::getInstance();
     }
 

@@ -4,7 +4,7 @@
 #include <iostream>
 
 #include "Enums.hh"
-#include "IAsset.hh"
+#include "AObject.hpp"
 #include "ISound.hh"
 #include "IAnimation.hh"
 
@@ -22,8 +22,8 @@ namespace BomberMan
             virtual void					setX(float) = 0;
             virtual float					getY() const = 0;
             virtual void					setY(float) = 0;
-            virtual Display::IAsset *		getAsset() const = 0;
-            virtual void					setAsset(Display::IAsset *) = 0;
+            virtual Display::AObject *		getAsset() const = 0;
+            virtual void					setAsset(Display::AObject *) = 0;
             virtual Display::ISound *		getSound() const = 0;
             virtual void					setSound(Display::ISound *) = 0;
             virtual Display::IAnimation *	getAnimation() const = 0;
