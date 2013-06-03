@@ -9,8 +9,9 @@
 #ifndef __BomberMan__Resources__
 #define __BomberMan__Resources__
 
-#include <map>
-#include <string>
+#include	<map>
+#include	<string>
+#include	<Image.hpp>
 
 #include "AObject.hpp"
 #include "ISound.hh"
@@ -30,10 +31,15 @@ namespace BomberMan
     private:
       static Resources*	_ressources;
 
+      std::map<std::string, gdl::Image>	_images;
+
       std::map<std::string, AObject *>		_assets;
       std::map<std::string, ISound *>		_sounds;
 
     public:
+      const gdl::Image*	getImage(const std::string&);
+
+
       ISound*		getSound(const std::string &);
       AObject*		getAsset(const std::string &);
 
