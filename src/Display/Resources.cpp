@@ -45,9 +45,9 @@ namespace BomberMan
       vectorPosition.setY(15);
       this->_assets.insert(std::pair<std::string, AObject *>("continueGame",  new Texture2d("texture/continuegame.png", vectorPosition, vectorRotation, vectorLen)));
       vectorPosition.setY(41);
-      this->_assets.insert(std::pair<std::string, AObject *>("option",  new Texture2d("texture/option.png", vectorPosition, vectorRotation, vectorLen)));
+      this->_assets.insert(std::pair<std::string, AObject *>("options",  new Texture2d("texture/options.png", vectorPosition, vectorRotation, vectorLen)));
       vectorPosition.setY(54);
-      this->_assets.insert(std::pair<std::string, AObject *>("credit",  new Texture2d("texture/credit.png", vectorPosition, vectorRotation, vectorLen)));
+      this->_assets.insert(std::pair<std::string, AObject *>("credits",  new Texture2d("texture/credits.png", vectorPosition, vectorRotation, vectorLen)));
       vectorPosition.setY(67);
       this->_assets.insert(std::pair<std::string, AObject *>("quit",  new Texture2d("texture/quit.png", vectorPosition, vectorRotation, vectorLen)));
       std::map<std::string, AObject *>::iterator itb = this->_assets.begin();

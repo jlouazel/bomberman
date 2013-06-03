@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 01:44:06 2013 julien fortin
-// Last update Mon Jun  3 01:39:39 2013 julien fortin
+// Last update Mon Jun  3 11:28:21 2013 Jean-Baptiste Louazel
 //
 
 #ifndef	__BOMBERMAN_HH__
