@@ -17,7 +17,6 @@ namespace BomberMan
     {
         BomberMan::BomberMan()
         {
-            this->initialize();
         }
         
         BomberMan::~BomberMan()
@@ -31,8 +30,8 @@ namespace BomberMan
             // valeur par defaut : BomberMan inactif
             this->_intro = false;
             this->_menu = false;
-            this->_game = false;
-            this->_currentGame = 0;
+            this->_game = true;
+            this->_currentGame = new BomberGame;
             
             // initialisation : 1ere sequence = intro + load assets / ressources
             this->_initializeWindow();
@@ -62,7 +61,7 @@ namespace BomberMan
         
         void	BomberMan::_initializeIntro()
         {
-            this->_intro = true;
+            this->_intro = false;
         }
         
         void	BomberMan::_initializeInput() const

@@ -34,7 +34,9 @@ namespace BomberMan
     };
   }
 }
+
 #else
+
 namespace BomberMan
 {
   namespace Core

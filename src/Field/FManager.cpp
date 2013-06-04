@@ -67,16 +67,5 @@ namespace BomberMan
     {
       return this->_height;
     }
-
-    void							Manager::initInstance(unsigned int width, unsigned int height)
-    {
-      if (Manager::_manager == 0)
-	Manager::_manager = new Manager(width, height);
-    }
-
-    Manager *                       Manager::getInstance()
-    {
-      return Manager::_manager;
-    }
   }
 }
