@@ -51,7 +51,7 @@ namespace BomberMan
 
     void	Player::update(gdl::GameClock const & gameClock)
     {
-      std::cout << "Start update Player" << std::endl;
+      //std::cout << "Start update Player" << std::endl;
       this->_asset->update(gameClock);
 
       // Input::Controller::KeyBoardManager::treatInput(input);
@@ -61,13 +61,13 @@ namespace BomberMan
 	{
 	  const Event::Move *move = (const Event::Move *)event;
 
-	  float       angle =  (move->getAngle() + 270) % 360;
-	  float       x = cosf(angle * 3.14159265359 / 180) * 10;
-	  float       z = sinf(angle * 3.14159265359 / 180) * 10;
+	  float       angle =  move->getAngle() * 3.14159 / 180.0;
+	  float       x = -(cosf(angle) * 30);
+	  float       z = sinf(angle) * 30;
 
 	  std::cout << "YOOOOOOOOOOO : " << angle << std::endl;
 	  Display::Vector3f	newVectorPosition(this->_asset->getPosition().getX() + x, this->_asset->getPosition().getY(), this->_asset->getPosition().getZ() + z);
-	  Display::Vector3f	newVectorRotation(this->_asset->getRotation().getX(), angle, this->_asset->getRotation().getZ());
+	  Display::Vector3f	newVectorRotation(this->_asset->getRotation().getX(), angle / 180.0 * 3.14159, this->_asset->getRotation().getZ());
 	  // this->_asset->getPosition().setX(this->_asset->getPosition().getX() + x);
 	  // this->_asset->getPosition().setZ(this->_asset->getPosition().getZ() + z);
 	  this->_asset->setPosition(newVectorPosition);
@@ -77,14 +77,14 @@ namespace BomberMan
 	  // this->play("Take 001", 1);
 	  delete move;
 	}
-      std::cout << "End update Player" << std::endl;
+      //std::cout << "End update Player" << std::endl;
     }
 
     void	Player::draw(gdl::GameClock const & gameClock, gdl::Input & input)
     {
-      std::cout << "Start Draw player" << std::endl;
+      //std::cout << "Start Draw player" << std::endl;
       this->_asset->draw();
-      std::cout << "End Draw player" << std::endl;
+      //std::cout << "End Draw player" << std::endl;
     }
 
     void        Player::run()

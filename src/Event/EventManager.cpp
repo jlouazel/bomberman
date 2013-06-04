@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 22:23:19 2013 julien fortin
-// Last update Sun Jun  2 20:26:13 2013 julien fortin
+// Last update Tue Jun  4 17:29:06 2013 julien fortin
 //
 
 #include	<algorithm>
@@ -106,7 +106,7 @@ namespace BomberMan
 	    EventManager::getEventManager()->_event.push(event);
 	  EventManager::getEventManager()->_eventListMutex->unlock();
 	}
-      std::cout << "#" << EventManager::getEventManager()->_event.size() << "\n";
+      //std::cout << "#" << EventManager::getEventManager()->_event.size() << "\n";
     }
 
     void		EventManager::moveEvent(EventDirection::eEventDirection direction,
@@ -138,6 +138,14 @@ namespace BomberMan
 
     void		EventManager::coreEvent(EventType::eEventType)
     {
+    }
+
+    void		EventManager::cleanEvent()
+    {
+      int nb = this->_event.size() - 1;
+
+      for (int i = 0; i < nb; i++)
+	this->_event.pop();
     }
   }
 }

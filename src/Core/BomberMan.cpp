@@ -75,6 +75,7 @@ namespace BomberMan
       glClearDepth(1.0f);
       glMatrixMode(GL_MODELVIEW);
       this->_drawGame();
+      Event::EventManager::getEventManager()->cleanEvent();
     }
 
     static void	affObjs(Field::IGameComponent * comp, gdl::GameClock const & gameClock, gdl::Input input)
@@ -96,7 +97,7 @@ namespace BomberMan
       // 	  std::cout << "Dans mon slip" << std::endl;
       // 	}
       affObjs(this->_currentGame->getPlayers().front(), gameClock_, input_);
-      std::cout << "--End DRAW GAME--" << std::endl;
+      //std::cout << "--End DRAW GAME--" << std::endl;
     }
 
     void	BomberMan::unload()
