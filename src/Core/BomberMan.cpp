@@ -97,10 +97,6 @@ namespace BomberMan
       // 	  std::cout << "Dans mon slip" << std::endl;
       // 	}
       affObjs(this->_currentGame->getPlayers().front(), gameClock_, input_);
-<<<<<<< HEAD
-=======
-      //std::cout << "--End DRAW GAME--" << std::endl;
->>>>>>> f6e64fd53307595c238ee248bfd346fd3146b652
     }
 
     void	BomberMan::unload()

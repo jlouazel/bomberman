@@ -59,10 +59,8 @@ namespace BomberMan
 
     void	Player::update(gdl::GameClock const & gameClock)
     {
-<<<<<<< HEAD
       this->_asset->update(gameClock);
 
-=======
       if (this->_isMoving == false)
 	{
 	  this->_asset->play("Take 001", 1);
@@ -73,7 +71,6 @@ namespace BomberMan
 	  this->_walking->play("Take 001", 1);
 	  this->_walking->update(gameClock);
 	}
->>>>>>> f6e64fd53307595c238ee248bfd346fd3146b652
       // Input::Controller::KeyBoardManager::treatInput(input);
 
       const Event::IEvent* event = Event::EventManager::getEvent();
@@ -95,28 +92,22 @@ namespace BomberMan
 	  this->_walking->setRotation(newVectorRotation);
 	  delete move;
 	}
-<<<<<<< HEAD
-=======
       else
 	{
 	  this->_isMoving = false;
 	}
       //std::cout << "End update Player" << std::endl;
->>>>>>> f6e64fd53307595c238ee248bfd346fd3146b652
     }
 
     void	Player::draw(gdl::GameClock const & gameClock, gdl::Input & input)
     {
-<<<<<<< HEAD
       this->_asset->draw();
-=======
       //std::cout << "Start Draw player" << std::endl;
       if (this->_isMoving == false)
 	this->_asset->draw();
       else
 	this->_walking->draw();
       //std::cout << "End Draw player" << std::endl;
->>>>>>> f6e64fd53307595c238ee248bfd346fd3146b652
     }
 
     void        Player::run()

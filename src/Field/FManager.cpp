@@ -18,7 +18,6 @@ namespace BomberMan
       components.push_front(new Empty(elemCnt / width, elemCnt % width, 0, 0, 0));
     }
 
-<<<<<<< HEAD
     Manager::Manager()
       : _width(0),
 	_height(0)
@@ -35,38 +34,6 @@ namespace BomberMan
       for (std::vector<std::list<IGameComponent *> >::iterator it = this->_map.begin(); it != this->_map.end(); ++it)
 	addEmptyObject(*it, this->_width, elemCnt++);
       std::cout << this->_width << "-" << this->_height << std::endl;
-=======
-      for (it = this->_map.begin(); it != this->_map.end(); it++)
-	{
-	  Display::Vector3f      vectorPosition((i / width) * 218, 0.0, (i % width) * 218);
-	  Display::Vector3f      vectorLen(0.0, 0.0, 0.0);
-	  Display::Vector3f      vectorRot(0.0, 0.0, 0.0);
-	  (*it).push_front(new Empty(i / width, i % width, 0, 0, 0));
-	  if (i / width == 0)
-	    {
-	      // mur du fond
-	    }
-	  else if (i / width == height - 1)
-	    {
-	      (*it).push_front(new Empty(i / width, i % width, new Display::Texture3d("models/Wall1.fbx", vectorPosition, vectorLen, vectorRot), 0, 0));
-	      // mur du fond
-	    }
-	  if (i % width == 0)
-	    {
-	      // mur de cote
-	    }
-	  else if (i % width == width - 1)
-	    {
-	      // mur de cote
-	    }
-	  // vectorPosition.setX((i / width) * 50);
-	  // vectorPosition.setZ((i % width) * 50);
-	  // Display::AObject *newTexture = new Display::Texture3d("models/Wall3bis2.fbx", vectorPosition, vectorRot, vectorLen);
-	  // (*it).push_front(new Empty(i / width, i % width, newTexture, 0, 0));
-	  (*it).front()->getAsset()->initialize();
-	  i++;
-	}
->>>>>>> f6e64fd53307595c238ee248bfd346fd3146b652
     }
 
 //       std::vector<std::list<IGameComponent *> >::iterator	it;
