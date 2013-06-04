@@ -14,21 +14,21 @@ namespace BomberMan
     {
         class Manager
         {
-	  unsigned int							_width;
-	  unsigned int							_height;
-	  std::vector<std::list<IGameComponent *> >				_map;
-
-
-	  Manager(const Manager &);
-	  Manager &	operator=(const Manager &);
-
+            unsigned int	_width;
+            unsigned int	_height;
+            
+            std::vector<std::list<IGameComponent *> >	_map;
+                        
+            Manager(const Manager &);
+            Manager &	operator=(const Manager &);
+            
         public:
             Manager(unsigned int width, unsigned int height);
             ~Manager();
-
-                        std::list<IGameComponent *> &	get(unsigned int, unsigned int);
+            
+            std::list<IGameComponent *> &	get(unsigned int, unsigned int);
             unsigned int				       getWidth() const;
-	  unsigned int					getHeight() const;
+            unsigned int					getHeight() const;
         };
     }
 }
