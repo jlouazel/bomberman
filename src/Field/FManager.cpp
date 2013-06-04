@@ -13,6 +13,9 @@
 #include "FManager.hh"
 #include "Empty.hh"
 #include "Resources.hh"
+#include "Vector.hpp"
+#include "AObject.hpp"
+#include "Texture3d.hpp"
 
 namespace BomberMan
 {
@@ -25,14 +28,22 @@ namespace BomberMan
     {
       std::vector<std::list<IGameComponent *> >::iterator	it;
       unsigned int i = 0;
+      Display::Vector3f      vectorPosition(0.0, 0.0, 0.0);
+      Display::Vector3f      vectorLen(0.0, 0.0, 0.0);
+      Display::Vector3f      vectorRot(0.0, 0.0, 0.0);
 
       for (it = this->_map.begin(); it != this->_map.end(); it++)
 	{
-	  Display::Resources *Resources = Display::Resources::getResources();
-	  if (Resources)
-	    (*it).push_front(new Empty(i / width, i % width, Resources->getAsset("walterWalking"), 0, 0));
+	  vectorPosition.setX((i / width) * 50);
+	  vectorPosition.setZ((i % width) * 50);
+	  Display::AObject *newTexture = new Display::Texture3d("libgdl/assets/marvin.fbx", vectorPosition, vectorRot, vectorLen);
+	  (*it).push_front(new Empty(i / width, i % width, newTexture, 0, 0));
+	  (*it).front()->getAsset()->initialize();
 	  i++;
 	}
+      // for (it = this->_map.begin(); it != this->_map.end(); it++)
+      // 	for (std::list<IGameComponent *>::iterator it2 = (*it).begin(); it2 != (*it).end(); ++it2)
+      // 	  (*it2)->getAsset()->initialize();
     }
 
     Manager::~Manager()

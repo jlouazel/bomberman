@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 02:46:34 2013 julien fortin
-// Last update Mon Jun  3 17:58:57 2013 Happy
+// Last update Tue Jun  4 01:34:28 2013 Happy
 //
 
 #ifndef	__BOMBERGAME_HH__
@@ -14,6 +14,7 @@
 #include <list>
 #include "Player.hh"
 #include "FManager.hh"
+#include "Empty.hh"
 
 namespace BomberMan
 {
@@ -27,11 +28,10 @@ namespace BomberMan
       // Object score
       // camera + bordel opengl
 
-      protected:
-      public:
+    protected:
+    public:
       ~BomberGame();
       BomberGame(/*vector de player*/);
-
       Field::Manager * getManager() const;
     };
   }

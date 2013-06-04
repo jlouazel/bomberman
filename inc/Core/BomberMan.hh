@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 01:44:06 2013 julien fortin
-// Last update Mon Jun  3 16:34:30 2013 Happy
+// Last update Tue Jun  4 02:20:00 2013 Happy
 //
 
 #ifndef	__BOMBERMAN_HH__
@@ -25,8 +25,8 @@ namespace BomberMan
     class BomberMan : public gdl::Game
     {
     private:
-      BomberMan();
-      BomberMan(BomberMan const&);
+      // BomberMan();
+      // BomberMan(BomberMan const&);
       BomberMan	&operator=(BomberMan const&);
 
     private:

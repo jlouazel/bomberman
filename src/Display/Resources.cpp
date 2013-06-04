@@ -45,17 +45,13 @@ namespace BomberMan
       	   it != this->_images.end(); ++it)
 	it->second.bind();
 
-
-
-
-
       Vector3f      vectorPosition(0, 0, 0);
       Vector3f      vectorLen(50.0, 8.0, 0.0);
       Vector3f      vectorRotation(0.0, 0.0, 0.0);
 
-      this->_assets.insert(std::pair<std::string, AObject *>("marvin", new Texture3d("libgdl/assets/marvin.fbx", vectorPosition, vectorRotation, vectorLen)));
-      this->_assets.insert(std::pair<std::string, AObject *>("walter", new Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRotation, vectorLen)));
-      this->_assets.insert(std::pair<std::string, AObject *>("walterWalking", new Texture3d("models/WWwalking.fbx", vectorPosition, vectorRotation, vectorLen)));
+      // this->_assets.insert(std::pair<std::string, AObject *>("marvin", new Texture3d("libgdl/assets/marvin.fbx", vectorPosition, vectorRotation, vectorLen)));
+      // this->_assets.insert(std::pair<std::string, AObject *>("walter", new Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRotation, vectorLen)));
+      // this->_assets.insert(std::pair<std::string, AObject *>("walterWalking", new Texture3d("models/WWwalking.fbx", vectorPosition, vectorRotation, vectorLen)));
       vectorPosition.setX(25);
       // this->_assets.insert(std::pair<std::string, AObject *>("newGame",  new Texture2d("models/newgame.png", vectorPosition, vectorRotation, vectorLen)));
       vectorPosition.setY(28);

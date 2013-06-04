@@ -29,15 +29,13 @@ namespace BomberMan
       {
 	std::cout << "I initialize Model : " << this->stringTexture_ << std::endl;
 	this->model_ = gdl::Model::load(this->stringTexture_);
+	std::cout << "End of init" << std::endl;
       }
 
       void	Texture3d::update(gdl::GameClock const & gameClock)
       {
-	std::cout << "lalala0" << std::endl;
 	this->model_.update(gameClock);
-	std::cout << "lalala1" << std::endl;
         this->play("Take 001", 1);
-	std::cout << "lalala2" << std::endl;
 	// Input::Controller::KeyBoardManager::treatInput(input);
 
 
@@ -83,7 +81,6 @@ namespace BomberMan
 
       void	Texture3d::draw()
       {
-	std::cout << "kaka" << std::endl;
 	glLoadIdentity();
 	glEnable(GL_BLEND);
 	glPushMatrix();
@@ -92,7 +89,6 @@ namespace BomberMan
 	glRotatef(this->rotation_.getX(), 1, 0, 0);
 	glRotatef(this->rotation_.getY(), 0, 1, 0);
 	glRotatef(this->rotation_.getZ(), 0, 0, 1);
-	std::cout << "kaka1" << std::endl;
 	this->model_.draw();
 	gdl::Model::End();
 	glPopMatrix();

@@ -9,15 +9,15 @@
 
 namespace BomberMan
 {
-    namespace Field
+  namespace Field
     {
-        class Empty : public AGameComponent
+      class Empty : public AGameComponent
         {
         public:
-            Empty(float x, float y, Display::AObject * asset, Display::ISound * sound, Display::IAnimation * anim);
-            ~Empty();
+	  Empty(float x, float y, Display::AObject * asset, Display::ISound * sound, Display::IAnimation * anim);
+	  ~Empty();
 
-            void	explode(int, eDirection);
+	  void	explode(int, eDirection);
         };
     }
 }

@@ -23,7 +23,7 @@ namespace BomberMan
 	BomberMan::_bomberMan = new BomberMan;
       if (!BomberMan::_bomberMan)
 	throw EndOfBomberMan("BomberMan", "getBomberMan", "NULL pointer");
-    return BomberMan::_bomberMan;
+      return BomberMan::_bomberMan;
     }
 
     void		BomberMan::deleteBomberMan()
@@ -32,14 +32,14 @@ namespace BomberMan
       BomberMan::_bomberMan = 0;
     }
 
-    BomberMan::BomberMan()
-    {
-      this->_intro = false;
-      this->_menu = false;
-      this->_game = true;
+    // BomberMan::BomberMan()
+    // {
+    //   this->_intro = false;
+    //   this->_menu = false;
+    //   this->_game = true;
 
-      this->_currentGame = new BomberGame;
-    }
+    //   this->_currentGame = new BomberGame;
+    // }
 
     BomberMan::~BomberMan()
     {
@@ -47,6 +47,13 @@ namespace BomberMan
 
     void	BomberMan::initialize(void)
     {
+      std::cout << "Je passe dans l'initialisation :(" << std::endl;
+      this->_intro = false;
+      this->_menu = false;
+      this->_game = true;
+
+      this->_currentGame = new BomberGame;
+
       this->_initializeWindow();
       this->_initializeIntro();
       this->_initializeResources();
@@ -164,10 +171,10 @@ namespace BomberMan
       if (dynamic_cast<Field::Empty *>(comp) == comp)
 	{
 	  comp->getAsset()->draw();
-	  // std::cout << "Empty (" << comp->getX() << ";" << comp->getY() << ")" << std::endl;
-	  // std::cout << "-------> " << comp->getAsset()->getPosition().getX() << std::endl;
-	  // std::cout << "-------> " << comp->getAsset()->getPosition().getY() << std::endl;
-	  // std::cout << "-------> " << comp->getAsset()->getPosition().getZ() << std::endl;
+	  std::cout << "Empty (" << comp->getX() << ";" << comp->getY() << ")" << std::endl;
+	  std::cout << "-------> " << comp->getAsset()->getPosition().getX() << std::endl;
+	  std::cout << "-------> " << comp->getAsset()->getPosition().getY() << std::endl;
+	  std::cout << "-------> " << comp->getAsset()->getPosition().getZ() << std::endl;
 	}
     }
 
