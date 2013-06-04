@@ -90,6 +90,10 @@ namespace BomberMan
 	  this->_asset->setRotation(newVectorRotation);
 	  this->_walking->setPosition(newVectorPosition);
 	  this->_walking->setRotation(newVectorRotation);
+	  this->_camera->setLook(newVectorPosition);
+	  newVectorPosition.setX(newVectorPosition.getX() - 1000.0);
+	  newVectorPosition.setY(newVectorPosition.getY() + 1000.0);
+	  this->_camera->setPosition(newVectorPosition);
 	  delete move;
 	}
       else
@@ -101,12 +105,13 @@ namespace BomberMan
 
     void	Player::draw(gdl::GameClock const & gameClock, gdl::Input & input)
     {
-      this->_asset->draw();
+      // this->_asset->draw();
       //std::cout << "Start Draw player" << std::endl;
       if (this->_isMoving == false)
 	this->_asset->draw();
       else
 	this->_walking->draw();
+      this->_camera->update(gameClock, input);
       //std::cout << "End Draw player" << std::endl;
     }
 
