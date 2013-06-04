@@ -17,14 +17,14 @@ namespace BomberMan
     {
       Display::Vector3f	vectorLen(0.0, 0.0, 0.0);
       Display::Vector3f	vectorRot(0.0, 0.0, 0.0);
-      Display::Vector3f	vectorPosition((elemCnt / width) * 215, 0.0, (elemCnt % width) * 215);
+      Display::Vector3f	vectorPosition((elemCnt / width) * 219, 0.0, (elemCnt % width) * 215);
       components.push_front(new Empty(elemCnt / width, elemCnt % width, 0, 0, 0));
       if (elemCnt / width == height - 1)
 	{
 	  vectorRot.setY(270.0);
 	  components.push_front(new Empty(elemCnt / width, elemCnt % width, new Display::Texture3d("models/Wall1.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
 	}
-      if (
+      //if (
     }
 
     Manager::Manager()
@@ -47,6 +47,7 @@ namespace BomberMan
 
 //       std::vector<std::list<IGameComponent *> >::iterator	it;
 //       unsigned int i = 0;
+
 
 //       for (it = this->_map.begin(); it != this->_map.end(); it++)
 // 	{
