@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sun May 19 00:17:06 2013 julien fortin
-// Last update Tue Jun  4 18:32:14 2013 julien fortin
+// Last update Tue Jun  4 19:58:35 2013 Jean-Baptiste Louazel
 //
 
 #include	<string>
@@ -260,7 +260,7 @@ namespace BomberMan
 	      angle = 180 - angle;
 	  }
 
-	std::cout << "INTENSITY:" << intensity << "\tANGLE:" << angle << "\n";
+	//	std::cout << "INTENSITY:" << intensity << "\tANGLE:" << angle << "\n";
 	if (intensity >= 10000.0)
 	  {
 	    if (!(last % 3))

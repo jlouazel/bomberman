@@ -19,7 +19,7 @@ namespace BomberMan
       {
 	Display::Vector3f      vectorLen(0.0, 0.0, 0.0);
 	Display::Vector3f      vectorRot(0.0, 0.0, 0.0);
-	Display::Vector3f      vectorPosition(x * 218, 0.0, y * 215);
+	Display::Vector3f      vectorPosition(x * 214, 0.0, y * 214);
 
 	this->_x = x;
 	this->_y = y;
