@@ -29,6 +29,7 @@ namespace BomberMan
 
       for (it = this->_map.begin(); it != this->_map.end(); it++)
 	{
+<<<<<<< HEAD
 	  // if (i % width == 0)
 	  //   {
 	  //     Display::Vector3f      vectorPosition((i / width) * 218, 0.0, (i % width) * 218);
@@ -37,6 +38,29 @@ namespace BomberMan
 	  //     (*it).push_front(new Empty(i / width, i % width, new Display::Texture3d("models/Wall1.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
 	  //   }
 	  (*it).push_front(new Empty(i / width, i % width, 0, 0, 0));
+=======
+        if (i / width == 0)
+        {
+            // mur du fond
+        }
+        else if (i / width == height)
+        {
+            // mur du fond
+        }
+        if (i % width == 0)
+        {
+            // mur de cote
+        }
+        else if (i % width == width - 1)
+        {
+            // mur de cote
+        }
+	  vectorPosition.setX((i / width) * 50);
+	  vectorPosition.setZ((i % width) * 50);
+	  Display::AObject *newTexture = new Display::Texture3d("libgdl/assets/marvin.fbx", vectorPosition, vectorRot, vectorLen);
+	  (*it).push_front(new Empty(i / width, i % width, newTexture, 0, 0));
+	  (*it).front()->getAsset()->initialize();
+>>>>>>> 90c3fd04f4bb1d55a2fe62dcb4d9d1a2881981c8
 	  i++;
 	}
     }
