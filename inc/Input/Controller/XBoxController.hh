@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Fri May 17 12:53:01 2013 julien fortin
-// Last update Thu May 30 20:22:43 2013 julien fortin
+// Last update Tue Jun  4 12:38:24 2013 julien fortin
 //
 
 #ifndef	__XBoxController__HH__
@@ -76,17 +76,18 @@ namespace BomberMan
       private:
 	struct t_data
 	{
-	  unsigned int		time; /* event timestamp in milliseconds */
-	  short			value; /* value */
-	  unsigned char		type; /* event type */
+	  unsigned int		time;
+	  short			value;
+	  unsigned char		type;
 	  unsigned char		number;
 	};
 	t_data		_data;
 
       private:
 	std::map<int, XBoxButtonStatus::eXBoxButtonStatus>	_status;
-	std::map<int, void (XBoxController::*)()>			_button;
-	std::map<int, void (XBoxController::*)()>			_axis;
+	std::map<int, void (XBoxController::*)()>		_button;
+	std::map<int, void (XBoxController::*)()>		_axis;
+	std::map<int, int>					_countDir;
 
       private:
 	XBoxController();
@@ -118,6 +119,8 @@ namespace BomberMan
 	void	_axisJS_RT();
 
 	void	_makeEventMove(Event::EventDirection::eEventDirection, float);
+
+	int	_getMaxCountDir() const;
 
       protected:
       public:

@@ -52,9 +52,9 @@ namespace BomberMan
 	    }
 	  vectorPosition.setX((i / width) * 50);
 	  vectorPosition.setZ((i % width) * 50);
-	  // Display::AObject *newTexture = new Display::Texture3d("libgdl/assets/marvin.fbx", vectorPosition, vectorRot, vectorLen);
-	  // (*it).push_front(new Empty(i / width, i % width, newTexture, 0, 0));
-	  // (*it).front()->getAsset()->initialize();
+	  Display::AObject *newTexture = new Display::Texture3d("models/Wall3bis2.fbx", vectorPosition, vectorRot, vectorLen);
+	  (*it).push_front(new Empty(i / width, i % width, newTexture, 0, 0));
+	  (*it).front()->getAsset()->initialize();
 	  i++;
 	}
     }
