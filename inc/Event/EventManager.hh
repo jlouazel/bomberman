@@ -49,6 +49,7 @@ namespace BomberMan
 						  EventType::eEventType,
 						  float, float);
       void			coreEvent(EventType::eEventType);
+      void			cleanEvent();
     };
   }
 }
