@@ -13,9 +13,18 @@ namespace BomberMan
 {
   namespace Field
   {
-    static void addEmptyObject(std::list<IGameComponent *> & components, unsigned int width, unsigned int elemCnt)
+    static void addEmptyObject(std::list<IGameComponent *> & components, unsigned int width, unsigned int height, unsigned int elemCnt)
     {
+      Display::Vector3f	vectorLen(0.0, 0.0, 0.0);
+      Display::Vector3f	vectorRot(0.0, 0.0, 0.0);
+      Display::Vector3f	vectorPosition((elemCnt / width) * 215, 0.0, (elemCnt % width) * 215);
       components.push_front(new Empty(elemCnt / width, elemCnt % width, 0, 0, 0));
+      if (elemCnt / width == height - 1)
+	{
+	  vectorRot.setY(270.0);
+	  components.push_front(new Empty(elemCnt / width, elemCnt % width, new Display::Texture3d("models/Wall1.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+	}
+      if (
     }
 
     Manager::Manager()
@@ -32,7 +41,7 @@ namespace BomberMan
       this->_map = std::vector<std::list<IGameComponent *> >(this->_width * this->_height, std::list<IGameComponent *>());
       unsigned int elemCnt = 0;
       for (std::vector<std::list<IGameComponent *> >::iterator it = this->_map.begin(); it != this->_map.end(); ++it)
-	addEmptyObject(*it, this->_width, elemCnt++);
+	addEmptyObject(*it, this->_width, this->_height, elemCnt++);
       std::cout << this->_width << "-" << this->_height << std::endl;
     }
 
