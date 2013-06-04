@@ -6,6 +6,7 @@ namespace BomberMan
   {
     BomberGame::BomberGame(std::list<Field::Player *> &players)
     {
+      // Field::Manager::initInstance(1, 1);
       this->_manager = new Field::Manager;
       this->_players = players;
       std::list<Field::Player *>::iterator it = this->_players.begin();
