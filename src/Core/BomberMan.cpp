@@ -17,6 +17,17 @@ namespace BomberMan
     {
         BomberMan::BomberMan()
         {
+            this->initialize();
+        }
+        
+        BomberMan::~BomberMan()
+        {
+            if (this->_currentGame)
+                delete this->_currentGame;
+        }
+        
+        void	BomberMan::initialize()
+        {
             // valeur par defaut : BomberMan inactif
             this->_intro = false;
             this->_menu = false;
@@ -33,12 +44,6 @@ namespace BomberMan
             
             /* Initialisation ressources GDL */
             /* Initialise Display */
-        }
-        
-        BomberMan::~BomberMan()
-        {
-            if (this->_currentGame)
-                delete this->_currentGame;
         }
         
         void	BomberMan::_initializeWindow()

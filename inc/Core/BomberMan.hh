@@ -56,6 +56,7 @@ namespace BomberMan
             void	_drawMenu() const;
             void	_drawGame() const;
             
+            virtual void	initialize(void);
             virtual void	update(void);
             virtual void	unload(void);
             virtual void	draw(void);
