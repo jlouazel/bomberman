@@ -34,6 +34,22 @@ namespace BomberMan
 
       for (it = this->_map.begin(); it != this->_map.end(); it++)
 	{
+        if (i / width == 0)
+        {
+            // mur du fond
+        }
+        else if (i / width == height)
+        {
+            // mur du fond
+        }
+        if (i % width == 0)
+        {
+            // mur de cote
+        }
+        else if (i % width == width - 1)
+        {
+            // mur de cote
+        }
 	  vectorPosition.setX((i / width) * 50);
 	  vectorPosition.setZ((i % width) * 50);
 	  Display::AObject *newTexture = new Display::Texture3d("libgdl/assets/marvin.fbx", vectorPosition, vectorRot, vectorLen);
