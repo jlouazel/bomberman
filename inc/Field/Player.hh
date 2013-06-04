@@ -30,6 +30,7 @@ namespace BomberMan
       Object *    _bomb;
       Display::AObject *   _walking;
       Display::AObject *   _mark;
+      Display::AObject *   _run;
       Display::Camera *	  _camera;
       bool	  _isMoving;
 
