@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sun May 19 00:17:06 2013 julien fortin
-// Last update Mon Jun  3 18:23:01 2013 julien fortin
+// Last update Tue Jun  4 15:25:36 2013 julien fortin
 //
 
 #include	<string>
@@ -172,6 +172,7 @@ namespace BomberMan
 
       void	XBoxController::_axisJS_LS_X()
       {
+	//std::cout << "X:" << this->_data.value << "\tY:" << this->_valueY;
 	this->_valueX = this->_data.value;
 	if (this->_data.value < 0)
 	  this->_currentX = XBoxAxis::LEFT;
@@ -183,6 +184,7 @@ namespace BomberMan
 
       void	XBoxController::_axisJS_LS_Y()
       {
+	//std::cout << "X:" << this->_valueX << "\tY:" << this->_data.value;
 	this->_valueY = this->_data.value;
 	if (this->_data.value > 2000)
 	  {
@@ -294,15 +296,61 @@ namespace BomberMan
 		return ;
 	      }
 	  }
-	if (this->_currentX == XBoxAxis::RIGHT && this->_valueX > 5000)
+	if (this->_currentX == XBoxAxis::RIGHT && this->_valueX > 6000)
 	  this->_axisJS_LS_Y();
-	else if (this->_currentX == XBoxAxis::LEFT && this->_valueX < -5000)
+	else if (this->_currentX == XBoxAxis::LEFT && this->_valueX < -6000)
 	  this->_axisJS_LS_Y();
+      }
+
+      int	XBoxController::_getMaxCountDir() const
+      {
+	int	max = 0;
+	int	id = 0;
+
+	for (std::map<int, int>::const_iterator it = this->_countDir.begin();
+	     it != this->_countDir.end(); ++it)
+	  {
+	    if (it->second > max)
+	      {
+		id = it->first;
+		max = it->second;
+	      }
+	  }
+	return id;
       }
 
       void	XBoxController::_makeEventMove(Event::EventDirection::eEventDirection dir, float angle)
       {
-	Event::EventManager::getEventManager()->moveEvent(dir, angle, 42, 42);
+	static int last = 0;
+	// std::cout << "\tDIR:" << dir << "\n\n";
+	// int	maxDir;
+
+	// this->_countDir[dir] += 1;
+	// maxDir = this->_getMaxCountDir();
+	// if (dir != maxDir)
+	//   {
+	//   }
+
+	if (dir == Event::EventDirection::UP)
+	  std::cout << "UP " << angle << "\n";
+	else if (dir == Event::EventDirection::DOWN)
+	  std::cout << "DOWN " << angle << "\n";
+	else if (dir == Event::EventDirection::LEFT)
+	  std::cout << "LEFT " << angle << "\n";
+	else if (dir == Event::EventDirection::RIGHT)
+	  std::cout << "RIGHT " << angle << "\n";
+	else if (dir == Event::EventDirection::UP_LEFT)
+	  std::cout << "UP_LEFT " << angle << "\n";
+	else if (dir == Event::EventDirection::UP_RIGHT)
+	  std::cout << "UP_RIGHT " << angle << "\n";
+	else if (dir == Event::EventDirection::DOWN_LEFT)
+	  std::cout << "DOWN_LEFT " << angle << "\n";
+	else if (dir == Event::EventDirection::DOWN_RIGHT)
+	  std::cout << "DOWN_RIGHT " << angle << "\n";
+
+	if (last % 10)
+	  Event::EventManager::getEventManager()->moveEvent(dir, angle, 42, 42);
+	last++;
       }
     }
   }
