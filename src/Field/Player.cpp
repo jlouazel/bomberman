@@ -51,7 +51,6 @@ namespace BomberMan
 
     void	Player::update(gdl::GameClock const & gameClock)
     {
-      std::cout << "Start update Player" << std::endl;
       this->_asset->update(gameClock);
 
       // Input::Controller::KeyBoardManager::treatInput(input);
@@ -76,14 +75,11 @@ namespace BomberMan
 	  // this->play("Take 001", 1);
 	  delete move;
 	}
-      std::cout << "End update Player" << std::endl;
     }
 
     void	Player::draw(gdl::GameClock const & gameClock, gdl::Input & input)
     {
-      std::cout << "Start Draw player" << std::endl;
       this->_asset->draw();
-      std::cout << "End Draw player" << std::endl;
     }
 
     void        Player::run()
