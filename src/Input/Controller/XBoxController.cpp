@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sun May 19 00:17:06 2013 julien fortin
-// Last update Tue Jun  4 17:32:37 2013 julien fortin
+// Last update Tue Jun  4 18:32:14 2013 julien fortin
 //
 
 #include	<string>
@@ -261,7 +261,7 @@ namespace BomberMan
 	  }
 
 	std::cout << "INTENSITY:" << intensity << "\tANGLE:" << angle << "\n";
-	if (intensity >= 15000.0)
+	if (intensity >= 10000.0)
 	  {
 	    if (!(last % 3))
 	      Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::NO,
