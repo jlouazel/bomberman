@@ -80,8 +80,13 @@ namespace BomberMan
 	  this->_isMoving = true;
 	  std::cout << move->getAngle() << std::endl;
 	  float       angle =  move->getAngle() * 3.14159 / 180.0;
+<<<<<<< HEAD
 	  float       x = -(cosf(angle) * 14);
 	  float       z = sinf(angle) * 14;
+=======
+	  float       x = -(cosf(angle) * 10);
+	  float       z = sinf(angle) * 10;
+>>>>>>> 269059d301ab96eb30778fe01b2528c61cb32c07
 
 	  std::cout << "YOOOOOOOOOOO : " << angle << std::endl;
 	  Display::Vector3f	newVectorPosition(this->_asset->getPosition().getX() + x, this->_asset->getPosition().getY(), this->_asset->getPosition().getZ() + z);
@@ -90,6 +95,10 @@ namespace BomberMan
 	  this->_asset->setRotation(newVectorRotation);
 	  this->_walking->setPosition(newVectorPosition);
 	  this->_walking->setRotation(newVectorRotation);
+	  this->_camera->setLook(newVectorPosition);
+	  newVectorPosition.setX(newVectorPosition.getX() - 1000.0);
+	  newVectorPosition.setY(newVectorPosition.getY() + 1000.0);
+	  this->_camera->setPosition(newVectorPosition);
 	  delete move;
 	}
       else
@@ -106,6 +115,7 @@ namespace BomberMan
 	this->_asset->draw();
       else
 	this->_walking->draw();
+      this->_camera->update(gameClock, input);
       //std::cout << "End Draw player" << std::endl;
     }
 
