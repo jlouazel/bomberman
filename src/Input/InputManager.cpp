@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 22:20:00 2013 julien fortin
-// Last update Sun Jun  2 20:26:02 2013 julien fortin
+// Last update Tue Jun  4 10:48:07 2013 julien fortin
 //
 
 #include	<string>
@@ -317,7 +317,7 @@ namespace BomberMan
       int			scan = 0, failScan = 0;
 
       timeout.tv_sec = 1;
-      timeout.tv_usec = 10000000;
+      timeout.tv_usec = 1000;
       while (true)
 	{
 	  this->_shouldILeave();
