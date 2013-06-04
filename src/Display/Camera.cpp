@@ -34,8 +34,8 @@ namespace BomberMan
 
         void		Camera::update(gdl::GameClock const & gameClock, gdl::Input & input)
         {
-	  this->look_.setZ(this->look_.getZ() + 20);
-	  this->position_.setZ(this->position_.getZ() + 20);
+	  // this->look_.setZ(this->look_.getZ() + 20);
+	  // this->position_.setZ(this->position_.getZ() + 20);
 	  glMatrixMode(GL_PROJECTION);
 	  glLoadIdentity();
 	  gluPerspective((this->angle_ * 180.0) / 3.14159265359, WIDTH/HEIGHT, 1.0f, 10000.0f);

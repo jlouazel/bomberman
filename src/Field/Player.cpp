@@ -78,8 +78,8 @@ namespace BomberMan
 	  this->_isMoving = true;
 	  std::cout << move->getAngle() << std::endl;
 	  float       angle =  move->getAngle() * 3.14159 / 180.0;
-	  float       x = -(cosf(angle) * 30);
-	  float       z = sinf(angle) * 30;
+	  float       x = -(cosf(angle) * 10);
+	  float       z = sinf(angle) * 10;
 
 	  std::cout << "YOOOOOOOOOOO : " << angle << std::endl;
 	  Display::Vector3f	newVectorPosition(this->_asset->getPosition().getX() + x, this->_asset->getPosition().getY(), this->_asset->getPosition().getZ() + z);
