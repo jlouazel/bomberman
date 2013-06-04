@@ -101,7 +101,6 @@ namespace BomberMan
 
     void	Player::draw(gdl::GameClock const & gameClock, gdl::Input & input)
     {
-      this->_asset->draw();
       //std::cout << "Start Draw player" << std::endl;
       if (this->_isMoving == false)
 	this->_asset->draw();
