@@ -24,7 +24,7 @@ namespace BomberMan
     protected:
       float					_x;
       float					_y;
-      Display::AObject *		_asset;
+      Display::AObject *			_asset;
       Display::ISound *		_sound;
       Display::IAnimation *	_animation;
 
