@@ -14,6 +14,7 @@
 #include "AGameComponent.hh"
 #include "Object.hh"
 #include "AObject.hpp"
+#include "Camera.hpp"
 
 namespace BomberMan
 {
@@ -27,6 +28,7 @@ namespace BomberMan
       int         _nb_bomb_max;
       int         _nb_bomb_set;
       Object *    _bomb;
+      Display::Camera *	  _camera;
 
     public:
       Player(int pv, float speed, int max, int set, float x, float y, Display::AObject * asset, Display::ISound * sound, Display::IAnimation * anim);
@@ -45,7 +47,10 @@ namespace BomberMan
       void        explode(int, eDirection);
       int         getPv() const;
       void        setPv(int);
+      void	  setCamera(Display::Camera *);
       void	  update(gdl::GameClock const &);
+      void	  draw(gdl::GameClock const &, gdl::Input &);
+      void	  initialize();
     };
   }
 }

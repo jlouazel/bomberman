@@ -9,6 +9,10 @@
 #ifndef __BomberMan__Object__
 #define __BomberMan__Object__
 
+#include <Input.hpp>
+#include <Clock.hpp>
+#include <GameClock.hpp>
+
 #include "AGameComponent.hh"
 
 #include "Enums.hh"
@@ -38,6 +42,10 @@ namespace BomberMan
             void        setPower(int);
             int         getTimer() const;
             void        explode(int, eDirection);
+
+	  void  draw(gdl::GameClock const & gameClock, gdl::Input & input);
+          void  update(gdl::GameClock const & gameClock);
+
         };
     }
 }

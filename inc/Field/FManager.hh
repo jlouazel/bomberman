@@ -7,6 +7,7 @@
 #include <list>
 
 #include "IGameComponent.hh"
+#include "Camera.hpp"
 
 namespace BomberMan
 {
@@ -14,22 +15,22 @@ namespace BomberMan
     {
         class Manager
         {
-	  static Manager *							_manager;
 	  unsigned int							_width;
 	  unsigned int							_height;
 	  std::vector<std::list<IGameComponent *> >				_map;
+	  Display::Camera							*_camera;
 
-	  Manager(unsigned int width, unsigned int height);
+
 	  Manager(const Manager &);
 	  Manager &	operator=(const Manager &);
-	  ~Manager();
 
         public:
-	  std::list<IGameComponent *> &	get(unsigned int, unsigned int);
-	  unsigned int				       getWidth() const;
+	  Manager(unsigned int width, unsigned int height);
+            ~Manager();
+
+                        std::list<IGameComponent *> &	get(unsigned int, unsigned int);
+            unsigned int				       getWidth() const;
 	  unsigned int					getHeight() const;
-	  static Manager *    getInstance();
-	  static void			initInstance(unsigned int width, unsigned int height);
         };
     }
 }

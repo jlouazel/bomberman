@@ -1,6 +1,10 @@
 #ifndef __BomberMan__Empty__
 #define __BomberMan__Empty__
 
+#include <Input.hpp>
+#include <Clock.hpp>
+#include <GameClock.hpp>
+
 #include "AGameComponent.hh"
 
 #include "AObject.hpp"
@@ -18,6 +22,8 @@ namespace BomberMan
 	  ~Empty();
 
 	  void	explode(int, eDirection);
+	  void	draw(gdl::GameClock const & gameClock, gdl::Input & input);
+	  void  update(gdl::GameClock const & gameClock);
         };
     }
 }

@@ -10,13 +10,13 @@ namespace BomberMan
     namespace Display
     {
         Camera::Camera(void)
-        : position_(0.0f, 0.0f, 1000.0f), rotation_(0.0f, 0.0f, 0.0f), look_(0.0f, 0.0f, 0.0f)
+        : position_(-500.0f, 500.0f, 0.0f), rotation_(0.0f, 0.0f, 0.0f), look_(0.0f, 0.0f, 0.0f)
         {
             this->angle_ = 3.14159265359 * 70.0 / 180.0;
             this->heightScreen_ = (int)(((tanf(this->angle_ / 2.0) * 300.0) * 2.0));
             this->widthScreen_ = (int)(((tanf(this->angle_ / 2.0) * 300.0) * 2.0));
         }
-        
+
         void		Camera::initialize(void)
         {
             glMatrixMode(GL_PROJECTION);
@@ -31,11 +31,23 @@ namespace BomberMan
             glEnable(GL_DEPTH_TEST);
             glDepthFunc(GL_LEQUAL);
         }
-        
+
         void		Camera::update(gdl::GameClock const & gameClock, gdl::Input & input)
         {
+	  this->look_.setZ(this->look_.getZ() + 20);
+	  this->position_.setZ(this->position_.getZ() + 20);
+	  glMatrixMode(GL_PROJECTION);
+	  glLoadIdentity();
+	  gluPerspective((this->angle_ * 180.0) / 3.14159265359, WIDTH/HEIGHT, 1.0f, 10000.0f);
+	  gluLookAt(position_.getX(), position_.getY(), position_.getZ(),
+		    this->look_.getX(), this->look_.getY(), this->look_.getZ(),
+		    0.0f, 1.0f, 0.0f);
+	  glMatrixMode(GL_MODELVIEW);
+	  glLoadIdentity();
+	  glEnable(GL_DEPTH_TEST);
+	  glDepthFunc(GL_LEQUAL);
         }
-        
+
         Vector3f	Camera::getPosition() const
         {
             return (this->position_);

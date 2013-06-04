@@ -36,6 +36,11 @@ namespace BomberMan
       {
 	this->model_.update(gameClock);
         this->play("Take 001", 1);
+	if (this->stringTexture_ == "models/WWwalking.fbx")
+	  {
+	    // this->rotation_.setY((int)(this->rotation_.getY() + 1) % 360);
+	    this->position_.setZ(this->position_.getZ() + 20);
+	  }
 	// Input::Controller::KeyBoardManager::treatInput(input);
 
 
@@ -92,8 +97,6 @@ namespace BomberMan
 	this->model_.draw();
 	gdl::Model::End();
 	glPopMatrix();
-	// 	std::cout << "Je draw une texture mother fucker" << std::endl;
-	std::cout << "kaka2" << std::endl;
       }
 
       void    Texture3d::info()

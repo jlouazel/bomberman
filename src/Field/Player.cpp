@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 manour_m. All rights reserved.
 //
 
+#include "Texture3d.hpp"
 #include "Player.hh"
 
 namespace BomberMan
@@ -20,7 +21,9 @@ namespace BomberMan
       this->_animation = anim;
       this->_sound = sound;
       this->_asset = asset;
+      // this->_asset->initialize();
       this->_bomb = new Object(0.0, 0.0, 0, 0, 0, BOMB, NONE, 3, 3);
+      this->_camera = 0; // initialise after.
     }
 
     Player::~Player()
@@ -40,8 +43,15 @@ namespace BomberMan
     {
     }
 
+    void	Player::initialize()
+    {
+      this->_asset->initialize();
+      this->_camera->initialize();
+    }
+
     void	Player::update(gdl::GameClock const & gameClock)
     {
+      std::cout << "Start update Player" << std::endl;
       this->_asset->update(gameClock);
 
       // Input::Controller::KeyBoardManager::treatInput(input);
@@ -62,6 +72,14 @@ namespace BomberMan
 	  // this->play("Take 001", 1);
 	  delete move;
 	}
+      std::cout << "End update Player" << std::endl;
+    }
+
+    void	Player::draw(gdl::GameClock const & gameClock, gdl::Input & input)
+    {
+      std::cout << "Start Draw player" << std::endl;
+      this->_asset->draw();
+      std::cout << "End Draw player" << std::endl;
     }
 
     void        Player::run()
@@ -115,6 +133,11 @@ namespace BomberMan
       // animation dmg
       if (this->_pv <= 0)
 	std::cout << "J'suis mort" << std::endl;
+    }
+
+    void	Player::setCamera(Display::Camera *camera)
+    {
+      this->_camera = camera;
     }
   }
 }

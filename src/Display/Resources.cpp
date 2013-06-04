@@ -10,7 +10,6 @@
 #include	"Texture3d.hpp"
 #include	"Texture2d.hpp"
 #include	"Resources.hh"
-#include	"EndOfBomberMan.hh"
 
 namespace BomberMan
 {
@@ -22,8 +21,8 @@ namespace BomberMan
     {
       if (!Resources::_ressources)
 	Resources::_ressources = new Resources;
-      if (!Resources::_ressources)
-	throw Core::EndOfBomberMan("Resources", "getResources", "NULL pointer");
+      // if (!Resources::_ressources)
+      // 	throw Core::EndOfBomberMan("Resources", "getResources", "NULL pointer");
       return Resources::_ressources;
     }
 

@@ -36,6 +36,16 @@ namespace BomberMan
         {
         }
 
+      void        Object::update(gdl::GameClock const & gameClock)
+      {
+        this->_asset->update(gameClock);
+      }
+
+      void        Object::draw(gdl::GameClock const & gameClock, gdl::Input & input)
+      {
+        this->_asset->draw();
+      }
+
         eObjectType Object::getObjectType() const
         {
             return this->_object_type;

@@ -21,29 +21,24 @@ namespace BomberMan
 {
   namespace Field
   {
-    Manager*	Manager::_manager = 0;
-
     Manager::Manager(unsigned int width, unsigned int height)
       : _width(width), _height(height), _map(width * height, std::list<IGameComponent *>())
     {
       std::vector<std::list<IGameComponent *> >::iterator	it;
       unsigned int i = 0;
-      Display::Vector3f      vectorPosition(0.0, 0.0, 0.0);
-      Display::Vector3f      vectorLen(0.0, 0.0, 0.0);
-      Display::Vector3f      vectorRot(0.0, 0.0, 0.0);
 
       for (it = this->_map.begin(); it != this->_map.end(); it++)
 	{
-	  vectorPosition.setX((i / width) * 50);
-	  vectorPosition.setZ((i % width) * 50);
-	  Display::AObject *newTexture = new Display::Texture3d("libgdl/assets/marvin.fbx", vectorPosition, vectorRot, vectorLen);
-	  (*it).push_front(new Empty(i / width, i % width, newTexture, 0, 0));
-	  (*it).front()->getAsset()->initialize();
+	  // if (i % width == 0)
+	  //   {
+	  //     Display::Vector3f      vectorPosition((i / width) * 218, 0.0, (i % width) * 218);
+	  //     Display::Vector3f      vectorLen(0.0, 0.0, 0.0);
+	  //     Display::Vector3f      vectorRot(0.0, 0.0, 0.0);
+	  //     (*it).push_front(new Empty(i / width, i % width, new Display::Texture3d("models/Wall1.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+	  //   }
+	  (*it).push_front(new Empty(i / width, i % width, 0, 0, 0));
 	  i++;
 	}
-      // for (it = this->_map.begin(); it != this->_map.end(); it++)
-      // 	for (std::list<IGameComponent *>::iterator it2 = (*it).begin(); it2 != (*it).end(); ++it2)
-      // 	  (*it2)->getAsset()->initialize();
     }
 
     Manager::~Manager()
@@ -66,17 +61,6 @@ namespace BomberMan
     unsigned int                    Manager::getHeight() const
     {
       return this->_height;
-    }
-
-    void							Manager::initInstance(unsigned int width, unsigned int height)
-    {
-      if (Manager::_manager == 0)
-	Manager::_manager = new Manager(width, height);
-    }
-
-    Manager *                       Manager::getInstance()
-    {
-      return Manager::_manager;
     }
   }
 }

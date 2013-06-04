@@ -9,6 +9,7 @@
 #include "Vector.hpp"
 #include "Empty.hh"
 #include "FManager.hh"
+#include "Texture3d.hpp"
 
 namespace BomberMan
 {
@@ -16,17 +17,35 @@ namespace BomberMan
     {
       Empty::Empty(float x, float y, BomberMan::Display::AObject * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim)
       {
+	Display::Vector3f      vectorLen(0.0, 0.0, 0.0);
+	Display::Vector3f      vectorRot(0.0, 0.0, 0.0);
+	Display::Vector3f      vectorPosition(x * 218, 0.0, y * 218);
+
 	this->_x = x;
 	this->_y = y;
-	// Display::Vector3f newVec(x, y, 0);
-	this->_asset = asset;
-	// this->_asset->setPosition(newVec);
+	if (asset == 0)
+	  this->_asset = new Display::Texture3d("models/Floor.fbx", vectorPosition, vectorRot, vectorLen);
+	else
+	  this->_asset = asset;
+	this->_asset->initialize();
 	this->_sound = sound;
 	this->_animation = anim;
       }
 
       Empty::~Empty()
       {
+      }
+
+      void        Empty::update(gdl::GameClock const & gameClock)
+      {
+	this->_asset->update(gameClock);
+      }
+
+      void        Empty::draw(gdl::GameClock const & gameClock, gdl::Input & input)
+      {
+	// std::cout << "Start draw Empty" << std::endl;
+	this->_asset->draw();
+	// std::cout << "End draw Empty" << std::endl;
       }
 
       void    Empty::explode(int damages, eDirection direction)
