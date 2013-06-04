@@ -1,6 +1,7 @@
 #include <sys/types.h>
 #include <cstdlib>
 #include <ctime>
+#include <map>
 
 #include "FManager.hh"
 #include "Empty.hh"
@@ -15,6 +16,12 @@ namespace BomberMan
   {
     static void addEmptyObject(std::list<IGameComponent *> & components, unsigned int width, unsigned int height, unsigned int elemCnt)
     {
+      std::vector<std::string> textures;
+      textures.push_back("models/Wall1.fbx");
+      textures.push_back("models/Wall2.fbx");
+      textures.push_back("models/Wall3.fbx");
+      textures.push_back("models/Wall3bis1.fbx");
+      textures.push_back("models/Wall3bis2.fbx");
       Display::Vector3f	vectorLen(0.0, 0.0, 0.0);
       Display::Vector3f	vectorRot(0.0, 0.0, 0.0);
       Display::Vector3f	vectorPosition((elemCnt / width) * 220, 0.0, (elemCnt % width) * 220);
@@ -22,17 +29,17 @@ namespace BomberMan
       if (elemCnt / width == height - 1)
 	{
 	  vectorRot.setY(270.0);
-	  components.push_front(new Empty(elemCnt / width, elemCnt % width, new Display::Texture3d("models/Wall1.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+	  components.push_front(new Empty(elemCnt / width, elemCnt % width, new Display::Texture3d(textures[rand() % 5], vectorPosition, vectorRot, vectorLen), 0, 0));
 	}
       if (elemCnt % width == 0)
 	{
 	  vectorRot.setY(0);
-	  components.push_front(new Empty(elemCnt / width, elemCnt % width, new Display::Texture3d("models/Wall1.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+	  components.push_front(new Empty(elemCnt / width, elemCnt % width, new Display::Texture3d(textures[rand() % 5], vectorPosition, vectorRot, vectorLen), 0, 0));
 	}
       if (elemCnt % width == width - 1)
 	{
 	  vectorRot.setY(180);
-	  components.push_front(new Empty(elemCnt / width, elemCnt % width, new Display::Texture3d("models/Wall1.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+	  components.push_front(new Empty(elemCnt / width, elemCnt % width, new Display::Texture3d(textures[rand() % 5], vectorPosition, vectorRot, vectorLen), 0, 0));
 	}
     }
 
