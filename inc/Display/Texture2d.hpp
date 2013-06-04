@@ -24,6 +24,7 @@ namespace BomberMan
       double	get_anim_speed(std::string const &name) {};
       void	set_anim_speed(std::string const &name, double speed) {};
       void	info() {};
+      void      setColor(unsigned char r, unsigned char g, unsigned char b) {};
     };
   }
 }

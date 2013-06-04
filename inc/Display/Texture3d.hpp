@@ -5,31 +5,33 @@
 #include <GL/glu.h>
 #include <Clock.hpp>
 #include <Model.hpp>
+#include <Color.hpp>
 #include "AObject.hpp"
 
 namespace BomberMan
 {
-    namespace Display
+  namespace Display
+  {
+    class Texture3d : public AObject
     {
-        class Texture3d : public AObject
-        {
-        private:
-            gdl::Model model_;
+    private:
+      gdl::Model model_;
 
-        public:
-            Texture3d(const std::string &, Vector3f &, Vector3f &, Vector3f &);
-            ~Texture3d();
+    public:
+      Texture3d(const std::string &, Vector3f &, Vector3f &, Vector3f &);
+      ~Texture3d();
 
-            void	initialize();
-            void	update(gdl::GameClock const &);
-            void	draw();
-            void	play(std::string const & _name, char state);
-            void	stop(std::string const & name);
-            double	get_anim_speed(std::string const &name);
-            void	set_anim_speed(std::string const &name, double speed);
-            void	info();
-        };
-    }
+      void	initialize();
+      void	update(gdl::GameClock const &);
+      void	draw();
+      void	play(std::string const & _name, char state);
+      void	stop(std::string const & name);
+      double	get_anim_speed(std::string const &name);
+      void	set_anim_speed(std::string const &name, double speed);
+      void	info();
+      void      setColor(unsigned char r, unsigned char g, unsigned char b);
+    };
+  }
 }
 
 #else

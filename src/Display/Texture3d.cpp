@@ -13,67 +13,74 @@
 
 namespace BomberMan
 {
-    namespace Display
+  namespace Display
+  {
+    Texture3d::Texture3d(const std::string &model, Vector3f &position, Vector3f &rotation, Vector3f &len)
+      : AObject(model, position, rotation, len)
     {
-      Texture3d::Texture3d(const std::string &model, Vector3f &position, Vector3f &rotation, Vector3f &len)
-        : AObject(model, position, rotation, len)
-      {
-      }
-
-      Texture3d::~Texture3d()
-      {
-	// delete this->model_;
-      }
-
-      void	Texture3d::initialize()
-      {
-	this->model_ = gdl::Model::load(this->stringTexture_);
-      }
-
-      void	Texture3d::update(gdl::GameClock const & gameClock)
-      {
-	this->model_.update(gameClock);
-        this->play("Take 001", 1);
-      }
-
-      void    Texture3d::play(std::string const & name, char state)
-      {
-	this->model_.play(name, state);
-      }
-
-      void    Texture3d::stop(std::string const & name)
-      {
-	this->model_.stop_animation(name);
-      }
-
-      double  Texture3d::get_anim_speed(std::string const &name)
-      {
-	return (this->model_.get_anim_speed(name));
-      }
-
-      void    Texture3d::set_anim_speed(std::string const &name, double speed)
-      {
-	this->model_.set_anim_speed(name, speed);
-      }
-
-      void	Texture3d::draw()
-      {
-	glLoadIdentity();
-	glEnable(GL_BLEND);
-	glPushMatrix();
-	gdl::Model::Begin();
-	glTranslatef(this->position_.getX(), this->position_.getY(), this->position_.getZ());
-	glRotatef(this->rotation_.getX(), 1, 0, 0);
-	glRotatef(this->rotation_.getY(), 0, 1, 0);
-	glRotatef(this->rotation_.getZ(), 0, 0, 1);
-	this->model_.draw();
-	gdl::Model::End();
-	glPopMatrix();
-      }
-
-      void    Texture3d::info()
-      {
-	this->model_.infos();
-      }
     }
+
+    Texture3d::~Texture3d()
+    {
+      // delete this->model_;
+    }
+
+    void	Texture3d::initialize()
+    {
+      this->model_ = gdl::Model::load(this->stringTexture_);
+    }
+
+    void	Texture3d::update(gdl::GameClock const & gameClock)
+    {
+      this->model_.update(gameClock);
+      this->play("Take 001", 1);
+    }
+
+    void    Texture3d::play(std::string const & name, char state)
+    {
+      this->model_.play(name, state);
+    }
+
+    void    Texture3d::stop(std::string const & name)
+    {
+      this->model_.stop_animation(name);
+    }
+
+    double  Texture3d::get_anim_speed(std::string const &name)
+    {
+      return (this->model_.get_anim_speed(name));
+    }
+
+    void    Texture3d::set_anim_speed(std::string const &name, double speed)
+    {
+      this->model_.set_anim_speed(name, speed);
+    }
+
+    void      Texture3d::setColor(unsigned char r, unsigned char g, unsigned char b)
+    {
+      gdl::Color    color(r, g, b, 255);
+
+      this->model_.set_default_model_color(color);
+    }
+
+    void	Texture3d::draw()
+    {
+      glLoadIdentity();
+      glEnable(GL_BLEND);
+      glPushMatrix();
+      gdl::Model::Begin();
+      glTranslatef(this->position_.getX(), this->position_.getY(), this->position_.getZ());
+      glRotatef(this->rotation_.getX(), 1, 0, 0);
+      glRotatef(this->rotation_.getY(), 0, 1, 0);
+      glRotatef(this->rotation_.getZ(), 0, 0, 1);
+      this->model_.draw();
+      gdl::Model::End();
+      glPopMatrix();
+    }
+
+    void    Texture3d::info()
+    {
+      this->model_.infos();
+    }
+  }
 }
