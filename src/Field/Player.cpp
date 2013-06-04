@@ -65,8 +65,9 @@ namespace BomberMan
 	  float       x = cosf(angle * 3.14159265359 / 180) * 10;
 	  float       z = sinf(angle * 3.14159265359 / 180) * 10;
 
+	  std::cout << "YOOOOOOOOOOO : " << angle << std::endl;
 	  Display::Vector3f	newVectorPosition(this->_asset->getPosition().getX() + x, this->_asset->getPosition().getY(), this->_asset->getPosition().getZ() + z);
-	  Display::Vector3f	newVectorRotation(this->_asset->getRotation().getX(), ((float)-((int)(angle + 270) % 360)), this->_asset->getRotation().getZ());
+	  Display::Vector3f	newVectorRotation(this->_asset->getRotation().getX(), angle, this->_asset->getRotation().getZ());
 	  // this->_asset->getPosition().setX(this->_asset->getPosition().getX() + x);
 	  // this->_asset->getPosition().setZ(this->_asset->getPosition().getZ() + z);
 	  this->_asset->setPosition(newVectorPosition);

@@ -37,8 +37,9 @@ namespace BomberMan
 	    {
 	      // mur du fond
 	    }
-	  else if (i / width == height)
+	  else if (i / width == height - 1)
 	    {
+	      (*it).push_front(new Empty(i / width, i % width, new Display::Texture3d("models/Wall1.fbx", vectorPosition, vectorLen, vectorRot), 0, 0));
 	      // mur du fond
 	    }
 	  if (i % width == 0)
