@@ -17,7 +17,7 @@ namespace BomberMan
     {
       Display::Vector3f	vectorLen(0.0, 0.0, 0.0);
       Display::Vector3f	vectorRot(0.0, 0.0, 0.0);
-      Display::Vector3f	vectorPosition((elemCnt / width) * 215, 0.0, (elemCnt % width) * 215);
+      Display::Vector3f	vectorPosition((elemCnt / width) * 220, 0.0, (elemCnt % width) * 220);
       components.push_front(new Empty(elemCnt / width, elemCnt % width, 0, 0, 0));
       if (elemCnt / width == height - 1)
 	{
@@ -27,6 +27,11 @@ namespace BomberMan
       if (elemCnt % width == 0)
 	{
 	  vectorRot.setY(0);
+	  components.push_front(new Empty(elemCnt / width, elemCnt % width, new Display::Texture3d("models/Wall1.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+	}
+      if (elemCnt % width == width - 1)
+	{
+	  vectorRot.setY(180);
 	  components.push_front(new Empty(elemCnt / width, elemCnt % width, new Display::Texture3d("models/Wall1.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
 	}
     }
@@ -39,8 +44,8 @@ namespace BomberMan
       for (; this->_width < 15 || this->_width > 100; this->_width = rand() % 100);
       for (; this->_height < 15 || this->_height > 100; this->_height = rand() % 100);
       //
-      this->_width = 10;
-      this->_height = 10;
+      this->_width = 5;
+      this->_height = 5;
       //
       this->_map = std::vector<std::list<IGameComponent *> >(this->_width * this->_height, std::list<IGameComponent *>());
       unsigned int elemCnt = 0;
