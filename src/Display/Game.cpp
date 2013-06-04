@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "MyGame.hpp"
-#include "Core.hh"
+// #include "Core.hh"
 
 namespace BomberMan
 {
@@ -9,20 +9,20 @@ namespace BomberMan
     {
         void	MyGame::initialize()
         {
-	  // Vector3f      vectorPosition(25, 15, 0);
-	  // Vector3f      vectorLen(50.0, 8.0, 0.0);
+	  Vector3f      vectorPosition(25, 15, 0);
+	  Vector3f      vectorLen(50.0, 8.0, 0.0);
+	  Vector3f      vectorRotation(0.0, 0.0, 0.0);
+	  // Vector3f      vectorPosition(500, 0, -500);
+	  // Vector3f      vectorLen(0.0, 0.0, 0.0);
 	  // Vector3f      vectorRotation(0.0, 0.0, 0.0);
-	  // // Vector3f      vectorPosition(500, 0, -500);
-	  // // Vector3f      vectorLen(0.0, 0.0, 0.0);
-	  // // Vector3f      vectorRotation(0.0, 0.0, 0.0);
-	  // IOnglet       *newOnglet;
+	  IOnglet       *newOnglet;
 
 	  // this->_core = Engine::Core::getCore();
 
-	  // window_.setWidth(WIDTH);
-	  // window_.setHeight(HEIGHT);
-	  // window_.create();
-	  // camera_.initialize();
+	  window_.setWidth(WIDTH);
+	  window_.setHeight(HEIGHT);
+	  window_.create();
+	  camera_.initialize();
 	  // Menu	*firstMenu = new Menu("texture/Fond.jpg");
 	  // Menu	*continueGame = new Menu("texture/Fond.jpg");
 
@@ -42,10 +42,10 @@ namespace BomberMan
 	  // firstMenu->addOnglet(newOnglet);
 	  // this->menu_ = *firstMenu;
 	  // this->menu_.initialize();
-	  // this->addObject3d("libgdl/assets/marvin.fbx", vectorPosition, vectorRotation, vectorLen);
-	  // std::list<AObject*>::iterator itb = this->objects_.begin();
-	  // for (; itb != this->objects_.end(); ++itb)
-	  //   (*itb)->initialize();
+	  this->addObject3d("libgdl/assets/marvin.fbx", vectorPosition, vectorRotation, vectorLen);
+	  std::list<AObject*>::iterator itb = this->objects_.begin();
+	  for (; itb != this->objects_.end(); ++itb)
+	    (*itb)->initialize();
         }
 
         void	MyGame::addObject2d(const std::string &texture, Vector3f &position, Vector3f &rotation, Vector3f &len)
@@ -79,10 +79,10 @@ namespace BomberMan
 
         void	MyGame::update(void)
         {
-	  this->_core->update();
+	  // this->_core->update();
 	  std::list<AObject*>::iterator itb = this->objects_.begin();
 	  for (; itb != this->objects_.end(); ++itb)
-	    (*itb)->update(gameClock_, input_);
+	    (*itb)->update(gameClock_);
 	  camera_.update(gameClock_, input_);
 	  this->menu_.update();
         }

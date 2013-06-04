@@ -24,7 +24,7 @@ namespace BomberMan
     Manager*	Manager::_manager = 0;
 
     Manager::Manager(unsigned int width, unsigned int height)
-      :   _width(width), _height(height), _map(width * height, std::list<IGameComponent *>())
+      : _width(width), _height(height), _map(width * height, std::list<IGameComponent *>())
     {
       std::vector<std::list<IGameComponent *> >::iterator	it;
       unsigned int i = 0;
