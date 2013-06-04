@@ -65,9 +65,13 @@ namespace BomberMan
 	  float       x = cosf(angle * 3.14159265359 / 180) * 10;
 	  float       z = sinf(angle * 3.14159265359 / 180) * 10;
 
-	  this->_asset->getPosition().setX(this->_asset->getPosition().getX() + x);
-	  this->_asset->getPosition().setZ(this->_asset->getPosition().getZ() + z);
-	  this->_asset->getRotation().setY((float)-((int)(angle + 270) % 360));
+	  Display::Vector3f	newVectorPosition(this->_asset->getPosition().getX() + x, this->_asset->getPosition().getY(), this->_asset->getPosition().getZ() + z);
+	  Display::Vector3f	newVectorRotation(this->_asset->getRotation().getX(), ((float)-((int)(angle + 270) % 360)), this->_asset->getRotation().getZ());
+	  // this->_asset->getPosition().setX(this->_asset->getPosition().getX() + x);
+	  // this->_asset->getPosition().setZ(this->_asset->getPosition().getZ() + z);
+	  this->_asset->setPosition(newVectorPosition);
+	  this->_asset->setRotation(newVectorRotation);
+	  // this->_asset->getRotation().setY((float)-((int)(angle + 270) % 360));
 	  //this->info();
 	  // this->play("Take 001", 1);
 	  delete move;
