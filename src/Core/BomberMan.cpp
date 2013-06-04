@@ -44,6 +44,7 @@ namespace BomberMan
 
       player.push_front(new Field::Player(100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
       this->_initializeWindow();
+      Input::InputManager::getInputManager()->init();
       this->_currentGame = new BomberGame(player);
       std::list<Field::Player *>::iterator it = player.begin();
       for (; it != player.end(); ++it)
