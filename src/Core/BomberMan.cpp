@@ -62,9 +62,9 @@ namespace BomberMan
 
       // this->_currentGame->updateCamera(gameClock_, input_);
       for (unsigned int y = 0; y != this->_currentGame->getManager()->Field::Manager::getHeight(); y++)
-	for (unsigned int x = 0; x != this->_currentGame->getManager()->Field::Manager::getWidth(); x++)
-	  for (std::list<Field::IGameComponent *>::iterator it = this->_currentGame->getManager()->Field::Manager::get(x, y).begin(); it != this->_currentGame->getManager()->Field::Manager::get(x, y).end(); ++it)
-	    updateObjs(*it, gameClock_);
+      	for (unsigned int x = 0; x != this->_currentGame->getManager()->Field::Manager::getWidth(); x++)
+      	  for (std::list<Field::IGameComponent *>::iterator it = this->_currentGame->getManager()->Field::Manager::get(x, y).begin(); it != this->_currentGame->getManager()->Field::Manager::get(x, y).end(); ++it)
+      	    updateObjs(*it, gameClock_);
       updateObjs(this->_currentGame->getPlayers().front(), gameClock_);
     }
 
