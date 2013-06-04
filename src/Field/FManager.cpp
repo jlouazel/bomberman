@@ -17,6 +17,42 @@ namespace BomberMan
   {
     Manager::Manager()
     {
+<<<<<<< HEAD
+=======
+      std::vector<std::list<IGameComponent *> >::iterator	it;
+      unsigned int i = 0;
+
+      for (it = this->_map.begin(); it != this->_map.end(); it++)
+	{
+	  Display::Vector3f      vectorPosition((i / width) * 218, 0.0, (i % width) * 218);
+	  Display::Vector3f      vectorLen(0.0, 0.0, 0.0);
+	  Display::Vector3f      vectorRot(0.0, 0.0, 0.0);
+	  (*it).push_front(new Empty(i / width, i % width, 0, 0, 0));
+	  if (i / width == 0)
+	    {
+	      // mur du fond
+	    }
+	  else if (i / width == height - 1)
+	    {
+	      (*it).push_front(new Empty(i / width, i % width, new Display::Texture3d("models/Wall1.fbx", vectorPosition, vectorLen, vectorRot), 0, 0));
+	      // mur du fond
+	    }
+	  if (i % width == 0)
+	    {
+	      // mur de cote
+	    }
+	  else if (i % width == width - 1)
+	    {
+	      // mur de cote
+	    }
+	  vectorPosition.setX((i / width) * 50);
+	  vectorPosition.setZ((i % width) * 50);
+	  Display::AObject *newTexture = new Display::Texture3d("models/Wall3bis2.fbx", vectorPosition, vectorRot, vectorLen);
+	  (*it).push_front(new Empty(i / width, i % width, newTexture, 0, 0));
+	  (*it).front()->getAsset()->initialize();
+	  i++;
+	}
+>>>>>>> acffd3899b9a535c8e134ccb3850352c539683ef
     }
     // Manager::Manager(unsigned int width, unsigned int height)
     //   : _width(width), _height(height), _map(width * height, std::list<IGameComponent *>())

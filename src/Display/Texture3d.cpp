@@ -34,32 +34,6 @@ namespace BomberMan
       {
 	this->model_.update(gameClock);
         this->play("Take 001", 1);
-	if (this->stringTexture_ == "models/WWwalking.fbx")
-	  {
-	    // this->rotation_.setY((int)(this->rotation_.getY() + 1) % 360);
-	    this->position_.setZ(this->position_.getZ() + 20);
-	  }
-	// Input::Controller::KeyBoardManager::treatInput(input);
-
-
-	// const Event::IEvent* event = Event::EventManager::getEvent();
-	// if (event != NULL)
-	//   {
-	//     const Event::Move *move = (const Event::Move *)event;
-	//     // std::cout << "Angle:" << move->getAngle() << std::endl;
-	//     float	angle =  (move->getAngle() + 270) % 360;
-	//     float	x = cosf(angle * 3.14159265359 / 180) * 10;
-	//     float	z = sinf(angle * 3.14159265359 / 180) * 10;
-
-	//     //std::cout << "angle : " << angle << std::endl;
-
-	//     this->position_.setX(this->position_.getX() + x);
-	//     this->position_.setZ(this->position_.getZ() + z);
-	//     this->rotation_.setY((float)-((int)(angle + 270) % 360));
-	//     //this->info();
-	//     this->play("Take 001", 1);
-	//     delete move;
-	//   }
       }
 
       void    Texture3d::play(std::string const & name, char state)

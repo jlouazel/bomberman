@@ -58,6 +58,8 @@ namespace BomberMan
 
     void	BomberMan::update(void)
     {
+      Input::Controller::KeyBoardManager::getKeyBoardManager()->treatInput(this->input_);
+
       // this->_currentGame->updateCamera(gameClock_, input_);
       for (unsigned int y = 0; y != this->_currentGame->getManager()->Field::Manager::getHeight(); y++)
 	for (unsigned int x = 0; x != this->_currentGame->getManager()->Field::Manager::getWidth(); x++)
