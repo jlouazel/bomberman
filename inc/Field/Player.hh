@@ -29,6 +29,7 @@ namespace BomberMan
       int         _nb_bomb_set;
       Object *    _bomb;
       Display::AObject *   _walking;
+      Display::AObject *   _mark;
       Display::Camera *	  _camera;
       bool	  _isMoving;
 

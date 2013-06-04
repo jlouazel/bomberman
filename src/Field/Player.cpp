@@ -28,6 +28,7 @@ namespace BomberMan
       this->_sound = sound;
       this->_asset = asset;
       this->_walking = new Display::Texture3d("models/WWwalking.fbx", position, rotation, len);
+      this->_mark = new Display::Texture3d("models/PlayerMark.fbx", position, rotation, len);
       this->_bomb = new Object(0.0, 0.0, 0, 0, 0, BOMB, NONE, 3, 3);
       this->_camera = 0; // initialise after.
       this->_isMoving = false;
@@ -54,6 +55,8 @@ namespace BomberMan
     {
       this->_asset->initialize();
       this->_walking->initialize();
+      this->_mark->initialize();
+      this->_mark->setColor(0, 0, 255);
       this->_camera->initialize();
     }
 
@@ -71,6 +74,8 @@ namespace BomberMan
 	  this->_walking->play("Take 001", 1);
 	  this->_walking->update(gameClock);
 	}
+      this->_mark->play("Take 001", 1);
+      this->_mark->update(gameClock);
       // Input::Controller::KeyBoardManager::treatInput(input);
 
       const Event::IEvent* event = Event::EventManager::getEvent();
@@ -90,6 +95,7 @@ namespace BomberMan
 	  this->_asset->setRotation(newVectorRotation);
 	  this->_walking->setPosition(newVectorPosition);
 	  this->_walking->setRotation(newVectorRotation);
+	  this->_mark->setPosition(newVectorPosition);
 	  this->_camera->setLook(newVectorPosition);
 	  newVectorPosition.setX(newVectorPosition.getX() - 1000.0);
 	  newVectorPosition.setY(newVectorPosition.getY() + 1000.0);
@@ -110,6 +116,7 @@ namespace BomberMan
 	this->_asset->draw();
       else
 	this->_walking->draw();
+      this->_mark->draw();
       this->_camera->update(gameClock, input);
       //std::cout << "End Draw player" << std::endl;
     }
