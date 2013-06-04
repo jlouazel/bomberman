@@ -59,6 +59,8 @@ namespace BomberMan
 
     void	Player::update(gdl::GameClock const & gameClock)
     {
+      this->_asset->update(gameClock);
+
       if (this->_isMoving == false)
 	{
 	  this->_asset->play("Take 001", 1);
@@ -99,6 +101,7 @@ namespace BomberMan
 
     void	Player::draw(gdl::GameClock const & gameClock, gdl::Input & input)
     {
+      this->_asset->draw();
       //std::cout << "Start Draw player" << std::endl;
       if (this->_isMoving == false)
 	this->_asset->draw();
