@@ -15,7 +15,6 @@ namespace BomberMan
 	  : position_(position), rotation_(rotation), len_(len)
         {
 	  this->stringTexture_ = texture;
-	  std::cout << texture << std::endl;
         }
 
         void    AObject::setRotation(Vector3f &rotation)

@@ -28,7 +28,9 @@ namespace BomberMan
       int         _nb_bomb_max;
       int         _nb_bomb_set;
       Object *    _bomb;
+      Display::AObject *   _walking;
       Display::Camera *	  _camera;
+      bool	  _isMoving;
 
     public:
       Player(int pv, float speed, int max, int set, float x, float y, Display::AObject * asset, Display::ISound * sound, Display::IAnimation * anim);

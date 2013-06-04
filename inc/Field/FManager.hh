@@ -1,5 +1,5 @@
-#ifndef __BomberMan_Field_Manager__
-#define __BomberMan_Field_Manager__
+#ifndef __BOMBERMAN_FIELD_MANAGER__
+#define __BOMBERMAN_FIELD_MANAGER__
 
 #include <vector>
 #include <iostream>
@@ -10,36 +10,39 @@
 
 namespace BomberMan
 {
-    namespace Field
+  namespace Field
+  {
+    class Manager
     {
-        class Manager
-        {
-            unsigned int	_width;
-            unsigned int	_height;
+      unsigned int	_width;
+      unsigned int	_height;
 
-            std::vector<std::list<IGameComponent *> >	_map;
+      std::vector<std::list<IGameComponent *> >	_map;
 
-            Manager(const Manager &);
-            Manager &	operator=(const Manager &);
+      Manager(const Manager &);
+      Manager &	operator=(const Manager &);
 
-        public:
-            Manager(unsigned int width, unsigned int height);
-            ~Manager();
+    public:
+      Manager();					// Genere une map aleatoire en tout points
+      // Manager(unsigned int);				// Genere une map aleatoire en fonction d'un niveau donne
+      // Manager(std::string const &);			// Genere une map en fonction d'un seed
+      // Manager(unsigned int width, unsigned int height);	// Genere une map aleatoire avec une taille predefinie
+      ~Manager();
 
-            std::list<IGameComponent *> &	get(unsigned int, unsigned int);
-            unsigned int				       getWidth() const;
-            unsigned int					getHeight() const;
-        };
-    }
+      unsigned int			getWidth() const;
+      unsigned int			getHeight() const;
+      std::list<IGameComponent *> &	get(unsigned int, unsigned int);
+    };
+  }
 }
 
 #else
 namespace BomberMan
 {
-    namespace Field
-    {
-        class Manager;
-    }
+  namespace Field
+  {
+    class Manager;
+  }
 }
 
 #endif

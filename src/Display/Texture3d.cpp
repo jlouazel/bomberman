@@ -27,9 +27,7 @@ namespace BomberMan
 
       void	Texture3d::initialize()
       {
-	std::cout << "I initialize Model : " << this->stringTexture_ << std::endl;
 	this->model_ = gdl::Model::load(this->stringTexture_);
-	std::cout << "End of init" << std::endl;
       }
 
       void	Texture3d::update(gdl::GameClock const & gameClock)

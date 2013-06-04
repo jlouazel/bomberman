@@ -6,8 +6,10 @@
 //  Copyright (c) 2013 manour_m. All rights reserved.
 //
 
+#include "AObject.hpp"
 #include "Texture3d.hpp"
 #include "Player.hh"
+#include "Vector.hpp"
 
 namespace BomberMan
 {
@@ -16,14 +18,19 @@ namespace BomberMan
     Player::Player(int pv, float speed, int max, int set, float x, float y, BomberMan::Display::AObject * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim)
       :   _pv(pv), _speed(speed), _nb_bomb_max(max), _nb_bomb_set(set)
     {
+      Display::Vector3f	position(0, 0, 0);
+      Display::Vector3f	rotation(0, 0, 0);
+      Display::Vector3f	len(0, 0, 0);
+
       this->_x = x;
       this->_y = y;
       this->_animation = anim;
       this->_sound = sound;
       this->_asset = asset;
-      // this->_asset->initialize();
+      this->_walking = new Display::Texture3d("models/WWwalking.fbx", position, rotation, len);
       this->_bomb = new Object(0.0, 0.0, 0, 0, 0, BOMB, NONE, 3, 3);
       this->_camera = 0; // initialise after.
+      this->_isMoving = false;
     }
 
     Player::~Player()
@@ -46,36 +53,52 @@ namespace BomberMan
     void	Player::initialize()
     {
       this->_asset->initialize();
+      this->_walking->initialize();
       this->_camera->initialize();
     }
 
     void	Player::update(gdl::GameClock const & gameClock)
     {
-      //std::cout << "Start update Player" << std::endl;
       this->_asset->update(gameClock);
 
+      if (this->_isMoving == false)
+	{
+	  this->_asset->play("Take 001", 1);
+	  this->_asset->update(gameClock);
+	}
+      else
+	{
+	  this->_walking->play("Take 001", 1);
+	  this->_walking->update(gameClock);
+	}
       // Input::Controller::KeyBoardManager::treatInput(input);
 
       const Event::IEvent* event = Event::EventManager::getEvent();
       if (event != NULL)
 	{
 	  const Event::Move *move = (const Event::Move *)event;
-
+	  this->_isMoving = true;
+	  std::cout << move->getAngle() << std::endl;
 	  float       angle =  move->getAngle() * 3.14159 / 180.0;
-	  float       x = -(cosf(angle) * 30);
-	  float       z = sinf(angle) * 30;
+	  float       x = -(cosf(angle) * 10);
+	  float       z = sinf(angle) * 10;
 
 	  std::cout << "YOOOOOOOOOOO : " << angle << std::endl;
 	  Display::Vector3f	newVectorPosition(this->_asset->getPosition().getX() + x, this->_asset->getPosition().getY(), this->_asset->getPosition().getZ() + z);
-	  Display::Vector3f	newVectorRotation(this->_asset->getRotation().getX(), angle / 180.0 * 3.14159, this->_asset->getRotation().getZ());
-	  // this->_asset->getPosition().setX(this->_asset->getPosition().getX() + x);
-	  // this->_asset->getPosition().setZ(this->_asset->getPosition().getZ() + z);
+	  Display::Vector3f	newVectorRotation(this->_asset->getRotation().getX(), static_cast<int>(angle * 180.0 / 3.14159 + 270) % 360, this->_asset->getRotation().getZ());
 	  this->_asset->setPosition(newVectorPosition);
 	  this->_asset->setRotation(newVectorRotation);
-	  // this->_asset->getRotation().setY((float)-((int)(angle + 270) % 360));
-	  //this->info();
-	  // this->play("Take 001", 1);
+	  this->_walking->setPosition(newVectorPosition);
+	  this->_walking->setRotation(newVectorRotation);
+	  this->_camera->setLook(newVectorPosition);
+	  newVectorPosition.setX(newVectorPosition.getX() - 1000.0);
+	  newVectorPosition.setY(newVectorPosition.getY() + 1000.0);
+	  this->_camera->setPosition(newVectorPosition);
 	  delete move;
+	}
+      else
+	{
+	  this->_isMoving = false;
 	}
       //std::cout << "End update Player" << std::endl;
     }
@@ -83,7 +106,11 @@ namespace BomberMan
     void	Player::draw(gdl::GameClock const & gameClock, gdl::Input & input)
     {
       //std::cout << "Start Draw player" << std::endl;
-      this->_asset->draw();
+      if (this->_isMoving == false)
+	this->_asset->draw();
+      else
+	this->_walking->draw();
+      this->_camera->update(gameClock, input);
       //std::cout << "End Draw player" << std::endl;
     }
 
