@@ -10,7 +10,7 @@ namespace BomberMan
   namespace Display
   {
     Camera::Camera(void)
-      : position_(-500.0f, 500.0f, 0.0f), rotation_(0.0f, 0.0f, 0.0f), look_(0.0f, 0.0f, 0.0f)
+      : position_(-500.0f, 700.0f, 0.0f), rotation_(0.0f, 0.0f, 0.0f), look_(0.0f, 0.0f, 0.0f)
     {
       this->angle_ = 3.14159265359 * 70.0 / 180.0;
       this->heightScreen_ = (int)(((tanf(this->angle_ / 2.0) * 300.0) * 2.0));
