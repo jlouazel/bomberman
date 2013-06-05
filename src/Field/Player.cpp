@@ -62,6 +62,26 @@ namespace BomberMan
       this->_camera->initialize();
     }
 
+    bool        Player::checkMyMove(float x, float z, Manager *manager)
+    {
+      if ((x + 110 - 20) / 220 < 0 || (x + 110 + 20) / 220 > (manager->getWidth()) ||
+	  (z + 110 - 20) / 220 < 0 || (z + 110 + 20) / 220 > (manager->getHeight()))
+	return (false);
+      else
+	return (true);
+      for (int y = 0; y < manager->getWidth(); y++)
+	for (int x = 0; x < manager->getHeight(); x++)
+	  {
+	    std::list<IGameComponent *> obj = manager->get(x, y);
+
+	    for (std::list<IGameComponent *>::iterator it = obj.begin(); it != obj.end(); ++it)
+	      {
+		std::cout << "x = " << (*it)->getX() << " X = " << (this->_x + 110) / 220 << std::endl;;
+	      }
+	  }
+      return (true);
+    }
+
     void	Player::update(gdl::GameClock const & gameClock, Manager *manager)
     {
       // Input::Controller::KeyBoardManager::treatInput(input);
@@ -79,21 +99,24 @@ namespace BomberMan
 
 	  // std::cout << "YOOOOOOOOOOO : " << angle << std::endl;
 	  Display::Vector3f	newVectorPosition(this->_asset->getPosition().getX() + x, this->_asset->getPosition().getY(), this->_asset->getPosition().getZ() + z);
-	  this->_x = this->_asset->getPosition().getX() + x;
-	  this->_y = this->_asset->getPosition().getZ() + z;
-	  Display::Vector3f	newVectorRotation(this->_asset->getRotation().getX(), static_cast<int>(angle * 180.0 / 3.14159 + 270) % 360, this->_asset->getRotation().getZ());
-	  this->_asset->setPosition(newVectorPosition);
-	  this->_asset->setRotation(newVectorRotation);
-	  this->_walking->setPosition(newVectorPosition);
-	  this->_walking->setRotation(newVectorRotation);
-	  this->_run->setPosition(newVectorPosition);
-	  this->_run->setRotation(newVectorRotation);
-	  this->_mark->setPosition(newVectorPosition);
-	  this->_camera->setLook(newVectorPosition);
-	  newVectorPosition.setX(newVectorPosition.getX() + this->_camera->getDistanceX());
-	  newVectorPosition.setY(newVectorPosition.getY() + this->_camera->getDistanceY());
-	  this->_camera->setPosition(newVectorPosition);
-	  delete move;
+	  if (this->checkMyMove(this->_asset->getPosition().getX() + x, this->_asset->getPosition().getZ() + z, manager) == true)
+	    {
+	      this->_x = this->_asset->getPosition().getX() + x;
+	      this->_y = this->_asset->getPosition().getZ() + z;
+	      Display::Vector3f	newVectorRotation(this->_asset->getRotation().getX(), static_cast<int>(angle * 180.0 / 3.14159 + 270) % 360, this->_asset->getRotation().getZ());
+	      this->_asset->setPosition(newVectorPosition);
+	      this->_asset->setRotation(newVectorRotation);
+	      this->_walking->setPosition(newVectorPosition);
+	      this->_walking->setRotation(newVectorRotation);
+	      this->_run->setPosition(newVectorPosition);
+	      this->_run->setRotation(newVectorRotation);
+	      this->_mark->setPosition(newVectorPosition);
+	      this->_camera->setLook(newVectorPosition);
+	      newVectorPosition.setX(newVectorPosition.getX() + this->_camera->getDistanceX());
+	      newVectorPosition.setY(newVectorPosition.getY() + this->_camera->getDistanceY());
+	      this->_camera->setPosition(newVectorPosition);
+	      delete move;
+	    }
 	}
       else
 	{

@@ -57,6 +57,7 @@ namespace BomberMan
       void	  update(gdl::GameClock const &, Manager *);
       void	  draw(gdl::GameClock const &);
       void	  initialize();
+      bool	  checkMyMove(float, float, Manager *);
     };
   }
 }
