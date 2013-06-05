@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 22:23:19 2013 julien fortin
-// Last update Tue Jun  4 17:29:06 2013 julien fortin
+// Last update Wed Jun  5 00:58:35 2013 julien fortin
 //
 
 #include	<algorithm>
@@ -110,11 +110,11 @@ namespace BomberMan
     }
 
     void		EventManager::moveEvent(EventDirection::eEventDirection direction,
-						float angle, float x, float y)
+						float angle, bool run)
     {
       EventContext::eEventContext	context;  // Core::getContext();
 
-      EventManager::addEvent(new Move(context, direction, angle, x, y));
+      EventManager::addEvent(new Move(context, direction, angle, run));
     }
 
     void		EventManager::actionEvent(EventDirection::eEventDirection,

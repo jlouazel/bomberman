@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sun May 19 00:17:06 2013 julien fortin
-// Last update Tue Jun  4 19:58:35 2013 Jean-Baptiste Louazel
+// Last update Wed Jun  5 01:06:24 2013 julien fortin
 //
 
 #include	<string>
@@ -265,7 +265,7 @@ namespace BomberMan
 	  {
 	    if (!(last % 3))
 	      Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::NO,
-								(static_cast<int>(angle) + 90) % 360, 42, 42);
+								(static_cast<int>(angle) + 90) % 360, false);
 
 	  }
 	last++;
