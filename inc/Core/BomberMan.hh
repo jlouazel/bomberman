@@ -4,29 +4,56 @@
 #include <Game.hpp>
 #include "BomberGame.hh"
 
-#define BOMBER_WIDTH 1920
-#define BOMBER_HEIGHT 1080
-
 namespace BomberMan
 {
   namespace Core
   {
-    class   BomberMan : public gdl::Game
+    const int	BOMBER_WIDTH	= 1920;
+    const int	BOMBER_HEIGHT	= 1080;
+
+    class BomberMan : public gdl::Game
     {
     private:
-      BomberGame *_currentGame;
+      BomberMan(BomberMan const&);
+      BomberMan	&operator=(BomberMan const&);
 
     private:
-      void      _drawGame() const;
-      void	_initializeWindow();
+      bool		_intro;
+      bool		_menu;
+      bool		_game;
+
+    private:
+      BomberGame*	_currentGame;
+
+    private:
+      void		_initializeWindow();
+      void		_initializeResources() const;
+      void		_initializeIntro();
+      void		_initializeInput() const;
+      void		_initializeEvent() const;
+      void		_initializeMenu() const;
+
+      void		_drawIntro() const;
+      void		_drawMenu() const;
+      void		_drawGame() const;
+
+      void		_updateIntro();
+      void		_updateMenu();
+      void		_updateGame();
+
+    private:
+      void		_startMenu();
+      void		_startGame();
+
 
     public:
-      BomberMan() : gdl::Game() {}
-      ~BomberMan();
-      void	initialize();
-      void	update();
-      void	draw();
-      void	unload();
+      BomberMan();
+      virtual ~BomberMan();
+
+      virtual void	initialize(void);
+      virtual void	update(void);
+      virtual void	unload(void);
+      virtual void	draw(void);
     };
   }
 }
@@ -34,10 +61,9 @@ namespace BomberMan
 #else
 namespace BomberMan
 {
-    namespace Core
-    {
-      class BomberMan;
-    }
+  namespace Core
+  {
+    class BomberMan;
+  }
 }
-
 #endif

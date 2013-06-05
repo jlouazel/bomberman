@@ -22,7 +22,7 @@ namespace BomberMan
       virtual ~IGameComponent(){}
 
       virtual void					explode(int, eDirection) = 0;
-      virtual void  draw(gdl::GameClock const & gameClock, gdl::Input & input) = 0;
+      virtual void  draw(gdl::GameClock const & gameClock) = 0;
       virtual void  update(gdl::GameClock const & gameClock) = 0;
 
       virtual float					getX() const = 0;

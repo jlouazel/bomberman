@@ -33,7 +33,7 @@ namespace BomberMan
       this->_asset->update(gameClock);
     }
 
-    void        Object::draw(gdl::GameClock const & gameClock, gdl::Input & input)
+    void        Object::draw(gdl::GameClock const & gameClock)
     {
       this->_asset->draw();
     }

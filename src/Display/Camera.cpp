@@ -34,7 +34,7 @@ namespace BomberMan
       glDepthFunc(GL_LEQUAL);
     }
 
-    void		Camera::update(gdl::GameClock const & gameClock, gdl::Input & input)
+    void		Camera::update(gdl::GameClock const & gameClock)
     {
       glMatrixMode(GL_PROJECTION);
       glLoadIdentity();
@@ -62,49 +62,49 @@ namespace BomberMan
     {
       return (this->position_);
     }
-        
+
     Vector3f	Camera::getRotation() const
     {
       return (this->rotation_);
     }
-        
+
     Vector3f	Camera::getLook() const
     {
       return (this->look_);
     }
-        
+
     float		Camera::getAngle() const
     {
       return (this->angle_);
     }
-        
+
     int		Camera::getHeightScreen() const
     {
       return (this->heightScreen_);
     }
-        
+
     int		Camera::getWidthScreen() const
     {
       return (this->widthScreen_);
     }
-        
+
     void		Camera::setPosition(Vector3f &position)
     {
       this->position_ = position;
       this->heightScreen_ = (int)((tanf(this->angle_ / 2) * this->position_.getZ()) * 2);
       this->widthScreen_ = (int)((tanf(this->angle_ / 2) * this->position_.getZ()) * 2);
     }
-        
+
     void		Camera::setRotation(Vector3f &rotation)
     {
       this->rotation_ = rotation;
     }
-        
+
     void		Camera::setLook(Vector3f &look)
     {
       this->look_ = look;
     }
-        
+
     void		Camera::setAngle(float angle)
     {
       this->angle_ = 3.14159265359 * angle / 180;

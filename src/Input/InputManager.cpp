@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 22:20:00 2013 julien fortin
-// Last update Tue Jun  4 10:48:07 2013 julien fortin
+// Last update Wed Jun  5 17:05:01 2013 julien fortin
 //
 
 #include	<string>
@@ -86,6 +86,11 @@ namespace BomberMan
       if (c)
 	delete c;
       c = 0;
+    }
+
+    void	InputManager::treatInput(gdl::Input& input)
+    {
+      Controller::KeyBoardManager::getKeyBoardManager()->treatInput(input);
     }
 
     void	InputManager::_shouldILeave()

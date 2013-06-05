@@ -37,7 +37,7 @@ namespace BomberMan
       void		setLook(Vector3f &);
       void		setAngle(float);
       void		initialize(void);
-      void		update(gdl::GameClock const &, gdl::Input &);
+      void		update(gdl::GameClock const &);
     };
   }
 }
