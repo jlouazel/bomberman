@@ -72,7 +72,6 @@ namespace BomberMan
 	  const Event::Move *move = (const Event::Move *)event;
 	  this->_isRunning = move->isRunning();
 	  this->_isMoving = true;
-	  std::cout << move->getAngle() << std::endl;
 	  float       angle =  move->getAngle() * 3.14159 / 180.0;
 	  float       x = -(cosf(angle) * this->_speed);
 	  float       z = sinf(angle) * this->_speed;

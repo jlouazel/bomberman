@@ -32,28 +32,42 @@ namespace BomberMan
       return "models/Wall3.fbx";
     }
 
-    static std::string const	randomiseWalls()
+    static int	randAngle(unsigned int plage)
     {
-      unsigned int r = rand() % 100;
-      if (r >= 0 && r <= 75)
-	return "models/Barrel.fbx";
-      return "";
+      unsigned int angle = rand() % 360;
+      if (angle > 90 && angle < 180)
+	{
+	  if (rand() % 100 < 50)
+	    angle = 90 + rand() % plage;
+	  else
+	    angle = 90 - rand() % plage;
+	}
+      else
+	{
+	  if (rand() % 100 < 50)
+	    angle = 0 + rand() % plage;
+	  else
+	    angle = 0 - rand() % plage;
+	}
+      return angle;
     }
 
     static void	addWalls(std::list<IGameComponent *> & components, unsigned int width, unsigned int height, unsigned int elemCnt)
     {
       Display::Vector3f	vectorLen(0.0, 0.0, 0.0);
-      Display::Vector3f	vectorRot(0.0, rand() % 360, 0.0);
+      Display::Vector3f	vectorRot(0.0, 0.0, 0.0);
       Display::Vector3f	vectorPosition((elemCnt / width) * 220, 0.0, (elemCnt % width) * 220);
       if (elemCnt % width != 0 || elemCnt / width != height - 1)
 	{
 	  if ((elemCnt % width) % 2 != 0 && (elemCnt / width) % 2 != 0)
-	    components.push_front(new Wall(false, 100, elemCnt / width, elemCnt % width, new Display::Texture3d("models/Cuve.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+	    {
+	      vectorRot.setY(rand() % 360);
+	      components.push_front(new Wall(false, 100, elemCnt / width, elemCnt % width, new Display::Texture3d("models/Cuve.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+	    }
 	  else
 	    {
-	      std::string model = randomiseWalls();
-	      if (model.empty() == false)
-		components.push_front(new Wall(true, 100, elemCnt / width, elemCnt % width, new Display::Texture3d(model, vectorPosition, vectorRot, vectorLen), 0, 0));
+	      vectorRot.setY(randAngle(5));
+	      components.push_front(new Wall(true, 100, elemCnt / width, elemCnt % width, new Display::Texture3d("models/Barrel.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
 	    }
 	}
     }
@@ -98,10 +112,16 @@ namespace BomberMan
 	  if (elemCnt % 2 == 0)
 	    components.push_front(new Empty(elemCnt / width, elemCnt % width, new Display::Texture3d("models/ExplodedLine.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
 	  else
-	    if (rand() % 100 <= 30)
-	      components.push_front(new Empty(elemCnt / width, elemCnt % width, new Display::Texture3d("models/ExplodedLineBody.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
-	    else
-	      components.push_front(new Empty(elemCnt / width, elemCnt % width, new Display::Texture3d("models/ExplodedLine2.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+	    {
+	      static int stat = 100;
+	      if (rand() % 100 <= stat)
+		{
+		  components.push_front(new Empty(elemCnt / width, elemCnt % width, new Display::Texture3d("models/ExplodedLineBody.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+		  stat /= 2;
+		}
+	      else
+		components.push_front(new Empty(elemCnt / width, elemCnt % width, new Display::Texture3d("models/ExplodedLine2.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+	    }
 	}
       addWalls(components, width, height, elemCnt);
     }
