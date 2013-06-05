@@ -49,8 +49,7 @@ namespace BomberMan
       for (unsigned int y = 0; y != this->getManager()->Field::Manager::getHeight(); y++)
         for (unsigned int x = 0; x != this->getManager()->Field::Manager::getWidth(); x++)
           for (std::list<Field::IGameComponent *>::iterator it = this->getManager()->Field::Manager::get(x, y).begin(); it != this->getManager()->Field::Manager::get(x, y).end(); ++it)
-            if (y > (this->getPlayers().front()->getX() / 220) - 10 && y < (this->getPlayers().front()->getX() / 220) + 7 && x > (this->getPlayers().front()->getY() / 220) - 10 && x < (this->getPlayers().front()->getY() / 220) + 7)
-              updateObjs(*it, gameClock, this->_manager);
+	    updateObjs(*it, gameClock, this->_manager);
       updateObjs(this->getPlayers().front(), gameClock, this->_manager);
     }
 
@@ -64,7 +63,7 @@ namespace BomberMan
       for (unsigned int y = 0; y != this->getManager()->Field::Manager::getHeight(); y++)
         for (unsigned int x = 0; x != this->getManager()->Field::Manager::getWidth(); x++)
           for (std::list<Field::IGameComponent *>::iterator it = this->getManager()->Field::Manager::get(x, y).begin(); it != this->getManager()->Field::Manager::get(x, y).end(); ++it)
-            if (y > (this->getPlayers().front()->getX() / 220) - 10 && y < (this->getPlayers().front()->getX() / 220) + 7 && x > (this->getPlayers().front()->getY() / 220) - 10 && x < (this->getPlayers().front()->getY() / 220) + 7)
+            if (y > ((this->getPlayers().front()->getX() - 110) / 220) - 3 && y < ((this->getPlayers().front()->getX() + 110) / 220) + 4 && x > ((this->getPlayers().front()->getY() - 110) / 220) - 3 && x < ((this->getPlayers().front()->getY() + 110) / 220) + 3)
               affObjs(*it, gameClock);
 
       // for (std::list<Field::Player *>::iterator it2 = this->_currentGame->getPlayers().begin(); it2 != this->_currentGame->getPlayers().end(); ++it2)

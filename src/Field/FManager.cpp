@@ -2,7 +2,6 @@
 #include <cstdlib>
 #include <ctime>
 #include <map>
-
 #include "Wall.hh"
 #include "FManager.hh"
 #include "Empty.hh"
@@ -74,6 +73,7 @@ namespace BomberMan
 
     static void addEmptyObject(std::list<IGameComponent *> & components, unsigned int width, unsigned int height, unsigned int elemCnt)
     {
+      std::cout << "elem no " << elemCnt << std::endl;
       Display::Vector3f	vectorLen(0.0, 0.0, 0.0);
       Display::Vector3f	vectorRot(0.0, 0.0, 0.0);
       Display::Vector3f	vectorPosition((elemCnt / width) * 220, 0.0, (elemCnt % width) * 220);
@@ -98,29 +98,36 @@ namespace BomberMan
 	  vectorRot.setY(180);
 	  components.push_front(new Empty(elemCnt / width, elemCnt % width, new Display::Texture3d(randomiseDecor(), vectorPosition, vectorRot, vectorLen), 0, 0));
 	}
-      if (elemCnt / height == 0)
+      std::cout << elemCnt / width << std::endl;
+      if (elemCnt / width == 0)
 	{
 	  vectorRot.setY(270);
 	  if (elemCnt % width == 0)
 	    {
+	      std::cout << "LEFT" << std::endl;
 	      components.push_front(new Empty(elemCnt / width, elemCnt % width, new Display::Texture3d("models/ExplodedLineLeft.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
 	    }
 	  else if (elemCnt % width == width - 1)
 	    {
+	      std::cout << "RIGHT" << std::endl;
 	      components.push_front(new Empty(elemCnt / width, elemCnt % width, new Display::Texture3d("models/ExplodedLineRight.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
 	    }
-	  if (elemCnt % 2 == 0)
-	    components.push_front(new Empty(elemCnt / width, elemCnt % width, new Display::Texture3d("models/ExplodedLine.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
 	  else
 	    {
-	      static int stat = 100;
-	      if (rand() % 100 <= stat)
-		{
-		  components.push_front(new Empty(elemCnt / width, elemCnt % width, new Display::Texture3d("models/ExplodedLineBody.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
-		  stat /= 2;
-		}
+	      std::cout << "LINE" << std::endl;
+	      if (elemCnt % 2 == 0)
+		components.push_front(new Empty(elemCnt / width, elemCnt % width, new Display::Texture3d("models/ExplodedLine.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
 	      else
-		components.push_front(new Empty(elemCnt / width, elemCnt % width, new Display::Texture3d("models/ExplodedLine2.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+		{
+		  static int stat = 100;
+		  if (rand() % 100 <= stat)
+		    {
+		      components.push_front(new Empty(elemCnt / width, elemCnt % width, new Display::Texture3d("models/ExplodedLineBody.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+		      stat /= 2;
+		}
+		  else
+		    components.push_front(new Empty(elemCnt / width, elemCnt % width, new Display::Texture3d("models/ExplodedLine2.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+		}
 	    }
 	}
       addWalls(components, width, height, elemCnt);
@@ -134,8 +141,8 @@ namespace BomberMan
       for (; this->_width < 15 || this->_width > 100; this->_width = rand() % 100);
       for (; this->_height < 15 || this->_height > 100; this->_height = rand() % 100);
 
-      this->_width = 5;
-      this->_height = 5;
+      //      this->_width = 3;
+      //      this->_height = 2;
 
       this->_map = std::vector<std::list<IGameComponent *> >(this->_width * this->_height, std::list<IGameComponent *>());
       unsigned int elemCnt = 0;

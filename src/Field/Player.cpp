@@ -98,7 +98,7 @@ namespace BomberMan
 
 	  // std::cout << "YOOOOOOOOOOO : " << angle << std::endl;
 	  Display::Vector3f	newVectorPosition(this->_asset->getPosition().getX() + x, this->_asset->getPosition().getY(), this->_asset->getPosition().getZ() + z);
-	  if (this->checkMyMove(this->_asset->getPosition().getX() + x, this->_asset->getPosition().getZ() + z, manager) == true)
+	  if (this->checkMyMove(this->_asset->getPosition().getZ() + z, this->_asset->getPosition().getX() + x, manager) == true)
 	    {
 	      this->_x = this->_asset->getPosition().getX() + x;
 	      this->_y = this->_asset->getPosition().getZ() + z;
