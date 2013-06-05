@@ -64,16 +64,9 @@ namespace BomberMan
       std::cout << "X = " << this->_currentGame->getPlayers().front()->getX() << std::endl;
       std::cout << "Y = "<< this->_currentGame->getPlayers().front()->getY() << std::endl;
       for (unsigned int y = 0; y != this->_currentGame->getManager()->Field::Manager::getHeight(); y++)
-<<<<<<< HEAD
       	for (unsigned int x = 0; x != this->_currentGame->getManager()->Field::Manager::getWidth(); x++)
       	  for (std::list<Field::IGameComponent *>::iterator it = this->_currentGame->getManager()->Field::Manager::get(x, y).begin(); it != this->_currentGame->getManager()->Field::Manager::get(x, y).end(); ++it)
       	    updateObjs(*it, gameClock_);
-=======
-	for (unsigned int x = 0; x != this->_currentGame->getManager()->Field::Manager::getWidth(); x++)
-	  for (std::list<Field::IGameComponent *>::iterator it = this->_currentGame->getManager()->Field::Manager::get(x, y).begin(); it != this->_currentGame->getManager()->Field::Manager::get(x, y).end(); ++it)
-	    if (x > this->_currentGame->getPlayers().front()->getX() - 10 && x < this->_currentGame->getPlayers().front()->getX() + 10 && y > this->_currentGame->getPlayers().front()->getY() - 10 && y < this->_currentGame->getPlayers().front()->getY() + 10)
-	      updateObjs(*it, gameClock_);
->>>>>>> 6ee1f034de9996ee605d16553b633299c2bd74f1
       updateObjs(this->_currentGame->getPlayers().front(), gameClock_);
     }
 
