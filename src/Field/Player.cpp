@@ -79,6 +79,8 @@ namespace BomberMan
 
 	  // std::cout << "YOOOOOOOOOOO : " << angle << std::endl;
 	  Display::Vector3f	newVectorPosition(this->_asset->getPosition().getX() + x, this->_asset->getPosition().getY(), this->_asset->getPosition().getZ() + z);
+	  this->_x = this->_asset->getPosition().getX() + x;
+	  this->_y = this->_asset->getPosition().getZ() + z;
 	  Display::Vector3f	newVectorRotation(this->_asset->getRotation().getX(), static_cast<int>(angle * 180.0 / 3.14159 + 270) % 360, this->_asset->getRotation().getZ());
 	  this->_asset->setPosition(newVectorPosition);
 	  this->_asset->setRotation(newVectorRotation);
