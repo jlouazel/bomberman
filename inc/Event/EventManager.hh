@@ -42,7 +42,7 @@ namespace BomberMan
       static void			addEvent(const IEvent*);
 
       void			moveEvent(EventDirection::eEventDirection,
-						  float, float, float);
+						  float, bool);
       void			actionEvent(EventDirection::eEventDirection,
 						    float, float);
       void			gameEvent(EventDirection::eEventDirection,

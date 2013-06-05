@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 21 20:26:12 2013 julien fortin
-// Last update Tue Jun  4 19:24:16 2013 julien fortin
+// Last update Wed Jun  5 14:00:53 2013 julien fortin
 //
 
 #include	"EventManager.hh"
@@ -43,35 +43,23 @@ namespace BomberMan
       {
 	// BomberMan::getBomberMan()->getPlayer(0);
 	// BomberMan::getBomberMan()->getPlayer(1);
+	this->_input = 0;
 
 	this->initMapping(true);
 
-	this->_keys[gdl::Keys::W] = &KeyBoardManager::_up;
-	this->_keys[static_cast<gdl::Keys::Key>(gdl::Keys::W | gdl::Keys::A)] = &KeyBoardManager::_upLeft;
-	this->_keys[static_cast<gdl::Keys::Key>(gdl::Keys::W | gdl::Keys::D)] = &KeyBoardManager::_upRight;
-
-	this->_keys[gdl::Keys::A] = &KeyBoardManager::_left;
-	this->_keys[gdl::Keys::D] = &KeyBoardManager::_right;
 
 	this->_keys[gdl::Keys::S] = &KeyBoardManager::_down;
-	this->_keys[static_cast<gdl::Keys::Key>(gdl::Keys::S | gdl::Keys::A)] = &KeyBoardManager::_downLeft;
-	this->_keys[static_cast<gdl::Keys::Key>(gdl::Keys::S | gdl::Keys::Q)] = &KeyBoardManager::_downLeft;
-	this->_keys[static_cast<gdl::Keys::Key>(gdl::Keys::S | gdl::Keys::D)] = &KeyBoardManager::_downRight;
-
+	this->_keys[gdl::Keys::D] = &KeyBoardManager::_right;
 	this->_keys[gdl::Keys::Space] = &KeyBoardManager::_action;
-
-	this->_keys[gdl::Keys::Z] = &KeyBoardManager::_up;
-	this->_keys[static_cast<gdl::Keys::Key>(gdl::Keys::Z | gdl::Keys::Q)] = &KeyBoardManager::_upLeft;
-	this->_keys[static_cast<gdl::Keys::Key>(gdl::Keys::Z | gdl::Keys::D)] = &KeyBoardManager::_upRight;
-
-	this->_keys[gdl::Keys::Q] = &KeyBoardManager::_left;
-
 
 	this->_keys[gdl::Keys::Up] = &KeyBoardManager::_up;
 	this->_keys[gdl::Keys::Left] = &KeyBoardManager::_left;
 	this->_keys[gdl::Keys::Right] = &KeyBoardManager::_right;
 	this->_keys[gdl::Keys::Down] = &KeyBoardManager::_down;
 	this->_keys[gdl::Keys::Return] = &KeyBoardManager::_action;
+
+	this->_run[0] = gdl::Keys::LShift;
+	//this->_run[0] = gdl::Keys::;
       }
 
       KeyBoardManager::~KeyBoardManager()
@@ -80,104 +68,170 @@ namespace BomberMan
 
       void	KeyBoardManager::initMapping(bool qwerty)
       {
+	this->_qwerty = qwerty;
+
 	this->_mappingP1.clear();
 	this->_mappingP2.clear();
 
-	this->_mappingP2.push_back(std::pair<gdl::Keys::Key, gdl::Keys::Key>(gdl::Keys::Up, gdl::Keys::Left));
-	this->_mappingP2.push_back(std::pair<gdl::Keys::Key, gdl::Keys::Key>(gdl::Keys::Up, gdl::Keys::Right));
-	this->_mappingP2.push_back(std::pair<gdl::Keys::Key, gdl::Keys::Key>(gdl::Keys::Down, gdl::Keys::Left));
-	this->_mappingP2.push_back(std::pair<gdl::Keys::Key, gdl::Keys::Key>(gdl::Keys::Down, gdl::Keys::Right));
-
-	this->_mappingP2.push_back(std::pair<gdl::Keys::Key, gdl::Keys::Key>(gdl::Keys::Up, gdl::Keys::Up));
-	this->_mappingP2.push_back(std::pair<gdl::Keys::Key, gdl::Keys::Key>(gdl::Keys::Left, gdl::Keys::Left));
-	this->_mappingP2.push_back(std::pair<gdl::Keys::Key, gdl::Keys::Key>(gdl::Keys::Right, gdl::Keys::Right));
-	this->_mappingP2.push_back(std::pair<gdl::Keys::Key, gdl::Keys::Key>(gdl::Keys::Down, gdl::Keys::Down));
-	this->_mappingP2.push_back(std::pair<gdl::Keys::Key, gdl::Keys::Key>(gdl::Keys::Return, gdl::Keys::Return));
+	this->_mappingP2.push_back(gdl::Keys::Up);
+	this->_mappingP2.push_back(gdl::Keys::Left);
+	this->_mappingP2.push_back(gdl::Keys::Down);
+	this->_mappingP2.push_back(gdl::Keys::Right);
+	this->_mappingP2.push_back(gdl::Keys::Return);
 
 	if (qwerty)
 	  {
-	    this->_mappingP2.push_back(std::pair<gdl::Keys::Key, gdl::Keys::Key>(gdl::Keys::W, gdl::Keys::A));
-	    this->_mappingP2.push_back(std::pair<gdl::Keys::Key, gdl::Keys::Key>(gdl::Keys::W, gdl::Keys::D));
-	    this->_mappingP2.push_back(std::pair<gdl::Keys::Key, gdl::Keys::Key>(gdl::Keys::A, gdl::Keys::S));
-
-	    this->_mappingP1.push_back(std::pair<gdl::Keys::Key, gdl::Keys::Key>(gdl::Keys::W, gdl::Keys::W));
-	    this->_mappingP1.push_back(std::pair<gdl::Keys::Key, gdl::Keys::Key>(gdl::Keys::A, gdl::Keys::A));
+	    this->_keys[gdl::Keys::W] = &KeyBoardManager::_up;
+	    this->_keys[gdl::Keys::A] = &KeyBoardManager::_left;
+	    this->_mappingP1.push_back(gdl::Keys::W);
+	    this->_mappingP1.push_back(gdl::Keys::A);
 	  }
 	else
 	  {
-	    this->_mappingP2.push_back(std::pair<gdl::Keys::Key, gdl::Keys::Key>(gdl::Keys::Z, gdl::Keys::Q));
-	    this->_mappingP2.push_back(std::pair<gdl::Keys::Key, gdl::Keys::Key>(gdl::Keys::Z, gdl::Keys::D));
-
-	    this->_mappingP1.push_back(std::pair<gdl::Keys::Key, gdl::Keys::Key>(gdl::Keys::Z, gdl::Keys::Z));
-	    this->_mappingP1.push_back(std::pair<gdl::Keys::Key, gdl::Keys::Key>(gdl::Keys::Q, gdl::Keys::Q));
+	    this->_keys[gdl::Keys::Z] = &KeyBoardManager::_up;
+	    this->_keys[gdl::Keys::Q] = &KeyBoardManager::_left;
+	    this->_mappingP1.push_back(gdl::Keys::Z);
+	    this->_mappingP1.push_back(gdl::Keys::Q);
 	  }
-	this->_mappingP2.push_back(std::pair<gdl::Keys::Key, gdl::Keys::Key>(gdl::Keys::S, gdl::Keys::D));
-	this->_mappingP1.push_back(std::pair<gdl::Keys::Key, gdl::Keys::Key>(gdl::Keys::D, gdl::Keys::D));
-	this->_mappingP1.push_back(std::pair<gdl::Keys::Key, gdl::Keys::Key>(gdl::Keys::S, gdl::Keys::S));
-	this->_mappingP1.push_back(std::pair<gdl::Keys::Key, gdl::Keys::Key>(gdl::Keys::Space, gdl::Keys::Space));
+	this->_mappingP1.push_back(gdl::Keys::S);
+	this->_mappingP1.push_back(gdl::Keys::D);
+	this->_mappingP1.push_back(gdl::Keys::Space);
       }
 
       void	KeyBoardManager::_treatInputForPlayer(gdl::Input& input,
-						      const std::list<std::pair<gdl::Keys::Key, gdl::Keys::Key> > & playerMapping)
+						      const std::list<gdl::Keys::Key>& playerMapping)
       {
-	for (std::list<std::pair<gdl::Keys::Key, gdl::Keys::Key> >::const_iterator it = playerMapping.begin();
+	this->_multiples = false;
+	for (std::list<gdl::Keys::Key>::const_iterator it = playerMapping.begin();
 	     it != playerMapping.end() ; ++it)
 	  {
-	    if (input.isKeyDown((*it).first) && input.isKeyDown((*it).second))
+	    if (input.isKeyDown((*it)))
 	      {
-		if (this->_keys.count(static_cast<gdl::Keys::Key>((*it).first | (*it).second)) > 0)
-		  (this->*(this->_keys[static_cast<gdl::Keys::Key>((*it).first | (*it).second)]))(0);
+		if (this->_keys.count(*it) > 0)
+		  (this->*(this->_keys[*it]))(0);
 	      }
 	  }
+	this->_multiples = false;
       }
 
       void	KeyBoardManager::treatInput(gdl::Input& input)
       {
+	this->_input = &input;
 	this->_treatInputForPlayer(input, this->_mappingP1);
 	this->_treatInputForPlayer(input, this->_mappingP2);
       }
 
-      void	KeyBoardManager::_upLeft(const Field::Player* const) const
+      bool	KeyBoardManager::_activeSpeed(const Field::Player* const player)
       {
-	Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::UP_LEFT, 225.0, 0, 0);
+	if (this->_input && this->_run.count(player) > 0)
+	  return this->_input->isKeyDown(this->_run[player]);
+	return false;
       }
 
-      void	KeyBoardManager::_upRight(const Field::Player* const) const
+      bool	KeyBoardManager::_upLeft(const Field::Player* const player)
       {
-	Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::UP_RIGHT, 135.0, 0, 0);
+	if (!this->_multiples)
+	  {
+	    if (this->_input && (this->_input->isKeyDown(gdl::Keys::Left) ||
+				 ((this->_qwerty && this->_input->isKeyDown(gdl::Keys::A))
+				  || this->_input->isKeyDown(gdl::Keys::Q))))
+	      {
+		this->_multiples = true;
+		Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::UP_LEFT, 225.0,
+								  this->_activeSpeed(player));
+		return true;
+	      }
+	  }
+	return false;
       }
 
-      void	KeyBoardManager::_up(const Field::Player* const) const
+      bool	KeyBoardManager::_upRight(const Field::Player* const player)
       {
-	Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::UP, 180.0, 0, 0);
+	if (!this->_multiples)
+	  {
+	    if (this->_input && (this->_input->isKeyDown(gdl::Keys::D) || this->_input->isKeyDown(gdl::Keys::Right)))
+	      {
+		this->_multiples = true;
+		Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::UP_RIGHT, 135.0,
+								  this->_activeSpeed(player));
+		return true;
+	      }
+	  }
+	return false;
       }
 
-      void	KeyBoardManager::_left(const Field::Player* const) const
+      void	KeyBoardManager::_up(const Field::Player* const player)
       {
-	Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::LEFT, 270.0, 0, 0);
+	if (!this->_multiples)
+	  {
+	    if (!this->_upRight(player) && !this->_upLeft(player))
+	      Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::UP, 180.0,
+								this->_activeSpeed(player));
+	  }
       }
 
-      void	KeyBoardManager::_right(const Field::Player* const) const
+      void	KeyBoardManager::_left(const Field::Player* const)
       {
-	Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::RIGHT, 90.0, 0, 0);
+	if (!this->_multiples)
+	  {
+	    Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::LEFT, 270.0,
+							      this->_activeSpeed(0));
+	  }
       }
 
-      void	KeyBoardManager::_downLeft(const Field::Player* const) const
+      void	KeyBoardManager::_right(const Field::Player* const player)
       {
-	Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::DOWN_LEFT, 315.0, 0, 0);
+	if (!this->_multiples)
+	  {
+	    this->_multiples = true;
+	    Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::RIGHT, 90.0,
+							      this->_activeSpeed(player));
+	  }
       }
 
-      void	KeyBoardManager::_downRight(const Field::Player* const) const
+      bool	KeyBoardManager::_downLeft(const Field::Player* const player)
       {
-	Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::DOWN_RIGHT, 45.0, 0, 0);
+	if (!this->_multiples)
+	  {
+	    if (this->_input && (this->_input->isKeyDown(gdl::Keys::Left) ||
+				 ((this->_qwerty && this->_input->isKeyDown(gdl::Keys::A))
+				  || this->_input->isKeyDown(gdl::Keys::Q))))
+	      {
+		this->_multiples = true;
+		Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::DOWN_LEFT, 315.0,
+								  this->_activeSpeed(player));
+		return true;
+	      }
+	  }
+	return false;
       }
 
-      void	KeyBoardManager::_down(const Field::Player* const) const
+      bool	KeyBoardManager::_downRight(const Field::Player* const player)
       {
-	Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::DOWN, 0.0, 0, 0);
+	if (!this->_multiples)
+	  {
+	    if (this->_input && (this->_input->isKeyDown(gdl::Keys::D) || this->_input->isKeyDown(gdl::Keys::Right)))
+	      {
+		this->_multiples = true;
+		Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::DOWN_RIGHT, 45.0,
+								  this->_activeSpeed(player));
+		return true;
+	      }
+	  }
+	return false;
       }
 
-      void	KeyBoardManager::_action(const Field::Player* const) const
+      void	KeyBoardManager::_down(const Field::Player* const player)
+      {
+	if (!this->_multiples)
+	  {
+	    if (!this->_downRight(player) && !this->_downLeft(player))
+	      Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::DOWN, 0.0,
+								this->_activeSpeed(player));
+	  }
+      }
+
+      void	KeyBoardManager::_action(const Field::Player* const)
       {
       }
     }
