@@ -91,7 +91,7 @@ namespace BomberMan
       for (unsigned int y = 0; y != this->_currentGame->getManager()->Field::Manager::getHeight(); y++)
 	for (unsigned int x = 0; x != this->_currentGame->getManager()->Field::Manager::getWidth(); x++)
 	  for (std::list<Field::IGameComponent *>::iterator it = this->_currentGame->getManager()->Field::Manager::get(x, y).begin(); it != this->_currentGame->getManager()->Field::Manager::get(x, y).end(); ++it)
-	    if (x > this->_currentGame->getPlayers().front()->getX() - 10 && x < this->_currentGame->getPlayers().front()->getX() + 10 && y > this->_currentGame->getPlayers().front()->getY() - 10 && y < this->_currentGame->getPlayers().front()->getY() + 10)
+	    if (x > (this->_currentGame->getPlayers().front()->getX() / 220) - 10 && x < (this->_currentGame->getPlayers().front()->getX() / 220) + 10 && y > (this->_currentGame->getPlayers().front()->getY() / 220) - 10 && y < (this->_currentGame->getPlayers().front()->getY() / 220) + 10)
 	      affObjs(*it, gameClock_, input_);
       // for (std::list<Field::Player *>::iterator it2 = this->_currentGame->getPlayers().begin(); it2 != this->_currentGame->getPlayers().end(); ++it2)
       // 	{
