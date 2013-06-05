@@ -64,31 +64,6 @@ namespace BomberMan
 
     void	Player::update(gdl::GameClock const & gameClock)
     {
-      this->_asset->update(gameClock);
-
-      if (this->_isRunning == true)
-	{
-	  this->_run->play("Take 001", 1);
-	  this->_walking->stop("Take 001");
-	  this->_speed = 30;
-	}
-      else if (this->_isMoving == true)
-	{
-	  this->_walking->play("Take 001", 1);
-	  this->_run->stop("Take 001");
-	  this->_speed = 10;
-	}
-      else
-	{
-	  this->_asset->play("Take 001", 1);
-	  this->_walking->stop("Take 001");
-	  this->_run->stop("Take 001");
-	}
-      this->_run->update(gameClock);
-      this->_mark->play("Take 001", 1);
-      this->_asset->update(gameClock);
-      this->_walking->update(gameClock);
-      this->_mark->update(gameClock);
       // Input::Controller::KeyBoardManager::treatInput(input);
 
       const Event::IEvent* event = Event::EventManager::getEvent();
@@ -121,7 +96,32 @@ namespace BomberMan
       else
 	{
 	  this->_isMoving = false;
+	  this->_isRunning = false;
 	}
+      if (this->_isRunning == true)
+	{
+	  this->_run->play("Take 001", 1);
+	  this->_walking->stop("Take 001");
+	  this->_speed = 30;
+	}
+      else if (this->_isMoving == true)
+	{
+	  this->_walking->play("Take 001", 1);
+	  this->_run->stop("Take 001");
+	  this->_speed = 10;
+	}
+      else
+	{
+	  this->_asset->play("Take 001", 1);
+	  this->_walking->stop("Take 001");
+	  this->_run->stop("Take 001");
+	}
+      this->_run->update(gameClock);
+      this->_mark->play("Take 001", 1);
+      this->_asset->update(gameClock);
+      this->_walking->update(gameClock);
+      this->_mark->update(gameClock);
+      this->_asset->update(gameClock);
       //std::cout << "End update Player" << std::endl;
     }
 
