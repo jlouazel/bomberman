@@ -42,7 +42,7 @@ namespace BomberMan
       Display::Vector3f      vectorLen(0.0, 0.0, 0.0);
       Display::Vector3f      vectorRot(0.0, 0.0, 0.0);
 
-      player.push_front(new Field::Player(100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+      player.push_front(new Field::Player(100, 14, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
       this->_initializeWindow();
       Input::InputManager::getInputManager()->init();
       this->_currentGame = new BomberGame(player);
@@ -61,10 +61,19 @@ namespace BomberMan
       Input::Controller::KeyBoardManager::getKeyBoardManager()->treatInput(this->input_);
 
       // this->_currentGame->updateCamera(gameClock_, input_);
+      std::cout << "X = " << this->_currentGame->getPlayers().front()->getX() << std::endl;
+      std::cout << "Y = "<< this->_currentGame->getPlayers().front()->getY() << std::endl;
       for (unsigned int y = 0; y != this->_currentGame->getManager()->Field::Manager::getHeight(); y++)
+<<<<<<< HEAD
       	for (unsigned int x = 0; x != this->_currentGame->getManager()->Field::Manager::getWidth(); x++)
       	  for (std::list<Field::IGameComponent *>::iterator it = this->_currentGame->getManager()->Field::Manager::get(x, y).begin(); it != this->_currentGame->getManager()->Field::Manager::get(x, y).end(); ++it)
       	    updateObjs(*it, gameClock_);
+=======
+	for (unsigned int x = 0; x != this->_currentGame->getManager()->Field::Manager::getWidth(); x++)
+	  for (std::list<Field::IGameComponent *>::iterator it = this->_currentGame->getManager()->Field::Manager::get(x, y).begin(); it != this->_currentGame->getManager()->Field::Manager::get(x, y).end(); ++it)
+	    if (x > this->_currentGame->getPlayers().front()->getX() - 10 && x < this->_currentGame->getPlayers().front()->getX() + 10 && y > this->_currentGame->getPlayers().front()->getY() - 10 && y < this->_currentGame->getPlayers().front()->getY() + 10)
+	      updateObjs(*it, gameClock_);
+>>>>>>> 6ee1f034de9996ee605d16553b633299c2bd74f1
       updateObjs(this->_currentGame->getPlayers().front(), gameClock_);
     }
 
@@ -89,7 +98,8 @@ namespace BomberMan
       for (unsigned int y = 0; y != this->_currentGame->getManager()->Field::Manager::getHeight(); y++)
 	for (unsigned int x = 0; x != this->_currentGame->getManager()->Field::Manager::getWidth(); x++)
 	  for (std::list<Field::IGameComponent *>::iterator it = this->_currentGame->getManager()->Field::Manager::get(x, y).begin(); it != this->_currentGame->getManager()->Field::Manager::get(x, y).end(); ++it)
-	    affObjs(*it, gameClock_, input_);
+	    if (x > this->_currentGame->getPlayers().front()->getX() - 10 && x < this->_currentGame->getPlayers().front()->getX() + 10 && y > this->_currentGame->getPlayers().front()->getY() - 10 && y < this->_currentGame->getPlayers().front()->getY() + 10)
+	      affObjs(*it, gameClock_, input_);
       // for (std::list<Field::Player *>::iterator it2 = this->_currentGame->getPlayers().begin(); it2 != this->_currentGame->getPlayers().end(); ++it2)
       // 	{
       // 	  std::cout << "KIKOU J'aime la police" << std::endl;

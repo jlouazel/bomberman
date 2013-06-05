@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 21 20:26:12 2013 julien fortin
-// Last update Wed Jun  5 14:00:53 2013 julien fortin
+// Last update Wed Jun  5 14:12:25 2013 julien fortin
 //
 
 #include	"EventManager.hh"
@@ -133,8 +133,8 @@ namespace BomberMan
 	if (!this->_multiples)
 	  {
 	    if (this->_input && (this->_input->isKeyDown(gdl::Keys::Left) ||
-				 ((this->_qwerty && this->_input->isKeyDown(gdl::Keys::A))
-				  || this->_input->isKeyDown(gdl::Keys::Q))))
+				 ((this->_qwerty && (this->_input->isKeyDown(gdl::Keys::A))
+				   || (!this->_qwerty && this->_input->isKeyDown(gdl::Keys::Q))))))
 	      {
 		this->_multiples = true;
 		Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::UP_LEFT, 225.0,
@@ -194,8 +194,8 @@ namespace BomberMan
 	if (!this->_multiples)
 	  {
 	    if (this->_input && (this->_input->isKeyDown(gdl::Keys::Left) ||
-				 ((this->_qwerty && this->_input->isKeyDown(gdl::Keys::A))
-				  || this->_input->isKeyDown(gdl::Keys::Q))))
+				 ((this->_qwerty && (this->_input->isKeyDown(gdl::Keys::A))
+				   || this->_input->isKeyDown(gdl::Keys::Q)))))
 	      {
 		this->_multiples = true;
 		Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::DOWN_LEFT, 315.0,

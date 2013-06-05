@@ -33,6 +33,7 @@ namespace BomberMan
       Display::AObject *   _run;
       Display::Camera *	  _camera;
       bool	  _isMoving;
+      bool        _isRunning;
 
     public:
       Player(int pv, float speed, int max, int set, float x, float y, Display::AObject * asset, Display::ISound * sound, Display::IAnimation * anim);

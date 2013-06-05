@@ -74,12 +74,19 @@ namespace BomberMan
       srand(time(0));
       for (; this->_width < 15 || this->_width > 100; this->_width = rand() % 100);
       for (; this->_height < 15 || this->_height > 100; this->_height = rand() % 100);
+<<<<<<< HEAD
 
       // ENLEVER CETTE SECTION
       this->_width = 5;
       this->_height = 5;
       // UNE FOIS QUE CA LAG PLUS
 
+=======
+      //
+      this->_width = 50;
+      this->_height = 50;
+      //
+>>>>>>> 6ee1f034de9996ee605d16553b633299c2bd74f1
       this->_map = std::vector<std::list<IGameComponent *> >(this->_width * this->_height, std::list<IGameComponent *>());
       unsigned int elemCnt = 0;
       for (std::vector<std::list<IGameComponent *> >::iterator it = this->_map.begin(); it != this->_map.end(); ++it)
