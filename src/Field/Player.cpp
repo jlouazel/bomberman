@@ -66,17 +66,28 @@ namespace BomberMan
     {
       this->_asset->update(gameClock);
 
-      if (this->_isMoving == false)
+      if (this->_isRunning == true)
 	{
-	  this->_asset->play("Take 001", 1);
-	  this->_asset->update(gameClock);
+	  this->_run->play("Take 001", 1);
+	  this->_walking->stop("Take 001");
+	  this->_speed = 30;
+	}
+      else if (this->_isMoving == true)
+	{
+	  this->_walking->play("Take 001", 1);
+	  this->_run->stop("Take 001");
+	  this->_speed = 10;
 	}
       else
 	{
-	  this->_walking->play("Take 001", 1);
-	  this->_walking->update(gameClock);
+	  this->_asset->play("Take 001", 1);
+	  this->_walking->stop("Take 001");
+	  this->_run->stop("Take 001");
 	}
+      this->_run->update(gameClock);
       this->_mark->play("Take 001", 1);
+      this->_asset->update(gameClock);
+      this->_walking->update(gameClock);
       this->_mark->update(gameClock);
       // Input::Controller::KeyBoardManager::treatInput(input);
 
@@ -84,11 +95,12 @@ namespace BomberMan
       if (event != NULL)
 	{
 	  const Event::Move *move = (const Event::Move *)event;
+	  this->_isRunning = move->isRunning();
 	  this->_isMoving = true;
 	  std::cout << move->getAngle() << std::endl;
 	  float       angle =  move->getAngle() * 3.14159 / 180.0;
-	  float       x = -(cosf(angle) * 14);
-	  float       z = sinf(angle) * 14;
+	  float       x = -(cosf(angle) * this->_speed);
+	  float       z = sinf(angle) * this->_speed;
 
 	  // std::cout << "YOOOOOOOOOOO : " << angle << std::endl;
 	  Display::Vector3f	newVectorPosition(this->_asset->getPosition().getX() + x, this->_asset->getPosition().getY(), this->_asset->getPosition().getZ() + z);
@@ -97,6 +109,8 @@ namespace BomberMan
 	  this->_asset->setRotation(newVectorRotation);
 	  this->_walking->setPosition(newVectorPosition);
 	  this->_walking->setRotation(newVectorRotation);
+	  this->_run->setPosition(newVectorPosition);
+	  this->_run->setRotation(newVectorRotation);
 	  this->_mark->setPosition(newVectorPosition);
 	  this->_camera->setLook(newVectorPosition);
 	  newVectorPosition.setX(newVectorPosition.getX() + this->_camera->getDistanceX());
@@ -114,10 +128,12 @@ namespace BomberMan
     void	Player::draw(gdl::GameClock const & gameClock, gdl::Input & input)
     {
       //std::cout << "Start Draw player" << std::endl;
-      if (this->_isMoving == false)
-	this->_asset->draw();
-      else
+      if (this->_isRunning == true)
+	this->_run->draw();
+      else if (this->_isMoving == true)
 	this->_walking->draw();
+      else
+	this->_asset->draw();
       this->_mark->draw();
       this->_camera->update(gameClock, input);
       //std::cout << "End Draw player" << std::endl;
