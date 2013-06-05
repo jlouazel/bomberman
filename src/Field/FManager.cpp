@@ -35,18 +35,27 @@ namespace BomberMan
     static std::string const	randomiseWalls()
     {
       unsigned int r = rand() % 100;
-      if (r >= 0 && r <= 2)
-	return "models/Wall3bis1.fbx";
-      else
-	if (r >= 3 && r <= 15)
-	  return "models/Wall3bis2.fbx";
-	else
-	  if (r >= 16 && r <= 44)
-	    return "models/Wall1.fbx";
+      if (r >= 0 && r <= 24)
+	return "models/Barils.fbx";
+      return "";
+    }
+
+    static void	addWalls(std::list<IGameComponent *> & components, unsigned int width, unsigned int height, unsigned int elemCnt)
+    {
+      Display::Vector3f	vectorLen(0.0, 0.0, 0.0);
+      Display::Vector3f	vectorRot(0.0, rand() % 360, 0.0);
+      Display::Vector3f	vectorPosition((elemCnt / width) * 220, 0.0, (elemCnt % width) * 220);
+      if (elemCnt % width != 0 || elemCnt / width != height - 1)
+	{
+	  if ((elemCnt % width) % 2 != 0 && (elemCnt / width) % 2 != 0)
+	    components.push_front(new Wall(true, 100, elemCnt / width, elemCnt % width, new Display::Texture3d("models/Cuve.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
 	  else
-	    if (r >= 45 && r <= 73)
-	      return "models/Wall2.fbx";
-      return "models/Wall3.fbx";
+	    {
+	      std::string model = randomiseWalls();
+	      if (model.empty() == false)
+		components.push_front(new Wall(true, 100, elemCnt / width, elemCnt % width, new Display::Texture3d(model, vectorPosition, vectorRot, vectorLen), 0, 0));
+	    }
+	}
     }
 
     static void addEmptyObject(std::list<IGameComponent *> & components, unsigned int width, unsigned int height, unsigned int elemCnt)
@@ -75,14 +84,7 @@ namespace BomberMan
 	  vectorRot.setY(180);
 	  components.push_front(new Empty(elemCnt / width, elemCnt % width, new Display::Texture3d(randomiseDecor(), vectorPosition, vectorRot, vectorLen), 0, 0));
 	}
-      components.push_front(new Wall(false, 100, elemCnt / width, elemCnt % width, new Display::Texture3d("models/Barils.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
-    }
-
-    static void	addWalls(std::list<IGameComponent *> & components, unsigned int width, unsigned int height, unsigned int elemCnt)
-    {
-      Display::Vector3f	vectorLen(0.0, 0.0, 0.0);
-      Display::Vector3f	vectorRot(0.0, 0.0, 0.0);
-      Display::Vector3f	vectorPosition((elemCnt / width) * 220, 0.0, (elemCnt % width) * 220);
+      addWalls(components, width, height, elemCnt);
     }
 
     Manager::Manager()
