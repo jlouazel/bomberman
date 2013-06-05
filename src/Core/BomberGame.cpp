@@ -46,8 +46,6 @@ namespace BomberMan
 
     void	BomberGame::update(gdl::GameClock const & gameClock)
     {
-      std::cout << "X = " << this->getPlayers().front()->getX() / 220 << std::endl;
-      std::cout << "Y = "<< this->getPlayers().front()->getY() / 220 << std::endl;
       for (unsigned int y = 0; y != this->getManager()->Field::Manager::getHeight(); y++)
         for (unsigned int x = 0; x != this->getManager()->Field::Manager::getWidth(); x++)
           for (std::list<Field::IGameComponent *>::iterator it = this->getManager()->Field::Manager::get(x, y).begin(); it != this->getManager()->Field::Manager::get(x, y).end(); ++it)
