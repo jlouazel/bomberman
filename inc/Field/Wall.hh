@@ -7,6 +7,7 @@
 
 #include "AGameComponent.hh"
 #include "Enums.hh"
+#include "FManager.hh"
 
 namespace BomberMan
 {
@@ -25,7 +26,7 @@ namespace BomberMan
             int     getPv() const;
             void    setPv(int);
 	  void  draw(gdl::GameClock const & gameClock);
-          void  update(gdl::GameClock const & gameClock);
+          void  update(gdl::GameClock const & gameClock, Manager *);
         };
     }
 }

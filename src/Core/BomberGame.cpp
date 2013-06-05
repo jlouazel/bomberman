@@ -16,14 +16,14 @@ namespace BomberMan
       this->_manager = new Field::Manager;
 
 
-        Display::Vector3f      vectorPosition(0, 0.0, 0);
-        Display::Vector3f      vectorLen(0.0, 0.0, 0.0);
-        Display::Vector3f      vectorRot(0.0, 0.0, 0.0);
+      Display::Vector3f      vectorPosition(0, 0.0, 0);
+      Display::Vector3f      vectorLen(0.0, 0.0, 0.0);
+      Display::Vector3f      vectorRot(0.0, 0.0, 0.0);
 
 
-	this->_players.push_front(new Field::Player(100, 14, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+      this->_players.push_front(new Field::Player(100, 14, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
 
-	std::list<Field::Player *>::iterator it = this->_players.begin();
+      std::list<Field::Player *>::iterator it = this->_players.begin();
       for (; it != this->_players.end(); ++it)
 	{
 	  this->_camera.push_back(new Display::Camera());
@@ -39,9 +39,9 @@ namespace BomberMan
     {
     }
 
-    static void updateObjs(Field::IGameComponent * comp, gdl::GameClock const & gameClock)
+    static void updateObjs(Field::IGameComponent * comp, gdl::GameClock const & gameClock, Field::Manager *manager)
     {
-      comp->update(gameClock);
+      comp->update(gameClock, manager);
     }
 
     void	BomberGame::update(gdl::GameClock const & gameClock)
@@ -50,8 +50,8 @@ namespace BomberMan
         for (unsigned int x = 0; x != this->getManager()->Field::Manager::getWidth(); x++)
           for (std::list<Field::IGameComponent *>::iterator it = this->getManager()->Field::Manager::get(x, y).begin(); it != this->getManager()->Field::Manager::get(x, y).end(); ++it)
             if (y > (this->getPlayers().front()->getX() / 220) - 10 && y < (this->getPlayers().front()->getX() / 220) + 7 && x > (this->getPlayers().front()->getY() / 220) - 10 && x < (this->getPlayers().front()->getY() / 220) + 7)
-              updateObjs(*it, gameClock);
-      updateObjs(this->getPlayers().front(), gameClock);
+              updateObjs(*it, gameClock, this->_manager);
+      updateObjs(this->getPlayers().front(), gameClock, this->_manager);
     }
 
     static void affObjs(Field::IGameComponent * comp, gdl::GameClock const & gameClock)

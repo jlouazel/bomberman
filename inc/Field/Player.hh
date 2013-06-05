@@ -15,6 +15,7 @@
 #include "Object.hh"
 #include "AObject.hpp"
 #include "Camera.hpp"
+#include "FManager.hh"
 
 namespace BomberMan
 {
@@ -53,7 +54,7 @@ namespace BomberMan
       int         getPv() const;
       void        setPv(int);
       void	  setCamera(Display::Camera *);
-      void	  update(gdl::GameClock const &);
+      void	  update(gdl::GameClock const &, Manager *);
       void	  draw(gdl::GameClock const &);
       void	  initialize();
     };

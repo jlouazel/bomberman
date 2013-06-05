@@ -36,7 +36,7 @@ namespace BomberMan
       {
       }
 
-      void        Empty::update(gdl::GameClock const & gameClock)
+      void        Empty::update(gdl::GameClock const & gameClock, Manager *manager)
       {
 	this->_asset->update(gameClock);
       }

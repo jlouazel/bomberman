@@ -7,6 +7,7 @@
 
 #include <iostream>
 
+#include "FManager.hh"
 #include "Enums.hh"
 #include "AObject.hpp"
 #include "ISound.hh"
@@ -22,8 +23,8 @@ namespace BomberMan
       virtual ~IGameComponent(){}
 
       virtual void					explode(int, eDirection) = 0;
-      virtual void  draw(gdl::GameClock const & gameClock) = 0;
-      virtual void  update(gdl::GameClock const & gameClock) = 0;
+      virtual void  draw(gdl::GameClock const &) = 0;
+      virtual void  update(gdl::GameClock const &, Manager *) = 0;
 
       virtual float					getX() const = 0;
       virtual void					setX(float) = 0;
