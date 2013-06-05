@@ -35,8 +35,8 @@ namespace BomberMan
     static std::string const	randomiseWalls()
     {
       unsigned int r = rand() % 100;
-      if (r >= 0 && r <= 24)
-	return "models/Barils.fbx";
+      if (r >= 0 && r <= 75)
+	return "models/Barrel.fbx";
       return "";
     }
 
@@ -48,7 +48,7 @@ namespace BomberMan
       if (elemCnt % width != 0 || elemCnt / width != height - 1)
 	{
 	  if ((elemCnt % width) % 2 != 0 && (elemCnt / width) % 2 != 0)
-	    components.push_front(new Wall(true, 100, elemCnt / width, elemCnt % width, new Display::Texture3d("models/Cuve.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+	    components.push_front(new Wall(false, 100, elemCnt / width, elemCnt % width, new Display::Texture3d("models/Cuve.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
 	  else
 	    {
 	      std::string model = randomiseWalls();
@@ -83,6 +83,25 @@ namespace BomberMan
 	{
 	  vectorRot.setY(180);
 	  components.push_front(new Empty(elemCnt / width, elemCnt % width, new Display::Texture3d(randomiseDecor(), vectorPosition, vectorRot, vectorLen), 0, 0));
+	}
+      if (elemCnt / height == 0)
+	{
+	  vectorRot.setY(270);
+	  if (elemCnt % width == 0)
+	    {
+	      components.push_front(new Empty(elemCnt / width, elemCnt % width, new Display::Texture3d("models/ExplodedLineLeft.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+	    }
+	  else if (elemCnt % width == width - 1)
+	    {
+	      components.push_front(new Empty(elemCnt / width, elemCnt % width, new Display::Texture3d("models/ExplodedLineRight.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+	    }
+	  if (elemCnt % 2 == 0)
+	    components.push_front(new Empty(elemCnt / width, elemCnt % width, new Display::Texture3d("models/ExplodedLine.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+	  else
+	    if (rand() % 100 <= 30)
+	      components.push_front(new Empty(elemCnt / width, elemCnt % width, new Display::Texture3d("models/ExplodedLineBody.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+	    else
+	      components.push_front(new Empty(elemCnt / width, elemCnt % width, new Display::Texture3d("models/ExplodedLine2.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
 	}
       addWalls(components, width, height, elemCnt);
     }
