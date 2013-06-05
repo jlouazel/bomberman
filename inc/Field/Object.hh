@@ -30,12 +30,12 @@ namespace BomberMan
             eBuffType		_buff_type;
             int             _power;
             int             _timer;
-            
+
         public:
             Object(float x, float y, Display::AObject * asset, Display::ISound * sound, Display::IAnimation * anim, eObjectType, eBuffType, int, int);
             Object(const Object &);
             ~Object();
-            
+
             eObjectType getObjectType() const;
             eBuffType   getBuffType() const;
             int         getPower() const;
@@ -43,7 +43,7 @@ namespace BomberMan
             int         getTimer() const;
             void        explode(int, eDirection);
 
-	  void  draw(gdl::GameClock const & gameClock, gdl::Input & input);
+	  void  draw(gdl::GameClock const & gameClock);
           void  update(gdl::GameClock const & gameClock);
 
         };

@@ -54,7 +54,7 @@ namespace BomberMan
       void        setPv(int);
       void	  setCamera(Display::Camera *);
       void	  update(gdl::GameClock const &);
-      void	  draw(gdl::GameClock const &, gdl::Input &);
+      void	  draw(gdl::GameClock const &);
       void	  initialize();
     };
   }

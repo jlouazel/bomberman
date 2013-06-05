@@ -24,8 +24,8 @@ namespace BomberMan
             void	explode(int, eDirection);
             int     getPv() const;
             void    setPv(int);
-	  void  draw(gdl::GameClock const & gameClock, gdl::Input & input);
-          void  update(gdl::GameClock const & gameClock); 
+	  void  draw(gdl::GameClock const & gameClock);
+          void  update(gdl::GameClock const & gameClock);
         };
     }
 }

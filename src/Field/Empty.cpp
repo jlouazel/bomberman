@@ -41,7 +41,7 @@ namespace BomberMan
 	this->_asset->update(gameClock);
       }
 
-      void        Empty::draw(gdl::GameClock const & gameClock, gdl::Input & input)
+      void        Empty::draw(gdl::GameClock const & gameClock)
       {
 	// std::cout << "Start draw Empty" << std::endl;
 	this->_asset->draw();

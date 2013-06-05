@@ -1,6 +1,7 @@
 #ifndef	__INPUTMANAGER_HH__
 #define	__INPUTMANAGER_HH__
 
+#include	<Input.hpp>
 #include	<string>
 #include	<list>
 #include	<dirent.h>
@@ -50,6 +51,7 @@ namespace BomberMan
     public:
       void	detection();
       void	getInput();
+      void	treatInput(gdl::Input&);
 
       static void	init();
 

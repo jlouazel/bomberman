@@ -4,7 +4,7 @@ RM          = rm -f
 
 NAME		= BomberMan
 
-CPPFLAGS	+= -W -Wall -Wextra -O3
+CPPFLAGS	+= -W -Wall -Wextra -g3 -w
 
 CPPFLAGS	+= -I./inc/
 CPPFLAGS	+= -I./inc/Core/
@@ -41,6 +41,7 @@ SRCS_DATA	= $(SRC_DIR)$(DATAFORMAT)ADataFormat.cpp \
 		$(SRC_DIR)$(DATAFORMAT)Xml.cpp \
 
 SRCS_DISPLAY	= $(SRC_DIR)$(DISPLAY)MainMenu.cpp \
+		$(SRC_DIR)$(DISPLAY)MenuManager.cpp \
 		$(SRC_DIR)$(DISPLAY)AObject.cpp \
 		$(SRC_DIR)$(DISPLAY)Menu.cpp \
 		$(SRC_DIR)$(DISPLAY)OngletMenu.cpp \

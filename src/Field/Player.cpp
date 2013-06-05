@@ -127,7 +127,7 @@ namespace BomberMan
       //std::cout << "End update Player" << std::endl;
     }
 
-    void	Player::draw(gdl::GameClock const & gameClock, gdl::Input & input)
+    void	Player::draw(gdl::GameClock const & gameClock)
     {
       //std::cout << "Start Draw player" << std::endl;
       if (this->_isRunning == true)
@@ -137,7 +137,7 @@ namespace BomberMan
       else
 	this->_asset->draw();
       this->_mark->draw();
-      this->_camera->update(gameClock, input);
+      this->_camera->update(gameClock);
       //std::cout << "End Draw player" << std::endl;
     }
 

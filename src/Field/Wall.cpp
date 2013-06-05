@@ -18,6 +18,7 @@ namespace BomberMan
       this->_x = x;
       this->_y = y;
       this->_asset = asset;
+      this->_asset->initialize();
       this->_sound = sound;
       this->_animation = anim;
     }
@@ -28,10 +29,10 @@ namespace BomberMan
 
     void        Wall::update(gdl::GameClock const & gameClock)
     {
-      this->_asset->update(gameClock);
+      //this->_asset->update(gameClock);
     }
 
-    void        Wall::draw(gdl::GameClock const & gameClock, gdl::Input & input)
+    void        Wall::draw(gdl::GameClock const & gameClock)
     {
       this->_asset->draw();
     }

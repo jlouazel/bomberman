@@ -22,7 +22,7 @@ namespace BomberMan
 	  ~Empty();
 
 	  void	explode(int, eDirection);
-	  void	draw(gdl::GameClock const & gameClock, gdl::Input & input);
+	  void	draw(gdl::GameClock const & gameClock);
 	  void  update(gdl::GameClock const & gameClock);
         };
     }

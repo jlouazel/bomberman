@@ -1,33 +1,38 @@
-#include	<algorithm>
-#include	<Clock.hpp>
-#include	<Game.hpp>
-#include	<GameClock.hpp>
-#include	<Input.hpp>
-#include	"IGameComponent.hh"
+#include	"BomberMan.hh"
+#include	"Resources.hh"
 #include	"EventManager.hh"
 #include	"InputManager.hh"
-#include	"KeyBoardManager.hh"
 #include	"MenuManager.hh"
-#include	"Resources.hh"
-#include	"BomberMan.hh"
-#include	"EndOfBomberMan.hh"
-#include	"Empty.hh"
-#include	"Player.hh"
-#include	"AObject.hpp"
-#include	"Texture3d.hpp"
-#include	<iostream>
 
 namespace BomberMan
 {
   namespace Core
   {
+    BomberMan::BomberMan() : gdl::Game()
+    {
+      this->_intro = true;
+      this->_menu = false;
+      this->_game = false;
+    }
+
     BomberMan::~BomberMan()
     {
       if (this->_currentGame)
 	delete this->_currentGame;
+      this->unload();
     }
 
-    void    BomberMan::_initializeWindow()
+    void	BomberMan::initialize()
+    {
+      this->_initializeWindow();
+      this->_initializeResources();
+      this->_initializeIntro();
+      this->_initializeInput();
+      this->_initializeEvent();
+      this->_initializeMenu();
+    }
+
+    void	BomberMan::_initializeWindow()
     {
       this->window_.setTitle("Breaking Bad");
       this->window_.setHeight(BOMBER_HEIGHT);
@@ -35,22 +40,128 @@ namespace BomberMan
       this->window_.create();
     }
 
-    void	BomberMan::initialize()
+    void	BomberMan::_initializeResources() const
     {
-      std::list<Field::Player *> player;
-      Display::Vector3f      vectorPosition(0, 0.0, 0);
-      Display::Vector3f      vectorLen(0.0, 0.0, 0.0);
-      Display::Vector3f      vectorRot(0.0, 0.0, 0.0);
-
-      player.push_front(new Field::Player(100, 14, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
-      this->_initializeWindow();
-      Input::InputManager::getInputManager()->init();
-      this->_currentGame = new BomberGame(player);
-      std::list<Field::Player *>::iterator it = player.begin();
-      for (; it != player.end(); ++it)
-	(*it)->initialize();
+      Display::Resources::getResources();
     }
 
+    void	BomberMan::_initializeIntro()
+    {
+    }
+
+    void	BomberMan::_initializeEvent() const
+    {
+      Event::EventManager::getEventManager();
+    }
+
+    void	BomberMan::_initializeInput() const
+    {
+      Input::InputManager::getInputManager()->init();
+    }
+
+    void	BomberMan::_initializeMenu() const
+    {
+      Display::MenuManager::getMenuManager();
+    }
+
+    void	BomberMan::update(void)
+    {
+      Input::InputManager::getInputManager()->treatInput(this->input_);
+      if (this->_intro)
+	this->_updateIntro();
+      else
+	{
+	  if (this->_menu)
+	    this->_updateMenu();
+	  else if (this->_game)
+	    this->_updateGame();
+	}
+      Event::EventManager::getEventManager()->cleanEvent();
+    }
+
+    void	BomberMan::_updateIntro()
+    {
+      if (this->_intro) // On stop l'intro direct pour passer sur le menu;
+	this->_startMenu();
+    }
+
+    void	BomberMan::_updateMenu()
+    {
+      if (this->_menu) // On stop le menu direct ppur rentrer sur le jeu;
+	{
+	  this->_startGame();
+	  return;
+	}
+      Display::MenuManager::getMenuManager()->update();
+    }
+
+    void	BomberMan::_updateGame()
+    {
+      if (this->_currentGame)
+	this->_currentGame->update(this->gameClock_);
+    }
+
+    void	BomberMan::draw(void)
+    {
+      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+      glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+      glClearDepth(1.0f);
+      glMatrixMode(GL_MODELVIEW);
+      if (this->_intro)
+	this->_drawIntro();
+      else
+	{
+	  if (this->_menu)
+	    this->_drawMenu();
+	  else if (this->_game)
+	    this->_drawGame();
+	}
+    }
+
+    void	BomberMan::_drawIntro() const
+    {
+    }
+
+    void	BomberMan::_drawMenu() const
+    {
+      Display::MenuManager::getMenuManager()->draw();
+    }
+
+    void	BomberMan::_drawGame() const
+    {
+      if (this->_currentGame)
+	this->_currentGame->draw(this->gameClock_);
+    }
+
+    void	BomberMan::unload(void)
+    {
+      Input::InputManager::deleteInputManager();
+      Event::EventManager::deleteEventManager();
+      Display::MenuManager::deleteMenuManager();
+      Display::Resources::deleteResources();
+    }
+
+    void	BomberMan::_startMenu()
+    {
+      this->_intro = false;
+      this->_game = false;
+      this->_menu = true;
+      Display::MenuManager::getMenuManager()->menu(Display::Menu::MAIN);
+    }
+
+    void	BomberMan::_startGame()
+    {
+      this->_intro = false;
+      this->_menu = false;
+      this->_game = true;
+      this->_currentGame = new BomberGame;
+    }
+  }
+}
+
+
+
+    /*
     static void	updateObjs(Field::IGameComponent * comp, gdl::GameClock const & gameClock)
     {
       comp->update(gameClock);
@@ -58,7 +169,6 @@ namespace BomberMan
 
     void	BomberMan::update(void)
     {
-      Input::Controller::KeyBoardManager::getKeyBoardManager()->treatInput(this->input_);
 
       // this->_currentGame->updateCamera(gameClock_, input_);
       std::cout << "X = " << this->_currentGame->getPlayers().front()->getX() / 220 << std::endl;
@@ -107,5 +217,4 @@ namespace BomberMan
     void	BomberMan::unload()
     {
     }
-  }
-}
+    */
