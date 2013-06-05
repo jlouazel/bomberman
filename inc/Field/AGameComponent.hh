@@ -14,6 +14,7 @@
 #include <GameClock.hpp>
 #include "IGameComponent.hh"
 #include "AObject.hpp"
+#include "FManager.hh"
 
 namespace BomberMan
 {
@@ -32,8 +33,8 @@ namespace BomberMan
       virtual ~AGameComponent(){}
 
       virtual void					explode(int, eDirection) = 0;
-      virtual void  draw(gdl::GameClock const & gameClock) = 0;
-      virtual void  update(gdl::GameClock const & gameClock) = 0;
+      virtual void  draw(gdl::GameClock const &) = 0;
+      virtual void  update(gdl::GameClock const &, Manager *) = 0;
       virtual float					getX() const;
       virtual void					setX(float);
       virtual float					getY() const;

@@ -62,7 +62,7 @@ namespace BomberMan
       this->_camera->initialize();
     }
 
-    void	Player::update(gdl::GameClock const & gameClock)
+    void	Player::update(gdl::GameClock const & gameClock, Manager *manager)
     {
       // Input::Controller::KeyBoardManager::treatInput(input);
 

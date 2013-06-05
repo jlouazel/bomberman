@@ -7,6 +7,7 @@
 
 #include "AGameComponent.hh"
 
+#include "FManager.hh"
 #include "AObject.hpp"
 #include "IAnimation.hh"
 #include "ISound.hh"
@@ -22,8 +23,8 @@ namespace BomberMan
 	  ~Empty();
 
 	  void	explode(int, eDirection);
-	  void	draw(gdl::GameClock const & gameClock);
-	  void  update(gdl::GameClock const & gameClock);
+	  void	draw(gdl::GameClock const &);
+	  void  update(gdl::GameClock const &, Manager *);
         };
     }
 }
