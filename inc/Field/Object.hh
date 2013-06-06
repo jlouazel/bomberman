@@ -23,32 +23,32 @@
 
 namespace BomberMan
 {
-    namespace Field
+  namespace Field
+  {
+    class Object : public AGameComponent
     {
-        class Object : public AGameComponent
-        {
-            eObjectType		_object_type;
-            eBuffType		_buff_type;
-            int             _power;
-            int             _timer;
+      eObjectType		_object_type;
+      eBuffType		_buff_type;
+      int             _power;
+      int             _timer;
 
-        public:
-            Object(float x, float y, Display::AObject * asset, Display::ISound * sound, Display::IAnimation * anim, eObjectType, eBuffType, int, int);
-            Object(const Object &);
-            ~Object();
+    public:
+      Object(float x, float y, Display::AObject * asset, Display::ISound * sound, Display::IAnimation * anim, eObjectType, eBuffType, int, int);
+      Object(const Object &);
+      ~Object();
 
-            eObjectType getObjectType() const;
-            eBuffType   getBuffType() const;
-            int         getPower() const;
-            void        setPower(int);
-            int         getTimer() const;
-            void        explode(int, eDirection);
+      eObjectType getObjectType() const;
+      eBuffType   getBuffType() const;
+      int         getPower() const;
+      void        setPower(int);
+      int         getTimer() const;
+      void        explode(int, eDirection);
 
-	  void  draw(gdl::GameClock const & gameClock);
-          void  update(gdl::GameClock const & gameClock, Manager *);
+      void  draw(gdl::GameClock const & gameClock);
+      void  update(gdl::GameClock const & gameClock, Manager *);
 
-        };
-    }
+    };
+  }
 }
 
 #else

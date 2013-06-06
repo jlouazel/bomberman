@@ -65,7 +65,7 @@ namespace BomberMan
 	    }
 	  else
 	    {
-	      if (rand() % 100 <= 60)
+	      if (rand() % 100 <= 10)
 		{
 		  vectorRot.setY(randAngle(5));
 		  components.push_front(new Wall(true, 100, elemCnt / width, elemCnt % width, new Display::Texture3d("models/Barrel.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));

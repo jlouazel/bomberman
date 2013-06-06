@@ -10,6 +10,7 @@
 #include "Texture3d.hpp"
 #include "Player.hh"
 #include "Vector.hpp"
+#include "Wall.hh"
 
 namespace BomberMan
 {
@@ -83,16 +84,19 @@ namespace BomberMan
 	  (z + 110 - 20) / 220 < 0 || (z + 110 + 20) / 220 > (manager->getHeight()))
 	return (false);
       for (int y = 0; y < manager->getHeight(); y++)
-	for (int x = 0; x < manager->getWidth(); x++)
+	for (int X = 0; X < manager->getWidth(); X++)
 	  {
-	    std::list<IGameComponent *> obj = manager->get(x, y);
+	    std::list<IGameComponent *> obj = manager->get(X, y);
 
-	    int i = 0;
 	    for (std::list<IGameComponent *>::iterator it = obj.begin(); it != obj.end(); ++it)
 	      {
-		if (i > 0 && (*it)->getX())
-		// std::cout << "x = " << (*it)->getX() << " X = " << (this->_x + 110) / 220 << std::endl;;
-		i++;
+		if (dynamic_cast<Wall *>(*it) == *it)
+		  {
+		    std::cout << "Wall here : X = " << (*it)->getX() << " Y = " << (*it)->getY() << " Player here : X = "<< static_cast<int>((x + 110) / 220) << " Y = " << static_cast<int>((z + 110) / 220) << std::endl;
+		    if (static_cast<int>((x + 110) / 220) == (*it)->getX() && static_cast<int>((z + 110) / 220) == (*it)->getY())
+		      return (false);
+		  }
+		  // std::cout << "x = " << (*it)->getX() << " X = " << (this->_x + 110) / 220 << std::endl;;
 	      }
 	    // std::cout << "End of the case" << std::endl;
 	  }
