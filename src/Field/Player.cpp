@@ -31,7 +31,7 @@ namespace BomberMan
       this->_walking = new Display::Texture3d("models/WWwalking.fbx", position, rotation, len);
       this->_run = new Display::Texture3d("models/WWrunning.fbx", position, rotation, len);
       this->_mark = new Display::Texture3d("models/PlayerMark.fbx", position, rotation, len);
-      this->_bomb = new Object(0.0, 0.0, 0, 0, 0, BOMB, NONE, 3, 3);
+      this->_bomb = new Object(0.0, 0.0, new Display::Texture3d("models/ExplodingBomb.fbx", position, rotation, len), 0, 0, BOMB, NONE, 3, 3);
       this->_camera = 0; // initialise after.
       this->_isMoving = false;
     }
@@ -60,8 +60,15 @@ namespace BomberMan
       this->_camera->setPosition(newVectorPosition);
     }
 
-    void        Player::setBomb()
+    void        Player::setBomb(Manager *manager)
     {
+      int	X = (this->_x + 110) / 220;
+      int	Y = (this->_y + 110) / 220;
+      IGameComponent *toadd(this->_bomb);
+
+      toadd->setX(X);
+      toadd->setY(Y);
+      manager->addComponent(X, Y, toadd);
     }
 
     void        Player::acquireObject()
@@ -105,59 +112,40 @@ namespace BomberMan
       const Event::IEvent* event = Event::EventManager::getEvent();
       if (event != NULL)
 	{
-	  const Event::Move *move = (const Event::Move *)event;
-	  this->_isRunning = move->isRunning();
-	  this->_isMoving = true;
-	  float       angle =  move->getAngle() * 3.14159 / 180.0;
-	  float       x = -(cosf(angle) * this->_speed);
-	  float       z = sinf(angle) * this->_speed;
-
-	  if (this->checkMyMove(this->_asset->getPosition().getZ() + z, this->_asset->getPosition().getX() + x, manager) == true)
-	    this->move(x, z, angle);
-	  else
+	  if (dynamic_cast<const Event::Move *>(event) == event)
 	    {
-	      if (this->checkMyMove(this->_asset->getPosition().getZ(), this->_asset->getPosition().getX() + x, manager) == true)
-		this->move(x, 0, angle);
-	      else if (this->checkMyMove(this->_asset->getPosition().getZ() + z, this->_asset->getPosition().getX(), manager) == true)
-		this->move(0, z, angle);
+	      const Event::Move *move = (const Event::Move *)event;
+	      this->_isRunning = move->isRunning();
+	      this->_isMoving = true;
+
+	      float       angle =  move->getAngle() * 3.14159 / 180.0;
+	      float       x = -(cosf(angle) * this->_speed);
+	      float       z = sinf(angle) * this->_speed;
+
+	      if (this->checkMyMove(this->_asset->getPosition().getZ() + z, this->_asset->getPosition().getX() + x, manager) == true)
+		this->move(x, z, angle);
+	      else
+		{
+		  if (this->checkMyMove(this->_asset->getPosition().getZ(), this->_asset->getPosition().getX() + x, manager) == true)
+		    this->move(x, 0, angle);
+		  else if (this->checkMyMove(this->_asset->getPosition().getZ() + z, this->_asset->getPosition().getX(), manager) == true)
+		    this->move(0, z, angle);
+		}
+	      delete move;
 	    }
-	  delete move;
+	  else if (1/*si Touche espace appuyer*/)
+	    this->setBomb(manager);
 	}
       else
 	{
 	  this->_isMoving = false;
 	  this->_isRunning = false;
 	}
-      if (this->_isRunning == true)
-	{
-	  this->_run->play("Take 001", 1);
-	  this->_walking->stop("Take 001");
-	  this->_speed = 30;
-	}
-      else if (this->_isMoving == true)
-	{
-	  this->_walking->play("Take 001", 1);
-	  this->_run->stop("Take 001");
-	  this->_speed = 10;
-	}
-      else
-	{
-	  this->_asset->play("Take 001", 1);
-	  this->_walking->stop("Take 001");
-	  this->_run->stop("Take 001");
-	}
-      this->_run->update(gameClock);
-      this->_mark->play("Take 001", 1);
-      this->_asset->update(gameClock);
-      this->_walking->update(gameClock);
-      this->_mark->update(gameClock);
-      this->_asset->update(gameClock);
-      //std::cout << "End update Player" << std::endl;
+      this->run(gameClock);
     }
 
     void	Player::draw(gdl::GameClock const & gameClock)
     {
-      //std::cout << "Start Draw player" << std::endl;
       if (this->_isRunning == true)
 	this->_run->draw();
       else if (this->_isMoving == true)
@@ -166,11 +154,34 @@ namespace BomberMan
 	this->_asset->draw();
       this->_mark->draw();
       this->_camera->update(gameClock);
-      //std::cout << "End Draw player" << std::endl;
     }
 
-    void        Player::run()
+    void        Player::run(gdl::GameClock const &gameClock)
     {
+      if (this->_isRunning == true)
+        {
+          this->_run->play("Take 001", 1);
+          this->_walking->stop("Take 001");
+          this->_speed = 30;
+        }
+      else if (this->_isMoving == true)
+        {
+          this->_walking->play("Take 001", 1);
+          this->_run->stop("Take 001");
+          this->_speed = 10;
+        }
+      else
+        {
+          this->_asset->play("Take 001", 1);
+          this->_walking->stop("Take 001");
+          this->_run->stop("Take 001");
+        }
+      this->_run->update(gameClock);
+      this->_mark->play("Take 001", 1);
+      this->_asset->update(gameClock);
+      this->_walking->update(gameClock);
+      this->_mark->update(gameClock);
+      this->_asset->update(gameClock);
     }
 
     int         Player::getNbBombMax() const
@@ -225,6 +236,18 @@ namespace BomberMan
     void	Player::setCamera(Display::Camera *camera)
     {
       this->_camera = camera;
+    }
+
+    bool	Player::operator==(IGameComponent *otherToCompare)
+    {
+      if (dynamic_cast<Player *>(otherToCompare) == otherToCompare)
+	{
+	  Player *other = dynamic_cast<Player *>(otherToCompare);
+
+	  if (other->getPv() == this->_pv && other->getSpeed() == this->_speed && other->getNbBombMax() == this->_nb_bomb_max && other->getNbBombSet() == this->_nb_bomb_set)
+	    return (true);
+	}
+      return (false);
     }
   }
 }

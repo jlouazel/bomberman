@@ -27,6 +27,7 @@ namespace BomberMan
             void    setPv(int);
 	  void  draw(gdl::GameClock const & gameClock);
           void  update(gdl::GameClock const & gameClock, Manager *);
+	  bool  operator==(IGameComponent *other);
         };
     }
 }

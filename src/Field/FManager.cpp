@@ -144,8 +144,8 @@ namespace BomberMan
       // for (; this->_width < 15 || this->_width > 100; this->_width = rand() % 100);
       // for (; this->_height < 15 || this->_height > 100; this->_height = rand() % 100);
 
-      this->_width = 3;
-      this->_height = 3;
+      this->_width = 100;
+      this->_height = 100;
 
       this->_map = std::vector<std::list<IGameComponent *> >(this->_width * this->_height, std::list<IGameComponent *>());
       unsigned int elemCnt = 0;
@@ -174,6 +174,25 @@ namespace BomberMan
     unsigned int                    Manager::getHeight() const
     {
       return this->_height;
+    }
+
+    void	Manager::addComponent(unsigned int x, unsigned int y, IGameComponent *newComponent)
+    {
+      this->_map[y * this->_width + x].push_front(newComponent);
+    }
+
+    void	Manager::delComponent(unsigned int x, unsigned int y, IGameComponent *toDel)
+    {
+      std::list<IGameComponent *> list = this->_map[y * this->_width + x];
+
+      for (std::list<IGameComponent *>::iterator it = list.begin(); it != list.end(); ++it)
+	{
+	  if (toDel == *it)
+	    {
+	      list.erase(it);
+	      return;
+	    }
+	}
     }
   }
 }

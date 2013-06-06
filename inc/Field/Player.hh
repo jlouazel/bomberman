@@ -41,9 +41,9 @@ namespace BomberMan
       ~Player();
 
       void        move(float x, float y, float angle);
-      void	  setBomb();
+      void	  setBomb(Manager *);
       void        acquireObject();
-      void        run();
+      void        run(gdl::GameClock const &);
       int         getNbBombMax() const;
       void        setNbBombMax(int);
       int         getNbBombSet() const;
@@ -58,6 +58,7 @@ namespace BomberMan
       void	  draw(gdl::GameClock const &);
       void	  initialize();
       bool	  checkMyMove(float, float, Manager *);
+      bool        operator==(IGameComponent *other);
     };
   }
 }

@@ -74,5 +74,16 @@ namespace BomberMan
       // propagation
       delete this;
     }
+
+    bool	Object::operator==(IGameComponent *objectToCompare)
+    {
+      if (dynamic_cast<Object *>(objectToCompare) == objectToCompare)
+	{
+	  Object *object = static_cast<Object *>(objectToCompare);
+	  if (this->_power == object->getPower() && this->_object_type == object->getObjectType() && this->_buff_type == object->getBuffType())
+	    return (true);
+	}
+      return (false);
+    }
   }
 }

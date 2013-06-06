@@ -36,6 +36,7 @@ namespace BomberMan
       virtual void					setSound(Display::ISound *) = 0;
       virtual Display::IAnimation *	getAnimation() const = 0;
       virtual void					setAnimation(Display::IAnimation *) = 0;
+      virtual bool			operator==(IGameComponent *) = 0;
     };
   }
 }

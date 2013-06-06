@@ -60,5 +60,16 @@ namespace BomberMan
 	    }
 	}
     }
+
+    bool	Wall::operator==(IGameComponent *otherToCompare)
+    {
+      if (dynamic_cast<Wall *>(otherToCompare) == otherToCompare)
+	{
+	  Wall *other = static_cast<Wall *>(otherToCompare);
+	  if (other->getX() == this->_x && other->getY() == this->_y && this->_pv == other->getPv())
+	    return (true);
+	}
+      return (false);
+    }
   }
 }

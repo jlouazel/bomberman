@@ -64,5 +64,13 @@ namespace BomberMan
 	damages--;
 	// propagation
       }
+
+      bool	Empty::operator==(IGameComponent *other)
+      {
+	if (dynamic_cast<Empty *>(other) == other)
+	  if (other->getX() == this->_x && other->getY() == this->_y)
+	    return (true);
+	return (false);
+      }
   }
 }
