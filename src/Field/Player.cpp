@@ -10,6 +10,7 @@
 #include "Texture3d.hpp"
 #include "Player.hh"
 #include "Vector.hpp"
+#include "Wall.hh"
 
 namespace BomberMan
 {
@@ -82,17 +83,22 @@ namespace BomberMan
       if ((x + 110 - 20) / 220 < 0 || (x + 110 + 20) / 220 > (manager->getWidth()) ||
 	  (z + 110 - 20) / 220 < 0 || (z + 110 + 20) / 220 > (manager->getHeight()))
 	return (false);
-      else
-	return (true);
-      for (int y = 0; y < manager->getWidth(); y++)
-	for (int x = 0; x < manager->getHeight(); x++)
+      for (int y = 0; y < manager->getHeight(); y++)
+	for (int X = 0; X < manager->getWidth(); X++)
 	  {
-	    std::list<IGameComponent *> obj = manager->get(x, y);
+	    std::list<IGameComponent *> obj = manager->get(X, y);
 
 	    for (std::list<IGameComponent *>::iterator it = obj.begin(); it != obj.end(); ++it)
 	      {
-		std::cout << "x = " << (*it)->getX() << " X = " << (this->_x + 110) / 220 << std::endl;;
+		if (dynamic_cast<Wall *>(*it) == *it)
+		  {
+		    std::cout << "Wall here : X = " << (*it)->getX() << " Y = " << (*it)->getY() << " Player here : X = "<< static_cast<int>((x + 110) / 220) << " Y = " << static_cast<int>((z + 110) / 220) << std::endl;
+		    if (static_cast<int>((x + 110) / 220) == (*it)->getX() && static_cast<int>((z + 110) / 220) == (*it)->getY())
+		      return (false);
+		  }
+		  // std::cout << "x = " << (*it)->getX() << " X = " << (this->_x + 110) / 220 << std::endl;;
 	      }
+	    // std::cout << "End of the case" << std::endl;
 	  }
       return (true);
     }
@@ -113,10 +119,13 @@ namespace BomberMan
 
 	  if (this->checkMyMove(this->_asset->getPosition().getZ() + z, this->_asset->getPosition().getX() + x, manager) == true)
 	    this->move(x, z, angle);
-	  else if (this->checkMyMove(this->_asset->getPosition().getZ(), this->_asset->getPosition().getX() + x, manager) == true)
-	    this->move(x, 0, angle);
-	  else if (this->checkMyMove(this->_asset->getPosition().getZ() + z, this->_asset->getPosition().getX(), manager) == true)
-	    this->move(0, z, angle);
+	  else
+	    {
+	      if (this->checkMyMove(this->_asset->getPosition().getZ(), this->_asset->getPosition().getX() + x, manager) == true)
+		this->move(x, 0, angle);
+	      else if (this->checkMyMove(this->_asset->getPosition().getZ() + z, this->_asset->getPosition().getX(), manager) == true)
+		this->move(0, z, angle);
+	    }
 	  delete move;
 	}
       else
