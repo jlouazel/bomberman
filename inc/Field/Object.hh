@@ -1,13 +1,5 @@
-//
-//  Object.h
-//  BomberMan
-//
-//  Created by manour_m on 17/05/13.
-//  Copyright (c) 2013 manour_m. All rights reserved.
-//
-
-#ifndef __BomberMan__Object__
-#define __BomberMan__Object__
+#ifndef __BOMBERMAN__OBJECT__
+#define __BOMBERMAN__OBJECT__
 
 #include <Input.hpp>
 #include <Clock.hpp>

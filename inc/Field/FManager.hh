@@ -7,6 +7,7 @@
 #include <list>
 
 #include "IGameComponent.hh"
+#include "Player.hh"
 
 namespace BomberMan
 {
@@ -32,6 +33,8 @@ namespace BomberMan
       unsigned int			getWidth() const;
       unsigned int			getHeight() const;
       std::list<IGameComponent *> &	get(unsigned int, unsigned int);
+
+      void				randomize(std::list<Player *> const &);
     };
   }
 }

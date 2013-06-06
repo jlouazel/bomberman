@@ -1,13 +1,5 @@
-//
-//  AGameComponent.h
-//  BomberMan
-//
-//  Created by manour_m on 17/05/13.
-//  Copyright (c) 2013 manour_m. All rights reserved.
-//
-
-#ifndef __BomberMan__AGameComponent__
-#define __BomberMan__AGameComponent__
+#ifndef __BOMBERMAN__AGAMECOMPONENT__
+#define __BOMBERMAN__AGAMECOMPONENT__
 
 #include <Input.hpp>
 #include <Clock.hpp>

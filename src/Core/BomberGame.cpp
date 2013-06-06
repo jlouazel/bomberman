@@ -32,6 +32,8 @@ namespace BomberMan
 
       this->_players.push_front(new Field::Player(100, 14, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
 
+      this->_manager->randomize(this->_players);
+
       std::list<Field::Player *>::iterator it = this->_players.begin();
       for (; it != this->_players.end(); ++it)
 	{
