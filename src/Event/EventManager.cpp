@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 22:23:19 2013 julien fortin
-// Last update Thu Jun  6 19:47:45 2013 julien fortin
+// Last update Thu Jun  6 19:49:25 2013 julien fortin
 //
 
 #include	<algorithm>
@@ -13,6 +13,7 @@
 #include	"UnixMutex.hh"
 #include	"EventManager.hh"
 #include	"Move.hh"
+#include	"DropBomb.hh"
 #include	"EndOfBomberMan.hh"
 
 #include	<iostream>
@@ -134,7 +135,9 @@ namespace BomberMan
 						EventType::eEventType,
 						float, float)
     {
-      //EventManager::addEvent(new DropBomb());
+      EventContext::eEventContext	context; //Core::getContext();
+
+      EventManager::addEvent(new DropBomb(context));
     }
 
     void		EventManager::coreEvent(EventType::eEventType)
