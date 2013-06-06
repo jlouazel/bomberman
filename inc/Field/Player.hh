@@ -40,7 +40,7 @@ namespace BomberMan
       Player(int pv, float speed, int max, int set, float x, float y, Display::AObject * asset, Display::ISound * sound, Display::IAnimation * anim);
       ~Player();
 
-      void        move();
+      void        move(float x, float y, float angle);
       void	  setBomb();
       void        acquireObject();
       void        run();
