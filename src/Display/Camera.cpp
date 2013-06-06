@@ -10,7 +10,7 @@ namespace BomberMan
   namespace Display
   {
     Camera::Camera(void)
-      : position_(-500.0f, 800.0f, 0.0f), rotation_(0.0f, 0.0f, 0.0f), look_(0.0f, 0.0f, 0.0f)
+      : position_(-500.0f, 900.0f, 0.0f), rotation_(0.0f, 0.0f, 0.0f), look_(0.0f, 0.0f, 0.0f)
     {
       this->angle_ = 3.14159265359 * 50.0 / 180.0;
       this->heightScreen_ = (int)(((tanf(this->angle_ / 2.0) * 300.0) * 2.0));
@@ -24,7 +24,7 @@ namespace BomberMan
       glMatrixMode(GL_PROJECTION);
       glLoadIdentity();
       std::cout << "ANGLE : " << this->angle_ << std::endl;
-      gluPerspective((this->angle_ * 180.0) / 3.14159265359, WIDTH/HEIGHT, 1.0f, 10000.0f);
+      gluPerspective((this->angle_ * 180.0) / 3.14159265359, (WIDTH / 2)/HEIGHT, 1.0f, 10000.0f);
       gluLookAt(position_.getX(), position_.getY(), position_.getZ(),
 		this->look_.getX(), this->look_.getY(), this->look_.getZ(),
 		0.0f, 1.0f, 0.0f);

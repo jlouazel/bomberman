@@ -40,8 +40,23 @@ namespace BomberMan
       delete this->_bomb;
     }
 
-    void        Player::move()
+    void        Player::move(float x, float z, float angle)
     {
+      this->_x = this->_asset->getPosition().getX() + x;
+      this->_y = this->_asset->getPosition().getZ() + z;
+      Display::Vector3f	newVectorPosition(this->_asset->getPosition().getX() + x, this->_asset->getPosition().getY(), this->_asset->getPosition().getZ() + z);
+      Display::Vector3f newVectorRotation(this->_asset->getRotation().getX(), static_cast<int>(angle * 180.0 / 3.14159 + 270) % 360, this->_asset->getRotation().getZ());
+      this->_asset->setPosition(newVectorPosition);
+      this->_asset->setRotation(newVectorRotation);
+      this->_walking->setPosition(newVectorPosition);
+      this->_walking->setRotation(newVectorRotation);
+      this->_run->setPosition(newVectorPosition);
+      this->_run->setRotation(newVectorRotation);
+      this->_mark->setPosition(newVectorPosition);
+      this->_camera->setLook(newVectorPosition);
+      newVectorPosition.setX(newVectorPosition.getX() + this->_camera->getDistanceX());
+      newVectorPosition.setY(newVectorPosition.getY() + this->_camera->getDistanceY());
+      this->_camera->setPosition(newVectorPosition);
     }
 
     void        Player::setBomb()
@@ -96,26 +111,13 @@ namespace BomberMan
 	  float       x = -(cosf(angle) * this->_speed);
 	  float       z = sinf(angle) * this->_speed;
 
-	  // std::cout << "YOOOOOOOOOOO : " << angle << std::endl;
-	  Display::Vector3f	newVectorPosition(this->_asset->getPosition().getX() + x, this->_asset->getPosition().getY(), this->_asset->getPosition().getZ() + z);
 	  if (this->checkMyMove(this->_asset->getPosition().getZ() + z, this->_asset->getPosition().getX() + x, manager) == true)
-	    {
-	      this->_x = this->_asset->getPosition().getX() + x;
-	      this->_y = this->_asset->getPosition().getZ() + z;
-	      Display::Vector3f	newVectorRotation(this->_asset->getRotation().getX(), static_cast<int>(angle * 180.0 / 3.14159 + 270) % 360, this->_asset->getRotation().getZ());
-	      this->_asset->setPosition(newVectorPosition);
-	      this->_asset->setRotation(newVectorRotation);
-	      this->_walking->setPosition(newVectorPosition);
-	      this->_walking->setRotation(newVectorRotation);
-	      this->_run->setPosition(newVectorPosition);
-	      this->_run->setRotation(newVectorRotation);
-	      this->_mark->setPosition(newVectorPosition);
-	      this->_camera->setLook(newVectorPosition);
-	      newVectorPosition.setX(newVectorPosition.getX() + this->_camera->getDistanceX());
-	      newVectorPosition.setY(newVectorPosition.getY() + this->_camera->getDistanceY());
-	      this->_camera->setPosition(newVectorPosition);
-	      delete move;
-	    }
+	    this->move(x, z, angle);
+	  else if (this->checkMyMove(this->_asset->getPosition().getZ(), this->_asset->getPosition().getX() + x, manager) == true)
+	    this->move(x, 0, angle);
+	  else if (this->checkMyMove(this->_asset->getPosition().getZ() + z, this->_asset->getPosition().getX(), manager) == true)
+	    this->move(0, z, angle);
+	  delete move;
 	}
       else
 	{
