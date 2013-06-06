@@ -65,7 +65,7 @@ namespace BomberMan
 	    }
 	  else
 	    {
-	      if (rand() % 100 <= 60)
+	      for (unsigned int nbCaisses = 0; nbCaisses != (height * width) * (80 / 100); nbCaisses++)
 		{
 		  vectorRot.setY(randAngle(5));
 		  components.push_front(new Wall(true, 100, elemCnt / width, elemCnt % width, new Display::Texture3d("models/Barrel.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
@@ -144,8 +144,8 @@ namespace BomberMan
       // for (; this->_width < 15 || this->_width > 100; this->_width = rand() % 100);
       // for (; this->_height < 15 || this->_height > 100; this->_height = rand() % 100);
 
-      this->_width = 3;
-      this->_height = 3;
+      this->_width = 10;
+      this->_height = 10;
 
       this->_map = std::vector<std::list<IGameComponent *> >(this->_width * this->_height, std::list<IGameComponent *>());
       unsigned int elemCnt = 0;
