@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 22:23:19 2013 julien fortin
-// Last update Thu Jun  6 19:46:33 2013 julien fortin
+// Last update Thu Jun  6 19:47:45 2013 julien fortin
 //
 
 #include	<algorithm>
@@ -134,7 +134,7 @@ namespace BomberMan
 						EventType::eEventType,
 						float, float)
     {
-      EventManager::addEvent(new DropBomb());
+      //EventManager::addEvent(new DropBomb());
     }
 
     void		EventManager::coreEvent(EventType::eEventType)
