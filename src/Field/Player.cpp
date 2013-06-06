@@ -91,14 +91,9 @@ namespace BomberMan
 	    for (std::list<IGameComponent *>::iterator it = obj.begin(); it != obj.end(); ++it)
 	      {
 		if (dynamic_cast<Wall *>(*it) == *it)
-		  {
-		    std::cout << "Wall here : X = " << (*it)->getX() << " Y = " << (*it)->getY() << " Player here : X = "<< static_cast<int>((x + 110) / 220) << " Y = " << static_cast<int>((z + 110) / 220) << std::endl;
-		    if (static_cast<int>((x + 110) / 220) == (*it)->getX() && static_cast<int>((z + 110) / 220) == (*it)->getY())
-		      return (false);
-		  }
-		  // std::cout << "x = " << (*it)->getX() << " X = " << (this->_x + 110) / 220 << std::endl;;
+		  if (static_cast<int>((z + 110) / 220) == (*it)->getX() && static_cast<int>((x + 110) / 220) == (*it)->getY())
+		    return (false);
 	      }
-	    // std::cout << "End of the case" << std::endl;
 	  }
       return (true);
     }
