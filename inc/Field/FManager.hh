@@ -7,7 +7,6 @@
 #include <list>
 
 #include "IGameComponent.hh"
-// #include "Player.hh"
 
 namespace BomberMan
 {

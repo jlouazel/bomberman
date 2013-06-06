@@ -7,19 +7,11 @@
 
 #include <iostream>
 
-//#include "FManager.hh"
+#include "FManager.hh"
 #include "Enums.hh"
 #include "AObject.hpp"
 #include "ISound.hh"
 #include "IAnimation.hh"
-
-namespace BomberMan
-{
-  namespace Field
-  {
-    class Manager;
-  }
-}
 
 namespace BomberMan
 {
