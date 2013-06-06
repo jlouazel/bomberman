@@ -15,8 +15,10 @@ CPPFLAGS	+= -I./inc/Unix/
 CPPFLAGS	+= -I./libgdl/include
 CPPFLAGS	+= -I./inc/Input/ -I./inc/Input/Controller/
 CPPFLAGS	+= -I./inc/Event/
+CPPFLAGS	+= -I./inc/Sound/
+CPPFLAGS	+= -I./fmod/inc/
 
-LDFLAGS		=  -lpthread -L./libgdl/lib -Wl,--rpath=./libgdl/lib -lgdl_gl -lGL -lGLU
+LDFLAGS		=  -lpthread -L./libgdl/lib -Wl,--rpath=./libgdl/lib -lgdl_gl -lGL -lGLU ./fmod/lib/libfmodex64-4.44.14.so
 
 SRC_DIR		= src/
 
@@ -28,6 +30,7 @@ INPUT	    = Input/
 CONTROLLER  = Controller/
 EVENT	    = Event/
 UNIX        = Unix/
+SOUND       = Sound/
 
 SRCS		= $(SRC_DIR)main.cpp \
 
@@ -80,6 +83,8 @@ SRCS_UNIX	= $(SRC_DIR)$(UNIX)UnixMutex.cpp \
 		$(SRC_DIR)$(UNIX)ThreadPool.cpp \
 		$(SRC_DIR)$(UNIX)Fd.cpp \
 
+SRCS_SOUND	= $(SRC_DIR)$(SOUND)SoundManager.cpp
+
 OBJS		= $(SRCS:.cpp=.o) \
 		$(SRCS_CORE:.cpp=.o) \
 		$(SRCS_DATA:.cpp=.o) \
@@ -89,6 +94,7 @@ OBJS		= $(SRCS:.cpp=.o) \
 		$(SRCS_INPUT:.cpp=.o) \
 		$(SRCS_CTLLR:.cpp=.o) \
 		$(SRCS_EVENT:.cpp=.o) \
+		$(SRCS_SOUND:.cpp=.o) \
 
 all:		$(NAME)
 

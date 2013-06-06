@@ -1,25 +1,34 @@
+#include	<fmod.h>
 #include	<Input.hpp>
 #include	<Clock.hpp>
 #include	<GameClock.hpp>
 #include	"BomberGame.hh"
+#include	"SoundManager.hh"
 #include	"Texture3d.hpp"
-
 #include	<iostream>
 
 namespace BomberMan
 {
   namespace Core
-  {
+  {    
     BomberGame::BomberGame()
     {
-      // Field::Manager::initInstance(1, 1);
+      
       this->_manager = new Field::Manager;
 
+      int LightPos[4] = {0,0,3,1};
+      glEnable(GL_LIGHTING);
+      glEnable(GL_LIGHT0);
+      glLightiv(GL_LIGHT0,GL_POSITION,LightPos);
+
+
+      Sound::SoundManager *manager = Sound::SoundManager::getInstance();
+      manager->addNewSound("sounds/ambianceGame.mp3");
+      manager->playSound("sounds/ambianceGame.mp3", true);
 
       Display::Vector3f      vectorPosition(0, 0.0, 0);
       Display::Vector3f      vectorLen(0.0, 0.0, 0.0);
       Display::Vector3f      vectorRot(0.0, 0.0, 0.0);
-
 
       this->_players.push_front(new Field::Player(100, 14, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
 
