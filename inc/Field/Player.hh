@@ -5,17 +5,16 @@
 #include <Color.hpp>
 #include <Model.hpp>
 #include <math.h>
+
 #include "EventManager.hh"
 #include "AEvent.hh"
 #include "IEvent.hh"
 #include "EventEnum.hh"
-#include "EventError.hh"
 #include "Move.hh"
+#include "EventError.hh"
 #include "AGameComponent.hh"
 #include "Object.hh"
-#include "AObject.hpp"
 #include "Camera.hpp"
-#include "FManager.hh"
 
 namespace BomberMan
 {

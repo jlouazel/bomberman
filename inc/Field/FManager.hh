@@ -7,6 +7,15 @@
 #include <list>
 
 #include "IGameComponent.hh"
+// #include "Player.hh"
+
+namespace BomberMan
+{
+  namespace Field
+  {
+    class Player;
+  }
+}
 
 namespace BomberMan
 {
@@ -34,6 +43,8 @@ namespace BomberMan
       std::list<IGameComponent *> &	get(unsigned int, unsigned int);
       void				addComponent(unsigned int, unsigned int, IGameComponent *);
       void				delComponent(unsigned int, unsigned int, IGameComponent *);
+
+      void				randomize(std::list<Player *> const &);
     };
   }
 }

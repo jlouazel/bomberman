@@ -63,14 +63,6 @@ namespace BomberMan
 	      vectorRot.setY(rand() % 360);
 	      components.push_front(new Wall(false, 100, elemCnt / width, elemCnt % width, new Display::Texture3d("models/Cuve.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
 	    }
-	  else
-	    {
-	      if (rand() % 100 <= 10)
-		{
-		  vectorRot.setY(randAngle(5));
-		  components.push_front(new Wall(true, 100, elemCnt / width, elemCnt % width, new Display::Texture3d("models/Barrel.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
-		}
-	    }
 	}
     }
 
@@ -117,7 +109,6 @@ namespace BomberMan
 	    }
 	  else
 	    {
-	      std::cout << "LINE" << std::endl;
 	      if (elemCnt % 2 == 0)
 		components.push_front(new Empty(elemCnt / width, elemCnt % width, new Display::Texture3d("models/ExplodedLine.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
 	      else
@@ -194,5 +185,10 @@ namespace BomberMan
 	    }
 	}
     }
+    void			Manager::randomize(std::list<Player *> const & players)
+    {
+      
+    }
   }
 }
+
