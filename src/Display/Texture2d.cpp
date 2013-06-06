@@ -27,12 +27,12 @@ namespace BomberMan
 	  this->position_.setX(newVector.getX());
 	  this->position_.setY(newVector.getY());
 	  this->position_.setZ(newVector.getZ());
-	  this->_texture = Resources::getResources()->getImage(this->stringTexture_);
+	  this->_texture = gdl::Image::load(this->stringTexture_);
+	  //Resources::getResources()->getImage(this->stringTexture_);
         }
 
-      void	Texture2d::update(gdl::GameClock const &gameClock)
+      void	Texture2d::update(gdl::GameClock const &)
       {
-	(void)gameClock;
       }
 
       void	Texture2d::draw(void)
@@ -41,7 +41,7 @@ namespace BomberMan
 	std::cout << "Len X = " << this->len_.getX() << std::endl;
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	//this->texture_.bind();
+	this->_texture.bind();
 	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity();
 	gluOrtho2D(0, WIDTH, 0, HEIGHT);

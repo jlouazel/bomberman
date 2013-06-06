@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat May 25 10:47:04 2013 julien fortin
-// Last update Tue Jun  4 12:28:09 2013 julien fortin
+// Last update Thu Jun  6 19:39:53 2013 julien fortin
 //
 
 #ifndef	__EVENT_ENUM_HH__
@@ -36,7 +36,7 @@ namespace BomberMan
 	{
 	  VALIDATION,
 	  MOVE,
-	  DROP_ITEM,
+	  DROPBOMB,
 	  GET_ITEM,
 	  GET_HIT,
 	  COLLISION,

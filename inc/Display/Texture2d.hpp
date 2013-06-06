@@ -10,7 +10,7 @@ namespace BomberMan
     class Texture2d : public AObject
     {
     private:
-      const gdl::Image*	_texture;
+      gdl::Image	_texture;
 
     public:
       Texture2d(const std::string &texture, Vector3f &position,  Vector3f &rotation, Vector3f &len) : AObject(texture, position, rotation, len){}
@@ -19,12 +19,12 @@ namespace BomberMan
       void	initialize();
       void	update(gdl::GameClock const &);
       void	draw(void);
-      void	play(std::string const & _name, char state) {};
-      void	stop(std::string const & name) {};
-      double	get_anim_speed(std::string const &name) {};
-      void	set_anim_speed(std::string const &name, double speed) {};
+      void	play(std::string const &, char) {};
+      void	stop(std::string const &) {};
+      double	get_anim_speed(std::string const &) {};
+      void	set_anim_speed(std::string const &, double) {};
       void	info() {};
-      void      setColor(unsigned char r, unsigned char g, unsigned char b) {};
+      void      setColor(unsigned char, unsigned char, unsigned char) {};
     };
   }
 }
@@ -37,5 +37,4 @@ namespace BomberMan
     class Texture2d;
   }
 }
-
 #endif

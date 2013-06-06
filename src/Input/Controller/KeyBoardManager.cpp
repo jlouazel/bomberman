@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 21 20:26:12 2013 julien fortin
-// Last update Wed Jun  5 14:12:25 2013 julien fortin
+// Last update Thu Jun  6 19:43:37 2013 julien fortin
 //
 
 #include	"EventManager.hh"
@@ -233,6 +233,7 @@ namespace BomberMan
 
       void	KeyBoardManager::_action(const Field::Player* const)
       {
+	Event::EventManager::getEventManager()->gameEvent(Event::EventDirection::NO, Event::EventType::DROPBOMB, 0.0, 0.0);
       }
     }
   }
