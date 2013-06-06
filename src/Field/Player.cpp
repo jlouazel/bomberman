@@ -82,17 +82,19 @@ namespace BomberMan
       if ((x + 110 - 20) / 220 < 0 || (x + 110 + 20) / 220 > (manager->getWidth()) ||
 	  (z + 110 - 20) / 220 < 0 || (z + 110 + 20) / 220 > (manager->getHeight()))
 	return (false);
-      else
-	return (true);
-      for (int y = 0; y < manager->getWidth(); y++)
-	for (int x = 0; x < manager->getHeight(); x++)
+      for (int y = 0; y < manager->getHeight(); y++)
+	for (int x = 0; x < manager->getWidth(); x++)
 	  {
 	    std::list<IGameComponent *> obj = manager->get(x, y);
 
+	    int i = 0;
 	    for (std::list<IGameComponent *>::iterator it = obj.begin(); it != obj.end(); ++it)
 	      {
-		std::cout << "x = " << (*it)->getX() << " X = " << (this->_x + 110) / 220 << std::endl;;
+		if (i > 0 && (*it)->getX())
+		// std::cout << "x = " << (*it)->getX() << " X = " << (this->_x + 110) / 220 << std::endl;;
+		i++;
 	      }
+	    // std::cout << "End of the case" << std::endl;
 	  }
       return (true);
     }
@@ -113,10 +115,13 @@ namespace BomberMan
 
 	  if (this->checkMyMove(this->_asset->getPosition().getZ() + z, this->_asset->getPosition().getX() + x, manager) == true)
 	    this->move(x, z, angle);
-	  else if (this->checkMyMove(this->_asset->getPosition().getZ(), this->_asset->getPosition().getX() + x, manager) == true)
-	    this->move(x, 0, angle);
-	  else if (this->checkMyMove(this->_asset->getPosition().getZ() + z, this->_asset->getPosition().getX(), manager) == true)
-	    this->move(0, z, angle);
+	  else
+	    {
+	      if (this->checkMyMove(this->_asset->getPosition().getZ(), this->_asset->getPosition().getX() + x, manager) == true)
+		this->move(x, 0, angle);
+	      else if (this->checkMyMove(this->_asset->getPosition().getZ() + z, this->_asset->getPosition().getX(), manager) == true)
+		this->move(0, z, angle);
+	    }
 	  delete move;
 	}
       else
