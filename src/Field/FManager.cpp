@@ -43,7 +43,7 @@ namespace BomberMan
 	}
       else
 	{
-	  if (rand() % 100 < 50)
+	  if (rand() % 100 < 10)
 	    angle = 0 + rand() % plage;
 	  else
 	    angle = 0 - rand() % plage;
@@ -65,8 +65,11 @@ namespace BomberMan
 	    }
 	  else
 	    {
-	      vectorRot.setY(randAngle(5));
-	      components.push_front(new Wall(true, 100, elemCnt / width, elemCnt % width, new Display::Texture3d("models/Barrel.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+	      if (rand() % 100 <= 60)
+		{
+		  vectorRot.setY(randAngle(5));
+		  components.push_front(new Wall(true, 100, elemCnt / width, elemCnt % width, new Display::Texture3d("models/Barrel.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+		}
 	    }
 	}
     }
@@ -138,11 +141,11 @@ namespace BomberMan
 	_height(0)
     {
       srand(time(0));
-      for (; this->_width < 15 || this->_width > 100; this->_width = rand() % 100);
-      for (; this->_height < 15 || this->_height > 100; this->_height = rand() % 100);
+      // for (; this->_width < 15 || this->_width > 100; this->_width = rand() % 100);
+      // for (; this->_height < 15 || this->_height > 100; this->_height = rand() % 100);
 
-      //      this->_width = 3;
-      //      this->_height = 2;
+      this->_width = 3;
+      this->_height = 3;
 
       this->_map = std::vector<std::list<IGameComponent *> >(this->_width * this->_height, std::list<IGameComponent *>());
       unsigned int elemCnt = 0;
