@@ -1,0 +1,43 @@
+#ifndef __SOUND_MANAGER_HH__
+#define __SOUND_MANAGER_HH__
+
+#include <map>
+#include <string>
+#include <fmod.h>
+
+namespace BomberMan
+{
+  namespace Sound
+  {
+    class SoundManager
+    {
+    private:
+      FMOD_SYSTEM	*_system;
+      std::map<std::string, FMOD_SOUND *>	_sounds;
+
+    private:
+      SoundManager();
+      SoundManager(SoundManager const& copy);
+      SoundManager& operator=(SoundManager const& copy);
+
+    public:
+      static SoundManager& getInstance()
+      {
+	static SoundManager instance;
+	return instance;
+      }
+    };
+  }
+}
+
+#else
+
+namespace BomberMan
+{
+  namespace Sound
+  {
+    class SoundManager;
+  }
+}
+
+#endif
