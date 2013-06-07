@@ -218,6 +218,14 @@ namespace BomberMan
       return false;
     }
 
+    static void			createPlaceForPlayer(std::vector<std::list<IGameComponent *> >	& _map, std::list<Player *> const & players)
+    {
+      for (std::list<Player *>::const_iterator itPl = players.begin(); itPl != players.end(); ++itPl)
+	{
+	  
+	}
+    }
+
     void			Manager::randomize(std::list<Player *> const & players)
     {
       unsigned int x, y;
@@ -226,7 +234,7 @@ namespace BomberMan
 	  for (x = 0; x != this->_width; x++)
 	    {
 	      unsigned int elemCnt = (x + (y * (this->_width)));
-	      if (isThereAWallHere(this->_map[elemCnt]) == false && isAPlayerHere(players, x, y) == false)
+	      if (!(x == 0 && y == this->_height - 1) &&isThereAWallHere(this->_map[elemCnt]) == false && isAPlayerHere(players, x, y) == false)
 		{
 		  Display::Vector3f	vectorLen(0.0, 0.0, 0.0);
 		  Display::Vector3f	vectorRot(0.0, randAngle(5), 0.0);
