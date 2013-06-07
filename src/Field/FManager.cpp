@@ -233,22 +233,12 @@ namespace BomberMan
     {
       for (std::list<Player *>::const_iterator itPl = players.begin(); itPl != players.end(); ++itPl)
       	{
-      	  switch (static_cast<unsigned int>((*itPl)->getX()))
-	    {
-	    case 0:
-	      eraseWall(map[1]);
-	      break;
-	    default:
-	      break;
-	    }
-	  switch (static_cast<unsigned int>((*itPl)->getY()))
-	    {
-	    case 0:
-	      eraseWall(map[width]);
-	      break;
-	    default:
-	      break;
-	    }
+      	  if (static_cast<unsigned int>((*itPl)->getX()) == 0)
+	    eraseWall(map[1]);
+	  else if (static_cast<unsigned int>((*itPl)->getX()) % 2 == 0)
+	    eraseWall(map[width]);
+	  if (static_cast<unsigned int>((*itPl)->getY()) == 0)
+	    eraseWall(map[width]);
       	}
     }
 
