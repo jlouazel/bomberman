@@ -17,7 +17,6 @@ namespace BomberMan
     protected:
       float					_x;
       float					_y;
-      int					_explosion;
       Display::AObject *			_asset;
       Display::ISound *		_sound;
       Display::IAnimation *	_animation;
@@ -41,8 +40,6 @@ namespace BomberMan
       virtual void					setSound(Display::ISound *);
       virtual Display::IAnimation *   getAnimation() const;
       virtual void					setAnimation(Display::IAnimation *);
-      virtual void					setExplosion(bool);
-      virtual bool					getExplosion() const;
 
     };
   }

@@ -15,7 +15,6 @@ namespace BomberMan
       this->_animation = anim;
       this->_runningTimer = 0;
       this->_end = false;
-      this->_explosion = false;
     }
 
     Object::Object(const Object & other)
@@ -26,7 +25,6 @@ namespace BomberMan
       this->_asset = other._asset;
       this->_sound = other._sound;
       this->_animation = other._animation;
-      this->_explosion = other._explosion;
     }
 
     Object::~Object()

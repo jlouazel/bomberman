@@ -28,6 +28,7 @@ namespace BomberMan
 	  void  draw(gdl::GameClock const & gameClock);
           void  update(gdl::GameClock const & gameClock, Manager *);
 	  bool  operator==(IGameComponent *other);
+	  bool	isBreakable() const;
         };
     }
 }

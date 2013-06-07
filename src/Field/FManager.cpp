@@ -185,22 +185,25 @@ namespace BomberMan
       	      return;
       	    }
       	}
-      // this->_map[y * this->_width + x].pop_front();
     }
 
     void	Manager::setExplosion(unsigned int x, unsigned int y, int power)
     {
       for (std::list<IGameComponent *>::iterator it = this->_map[y * this->_width + x].begin(); it != this->_map[y * this->_width + x].end(); ++it)
-        {
-	  (*it)->explode(power);
-        }
+	{
+	  if (dynamic_cast<Wall *>(*it) == *it)
+	    {
+	      Wall *tmp = static_cast<Wall *>(*it);
+	      if (tmp->isBreakable() == false)
+		return;
+	    }
+	}
     }
 
     static unsigned int		getPercent(unsigned int width, unsigned int height, unsigned int nbPlayers, unsigned int percent)
     {
       return 50;
     }
-
 
     static bool			isAPlayerHere(std::list<Player *> const & players, unsigned int x, unsigned int y)
     {
@@ -218,12 +221,12 @@ namespace BomberMan
       return false;
     }
 
-    static void			createPlaceForPlayer(std::vector<std::list<IGameComponent *> >	& _map, std::list<Player *> const & players)
+    static void			createPlaceForPlayer(std::vector<std::list<IGameComponent *> >	& map, std::list<Player *> const & players)
     {
       for (std::list<Player *>::const_iterator itPl = players.begin(); itPl != players.end(); ++itPl)
-	{
-	  i
-	}
+      	{
+      	  
+      	}
     }
 
     void			Manager::randomize(std::list<Player *> const & players)

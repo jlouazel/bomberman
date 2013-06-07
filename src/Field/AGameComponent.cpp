@@ -58,15 +58,5 @@ namespace BomberMan
     {
       this->_animation = animation;
     }
-
-    void        AGameComponent::setExplosion(bool explosion)
-    {
-      this->_explosion = explosion;
-    }
-
-    bool        AGameComponent::getExplosion() const
-    {
-      return (this->_explosion);
-    }
   }
 }
