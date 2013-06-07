@@ -190,6 +190,7 @@ namespace BomberMan
 
     void	Manager::setExplosion(unsigned int x, unsigned int y, int power)
     {
+      std::cout << "J'aime le cafe : X = " << x << " Y = " << y << std::endl;
       for (std::list<IGameComponent *>::iterator it = this->_map[y * this->_width + x].begin(); it != this->_map[y * this->_width + x].end(); ++it)
         {
 	  (*it)->explode(power);
