@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 manour_m. All rights reserved.
 //
 
+#include <Clock.hpp>
+
 #include "Vector.hpp"
 #include "Empty.hh"
 #include "FManager.hh"
@@ -27,11 +29,14 @@ namespace BomberMan
 	  this->_asset = new Display::Texture3d("models/Floor.fbx", vectorPosition, vectorRot, vectorLen);
 	else
 	  this->_asset = asset;
+	this->_textureExplosion = new Display::Texture3d("models/SmokeExplosion.fbx", vectorPosition, vectorRot, vectorLen);
 	this->_asset->initialize();
 	this->_sound = sound;
 	this->_animation = anim;
 	this->_explosion = false;
 	this->_end = false;
+	this->_textureExplosion->initialize();
+	this->_clock = new gdl::Clock();
       }
 
       Empty::~Empty()
@@ -40,18 +45,30 @@ namespace BomberMan
 
       void        Empty::update(gdl::GameClock const & gameClock, Manager *manager)
       {
-	this->_asset->update(gameClock);
+ 	this->_asset->update(gameClock);
+	this->_clock->update();
+	if (this->_clock->getTotalElapsedTime() > 1)
+	  {
+	    this->_explosion = false;
+	    this->_clock->pause();
+	    this->_clock->reset();
+	    this->_clock->pause();
+	  }
+	if (this->_explosion == true)
+	  this->_textureExplosion->update(gameClock);
       }
 
       void        Empty::draw(gdl::GameClock const & gameClock)
       {
-	// std::cout << "Start draw Empty" << std::endl;
 	this->_asset->draw();
-	// std::cout << "End draw Empty" << std::endl;
+	if (this->_explosion == true)
+	  this->_textureExplosion->draw();
       }
 
       void    Empty::explode(int damages)
       {
+	this->_explosion = true;
+	this->_clock->play();
       }
 
       bool	Empty::operator==(IGameComponent *other)

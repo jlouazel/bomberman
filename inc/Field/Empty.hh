@@ -18,6 +18,10 @@ namespace BomberMan
     {
       class Empty : public AGameComponent
         {
+	private:
+	  Display::AObject *_textureExplosion;
+	  bool		   _explosion;
+	  gdl::Clock   *_clock;
         public:
 	  Empty(float x, float y, Display::AObject * asset, Display::ISound * sound, Display::IAnimation * anim);
 	  ~Empty();

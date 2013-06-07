@@ -21,7 +21,6 @@ namespace BomberMan
       this->_asset->initialize();
       this->_sound = sound;
       this->_animation = anim;
-      this->_explosion = false;
       this->_end = false;
     }
 
@@ -31,7 +30,7 @@ namespace BomberMan
 
     void        Wall::update(gdl::GameClock const & gameClock, Manager *manager)
     {
-      //this->_asset->update(gameClock);
+      this->_asset->update(gameClock);
     }
 
     void        Wall::draw(gdl::GameClock const & gameClock)
@@ -52,15 +51,7 @@ namespace BomberMan
     void    Wall::explode(int damages)
     {
       if (this->_breakable == true)
-	{
-	  std::cout << "DESTRUCTION DU MUR EN X = " << this->_x << " Y -= " << this->_y << std::endl;
-	  // this->_pv -= damages;
-	  // // changement d'asset (breches?)
-	  // if (this->_pv < 0)
-	  //   {
-	  this->_end = true;
-	    // }
-	}
+	this->_end = true;
     }
 
     bool	Wall::operator==(IGameComponent *otherToCompare)
@@ -72,6 +63,11 @@ namespace BomberMan
 	    return (true);
 	}
       return (false);
+    }
+
+    bool	Wall::isBreakable() const
+    {
+      return (this->_breakable);
     }
   }
 }

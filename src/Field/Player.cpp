@@ -35,7 +35,6 @@ namespace BomberMan
       this->_bomb = new Object(0.0, 0.0, new Display::Texture3d("models/ExplodingBomb.fbx", position, rotation, len), 0, 0, BOMB, NONE, 3, 3);
       this->_camera = 0; // initialise after.
       this->_isMoving = false;
-      this->_explosion = false;
       this->_end = false;
     }
 
@@ -103,7 +102,6 @@ namespace BomberMan
       this->newBomb();
       toadd->setX(X);
       toadd->setY(Y);
-      std::cout << "X = " << X << " Y = " << Y << std::endl;
       manager->addComponent(Y, X, toadd);
     }
 

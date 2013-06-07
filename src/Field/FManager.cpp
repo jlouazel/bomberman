@@ -185,12 +185,19 @@ namespace BomberMan
       	      return;
       	    }
       	}
-      // this->_map[y * this->_width + x].pop_front();
     }
 
     void	Manager::setExplosion(unsigned int x, unsigned int y, int power)
     {
-      std::cout << "J'aime le cafe : X = " << x << " Y = " << y << std::endl;
+      for (std::list<IGameComponent *>::iterator it = this->_map[y * this->_width + x].begin(); it != this->_map[y * this->_width + x].end(); ++it)
+	{
+	  if (dynamic_cast<Wall *>(*it) == *it)
+	    {
+	      Wall *tmp = static_cast<Wall *>(*it);
+	      if (tmp->isBreakable() == false)
+		return;
+	    }
+	}
       for (std::list<IGameComponent *>::iterator it = this->_map[y * this->_width + x].begin(); it != this->_map[y * this->_width + x].end(); ++it)
         {
 	  (*it)->explode(power);
@@ -201,7 +208,6 @@ namespace BomberMan
     {
       return 50;
     }
-
 
     static bool			isAPlayerHere(std::list<Player *> const & players, unsigned int x, unsigned int y)
     {
