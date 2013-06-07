@@ -90,6 +90,8 @@ namespace BomberMan
       Display::Vector3f len(0, 0, 0);
 
       this->_bomb =  new Object(0.0, 0.0, new Display::Texture3d("models/ExplodingBomb.fbx", position, rotation, len),0, 0, BOMB, NONE, 3, 3);
+      if (this->_nb_bomb_set < this->_nb_bomb_max)
+	this->_nb_bomb_set++;
       this->_bomb->initialize();
     }
 
