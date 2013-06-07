@@ -289,7 +289,7 @@ namespace BomberMan
       this->_pv = pv;
     }
 
-    void        Player::explode(int damages, eDirection direction)
+    void        Player::explode(int damages, eDirection direction, Manager *manager)
     {
       static_cast<void>(direction);
       this->setPv(this->_pv - damages);

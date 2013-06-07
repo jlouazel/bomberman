@@ -48,9 +48,8 @@ namespace BomberMan
 	// std::cout << "End draw Empty" << std::endl;
       }
 
-      void    Empty::explode(int damages, eDirection direction)
+      void    Empty::explode(int damages, eDirection direction, Manager *manager)
       {
-	Manager *	field;
 	int	x;
 	int	y;
 

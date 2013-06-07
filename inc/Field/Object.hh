@@ -37,11 +37,10 @@ namespace BomberMan
       int         getPower() const;
       void        setPower(int);
       int         getTimer() const;
-      void        explode(int, eDirection, Manager *);
       void	  setX(float);
       void	  setY(float);
       bool        isEnd() const;
-      void        explode(int, eDirection);
+      void        explode(int, eDirection, Manager *);
 
 
       void  draw(gdl::GameClock const & gameClock);

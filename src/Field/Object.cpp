@@ -56,14 +56,10 @@ namespace BomberMan
       this->_runningTimer += gameClock.getElapsedTime();
       if (this->_runningTimer >= this->_timer)
 	{
-	  this->explode(this->_power, UP);
-	  this->explode(this->_power, RIGHT);
-	  this->explode(this->_power, DOWN);
-	  this->explode(this->_power, LEFT);
-	  // this->explode(this->_power, UP, manager);
-	  // this->explode(this->_power, RIGHT, manager);
-	  // this->explode(this->_power, DOWN, manager);
-	  // this->explode(this->_power, LEFT, manager);
+	  this->explode(this->_power, UP, manager);
+	  this->explode(this->_power, RIGHT, manager);
+	  this->explode(this->_power, DOWN, manager);
+	  this->explode(this->_power, LEFT, manager);
 	  this->_end = true;
 	}
     }
@@ -103,7 +99,7 @@ namespace BomberMan
       return this->_timer;
     }
 
-    void        Object::explode(int damages, eDirection direction)//, Manager *manager)
+    void        Object::explode(int damages, eDirection direction, Manager *manager)
     {
       if (this->_object_type == BOMB)
 	{

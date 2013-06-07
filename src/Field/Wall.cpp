@@ -47,7 +47,7 @@ namespace BomberMan
       this->_pv = pv;
     }
 
-    void    Wall::explode(int damages, eDirection direction)
+    void    Wall::explode(int damages, eDirection direction, Manager *manager)
     {
       static_cast<void>(direction);
       if (this->_breakable == true)

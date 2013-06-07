@@ -51,7 +51,7 @@ namespace BomberMan
       float       getSpeed() const;
       void        setSpeed(float);
       Object *    getBomb() const;
-      void        explode(int, eDirection);
+      void        explode(int, eDirection, Manager *manager);
       int         getPv() const;
       void        setPv(int);
       void	  setCamera(Display::Camera *);
