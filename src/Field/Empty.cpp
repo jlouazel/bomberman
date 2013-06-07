@@ -68,6 +68,7 @@ namespace BomberMan
 
       void    Empty::explode(int damages)
       {
+	std::cout << "EXPLOSION" << std::endl;
 	this->_explosion = true;
 	Display::Vector3f      vectorLen(0.0, 0.0, 0.0);
 	Display::Vector3f      vectorRot(0.0, 0.0, 0.0);

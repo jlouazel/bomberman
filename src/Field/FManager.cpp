@@ -205,6 +205,10 @@ namespace BomberMan
 		return;
 	    }
 	}
+      for (std::list<IGameComponent *>::iterator it = this->_map[y * this->_width + x].begin(); it != this->_map[y * this->_width + x].end(); ++it)
+        {
+	  (*it)->explode(power);
+        }
     }
 
     static unsigned int		getPercent(unsigned int width, unsigned int height, unsigned int nbPlayers, unsigned int percent)
