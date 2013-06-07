@@ -51,15 +51,15 @@ namespace BomberMan
 
     void    Wall::explode(int damages)
     {
-      std::cout << "L'explosion entre dans le mur" << std::endl;
       if (this->_breakable == true)
 	{
-	  this->_pv -= damages;
-	  // changement d'asset (breches?)
-	  if (this->_pv < 0)
-	    {
-	      this->_end = true;
-	    }
+	  std::cout << "DESTRUCTION DU MUR EN X = " << this->_x << " Y -= " << this->_y << std::endl;
+	  // this->_pv -= damages;
+	  // // changement d'asset (breches?)
+	  // if (this->_pv < 0)
+	  //   {
+	  this->_end = true;
+	    // }
 	}
     }
 

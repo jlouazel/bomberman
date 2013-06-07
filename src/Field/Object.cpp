@@ -1,4 +1,5 @@
 #include "Object.hh"
+#include "Wall.hh"
 
 namespace BomberMan
 {
@@ -36,7 +37,6 @@ namespace BomberMan
     {
       Display::Vector3f newVectorPosition(x * 220, this->_asset->getPosition().getY(), this->_asset->getPosition().getZ());
       this->_x = x;
-      std::cout << "x = " << x << "X = " << x * 220 << std::endl;
       this->_asset->setPosition(newVectorPosition);
     }
 
@@ -106,16 +106,10 @@ namespace BomberMan
     {
       std::list<IGameComponent *> Case = manager->get(x, y);
 
-      std::cout << "SIZE = " << Case.size() << std::endl;
       for (std::list<IGameComponent *>::iterator it = Case.begin(); it != Case.end(); ++it)
 	{
-	  if (!(dynamic_cast<Empty *>(*it) == *it))
-	    {
-	      std::cout << "lalal" << std::endl;
-	      if (dynamic_cast<Object *>(*it) == *it)
-		std::cout << "Je suis un object." << std::endl;
-	      return (true);
-	    }
+	  if (dynamic_cast<Wall *>(*it) == *it)
+	    return (true);
 	}
       return (false);
     }
@@ -129,58 +123,53 @@ namespace BomberMan
 	    {
 	    case UP :
 	      {
-		while (i < this->_power)
-		  {
-		    if (this->_x + i > manager->getHeight())
-		      return;
-		    manager->setExplosion(this->_x + i, this->_y, this->_power - i);
-		    std::cout << "Explosion en : X = " << this->_x + i << " Y = " << this->_y << " deplacement up" << std::endl;
-		    if (this->checkCase(this->_x + i, this->_y, manager) == true)
-		      return;
-		    i++;
-		  }
+	    	while (i < this->_power)
+	    	  {
+	    	    if (this->_x + i > manager->getHeight() - 1)
+	    	      return;
+	    	    manager->setExplosion(this->_y, this->_x + i, this->_power - i);
+	    	    if (this->checkCase(this->_y, this->_x + i, manager) == true)
+	    	      return;
+	    	    i++;
+	    	  }
 	      }
 	    case DOWN :
 	      {
-		while (i < this->_power)
-		  {
-		    if (this->_x - i < 0)
-		      return;
-		    manager->setExplosion(this->_x - i, this->_y, this->_power - i);
-		    std::cout << "Explosion en : X = " << this->_x - i << " Y = " << this->_y << " deplacement down" << std::endl;
-		    if (this->checkCase(this->_x - i, this->_y, manager) == true)
-		      return;
-		    i++;
-		  }
+	    	while (i < this->_power)
+	    	  {
+	    	    if (this->_x - i < 0)
+	    	      return;
+	    	    manager->setExplosion(this->_y, this->_x - i, this->_power - i);
+	    	    if (this->checkCase(this->_y, this->_x - i, manager) == true)
+	    	      return;
+	    	    i++;
+	    	  }
 	      }
 	    case LEFT :
 	      {
-		while (i < this->_power)
-		  {
-		    if (this->_y - i < 0)
-		      return;
-		    manager->setExplosion(this->_x, this->_y - i, this->_power - i);
-		    std::cout << "Explosion en : X = " << this->_x << " Y = " << this->_y - i << " deplacement left" << std::endl;
-		    if (this->checkCase(this->_x, this->_y - i , manager) == true)
-		      return;
-		    i++;
-		  }
+	    	while (i < this->_power)
+	    	  {
+	    	    if (this->_y - i < 0)
+	    	      return;
+	    	    manager->setExplosion(this->_y - i, this->_x, this->_power - i);
+	    	    if (this->checkCase(this->_y - i, this->_x , manager) == true)
+	    	      return;
+	    	    i++;
+	    	  }
 	      }
 	    case RIGHT :
 	      {
-		while (i < this->_power)
-		  {
-		    if (this->_y + i > manager->getWidth())
-		      return;
-		    manager->setExplosion(this->_x, this->_y + i, this->_power - i);
-		    std::cout << "Explosion en : X = " << this->_x << " Y = " << this->_y + i << " deplacement right" << std::endl;
-		    if (this->checkCase(this->_x, this->_y + i, manager) == true)
-		      return;
-		    i++;
-		  }
+	    	while (i < this->_power)
+	    	  {
+	    	    if (this->_y + i > manager->getWidth() - 1)
+	    	      return;
+	    	    manager->setExplosion(this->_y + i, this->_x, this->_power - i);
+	    	    if (this->checkCase(this->_y + i, this->_x, manager) == true)
+	    	      return;
+	    	    i++;
+	    	  }
 	      }
 	    }
-	  // propagation++
 	}
     }
 

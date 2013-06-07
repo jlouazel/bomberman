@@ -24,7 +24,7 @@ namespace BomberMan
 
       Sound::SoundManager *manager = Sound::SoundManager::getInstance();
       manager->addNewSound("sounds/ambianceGame.mp3");
-      manager->playSound("sounds/ambianceGame.mp3", true);
+      // manager->playSound("sounds/ambianceGame.mp3", true);
 
       Display::Vector3f      vectorPosition(0, 0.0, 0);
       Display::Vector3f      vectorLen(0.0, 0.0, 0.0);
