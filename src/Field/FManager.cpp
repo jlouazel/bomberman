@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <sys/types.h>
 #include <cstdlib>
 #include <ctime>
@@ -54,12 +55,13 @@ namespace BomberMan
 
     static void	addWalls(std::list<IGameComponent *> & components, unsigned int width, unsigned int height, unsigned int elemCnt)
     {
+      std::cout << "width" << width << std::endl;
       Display::Vector3f	vectorLen(0.0, 0.0, 0.0);
       Display::Vector3f	vectorRot(0.0, 0.0, 0.0);
       Display::Vector3f	vectorPosition((elemCnt / width) * 220, 0.0, (elemCnt % width) * 220);
       if (elemCnt % width != 0 || elemCnt / width != height - 1)
 	{
-	  if ((elemCnt % width) % 2 != 0 && (elemCnt / width) % 2 != 0)
+	  if ((elemCnt % width) % 2 != 0 && (elemCnt / width) % 2 != 0 && elemCnt % width != width - 1 && elemCnt / width != height - 1)
 	    {
 	      vectorRot.setY(rand() % 360);
 	      components.push_front(new Wall(false, 100, elemCnt / width, elemCnt % width, new Display::Texture3d("models/Cuve.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
@@ -135,8 +137,8 @@ namespace BomberMan
       // for (; this->_width < 15 || this->_width > 100; this->_width = rand() % 100);
       // for (; this->_height < 15 || this->_height > 100; this->_height = rand() % 100);
 
-      this->_width = 10;
-      this->_height = 10;
+      this->_width = 3;
+      this->_height = 4;
 
       this->_map = std::vector<std::list<IGameComponent *> >(this->_width * this->_height, std::list<IGameComponent *>());
       unsigned int elemCnt = 0;
@@ -208,22 +210,29 @@ namespace BomberMan
       return false;
     }
 
+    static bool			isThereAWallHere(std::list<IGameComponent *> const & place)
+    {
+      for (std::list<IGameComponent *>::const_iterator it = place.begin(); it != place.end(); ++it)
+	if (dynamic_cast<Wall *>(*it) == *it)
+	  return true;
+      return false;
+    }
+
     void			Manager::randomize(std::list<Player *> const & players)
     {
-      unsigned int x, y, elemCnt, nbCaisses = 0;
-      while (nbCaisses != getPercent(this->_width, this->_height, players.size(), 80))
+      unsigned int x, y;
+      for (y = 0; y != this->_height; y++)
 	{
-	  x = rand() % this->_width;
-	  y = rand() % this->_height;
-	  elemCnt = (y * this->_width) + x;
-	  std::cout << elemCnt << std::endl;
-	  if ((x % 2 == 0 || y % 2 == 0) && isAPlayerHere(players, x, y) == false)
+	  for (x = 0; x != this->_width; x++)
 	    {
-	      Display::Vector3f	vectorLen(0.0, 0.0, 0.0);
-	      Display::Vector3f	vectorRot(0.0, randAngle(5), 0.0);
-	      Display::Vector3f	vectorPosition((elemCnt / this->_width) * 220, 0.0, (elemCnt % this->_width) * 220);
-	      this->_map[elemCnt].push_front(new Wall(true, 1, elemCnt / this->_width, elemCnt % this->_width, new Display::Texture3d("models/Barrel.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
-	      nbCaisses++;
+	      unsigned int elemCnt = (x + (y * (this->_width)));
+	      if (isThereAWallHere(this->_map[elemCnt]) == false && isAPlayerHere(players, x, y) == false)
+		{
+		  Display::Vector3f	vectorLen(0.0, 0.0, 0.0);
+		  Display::Vector3f	vectorRot(0.0, randAngle(5), 0.0);
+		  Display::Vector3f	vectorPosition((elemCnt / this->_width) * 220, 0.0, (elemCnt % this->_width) * 220);
+		  this->_map[elemCnt].push_front(new Wall(true, 1, elemCnt / this->_width, elemCnt % this->_width, new Display::Texture3d("models/Barrel.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+		}
 	    }
 	}
     }
