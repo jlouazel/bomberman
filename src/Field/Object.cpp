@@ -97,7 +97,8 @@ namespace BomberMan
 
     void        Object::explode(int power)
     {
-      
+      if (this->_object_type == BOMB)
+	this->_runningTimer = this->_timer;
     }
 
     bool	Object::checkCase(int x, int y, Manager *manager)
