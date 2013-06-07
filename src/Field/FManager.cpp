@@ -205,10 +205,6 @@ namespace BomberMan
 		return;
 	    }
 	}
-      for (std::list<IGameComponent *>::iterator it = this->_map[y * this->_width + x].begin(); it != this->_map[y * this->_width + x].end(); ++it)
-        {
-	  (*it)->explode(power);
-        }
     }
 
     static unsigned int		getPercent(unsigned int width, unsigned int height, unsigned int nbPlayers, unsigned int percent)
@@ -232,12 +228,25 @@ namespace BomberMan
       return false;
     }
 
-    static void			createPlaceForPlayer(std::vector<std::list<IGameComponent *> >	& _map, std::list<Player *> const & players)
+    static void		eraseWall(std::list<IGameComponent *> & place)
+    {
+      for (std::list<IGameComponent *>::iterator it = place.begin(); it != place.end(); ++it)
+	if (dynamic_cast<Wall *>(*it) == *it)
+	  if (dynamic_cast<Wall *>(*it)->isBreakable() == true)
+	    it = place.erase(it);
+    }
+
+      static void	createPlaceForPlayer(std::vector<std::list<IGameComponent *> >	& map, std::list<Player *> const & players, unsigned int width, unsigned int height)
     {
       for (std::list<Player *>::const_iterator itPl = players.begin(); itPl != players.end(); ++itPl)
-	{
-	  
-	}
+      	{
+      	  if (static_cast<unsigned int>((*itPl)->getX()) == 0)
+	    eraseWall(map[1]);
+	  else if (static_cast<unsigned int>((*itPl)->getX()) % 2 == 0)
+	    eraseWall(map[width]);
+	  if (static_cast<unsigned int>((*itPl)->getY()) == 0)
+	    eraseWall(map[width]);
+      	}
     }
 
     void			Manager::randomize(std::list<Player *> const & players)
@@ -257,6 +266,7 @@ namespace BomberMan
 		}
 	    }
 	}
+      createPlaceForPlayer(this->_map, players, this->_width, this->_height);
     }
   }
 }
