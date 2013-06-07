@@ -9,6 +9,7 @@
 #include "Vector.hpp"
 #include "AObject.hpp"
 #include "Texture3d.hpp"
+#include "Player.hh"
 
 namespace BomberMan
 {
@@ -175,19 +176,19 @@ namespace BomberMan
     void	Manager::delComponent(unsigned int x, unsigned int y, IGameComponent *toDel)
     {
       std::list<IGameComponent *> list = this->_map[y * this->_width + x];
-
-      for (std::list<IGameComponent *>::iterator it = list.begin(); it != list.end(); ++it)
-	{
-	  if (toDel == *it)
-	    {
-	      list.erase(it);
-	      return;
-	    }
-	}
+      for (std::list<IGameComponent *>::iterator it = this->_map[y * this->_width + x].begin(); it != this->_map[y * this->_width + x].end(); ++it)
+      	{
+      	  if (toDel == *it)
+      	    {
+      	      this->_map[y * this->_width + x].erase(it);
+      	      return;
+      	    }
+      	}
+      // this->_map[y * this->_width + x].pop_front();
     }
+
     void			Manager::randomize(std::list<Player *> const & players)
     {
-      
     }
   }
 }

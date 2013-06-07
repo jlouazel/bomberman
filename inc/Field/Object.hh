@@ -7,6 +7,7 @@
 
 #include "AGameComponent.hh"
 
+#include "Vector.hpp"
 #include "Enums.hh"
 #include "AObject.hpp"
 #include "IAnimation.hh"
@@ -23,6 +24,8 @@ namespace BomberMan
       eBuffType		_buff_type;
       int             _power;
       int             _timer;
+      float	      _runningTimer;
+      bool	      _end;
 
     public:
       Object(float x, float y, Display::AObject * asset, Display::ISound * sound, Display::IAnimation * anim, eObjectType, eBuffType, int, int);
@@ -34,10 +37,16 @@ namespace BomberMan
       int         getPower() const;
       void        setPower(int);
       int         getTimer() const;
+      void        explode(int, eDirection, Manager *);
+      void	  setX(float);
+      void	  setY(float);
+      bool        isEnd() const;
       void        explode(int, eDirection);
+
 
       void  draw(gdl::GameClock const & gameClock);
       void  update(gdl::GameClock const & gameClock, Manager *);
+      void  initialize();
       bool  operator==(IGameComponent *);
     };
   }

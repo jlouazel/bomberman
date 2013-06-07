@@ -37,9 +37,11 @@ namespace BomberMan
 
     public:
       Player(int pv, float speed, int max, int set, float x, float y, Display::AObject * asset, Display::ISound * sound, Display::IAnimation * anim);
+      Player(Player *);
       ~Player();
 
-      void        move(float x, float y, float angle);
+      void        move(float, float, float, Manager *);
+      void	  newBomb();
       void	  setBomb(Manager *);
       void        acquireObject();
       void        run(gdl::GameClock const &);
@@ -58,6 +60,16 @@ namespace BomberMan
       void	  initialize();
       bool	  checkMyMove(float, float, Manager *);
       bool        operator==(IGameComponent *other);
+
+      void	operator=(Player &);
+
+      bool	  getIsMoving() const;
+      bool        getIsRunning() const;
+      Display::AObject *  getRun() const;
+      Display::AObject *  getMark() const;
+      Display::Camera *	  getCamera() const;
+      Display::AObject *  getWalking() const;
+      Display::AObject *  getAsset() const;
     };
   }
 }

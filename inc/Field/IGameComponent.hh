@@ -37,6 +37,7 @@ namespace BomberMan
       virtual Display::IAnimation *	getAnimation() const = 0;
       virtual void					setAnimation(Display::IAnimation *) = 0;
       virtual bool			operator==(IGameComponent *) = 0;
+      virtual bool			isEnd() const = 0;
     };
   }
 }

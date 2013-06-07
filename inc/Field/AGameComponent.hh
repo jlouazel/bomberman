@@ -37,6 +37,7 @@ namespace BomberMan
       virtual void					setSound(Display::ISound *);
       virtual Display::IAnimation *   getAnimation() const;
       virtual void					setAnimation(Display::IAnimation *);
+      virtual bool        isEnd() const;
 
     };
   }

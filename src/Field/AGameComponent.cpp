@@ -53,5 +53,10 @@ namespace BomberMan
         {
             this->_animation = animation;
         }
+
+      bool        AGameComponent::isEnd() const
+      {
+	return (false);
+      }
     }
 }

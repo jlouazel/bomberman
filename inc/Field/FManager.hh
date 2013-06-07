@@ -5,7 +5,6 @@
 #include <iostream>
 #include <utility>
 #include <list>
-
 #include "IGameComponent.hh"
 
 namespace BomberMan

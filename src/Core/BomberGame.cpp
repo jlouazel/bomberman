@@ -57,11 +57,16 @@ namespace BomberMan
 
     void	BomberGame::update(gdl::GameClock const & gameClock)
     {
-	  for (unsigned int y = 0; y != this->getManager()->Field::Manager::getHeight(); y++)
-	    for (unsigned int x = 0; x != this->getManager()->Field::Manager::getWidth(); x++)
-	      for (std::list<Field::IGameComponent *>::iterator it = this->getManager()->Field::Manager::get(x, y).begin(); it != this->getManager()->Field::Manager::get(x, y).end(); ++it)
+      for (unsigned int y = 0; y != this->getManager()->Field::Manager::getHeight(); y++)
+	for (unsigned int x = 0; x != this->getManager()->Field::Manager::getWidth(); x++)
+	  for (std::list<Field::IGameComponent *>::iterator it = this->getManager()->Field::Manager::get(x, y).begin(); it != this->getManager()->Field::Manager::get(x, y).end(); ++it)
+	    {
+	      if ((*it)->isEnd() == true)
+		it = this->getManager()->get(x, y).erase(it);
+	      else
 		updateObjs(*it, gameClock, this->_manager);
-	  updateObjs(this->getPlayers().front(), gameClock, this->_manager);
+	    }
+      updateObjs(this->getPlayers().front(), gameClock, this->_manager);
     }
 
     static void affObjs(Field::IGameComponent * comp, gdl::GameClock const & gameClock)
@@ -72,11 +77,11 @@ namespace BomberMan
     void	BomberGame::draw(gdl::GameClock const & gameClock) const
     {
       for (unsigned int y = 0; y != this->getManager()->Field::Manager::getHeight(); y++)
-	    for (unsigned int x = 0; x != this->getManager()->Field::Manager::getWidth(); x++)
-	      for (std::list<Field::IGameComponent *>::iterator it = this->getManager()->Field::Manager::get(x, y).begin(); it != this->getManager()->Field::Manager::get(x, y).end(); ++it)
-		if (y > ((this->getPlayers().front()->getX() - 110) / 220) - 3 && y < ((this->getPlayers().front()->getX() + 110) / 220) + 4 && x > ((this->getPlayers().front()->getY() - 110) / 220) - 3 && x < ((this->getPlayers().front()->getY() + 110) / 220) + 3)
-		  affObjs(*it, gameClock);
-	  affObjs(this->getPlayers().front(), gameClock);
+	for (unsigned int x = 0; x != this->getManager()->Field::Manager::getWidth(); x++)
+	  for (std::list<Field::IGameComponent *>::iterator it = this->getManager()->Field::Manager::get(x, y).begin(); it != this->getManager()->Field::Manager::get(x, y).end(); ++it)
+	    if (y > ((this->getPlayers().front()->getX() - 110) / 220) - 3 && y < ((this->getPlayers().front()->getX() + 110) / 220) + 4 && x > ((this->getPlayers().front()->getY() - 110) / 220) - 3 && x < ((this->getPlayers().front()->getY() + 110) / 220) + 3)
+	      affObjs(*it, gameClock);
+      affObjs(this->getPlayers().front(), gameClock);
     }
 
     void	BomberGame::updateCamera(gdl::GameClock const & gameClock, gdl::Input & input)
