@@ -35,6 +35,8 @@ namespace BomberMan
       this->_bomb = new Object(0.0, 0.0, new Display::Texture3d("models/ExplodingBomb.fbx", position, rotation, len), 0, 0, BOMB, NONE, 3, 3);
       this->_camera = 0; // initialise after.
       this->_isMoving = false;
+      this->_explosion = false;
+      this->_end = false;
     }
 
     Player::Player(Player * cpy)
@@ -289,11 +291,11 @@ namespace BomberMan
       this->_pv = pv;
     }
 
-    void        Player::explode(int damages, eDirection direction, Manager *manager)
+    void        Player::explode(int damages)
     {
-      static_cast<void>(direction);
       this->setPv(this->_pv - damages);
       // animation dmg
+      std::cout << "Le player prend des degats" << std::endl;
       if (this->_pv <= 0)
 	std::cout << "J'suis mort" << std::endl;
     }

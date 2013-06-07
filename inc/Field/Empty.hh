@@ -22,7 +22,7 @@ namespace BomberMan
 	  Empty(float x, float y, Display::AObject * asset, Display::ISound * sound, Display::IAnimation * anim);
 	  ~Empty();
 
-	  void	explode(int, eDirection, Manager *manager);
+	  void	explode(int);
 	  void	draw(gdl::GameClock const &);
 	  void  update(gdl::GameClock const &, Manager *);
 	  bool  operator==(IGameComponent *);

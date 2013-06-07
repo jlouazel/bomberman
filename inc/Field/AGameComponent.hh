@@ -17,15 +17,18 @@ namespace BomberMan
     protected:
       float					_x;
       float					_y;
+      int					_explosion;
       Display::AObject *			_asset;
       Display::ISound *		_sound;
       Display::IAnimation *	_animation;
+      bool			_end;
 
     public:
       virtual ~AGameComponent(){}
 
-      virtual void					explode(int, eDirection, Manager *) = 0;
+      virtual void					explode(int) = 0;
       virtual bool                      operator==(IGameComponent *) = 0;
+      virtual bool        isEnd() const;
       virtual void  draw(gdl::GameClock const &) = 0;
       virtual void  update(gdl::GameClock const &, Manager *) = 0;
       virtual float					getX() const;
@@ -38,7 +41,8 @@ namespace BomberMan
       virtual void					setSound(Display::ISound *);
       virtual Display::IAnimation *   getAnimation() const;
       virtual void					setAnimation(Display::IAnimation *);
-      virtual bool        isEnd() const;
+      virtual void					setExplosion(bool);
+      virtual bool					getExplosion() const;
 
     };
   }

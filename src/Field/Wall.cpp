@@ -21,6 +21,8 @@ namespace BomberMan
       this->_asset->initialize();
       this->_sound = sound;
       this->_animation = anim;
+      this->_explosion = false;
+      this->_end = false;
     }
 
     Wall::~Wall()
@@ -47,16 +49,16 @@ namespace BomberMan
       this->_pv = pv;
     }
 
-    void    Wall::explode(int damages, eDirection direction, Manager *manager)
+    void    Wall::explode(int damages)
     {
-      static_cast<void>(direction);
+      std::cout << "L'explosion entre dans le mur" << std::endl;
       if (this->_breakable == true)
 	{
 	  this->_pv -= damages;
 	  // changement d'asset (breches?)
 	  if (this->_pv < 0)
 	    {
-	      delete this;
+	      this->_end = true;
 	    }
 	}
     }

@@ -13,6 +13,7 @@
 #include "IAnimation.hh"
 #include "ISound.hh"
 #include "FManager.hh"
+#include "Empty.hh"
 
 namespace BomberMan
 {
@@ -25,7 +26,6 @@ namespace BomberMan
       int             _power;
       int             _timer;
       float	      _runningTimer;
-      bool	      _end;
 
     public:
       Object(float x, float y, Display::AObject * asset, Display::ISound * sound, Display::IAnimation * anim, eObjectType, eBuffType, int, int);
@@ -39,10 +39,9 @@ namespace BomberMan
       int         getTimer() const;
       void	  setX(float);
       void	  setY(float);
-      bool        isEnd() const;
-      void        explode(int, eDirection, Manager *);
-
-
+      void        explode(int);
+      void	  bombExplode(int, eDirection, Manager *);
+      bool	  checkCase(int x, int y, Manager *manager);
       void  draw(gdl::GameClock const & gameClock);
       void  update(gdl::GameClock const & gameClock, Manager *);
       void  initialize();

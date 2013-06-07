@@ -62,7 +62,7 @@ namespace BomberMan
 	  for (std::list<Field::IGameComponent *>::iterator it = this->getManager()->Field::Manager::get(x, y).begin(); it != this->getManager()->Field::Manager::get(x, y).end(); ++it)
 	    {
 	      if ((*it)->isEnd() == true)
-		it = this->getManager()->get(x, y).erase(it);
+		it = this->_manager->get(x, y).erase(it);
 	      else
 		updateObjs(*it, gameClock, this->_manager);
 	    }

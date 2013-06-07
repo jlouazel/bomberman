@@ -30,6 +30,8 @@ namespace BomberMan
 	this->_asset->initialize();
 	this->_sound = sound;
 	this->_animation = anim;
+	this->_explosion = false;
+	this->_end = false;
       }
 
       Empty::~Empty()
@@ -48,20 +50,8 @@ namespace BomberMan
 	// std::cout << "End draw Empty" << std::endl;
       }
 
-      void    Empty::explode(int damages, eDirection direction, Manager *manager)
+      void    Empty::explode(int damages)
       {
-	int	x;
-	int	y;
-
-	x = static_cast<int>(this->_x);
-	y = static_cast<int>(this->_y);
-	// recup item list en map[x][y]
-	// si items > 0
-	// traitement specifique
-
-	// si 0 items
-	damages--;
-	// propagation
       }
 
       bool	Empty::operator==(IGameComponent *other)

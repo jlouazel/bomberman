@@ -64,6 +64,11 @@ namespace BomberMan
 	      vectorRot.setY(rand() % 360);
 	      components.push_front(new Wall(false, 100, elemCnt / width, elemCnt % width, new Display::Texture3d("models/Cuve.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
 	    }
+	  else
+	    {
+	      vectorRot.setY(rand() % 360);
+              components.push_front(new Wall(true, 1, elemCnt / width, elemCnt % width, new Display::Texture3d("models/Barrel.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+	    }
 	}
     }
 
@@ -185,6 +190,14 @@ namespace BomberMan
       	    }
       	}
       // this->_map[y * this->_width + x].pop_front();
+    }
+
+    void	Manager::setExplosion(unsigned int x, unsigned int y, int power)
+    {
+      for (std::list<IGameComponent *>::iterator it = this->_map[y * this->_width + x].begin(); it != this->_map[y * this->_width + x].end(); ++it)
+        {
+	  (*it)->explode(power);
+        }
     }
 
     void			Manager::randomize(std::list<Player *> const & players)
