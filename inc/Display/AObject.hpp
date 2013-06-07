@@ -38,7 +38,8 @@ namespace BomberMan
       virtual void	set_anim_speed(std::string const &name, double speed) = 0;
       virtual void	info() = 0;
       virtual void	setColor(unsigned char r, unsigned char g, unsigned char b) = 0;
-      virtual bool	anim_is_ended() const;
+      virtual bool      anim_is_ended() const = 0;
+
       void			setRotation(Vector3f &);
       void			setPosition(Vector3f &);
       void			setLen(Vector3f &);
