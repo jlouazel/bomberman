@@ -1,3 +1,4 @@
+
 //
 //  Empty.cpp
 //  BomberMan
@@ -47,7 +48,7 @@ namespace BomberMan
       {
  	this->_asset->update(gameClock);
 	this->_clock->update();
-	if (this->_clock->getTotalElapsedTime() > 1)
+	if (this->_clock->getTotalElapsedTime() >= 0.93)
 	  {
 	    this->_explosion = false;
 	    this->_clock->pause();
@@ -68,6 +69,11 @@ namespace BomberMan
       void    Empty::explode(int damages)
       {
 	this->_explosion = true;
+	Display::Vector3f      vectorLen(0.0, 0.0, 0.0);
+	Display::Vector3f      vectorRot(0.0, 0.0, 0.0);
+	Display::Vector3f      vectorPosition(this->_x * 220, 0.0, this->_y * 220);
+	this->_textureExplosion = new Display::Texture3d("models/SmokeExplosion.fbx", vectorPosition, vectorRot, vectorLen);
+	this->_textureExplosion->initialize();
 	this->_clock->play();
       }
 

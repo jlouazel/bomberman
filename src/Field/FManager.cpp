@@ -171,6 +171,13 @@ namespace BomberMan
 
     void	Manager::addComponent(unsigned int x, unsigned int y, IGameComponent *newComponent)
     {
+      if (dynamic_cast<Object *>(newComponent) == newComponent)
+	{
+	  Object *tmp = static_cast<Object *>(newComponent);
+	  for (std::list<IGameComponent *>::iterator it = this->_map[y * this->_width + x].begin(); it != this->_map[y * this->_width + x].end(); ++it)
+	    if (dynamic_cast<Object *>(*it) == *it)
+	      return;
+	}
       this->_map[y * this->_width + x].push_front(newComponent);
     }
 
