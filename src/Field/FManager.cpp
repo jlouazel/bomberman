@@ -221,11 +221,34 @@ namespace BomberMan
       return false;
     }
 
-    static void			createPlaceForPlayer(std::vector<std::list<IGameComponent *> >	& map, std::list<Player *> const & players)
+    static void		eraseWall(std::list<IGameComponent *> & place)
+    {
+      for (std::list<IGameComponent *>::iterator it = place.begin(); it != place.end(); ++it)
+	if (dynamic_cast<Wall *>(*it) == *it)
+	  if (dynamic_cast<Wall *>(*it)->isBreakable() == true)
+	    it = place.erase(it);
+    }
+
+      static void	createPlaceForPlayer(std::vector<std::list<IGameComponent *> >	& map, std::list<Player *> const & players, unsigned int width, unsigned int height)
     {
       for (std::list<Player *>::const_iterator itPl = players.begin(); itPl != players.end(); ++itPl)
       	{
-      	  
+      	  switch (static_cast<unsigned int>((*itPl)->getX()))
+	    {
+	    case 0:
+	      eraseWall(map[1]);
+	      break;
+	    default:
+	      break;
+	    }
+	  switch (static_cast<unsigned int>((*itPl)->getY()))
+	    {
+	    case 0:
+	      eraseWall(map[width]);
+	      break;
+	    default:
+	      break;
+	    }
       	}
     }
 
@@ -246,6 +269,7 @@ namespace BomberMan
 		}
 	    }
 	}
+      createPlaceForPlayer(this->_map, players, this->_width, this->_height);
     }
   }
 }
