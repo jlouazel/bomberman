@@ -5,9 +5,10 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 21:25:38 2013 julien fortin
-// Last update Sat Jun  8 12:48:54 2013 julien fortin
+// Last update Sat Jun  8 18:22:58 2013 julien fortin
 //
 
+#include	"BomberOptions.hh"
 #include	"MenuManager.hh"
 #include	"Texture2d.hpp"
 #include	"Vector.hpp"
@@ -85,24 +86,26 @@ namespace BomberMan
       event = Event::EventManager::getEventManager()->getEvent();
       if ((action = dynamic_cast<const Event::Action*>(event)))
         {
-	  // Pour le player1 on set soit
 	  if (this->_current == 0)
 	    {
-	      //WALter;
+	      Core::BomberOptions::getOptions()->setSkinForPlayer(0, Core::BomberOptions::WW);
+	      Core::BomberOptions::getOptions()->setSkinForPlayer(1, Core::BomberOptions::JP);
 	    }
 	  else
 	    {
-	      // Jessy
+	      Core::BomberOptions::getOptions()->setSkinForPlayer(0, Core::BomberOptions::JP);
+	      Core::BomberOptions::getOptions()->setSkinForPlayer(1, Core::BomberOptions::WW);
 	    }
 	  usleep(150000);
 	  if (!this->_cursor)
 	    MenuManager::getMenuManager()->menu(this->_player[this->_current]->getMenu());
 	  else
 	    MenuManager::getMenuManager()->menu(this->_back[0]->getMenu());
-        }
+	}
       else if ((move = dynamic_cast<const Event::Move*>(event)))
-        {
-	  if (move->getDirection() == Event::EventDirection::UP || move->getDirection() == Event::EventDirection::DOWN)
+	{
+	  if (move->getDirection() == Event::EventDirection::UP
+	      || move->getDirection() == Event::EventDirection::DOWN)
 	    {
 	      if (!this->_cursor)
 		this->_cursor = 1;
@@ -147,7 +150,6 @@ namespace BomberMan
 	    this->_left->affOnglet();
 	  this->_player[1]->affOnglet();
 	}
-
       this->_back[this->_cursor]->affOnglet();
     }
 
