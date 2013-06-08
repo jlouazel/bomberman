@@ -5,8 +5,8 @@ namespace BomberMan
 {
   namespace Field
   {
-    Object::Object(float x, float y, BomberMan::Display::AObject * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim, eObjectType objectType, eBuffType buffType, int power, int timer)
-      : _object_type(objectType), _buff_type(buffType), _power(power), _timer(timer)
+    Object::Object(float x, float y, BomberMan::Display::AObject * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim, eObjectType objectType, eBuffType buffType, int power, int timer, int idPlayer)
+      : _object_type(objectType), _buff_type(buffType), _power(power), _timer(timer), _idPlayer(idPlayer)
     {
       this->_x = x;
       this->_y = y;
@@ -98,7 +98,7 @@ namespace BomberMan
       return this->_timer;
     }
 
-    void        Object::explode(int power, Manager *)
+    void        Object::explode(int power, Manager *, int idBomb)
     {
       if (this->_object_type == BOMB)
 	this->_runningTimer = this->_timer;

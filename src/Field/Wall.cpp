@@ -49,10 +49,13 @@ namespace BomberMan
       this->_pv = pv;
     }
 
-    void    Wall::explode(int damages, Manager *)
+    void    Wall::explode(int damages, Manager *, int idBomb)
     {
       if (this->_breakable == true)
-	this->_end = true;
+	{
+	  this->_whoDestroyedMe = idBomb;
+	  this->_end = true;
+	}
     }
 
     bool	Wall::operator==(IGameComponent *otherToCompare)
@@ -80,5 +83,11 @@ namespace BomberMan
     {
       this->_content = content;
     }
+
+    int		Wall::getWhoDestroyedMe() const
+    {
+      return (this->_whoDestroyedMe);
+    }
+
   }
 }
