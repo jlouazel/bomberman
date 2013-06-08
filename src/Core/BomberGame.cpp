@@ -49,8 +49,8 @@ namespace BomberMan
       Display::Vector3f      vectorRot_(0.0, 0.0, 0.0);
       Display::Vector3f      vectorPosition2_(0, 70, 0);
       Display::Vector3f      vectorLen2_(20, 40, 0.0);
-      Display::Vector3f      vectorPosition3_(17, 80, 0);
-      Display::Vector3f      vectorLen3_(7, 15, 0.0);
+      Display::Vector3f      vectorPosition3_(12, 87, 0);
+      Display::Vector3f      vectorLen3_(5, 10, 0.0);
       this->_infos["barrel"] = new Display::Texture2d("images/MMbarrel.png", vectorPosition_, vectorRot_, vectorLen_);
       this->_infos["barrel"]->initialize();
       this->_infos["wall"] = new Display::Texture2d("images/MMcuve.png", vectorPosition_, vectorRot_, vectorLen_);
@@ -174,6 +174,56 @@ namespace BomberMan
 	case (0):
 	  {
 	    this->_infos.at("fiole0")->draw();
+	    break;
+	  }
+	case (10):
+	  {
+	    this->_infos.at("fiole10")->draw();
+	    break;
+	  }
+	case (20):
+	  {
+	    this->_infos.at("fiole20")->draw();
+	    break;
+	  }
+	case (30):
+	  {
+	    this->_infos.at("fiole30")->draw();
+	    break;
+	  }
+	case (40):
+	  {
+	    this->_infos.at("fiole40")->draw();
+	    break;
+	  }
+	case (50):
+	  {
+	    this->_infos.at("fiole50")->draw();
+	    break;
+	  }
+	case (60):
+	  {
+	    this->_infos.at("fiole60")->draw();
+	    break;
+	  }
+	case (70):
+	  {
+	    this->_infos.at("fiole70")->draw();
+	    break;
+	  }
+	case (80):
+	  {
+	    this->_infos.at("fiole80")->draw();
+	    break;
+	  }
+	case (90):
+	  {
+	    this->_infos.at("fiole90")->draw();
+	    break;
+	  }
+	case (100):
+	  {
+	    this->_infos.at("fiole100")->draw();
 	    break;
 	  }
 	default:
