@@ -1,5 +1,5 @@
-#ifndef __BomberMan__Empty__
-#define __BomberMan__Empty__
+#ifndef __BOMBERMAN__EMPTY__
+#define __BOMBERMAN__EMPTY__
 
 #include <Input.hpp>
 #include <Clock.hpp>
@@ -21,9 +21,10 @@ namespace BomberMan
 	private:
 	  Display::AObject *_textureExplosion;
 	  bool		   _explosion;
+	  bool		_isGround;
 	  gdl::Clock   *_clock;
         public:
-	  Empty(float x, float y, Display::AObject * asset, Display::ISound * sound, Display::IAnimation * anim);
+	  Empty(bool isGround, float x, float y, Display::AObject * asset, Display::ISound * sound, Display::IAnimation * anim);
 	  ~Empty();
 
 	  void	explode(int);
