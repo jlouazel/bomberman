@@ -36,6 +36,7 @@ namespace BomberMan
 
     void		Camera::update(gdl::GameClock const & gameClock)
     {
+      static_cast<void>(gameClock);
       glMatrixMode(GL_PROJECTION);
       glLoadIdentity();
       gluPerspective((this->angle_ * 180.0) / 3.14159265359, WIDTH/HEIGHT, 1.0f, 10000.0f);
