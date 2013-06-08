@@ -18,7 +18,7 @@ namespace BomberMan
 {
   namespace Field
     {
-      Empty::Empty(float x, float y, BomberMan::Display::AObject * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim)
+      Empty::Empty(bool isGround, float x, float y, BomberMan::Display::AObject * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim)
       {
 	Display::Vector3f      vectorLen(0.0, 0.0, 0.0);
 	Display::Vector3f      vectorRot(0.0, 0.0, 0.0);
@@ -26,6 +26,7 @@ namespace BomberMan
 
 	this->_x = x;
 	this->_y = y;
+	this->_isGround = isGround;
 	if (asset == 0)
 	  this->_asset = new Display::Texture3d("models/Floor.fbx", vectorPosition, vectorRot, vectorLen);
 	else
