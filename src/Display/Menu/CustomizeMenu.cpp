@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 21:25:38 2013 julien fortin
-// Last update Sat Jun  8 15:49:06 2013 julien fortin
+// Last update Sat Jun  8 18:40:36 2013 julien fortin
 //
 
 #include	"BomberOptions.hh"
@@ -69,7 +69,7 @@ namespace BomberMan
 
 
       vectorPositionNbPlayer.setY(30);
-      vectorPositionNbPlayer.setX(65);
+      vectorPositionNbPlayer.setX(66);
       this->_arrow[0] = new OngletMenu(MenuEnum::NO, "<",
 				       new Texture2d("resources/images/ChevronGauche.png",
 						     vectorPositionNbPlayer, vectorRotation, vectorIA));
@@ -217,18 +217,18 @@ namespace BomberMan
       if (this->_currentsIA != LIMIT_IA)
 	this->_arrow[1]->affOnglet();
 
-      //std::cout << "current:" << this->_currentsIA << "\tF:" << f << "\tS:" << s << std::endl;
-      //Vector3f vectorPosition(71, 31, 0);
+
+      Vector3f vectorPosition(73, 30, 0);
 
       if (f < 10)
 	{
-	  //this->_nbIA.at(f)->getImage()->setPosition(vectorPosition);
-	  //this->_nbIA.at(f)->getImage()->initProp();
+	  this->_nbIA.at(f)->getImage()->setPosition(vectorPosition);
 	  this->_nbIA.at(f)->affOnglet();
 	}
       if (s < 10)
 	{
-	  // this->_nbIA.at(s)->getImage()->setPosition(vectorPosition);
+	  vectorPosition.setX(78);
+	  this->_nbIA.at(s)->getImage()->setPosition(vectorPosition);
 	  this->_nbIA.at(s)->affOnglet();
 	}
     }

@@ -60,6 +60,8 @@ namespace BomberMan
       this->_infos["player"]->initialize();
       this->_infos["walter"] = new Display::Texture2d("images/WWmenu.png", vectorPosition2_, vectorRot_, vectorLen2_);
       this->_infos["walter"]->initialize();
+      this->_infos["jesse"] = new Display::Texture2d("images/JPmenu.png", vectorPosition2_, vectorRot_, vectorLen2_);
+      this->_infos["jesse"]->initialize();
       this->_infos["fiole0"] = new Display::Texture2d("images/Fiole0.png", vectorPosition3_, vectorRot_, vectorLen3_);
       this->_infos["fiole0"]->initialize();
       this->_infos["fiole10"] = new Display::Texture2d("images/Fiole10.png", vectorPosition3_, vectorRot_, vectorLen3_);
@@ -167,7 +169,11 @@ namespace BomberMan
       Display::Vector3f      newPosition2(startx, starty, 0);
       this->_infos.at("player")->setPosition(newPosition2);
       this->_infos.at("player")->draw();
-      this->_infos.at("walter")->draw();
+
+      // if (BomberOptions::getOptions()->getSkinForPlayer(player->getId()) == BomberOptions::WW)
+      // 	this->_infos.at("walter")->draw();
+      // else
+	this->_infos.at("jesse")->draw();
       switch (player->getPv())
 	{
 	case (0):
