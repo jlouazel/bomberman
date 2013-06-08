@@ -54,7 +54,7 @@ namespace BomberMan
     {
       this->_asset->update(gameClock);
       this->_runningTimer += gameClock.getElapsedTime();
-      if (this->_runningTimer >= this->_timer)
+      if (this->_runningTimer >= this->_timer && this->_object_type == BOMB)
 	{
 	  std::cout << "Y = " << this->_y << " X = " << this->_x << std::endl;
 	  manager->setExplosion(this->_y, this->_x, 10);

@@ -101,29 +101,32 @@ namespace BomberMan
     {
       for (unsigned int y = 0; y != this->getManager()->Field::Manager::getHeight(); y++)
 	for (unsigned int x = 0; x != this->getManager()->Field::Manager::getWidth(); x++)
-	  for (std::list<Field::IGameComponent *>::iterator it = this->getManager()->Field::Manager::get(x, y).begin(); it != this->getManager()->Field::Manager::get(x, y).end(); ++it)
-	    {
-	      if ((*it)->isEnd() == true)
-		{
-		  if (dynamic_cast<Field::Wall *>(*it) == *it)
-		    {
-		      Field::Wall *actualWall = static_cast<Field::Wall *>(*it);
-		      Field::Object *buff = actualWall->getContent();
-		      if (buff)
-			{
+	  {
+	    for (std::list<Field::IGameComponent *>::iterator it = this->getManager()->Field::Manager::get(x, y).begin(); it != this->getManager()->Field::Manager::get(x, y).end(); ++it)
+	      {
+		if ((*it)->isEnd() == true)
+		  {
+		    if (dynamic_cast<Field::Wall *>(*it) == *it)
+		      {
+			Field::Wall *actualWall = static_cast<Field::Wall *>(*it);
+			Field::Object *buff = actualWall->getContent();
+			if (buff)
+			  {
 			  std::cout << "Je dois add un buff" << std::endl;
-			  this->_manager->addComponent(x, y, buff);
-			}
-		      int	idPlayer = actualWall->getWhoDestroyedMe();
-		      for (std::list<Field::Player *>::iterator it = this->_players.begin(); it != this->_players.end(); ++it)
-			if ((*it)->getId() == idPlayer)
-			  (*it)->setNbCaisseDestroyed((*it)->getNbCaisseDestroyed() + 1);
-		    }
-		  it = this->_manager->get(x, y).erase(it);
-		}
-	      else
-		updateObjs(*it, gameClock, this->_manager);
-	    }
+			  this->_manager->get(x, y).insert(it, buff);
+			  // this->_manager->addComponent(x, y, buff);
+			  }
+			int	idPlayer = actualWall->getWhoDestroyedMe();
+			for (std::list<Field::Player *>::iterator it = this->_players.begin(); it != this->_players.end(); ++it)
+			  if ((*it)->getId() == idPlayer)
+			    (*it)->setNbCaisseDestroyed((*it)->getNbCaisseDestroyed() + 1);
+		      }
+		    it = this->_manager->get(x, y).erase(it);
+		  }
+		else
+		  updateObjs(*it, gameClock, this->_manager);
+	      }
+	  }
       updateObjs(this->getPlayers().front(), gameClock, this->_manager);
     }
 

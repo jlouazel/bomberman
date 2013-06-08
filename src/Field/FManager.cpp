@@ -141,8 +141,8 @@ namespace BomberMan
       // for (; this->_width < 15 || this->_width > 100; this->_width = rand() % 100);
       // for (; this->_height < 15 || this->_height > 100; this->_height = rand() % 100);
 
-      this->_width = 4;
-      this->_height = 4;
+      this->_width = 100;
+      this->_height = 100;
 
       this->_map = std::vector<std::list<IGameComponent *> >(this->_width * this->_height, std::list<IGameComponent *>());
       unsigned int elemCnt = 0;
@@ -209,7 +209,7 @@ namespace BomberMan
 	    }
 	}
       for (std::list<IGameComponent *>::iterator it = this->_map[y * this->_width + x].begin(); it != this->_map[y * this->_width + x].end(); ++it)
-	(*it)->explode(power, this);
+	(*it)->explode(power, this, -1);
     }
 
     static bool			isAPlayerHere(std::list<Player *> const & players, unsigned int x, unsigned int y)
@@ -316,7 +316,7 @@ namespace BomberMan
 	  nbCases--;
       unsigned int nbBonus = 0;
       ObjectFactory * factory = new ObjectFactory;
-      while (nbBonus != static_cast<unsigned int>(hopeFullCases * (60.0 / 100.0)))
+      while (nbBonus != static_cast<unsigned int>(hopeFullCases * (40.0 / 100.0))) /* % bonus */
       	{
 	  x = rand() % this->_width;
 	  y = rand() % this->_height;
@@ -331,16 +331,16 @@ namespace BomberMan
 	      switch (r)
 	      	{
 	      	case 0:
-	      	  tmp->setContent(new Object(x, y, new Display::Texture3d("models/PorteeBonus.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, BUFF, RANGE, 0, 0));
+	      	  tmp->setContent(new Object(x, y, new Display::Texture3d("models/PorteeBonus.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, BUFF, RANGE, 0, 0, -1));
 	      	  break;
 	      	case 1:
-	      	  tmp->setContent(new Object(x, y, new Display::Texture3d("models/SpeedBonus.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, BUFF, SPEED, 0, 0));
+	      	  tmp->setContent(new Object(x, y, new Display::Texture3d("models/SpeedBonus.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, BUFF, SPEED, 0, 0, -1));
 	      	  break;
 	      	case 2:
-	      	  tmp->setContent(new Object(x, y, new Display::Texture3d("models/LifeBonus.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, BUFF, LIFE, 0, 0));
+	      	  tmp->setContent(new Object(x, y, new Display::Texture3d("models/LifeBonus.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, BUFF, LIFE, 0, 0, -1));
 	      	  break;
 	      	case 3:
-	      	  tmp->setContent(new Object(x, y, new Display::Texture3d("models/MoreBombBonus.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, BUFF, MORE, 0, 0));
+	      	  tmp->setContent(new Object(x, y, new Display::Texture3d("models/MoreBombBonus.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, BUFF, MORE, 0, 0, -1));
 	      	  break;
 	      	default:
 	      	  break;
