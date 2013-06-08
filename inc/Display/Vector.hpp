@@ -3,25 +3,27 @@
 
 namespace BomberMan
 {
-    namespace Display
+  namespace Display
+  {
+    class Vector3f
     {
-        class Vector3f
-        {
-        private:
-            float x;
-            float y;
-            float z;
-        public:
-            Vector3f(void);
-            Vector3f(float x, float y, float z);
-            float	getX() const;
-            float	getY() const;
-            float	getZ() const;
-            void	setX(float);
-            void	setY(float);
-            void	setZ(float);
-        };
-    }
+    private:
+      float x;
+      float y;
+      float z;
+    public:
+      Vector3f(void);
+      Vector3f(float x, float y, float z);
+      Vector3f(Vector3f const &other);
+
+      float	getX() const;
+      float	getY() const;
+      float	getZ() const;
+      void	setX(float);
+      void	setY(float);
+      void	setZ(float);
+    };
+  }
 }
 
 #else

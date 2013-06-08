@@ -34,7 +34,7 @@ namespace BomberMan
 
         Vector3f        AObject::getRotation() const
         {
-            return (this->rotation_);
+	  return (this->rotation_);
         }
 
         Vector3f        AObject::getPosition() const

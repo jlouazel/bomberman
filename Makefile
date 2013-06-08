@@ -4,7 +4,7 @@ RM          = rm -f
 
 NAME		= bomberman
 
-CPPFLAGS	+= -W -Wall -Wextra -O2
+CPPFLAGS	+= -W -Wall -Wextra -O2 -g3
 
 CPPFLAGS	+= -I./inc/
 CPPFLAGS	+= -I./inc/Core/
