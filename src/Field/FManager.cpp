@@ -207,6 +207,12 @@ namespace BomberMan
 	}
       for (std::list<IGameComponent *>::iterator it = this->_map[y * this->_width + x].begin(); it != this->_map[y * this->_width + x].end(); ++it)
         {
+	  // if (dynamic_cast<Object *>(*it) == *it)
+          //   {
+	  //     Object *tmp = static_cast<Wall *>(*it);
+	  //     if (tmp->getObjectType() == BOMB)
+	  // 	(*it)->
+	  //   }
 	  (*it)->explode(power);
         }
     }
