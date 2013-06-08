@@ -13,7 +13,6 @@
 #include "IAnimation.hh"
 #include "ISound.hh"
 #include "FManager.hh"
-#include "Empty.hh"
 
 namespace BomberMan
 {
@@ -21,7 +20,7 @@ namespace BomberMan
   {
     class Object : public AGameComponent
     {
-      eObjectType		_object_type;
+      eObjectType	_object_type;
       eBuffType		_buff_type;
       int             _power;
       int             _timer;
@@ -45,6 +44,7 @@ namespace BomberMan
       void  draw(gdl::GameClock const & gameClock);
       void  update(gdl::GameClock const & gameClock, Manager *);
       void  initialize();
+
       bool  operator==(IGameComponent *);
     };
   }

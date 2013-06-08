@@ -11,6 +11,14 @@ namespace BomberMan
 {
   namespace Field
   {
+    class Object;
+  }
+}
+
+namespace BomberMan
+{
+  namespace Field
+  {
     class Player;
   }
 }
@@ -40,6 +48,7 @@ namespace BomberMan
       unsigned int			getWidth() const;
       unsigned int			getHeight() const;
       std::list<IGameComponent *> &	get(unsigned int, unsigned int);
+      Object *				getContent(unsigned int, unsigned int);
       void				addComponent(unsigned int, unsigned int, IGameComponent *);
       void				delComponent(unsigned int, unsigned int, IGameComponent *);
       void				setExplosion(unsigned int, unsigned int, int);

@@ -69,5 +69,15 @@ namespace BomberMan
     {
       return (this->_breakable);
     }
+
+    Object *	Wall::getContent() const
+    {
+      return this->_content;
+    }
+
+    void	Wall::setContent(Object * content)
+    {
+      this->_content = content;
+    }
   }
 }

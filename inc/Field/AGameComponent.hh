@@ -6,7 +6,6 @@
 #include <GameClock.hpp>
 #include "IGameComponent.hh"
 #include "AObject.hpp"
-#include "FManager.hh"
 
 namespace BomberMan
 {

@@ -11,6 +11,7 @@
 #include "AObject.hpp"
 #include "Texture3d.hpp"
 #include "Player.hh"
+#include "ObjectFactory.hh"
 
 namespace BomberMan
 {
@@ -139,8 +140,8 @@ namespace BomberMan
       // for (; this->_width < 15 || this->_width > 100; this->_width = rand() % 100);
       // for (; this->_height < 15 || this->_height > 100; this->_height = rand() % 100);
 
-      this->_width = 50;
-      this->_height = 50;
+      this->_width = 4;
+      this->_height = 4;
 
       this->_map = std::vector<std::list<IGameComponent *> >(this->_width * this->_height, std::list<IGameComponent *>());
       unsigned int elemCnt = 0;
@@ -161,6 +162,15 @@ namespace BomberMan
       return this->_map[pos];
     }
 
+    Object *			Manager::getContent(unsigned int x, unsigned int y)
+    {
+      unsigned int    pos = y * this->_width + x;
+      for(std::list<IGameComponent *>::iterator it = this->_map[pos].begin(); it != this->_map[pos].end(); ++it)
+	if (dynamic_cast<Object *>(*it) == *it)
+	  return dynamic_cast<Object *>(*it);
+      return 0;
+    }
+
     unsigned int                    Manager::getWidth() const
     {
       return this->_width;
@@ -175,7 +185,6 @@ namespace BomberMan
     {
       if (dynamic_cast<Object *>(newComponent) == newComponent)
 	{
-	  Object *tmp = static_cast<Object *>(newComponent);
 	  for (std::list<IGameComponent *>::iterator it = this->_map[y * this->_width + x].begin(); it != this->_map[y * this->_width + x].end(); ++it)
 	    if (dynamic_cast<Object *>(*it) == *it)
 	      return;
@@ -224,11 +233,12 @@ namespace BomberMan
       return false;
     }
 
-    static bool			isThereAWallHere(std::list<IGameComponent *> const & place)
+    static bool			isThereAWallHere(std::list<IGameComponent *> const & place, bool breakable)
     {
       for (std::list<IGameComponent *>::const_iterator it = place.begin(); it != place.end(); ++it)
 	if (dynamic_cast<Wall *>(*it) == *it)
-	  return true;
+	  if (dynamic_cast<Wall *>(*it)->isBreakable() == breakable)
+	    return true;
       return false;
     }
 
@@ -246,18 +256,24 @@ namespace BomberMan
 
     static unsigned int	createPlaceForPlayer(std::vector<std::list<IGameComponent *> >	& map, std::list<Player *> const & players, unsigned int width, unsigned int height)
     {
-      unsigned int n;
+      unsigned int n = 0;
       for (std::list<Player *>::const_iterator itPl = players.begin(); itPl != players.end(); ++itPl)
       	{
       	  if (static_cast<unsigned int>((*itPl)->getX()) == 0)
-	    if (eraseWall(map[1]) == true)
-	      n++;
+	    {
+	      if (eraseWall(map[1]) == true)
+		n++;
+	    }
 	  else if (static_cast<unsigned int>((*itPl)->getX()) % 2 == 0)
-	    if (eraseWall(map[width]) == true)
-	      n++;
+	    {
+	      if (eraseWall(map[width]) == true)
+		n++;
+	    }
 	  if (static_cast<unsigned int>((*itPl)->getY()) == 0)
-	    if (eraseWall(map[width]) == true)
-	      n++;
+	    {
+	      if (eraseWall(map[width]) == true)
+		n++;
+	    }
 	  n++;
       	}
       return n;
@@ -275,15 +291,16 @@ namespace BomberMan
         }
     }
 
+#include <unistd.h>
     void			Manager::randomize(std::list<Player *> const & players)
     {
-      unsigned int x, y;
+      unsigned int x, y , elemCnt = 0;
       for (y = 0; y != this->_height; y++)
 	{
 	  for (x = 0; x != this->_width; x++)
 	    {
-	      unsigned int elemCnt = (x + (y * (this->_width)));
-	      if (!(x == 0 && y == this->_height - 1) && isThereAWallHere(this->_map[elemCnt]) == false && isAPlayerHere(players, x, y) == false)
+	      elemCnt = (x + (y * (this->_width)));
+	      if (!(x == 0 && y == this->_height - 1) && isThereAWallHere(this->_map[elemCnt], false) == false && isAPlayerHere(players, x, y) == false)
 		{
 		  Display::Vector3f	vectorLen(0.0, 0.0, 0.0);
 		  Display::Vector3f	vectorRot(0.0, randAngle(5), 0.0);
@@ -293,11 +310,38 @@ namespace BomberMan
 	    }
 	}
       unsigned int nbCases = (this->_width * this->_height) - this->_nbCuves - 1 - createPlaceForPlayer(this->_map, players, this->_width, this->_height);
-      unsigned int freeCases = nbCases * (40.0 / 100.0);
-      while (nbCases != freeCases)
+      unsigned int hopeFullCases = static_cast<unsigned int>(nbCases * (60.0 / 100.0)); /* % caisses */
+      while (nbCases != hopeFullCases)
 	if (eraseWall(this->_map[rand() % (this->_width * this->_height)]) == true)
 	  nbCases--;
+      unsigned int nbBonus = 0;
+      ObjectFactory * factory = new ObjectFactory;
+      while (nbBonus != static_cast<unsigned int>(hopeFullCases * (60.0 / 100.0)))
+      	{
+      	  x = rand() % this->_width;
+      	  y = rand() % this->_height;
+      	  if (isThereAWallHere(this->_map[y * this->_width + x], true) == true && this->getContent(elemCnt / this->_width, elemCnt % this->_width) == 0)
+      	    {
+      	      switch (rand() % 4)
+      		{
+      		case 0:
+      		  factory->create(std::make_pair(BOMB, NONE));
+      		  break;
+      		case 1:
+      		  factory->create(std::make_pair(BOMB, NONE));
+      		  break;
+      		case 2:
+      		  factory->create(std::make_pair(BOMB, NONE));
+      		  break;
+      		case 3:
+      		  factory->create(std::make_pair(BOMB, NONE));
+      		  break;
+      		default:
+      		  break;
+      		}
+      	      nbBonus++;
+      	    }
+      }
     }
   }
 }
-
