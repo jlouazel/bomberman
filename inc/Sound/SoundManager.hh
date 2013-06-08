@@ -28,6 +28,7 @@ namespace BomberMan
       static	SoundManager *getInstance();
       void      addNewSound(const std::string &sound);
       void	playSound(const std::string &sound, bool loop);
+      void	stopSound(const std::string &sound);
 
     };
   }

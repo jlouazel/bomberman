@@ -12,8 +12,6 @@ namespace BomberMan
     {
       FMOD_System_Create(&this->_system);
       FMOD_System_Init(this->_system, 1024, FMOD_INIT_NORMAL, 0);
-      // FMOD_System_GetChannel(this->_system, 0, &this->_music);
-      // FMOD_System_GetChannel(this->_system, 1, &this->_sound);
     }
     SoundManager	*SoundManager::getInstance()
     {
@@ -32,6 +30,7 @@ namespace BomberMan
       else
 	this->_sounds[sound] = s;
     }
+
     void	SoundManager::playSound(const std::string &sound, bool loop)
     {
       if (loop)
@@ -44,6 +43,11 @@ namespace BomberMan
 	  FMOD_Sound_SetLoopCount(this->_sounds[sound], 0);
 	  FMOD_System_PlaySound(this->_system, FMOD_CHANNEL_FREE, this->_sounds[sound], 0, 0);
 	}
+    }
+
+    void	SoundManager::stopSound(const std::string &sound)
+    {
+      FMOD_System_PlaySound(this->_system, FMOD_CHANNEL_FREE, this->_sounds[sound], 1, 0);
     }
 
     static	void	releaseSounds(std::pair<const std::string, FMOD_SOUND*> i)
