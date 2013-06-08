@@ -65,14 +65,9 @@ namespace BomberMan
     void	BomberMan::_initializeSound() const
     {
       Sound::SoundManager *manager = Sound::SoundManager::getInstance();
-<<<<<<< HEAD
       manager->addNewSound("resources/sounds/ambianceGame.mp3");
       manager->playSound("resources/sounds/ambianceGame.mp3", true);
-=======
-      manager->addNewSound("resources/sounds/musicIntro2.mp3");
       manager->addNewSound("resources/sounds/Dying.mp3");
-      manager->playSound("resources/sounds/musicIntro2.mp3", true);
->>>>>>> a0c08e3045f19b0fec8742574fa95eb37d9fbecc
     }
 
     void	BomberMan::_initializeOptions() const
