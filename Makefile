@@ -5,7 +5,7 @@ RM          = rm -f
 NAME		= bomberman
 
 CPPFLAGS	+= -W -Wall -Wextra -O3
-CPPFLAGS	+= -W -Wall -Wextra -O3 -w -g3
+CPPFLAGS	+= -W -Wall -Wextra -O3 -g3
 
 CPPFLAGS	+= -I./inc/
 CPPFLAGS	+= -I./inc/Core/
@@ -60,6 +60,7 @@ SRCS_MENU	= $(SRC_DIR)$(DISPLAY)$(MENU)MainMenu.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)NewGameMenu.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)CookMenu.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)CustomizeMenu.cpp \
+		$(SRC_DIR)$(DISPLAY)$(MENU)MapOptionsMenu.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)QuickGame.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)PauseMenu.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)MenuManager.cpp \
