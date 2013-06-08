@@ -14,6 +14,8 @@ namespace BomberMan
     private:
       static SoundManager *_instance;
       FMOD_SYSTEM	*_system;
+      FMOD_CHANNEL	*_music;
+      FMOD_CHANNEL	*_sound;
       std::map<std::string, FMOD_SOUND *>	_sounds;
 
     private:

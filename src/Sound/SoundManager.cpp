@@ -11,7 +11,9 @@ namespace BomberMan
     SoundManager::SoundManager()
     {
       FMOD_System_Create(&this->_system);
-      FMOD_System_Init(this->_system, 1, FMOD_INIT_NORMAL, 0);
+      FMOD_System_Init(this->_system, 1024, FMOD_INIT_NORMAL, 0);
+      // FMOD_System_GetChannel(this->_system, 0, &this->_music);
+      // FMOD_System_GetChannel(this->_system, 1, &this->_sound);
     }
     SoundManager	*SoundManager::getInstance()
     {
@@ -23,7 +25,7 @@ namespace BomberMan
     {
       FMOD_SOUND *s;
       FMOD_RESULT check;
-      
+
       check = FMOD_System_CreateSound(this->_system, sound.c_str(), FMOD_SOFTWARE | FMOD_2D | FMOD_CREATESTREAM | FMOD_LOOP_NORMAL, 0, &s);
       if (check != FMOD_OK)
 	std::cout << "Cannot load " << sound << std::endl;
@@ -33,10 +35,15 @@ namespace BomberMan
     void	SoundManager::playSound(const std::string &sound, bool loop)
     {
       if (loop)
-	FMOD_Sound_SetLoopCount(this->_sounds[sound], -1);
+	{
+	  FMOD_Sound_SetLoopCount(this->_sounds[sound], -1);
+	  FMOD_System_PlaySound(this->_system, FMOD_CHANNEL_FREE, this->_sounds[sound], 0, 0);
+	}
       else
-	FMOD_Sound_SetLoopCount(this->_sounds[sound], 1);
-      FMOD_System_PlaySound(this->_system, FMOD_CHANNEL_FREE, this->_sounds[sound], 0, 0);
+	{
+	  FMOD_Sound_SetLoopCount(this->_sounds[sound], 0);
+	  FMOD_System_PlaySound(this->_system, FMOD_CHANNEL_FREE, this->_sounds[sound], 0, 0);
+	}
     }
 
     static	void	releaseSounds(std::pair<const std::string, FMOD_SOUND*> i)

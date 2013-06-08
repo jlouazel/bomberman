@@ -66,6 +66,7 @@ namespace BomberMan
     {
       Sound::SoundManager *manager = Sound::SoundManager::getInstance();
       manager->addNewSound("resources/sounds/musicIntro2.mp3");
+      manager->addNewSound("resources/sounds/Dying.mp3");
       manager->playSound("resources/sounds/musicIntro2.mp3", true);
     }
 

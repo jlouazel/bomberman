@@ -28,10 +28,13 @@ namespace BomberMan
       int         _nb_bomb_max;
       int         _nb_bomb_set;
       Object *    _bomb;
+      gdl::Clock   *_clock;
       Display::AObject *   _walking;
       Display::AObject *   _mark;
       Display::AObject *   _run;
+
       Display::AObject *   _dead;
+      Display::AObject *   _dying;
       Display::Camera *	  _camera;
       bool	  _isMoving;
       bool        _isRunning;
@@ -63,7 +66,7 @@ namespace BomberMan
       bool        operator==(IGameComponent *other);
       void	  checkIfILoseLife(Manager *);
       void	  operator=(Player &);
-
+      void	  imDyingDraw();
       bool	  getIsMoving() const;
       bool        getIsRunning() const;
       Display::AObject *  getRun() const;
