@@ -1,17 +1,20 @@
 #include "Object.hh"
+#include "Wall.hh"
 
 namespace BomberMan
 {
   namespace Field
   {
     Object::Object(float x, float y, BomberMan::Display::AObject * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim, eObjectType objectType, eBuffType buffType, int power, int timer)
-      :   _object_type(objectType), _buff_type(buffType), _power(power), _timer(timer)
+      : _object_type(objectType), _buff_type(buffType), _power(power), _timer(timer)
     {
       this->_x = x;
       this->_y = y;
       this->_asset = asset;
       this->_sound = sound;
       this->_animation = anim;
+      this->_runningTimer = 0;
+      this->_end = false;
     }
 
     Object::Object(const Object & other)
@@ -28,9 +31,38 @@ namespace BomberMan
     {
     }
 
+    void	Object::setX(float x)
+    {
+      Display::Vector3f newVectorPosition(x * 220, this->_asset->getPosition().getY(), this->_asset->getPosition().getZ());
+      this->_x = x;
+      this->_asset->setPosition(newVectorPosition);
+    }
+
+    void	Object::setY(float y)
+    {
+      Display::Vector3f newVectorPosition(this->_asset->getPosition().getX(), this->_asset->getPosition().getY(), y * 220);
+      this->_y = y;
+      this->_asset->setPosition(newVectorPosition);
+    }
+
+    void	Object::initialize()
+    {
+      this->_asset->initialize();
+    }
+
     void        Object::update(gdl::GameClock const & gameClock, Manager *manager)
     {
       this->_asset->update(gameClock);
+      this->_runningTimer += gameClock.getElapsedTime();
+      if (this->_runningTimer >= this->_timer)
+	{
+	  this->bombExplode(this->_power, UP, manager);
+	  this->bombExplode(this->_power, RIGHT, manager);
+	  this->bombExplode(this->_power, DOWN, manager);
+	  this->bombExplode(this->_power, LEFT, manager);
+	  this->_end = true;
+	  this->_runningTimer = 0;
+	}
     }
 
     void        Object::draw(gdl::GameClock const & gameClock)
@@ -63,16 +95,81 @@ namespace BomberMan
       return this->_timer;
     }
 
-    void        Object::explode(int damages, eDirection direction)
+    void        Object::explode(int power)
     {
       if (this->_object_type == BOMB)
+	this->_runningTimer = this->_timer;
+    }
+
+    bool	Object::checkCase(int x, int y, Manager *manager)
+    {
+      std::list<IGameComponent *> Case = manager->get(x, y);
+
+      for (std::list<IGameComponent *>::iterator it = Case.begin(); it != Case.end(); ++it)
 	{
-	  // propagation++
-	  static_cast<void>(damages);
-	  static_cast<void>(direction);
+	  if (dynamic_cast<Wall *>(*it) == *it)
+	    return (true);
 	}
-      // propagation
-      delete this;
+      return (false);
+    }
+
+    void        Object::bombExplode(int damages, eDirection direction, Manager *manager)
+    {
+      if (this->_object_type == BOMB)
+      	{
+      	  int	i = 0;
+	  switch (direction)
+	    {
+	    case UP :
+	      {
+	    	while (i < this->_power)
+	    	  {
+	    	    if (this->_x + i > manager->getHeight() - 1)
+	    	      return;
+	    	    manager->setExplosion(this->_y, this->_x + i, this->_power - i);
+	    	    if (this->checkCase(this->_y, this->_x + i, manager) == true)
+	    	      return;
+	    	    i++;
+	    	  }
+	      }
+	    case DOWN :
+	      {
+	    	while (i < this->_power)
+	    	  {
+	    	    if (this->_x - i < 0)
+	    	      return;
+	    	    manager->setExplosion(this->_y, this->_x - i, this->_power - i);
+	    	    if (this->checkCase(this->_y, this->_x - i, manager) == true)
+	    	      return;
+	    	    i++;
+	    	  }
+	      }
+	    case LEFT :
+	      {
+	    	while (i < this->_power)
+	    	  {
+	    	    if (this->_y - i < 0)
+	    	      return;
+	    	    manager->setExplosion(this->_y - i, this->_x, this->_power - i);
+	    	    if (this->checkCase(this->_y - i, this->_x , manager) == true)
+	    	      return;
+	    	    i++;
+	    	  }
+	      }
+	    case RIGHT :
+	      {
+	    	while (i < this->_power)
+	    	  {
+	    	    if (this->_y + i > manager->getWidth() - 1)
+	    	      return;
+	    	    manager->setExplosion(this->_y + i, this->_x, this->_power - i);
+	    	    if (this->checkCase(this->_y + i, this->_x, manager) == true)
+	    	      return;
+	    	    i++;
+	    	  }
+	      }
+	    }
+	}
     }
 
     bool	Object::operator==(IGameComponent *objectToCompare)

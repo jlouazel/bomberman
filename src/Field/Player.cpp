@@ -6,11 +6,13 @@
 //  Copyright (c) 2013 manour_m. All rights reserved.
 //
 
+#include	"Action.hh"
 #include "AObject.hpp"
 #include "Texture3d.hpp"
 #include "Player.hh"
 #include "Vector.hpp"
 #include "Wall.hh"
+#include "Empty.hh"
 
 namespace BomberMan
 {
@@ -31,9 +33,26 @@ namespace BomberMan
       this->_walking = new Display::Texture3d("models/WWwalking.fbx", position, rotation, len);
       this->_run = new Display::Texture3d("models/WWrunning.fbx", position, rotation, len);
       this->_mark = new Display::Texture3d("models/PlayerMark.fbx", position, rotation, len);
-      this->_bomb = new Object(0.0, 0.0, new Display::Texture3d("models/ExplodingBomb.fbx", position, rotation, len), 0, 0, BOMB, NONE, 3, 3);
+      this->_bomb = new Object(0.0, 0.0, new Display::Texture3d("models/ExplodingBomb.fbx", position, rotation, len), 0, 0, BOMB, NONE, 2, 3);
       this->_camera = 0; // initialise after.
       this->_isMoving = false;
+      this->_end = false;
+    }
+
+    Player::Player(Player * cpy)
+    {
+      this->_pv = cpy->getPv();
+      this->_speed = cpy->getSpeed();
+      this->_nb_bomb_max = cpy->getNbBombMax();
+      this->_nb_bomb_set = cpy->getNbBombSet();
+      this->_bomb = cpy->getBomb();
+      this->_walking = cpy->getWalking();
+      this->_mark = cpy->getMark();
+      this->_run = cpy->getRun();
+      this->_asset = cpy->getAsset();
+      this->_camera = cpy->getCamera();
+      this->_isMoving = cpy->getIsMoving();
+      this->_isRunning = cpy->getIsRunning();
     }
 
     Player::~Player()
@@ -41,7 +60,12 @@ namespace BomberMan
       delete this->_bomb;
     }
 
-    void        Player::move(float x, float z, float angle)
+    BomberMan::Display::AObject * Player::getAsset() const
+    {
+      return (this->_asset);
+    }
+
+    void        Player::move(float x, float z, float angle, Manager *manager)
     {
       this->_x = this->_asset->getPosition().getX() + x;
       this->_y = this->_asset->getPosition().getZ() + z;
@@ -60,15 +84,26 @@ namespace BomberMan
       this->_camera->setPosition(newVectorPosition);
     }
 
+    void	Player::newBomb()
+    {
+      Display::Vector3f position(0, 0, 0);
+      Display::Vector3f rotation(0, 0, 0);
+      Display::Vector3f len(0, 0, 0);
+
+      this->_bomb =  new Object(0.0, 0.0, new Display::Texture3d("models/ExplodingBomb.fbx", position, rotation, len),0, 0, BOMB, NONE, 3, 3);
+      this->_bomb->initialize();
+    }
+
     void        Player::setBomb(Manager *manager)
     {
       int	X = (this->_x + 110) / 220;
       int	Y = (this->_y + 110) / 220;
       IGameComponent *toadd(this->_bomb);
 
+      this->newBomb();
       toadd->setX(X);
       toadd->setY(Y);
-      manager->addComponent(X, Y, toadd);
+      manager->addComponent(Y, X, toadd);
     }
 
     void        Player::acquireObject()
@@ -83,6 +118,7 @@ namespace BomberMan
       this->_run->initialize();
       this->_mark->setColor(0, 0, 255);
       this->_camera->initialize();
+      this->_bomb->initialize();
     }
 
     bool        Player::checkMyMove(float x, float z, Manager *manager)
@@ -105,9 +141,27 @@ namespace BomberMan
       return (true);
     }
 
+    void	Player::checkIfILoseLife(Manager *manager)
+    {
+      std::list<IGameComponent *> obj = manager->get(static_cast<int>((this->_y + 110) / 220), static_cast<int>((this->_x + 110) / 220));
+
+      for (std::list<IGameComponent *>::iterator it = obj.begin(); it != obj.end(); ++it)
+	{
+	  if (dynamic_cast<Empty *>(*it) == *it)
+	    {
+	      Empty *tmp = static_cast<Empty *>(*it);
+
+	      if (tmp->getPlayerTakeDomage() > 0)
+		this->explode(tmp->getPlayerTakeDomage());
+	    }
+	}
+    }
+
     void	Player::update(gdl::GameClock const & gameClock, Manager *manager)
     {
       // Input::Controller::KeyBoardManager::treatInput(input);
+
+      this->checkIfILoseLife(manager);
 
       const Event::IEvent* event = Event::EventManager::getEvent();
       if (event != NULL)
@@ -123,18 +177,18 @@ namespace BomberMan
 	      float       z = sinf(angle) * this->_speed;
 
 	      if (this->checkMyMove(this->_asset->getPosition().getZ() + z, this->_asset->getPosition().getX() + x, manager) == true)
-		this->move(x, z, angle);
+		this->move(x, z, angle, manager);
 	      else
 		{
 		  if (this->checkMyMove(this->_asset->getPosition().getZ(), this->_asset->getPosition().getX() + x, manager) == true)
-		    this->move(x, 0, angle);
+		    this->move(x, 0, angle, manager);
 		  else if (this->checkMyMove(this->_asset->getPosition().getZ() + z, this->_asset->getPosition().getX(), manager) == true)
-		    this->move(0, z, angle);
+		    this->move(0, z, angle, manager);
 		}
-	      delete move;
 	    }
-	  else if (1/*si Touche espace appuyer*/)
+	  else if (dynamic_cast<const Event::Action *>(event) == event && this->_nb_bomb_set < this->_nb_bomb_max)
 	    this->setBomb(manager);
+	  delete event;
 	}
       else
 	{
@@ -199,6 +253,36 @@ namespace BomberMan
       return this->_nb_bomb_set;
     }
 
+    bool	  Player::getIsMoving() const
+    {
+      return this->_isMoving;
+    }
+
+    bool        Player::getIsRunning() const
+    {
+      return this->_isMoving;
+    }
+
+    Display::AObject *  Player::getRun() const
+    {
+      return this->_run;
+    }
+
+    Display::AObject *  Player::getMark() const
+    {
+      return this->_mark;
+    }
+
+    Display::Camera *	  Player::getCamera() const
+    {
+      return this->_camera;
+    }
+
+    Display::AObject *  Player::getWalking() const
+    {
+      return this->_walking;
+    }
+
     float       Player::getSpeed() const
     {
       return this->_speed;
@@ -224,11 +308,11 @@ namespace BomberMan
       this->_pv = pv;
     }
 
-    void        Player::explode(int damages, eDirection direction)
+    void        Player::explode(int damages)
     {
-      static_cast<void>(direction);
       this->setPv(this->_pv - damages);
       // animation dmg
+      std::cout << "Le player prend des degats : " << damages << std::endl;
       if (this->_pv <= 0)
 	std::cout << "J'suis mort" << std::endl;
     }
@@ -248,6 +332,24 @@ namespace BomberMan
 	    return (true);
 	}
       return (false);
+    }
+
+    void	Player::operator=(Player & cpy)
+    {
+      if (this != &cpy)
+	{
+	  this->_pv = cpy.getPv();
+	  this->_speed = cpy.getSpeed();
+	  this->_nb_bomb_max = cpy.getNbBombMax();
+	  this->_nb_bomb_set = cpy.getNbBombSet();
+	  this->_bomb = cpy.getBomb();
+	  this->_walking = cpy.getWalking();
+	  this->_mark = cpy.getMark();
+	  this->_run = cpy.getRun();
+	  this->_camera = cpy.getCamera();
+	  this->_isMoving = cpy.getIsMoving();
+	  this->_isRunning = cpy.getIsRunning();
+	}
     }
   }
 }

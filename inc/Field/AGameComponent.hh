@@ -6,6 +6,7 @@
 #include <GameClock.hpp>
 #include "IGameComponent.hh"
 #include "AObject.hpp"
+#include "FManager.hh"
 
 namespace BomberMan
 {
@@ -19,12 +20,14 @@ namespace BomberMan
       Display::AObject *			_asset;
       Display::ISound *		_sound;
       Display::IAnimation *	_animation;
+      bool			_end;
 
     public:
       virtual ~AGameComponent(){}
 
-      virtual void					explode(int, eDirection) = 0;
+      virtual void					explode(int) = 0;
       virtual bool                      operator==(IGameComponent *) = 0;
+      virtual bool        isEnd() const;
       virtual void  draw(gdl::GameClock const &) = 0;
       virtual void  update(gdl::GameClock const &, Manager *) = 0;
       virtual float					getX() const;

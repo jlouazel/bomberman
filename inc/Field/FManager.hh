@@ -5,7 +5,6 @@
 #include <iostream>
 #include <utility>
 #include <list>
-
 #include "IGameComponent.hh"
 
 namespace BomberMan
@@ -24,6 +23,7 @@ namespace BomberMan
     {
       unsigned int	_width;
       unsigned int	_height;
+      unsigned int	_nbCuves;
 
       std::vector<std::list<IGameComponent *> >	_map;
 
@@ -42,7 +42,7 @@ namespace BomberMan
       std::list<IGameComponent *> &	get(unsigned int, unsigned int);
       void				addComponent(unsigned int, unsigned int, IGameComponent *);
       void				delComponent(unsigned int, unsigned int, IGameComponent *);
-
+      void				setExplosion(unsigned int, unsigned int, int);
       void				randomize(std::list<Player *> const &);
     };
   }
