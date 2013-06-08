@@ -58,7 +58,6 @@ namespace BomberMan
 
     static unsigned int	addWalls(std::list<IGameComponent *> & components, unsigned int width, unsigned int height, unsigned int elemCnt)
     {
-      std::cout << "width" << width << std::endl;
       Display::Vector3f	vectorLen(0.0, 0.0, 0.0);
       Display::Vector3f	vectorRot(0.0, 0.0, 0.0);
       Display::Vector3f	vectorPosition((elemCnt / width) * 220, 0.0, (elemCnt % width) * 220);
@@ -101,7 +100,6 @@ namespace BomberMan
 	  vectorRot.setY(180);
 	  components.push_front(new Empty(false, elemCnt / width, elemCnt % width, new Display::Texture3d(randomiseDecor(), vectorPosition, vectorRot, vectorLen), 0, 0));
 	}
-      std::cout << elemCnt / width << std::endl;
       if (elemCnt / width == 0)
 	{
 	  vectorRot.setY(270);
@@ -213,11 +211,6 @@ namespace BomberMan
 	(*it)->explode(power, this);
     }
 
-    static unsigned int		getPercent(unsigned int width, unsigned int height, unsigned int nbPlayers, unsigned int percent)
-    {
-      return 50;
-    }
-
     static bool			isAPlayerHere(std::list<Player *> const & players, unsigned int x, unsigned int y)
     {
       for (std::list<Player *>::const_iterator it = players.begin(); it != players.end(); ++it)
@@ -284,15 +277,20 @@ namespace BomberMan
         }
     }
 
-    Wall *			Manager::getWall(unsigned int x, unsigned int y) const
+    IGameComponent * Manager::getWall(unsigned int x, unsigned int y) const
     {
-      for (std::list<IGameComponent *>::const_iterator it = this->_map[x + y * this->_width].begin();
-    	   it != this->_map[x + y * this->_width].end(); ++it)
-    	if (dynamic_cast<Wall *>(*it) == *it && dynamic_cast<Wall *>(*it)->isBreakable() == true)
-    	  return dynamic_cast<Wall *>(*it);
+      for (std::list<IGameComponent *>::const_iterator it = this->_map[x + y * this->_width].begin(); it != this->_map[x + y * this->_width].end(); ++it)
+	{
+	  if (dynamic_cast<Wall *>(*it) == *it && dynamic_cast<Wall *>(*it)->isBreakable() == true)
+	    {
+	      std::cout << "OUI" << std::endl;
+	      return *it;
+	    }
+	}
       return 0;
     }
 
+#include <unistd.h>
     void			Manager::randomize(std::list<Player *> const & players)
     {
       unsigned int x, y , elemCnt = 0;
@@ -319,30 +317,34 @@ namespace BomberMan
       ObjectFactory * factory = new ObjectFactory;
       while (nbBonus != static_cast<unsigned int>(hopeFullCases * (60.0 / 100.0)))
       	{
-      	  x = rand() % this->_width;
-      	  y = rand() % this->_height;
-      	  if (isThereAWallHere(this->_map[y * this->_width + x], true) == true && this->getWall(elemCnt / this->_width, elemCnt % this->_width)->getContent() == 0)
-      	    {
-      	      switch (rand() % 4)
-      	      	{
-      	      	case 0:
-      	      	  this->getWall(elemCnt / this->_width, elemCnt % this->_width)->setContent(factory->create(std::make_pair(BOMB, NONE)));
-      	      	  break;
-      	      	case 1:
-      	      	  this->getWall(elemCnt / this->_width, elemCnt % this->_width)->setContent(factory->create(std::make_pair(BOMB, NONE)));
-      	      	  break;
-      	      	case 2:
-	      	  this->getWall(elemCnt / this->_width, elemCnt % this->_width)->setContent(factory->create(std::make_pair(BOMB, NONE)));
-      	      	  break;
-      	      	case 3:
-	      	  this->getWall(elemCnt / this->_width, elemCnt % this->_width)->setContent(factory->create(std::make_pair(BOMB, NONE)));
-      	      	  break;
-      	      	default:
-      	      	  break;
-      	      	}
-      	      nbBonus++;
-      	    }
-      }
+	  x = rand() % this->_width;
+	  y = rand() % this->_height;
+	  Wall *tmp = dynamic_cast<Wall *>(this->getWall(x, y));
+	  if (tmp && tmp->getContent() == 0)
+	    {
+	      int r = rand() % 4;
+	      std::cout << r << std::endl;
+	      switch (r)
+		{
+		case 0:
+		  tmp->setContent(factory->create(std::make_pair(BOMB, NONE)));
+		  break;
+		case 1:
+		  tmp->setContent(factory->create(std::make_pair(BOMB, NONE)));
+		  break;
+		case 2:
+		  tmp->setContent(factory->create(std::make_pair(BOMB, NONE)));
+		  break;
+		case 3:
+		  tmp->setContent(factory->create(std::make_pair(BOMB, NONE)));
+		  break;
+		default:
+		  break;
+		}
+	      nbBonus++;
+	    }
+	}
     }
   }
 }
+

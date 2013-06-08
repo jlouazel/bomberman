@@ -62,7 +62,7 @@ namespace BomberMan
       void				setExplosion(unsigned int, unsigned int, int);
       void				randomize(std::list<Player *> const &);
       void				initFrame(int, int, int);
-      Wall *				getWall(unsigned int, unsigned int) const;
+      IGameComponent *				getWall(unsigned int, unsigned int) const;
     };
   }
 }
