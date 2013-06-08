@@ -16,12 +16,10 @@ namespace BomberMan
   {
     BomberGame::BomberGame()
     {
+      Sound::SoundManager::getInstance()->stopSound("resources/sounds/musicIntro2.mp3");
+      Sound::SoundManager::getInstance()->playSound("resources/sounds/ambianceGame.mp3", true);
+
       this->_manager = new Field::Manager;
-      Sound::SoundManager *manager = Sound::SoundManager::getInstance();
-      manager->addNewSound("resources/sounds/ambianceGame.mp3");
-      manager->stopSound("resources/sounds/musicIntro.mp3");
-      manager->playSound("resources/sounds/ambianceGame.mp3", true);
-      manager->addNewSound("resources/sounds/Dying.mp3");
 
       int LightPos[4] = {0,0,3,1};
       glEnable(GL_LIGHTING);
