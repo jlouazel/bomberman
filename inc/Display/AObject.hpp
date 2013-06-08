@@ -41,7 +41,7 @@ namespace BomberMan
       virtual bool      anim_is_ended() const = 0;
 
       void			setRotation(Vector3f &);
-      void			setPosition(Vector3f &);
+      virtual void		setPosition(Vector3f &);
       void			setLen(Vector3f &);
       Vector3f		getRotation() const;
       Vector3f		getPosition() const;

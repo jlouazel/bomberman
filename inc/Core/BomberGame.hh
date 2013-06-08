@@ -1,10 +1,12 @@
 #ifndef	__BOMBERGAME_HH__
 #define	__BOMBERGAME_HH__
 
+#include	<map>
 #include	<list>
 #include	<GameClock.hpp>
 #include	"Camera.hpp"
 #include	"Player.hh"
+#include	"Texture2d.hpp"
 #include	"FManager.hh"
 #include	"Empty.hh"
 
@@ -18,6 +20,7 @@ namespace BomberMan
       Field::Manager *			_manager;
       std::list<Field::Player *>	_players;
       std::list<Display::Camera *>      _camera;
+      std::map<std::string, Display::AObject *>	_infos;
       // Object score
       // camera + bordel opengl
 

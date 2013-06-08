@@ -31,6 +31,20 @@ namespace BomberMan
 	  //Resources::getResources()->getImage(this->stringTexture_);
         }
 
+      void	Texture2d::setPosition(Vector3f &position)
+      {
+	std::cout << "posx " << position.getX() << std::endl;
+	std::cout << "posy " << position.getY() << std::endl;
+	float posX = position.getX() * WIDTH / 100;
+	float posY = (HEIGHT - (position.getY() * HEIGHT / 100) - this->len_.getY());
+	Vector3f newVector(posX, posY, 0);
+
+	std::cout << "x " << newVector.getX() << std::endl;
+	this->position_.setX(newVector.getX());
+	this->position_.setY(newVector.getY());
+	this->position_.setZ(newVector.getZ());
+      }
+
       void	Texture2d::update(gdl::GameClock const &)
       {
       }
@@ -43,6 +57,7 @@ namespace BomberMan
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	this->_texture.bind();
 	glMatrixMode (GL_PROJECTION);
+	glPushMatrix();
 	glLoadIdentity();
 	gluOrtho2D(0, WIDTH, 0, HEIGHT);
 	glBegin(GL_QUADS);
@@ -55,6 +70,7 @@ namespace BomberMan
 	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(this->position_.getX() + this->len_.getX(), this->position_.getY() + this->len_.getY(), 0.0f);
 	glEnd();
+	glPopMatrix();
 	glFlush();
       }
     }

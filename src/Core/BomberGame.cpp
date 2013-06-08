@@ -5,6 +5,9 @@
 #include	"BomberGame.hh"
 #include	"SoundManager.hh"
 #include	"Texture3d.hpp"
+#include	"Texture2d.hpp"
+#include	"Wall.hh"
+#include	"Player.hh"
 #include	<iostream>
 
 namespace BomberMan
@@ -44,6 +47,22 @@ namespace BomberMan
       it = this->_players.begin();
       for (; it != this->_players.end(); ++it)
 	(*it)->initialize();
+
+      Display::Vector3f      vectorPosition_(0, 0, 0);
+      Display::Vector3f      vectorLen_(1.5, 2, 0.0);
+      Display::Vector3f      vectorRot_(0.0, 0.0, 0.0);
+      Display::Vector3f      vectorPosition2_(0, 70, 0);
+      Display::Vector3f      vectorLen2_(20, 40, 0.0);
+      this->_infos["barrel"] = new Display::Texture2d("images/MMbarrel.png", vectorPosition_, vectorRot_, vectorLen_);
+      this->_infos["barrel"]->initialize();
+      this->_infos["wall"] = new Display::Texture2d("images/MMcuve.png", vectorPosition_, vectorRot_, vectorLen_);
+      this->_infos["wall"]->initialize();
+      this->_infos["floor"] = new Display::Texture2d("images/MMfloor.png", vectorPosition_, vectorRot_, vectorLen_);
+      this->_infos["floor"]->initialize();
+      this->_infos["player"] = new Display::Texture2d("images/MMplayer.png", vectorPosition_, vectorRot_, vectorLen_);
+      this->_infos["player"]->initialize();
+      this->_infos["walter"] = new Display::Texture2d("images/WWmenu.png", vectorPosition2_, vectorRot_, vectorLen2_);      
+      this->_infos["walter"]->initialize();
     }
 
     BomberGame::~BomberGame()
@@ -82,6 +101,53 @@ namespace BomberMan
 	    if (y > ((this->getPlayers().front()->getX() - 110) / 220) - 3 && y < ((this->getPlayers().front()->getX() + 110) / 220) + 4 && x > ((this->getPlayers().front()->getY() - 110) / 220) - 3 && x < ((this->getPlayers().front()->getY() + 110) / 220) + 3)
 	      affObjs(*it, gameClock);
       affObjs(this->getPlayers().front(), gameClock);
+
+      float	startx = 88;
+      float	starty = 85;
+
+           Field::Player * player = this->getPlayers().front();
+      
+      for (int y = -5; y != 5; y++)
+      	{
+      	  for (int x = -5; x != 5; x++)
+      	    {
+      	      Field::Player * tmp = this->getPlayers().front();
+      	      int	real_y = static_cast<int>(((tmp->getY() - 110) / 220) + 1) + y;
+      	      int	real_x = static_cast<int>(((tmp->getX() - 110) / 220) + 1) + x;
+      	      if (real_y >= 0 && real_y < this->getManager()->Field::Manager::getHeight() && real_x >= 0 && real_x < this->getManager()->Field::Manager::getWidth())
+      		{
+      		  int	imp = 0;
+      		  for (std::list<Field::IGameComponent *>::iterator it = this->getManager()->Field::Manager::get(real_y, real_x).begin(); it != this->getManager()->Field::Manager::get(real_y, real_x).end(); ++it)
+      		    {
+      		      Display::Vector3f      newPosition(startx + y * 1.5, starty - x * 2 ,0);
+      		      if (dynamic_cast<Field::Wall *>(*it) == *it)
+      			{
+      			  Field::Wall * tmp = static_cast<Field::Wall *>(*it);
+      			  if (tmp->isBreakable())
+      			    {
+      			      this->_infos.at("barrel")->setPosition(newPosition);
+      			      this->_infos.at("barrel")->draw();
+      			    }
+      			  else
+      			    {
+      			      this->_infos.at("wall")->setPosition(newPosition);
+      			      this->_infos.at("wall")->draw();
+      			    }
+      			  imp = 1;
+      			}
+      		      else if (!imp)
+      			{
+      			  this->_infos.at("floor")->setPosition(newPosition);
+      			  this->_infos.at("floor")->draw();
+      			}
+      		    }
+      		}
+      	    }
+      	}
+      Display::Vector3f      newPosition2(startx, starty, 0);
+      this->_infos.at("player")->setPosition(newPosition2);
+      this->_infos.at("player")->draw();
+           this->_infos.at("walter")->draw();
     }
 
     void	BomberGame::updateCamera(gdl::GameClock const & gameClock, gdl::Input & input)
