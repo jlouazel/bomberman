@@ -281,7 +281,7 @@ namespace BomberMan
 	    }
 	}
       unsigned int nbCases = (this->_width * this->_height) - this->_nbCuves - 1 - createPlaceForPlayer(this->_map, players, this->_width, this->_height);
-      unsigned int freeCases = nbCases * (60.0 / 100.0);
+      unsigned int freeCases = nbCases * (40.0 / 100.0);
       while (nbCases != freeCases)
 	if (eraseWall(this->_map[rand() % (this->_width * this->_height)]) == true)
 	  nbCases--;
