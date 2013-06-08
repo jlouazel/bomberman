@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 01:21:17 2013 julien fortin
-// Last update Sat Jun  8 12:30:36 2013 julien fortin
+// Last update Sat Jun  8 15:40:04 2013 julien fortin
 //
 
 #include	<iostream>
@@ -22,6 +22,10 @@ int	main()
     }
   catch (const BomberMan::Core::EndOfBomberMan &)
     {
+    }
+  catch (const std::exception &e)
+    {
+      std::cerr << e.what() << std::endl;
     }
   catch (...)
     {
