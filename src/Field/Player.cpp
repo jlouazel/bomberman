@@ -12,6 +12,7 @@
 #include "Player.hh"
 #include "Vector.hpp"
 #include "Wall.hh"
+#include "Empty.hh"
 
 namespace BomberMan
 {
@@ -32,7 +33,7 @@ namespace BomberMan
       this->_walking = new Display::Texture3d("models/WWwalking.fbx", position, rotation, len);
       this->_run = new Display::Texture3d("models/WWrunning.fbx", position, rotation, len);
       this->_mark = new Display::Texture3d("models/PlayerMark.fbx", position, rotation, len);
-      this->_bomb = new Object(0.0, 0.0, new Display::Texture3d("models/ExplodingBomb.fbx", position, rotation, len), 0, 0, BOMB, NONE, 3, 3);
+      this->_bomb = new Object(0.0, 0.0, new Display::Texture3d("models/ExplodingBomb.fbx", position, rotation, len), 0, 0, BOMB, NONE, 2, 3);
       this->_camera = 0; // initialise after.
       this->_isMoving = false;
       this->_end = false;
@@ -140,9 +141,27 @@ namespace BomberMan
       return (true);
     }
 
+    void	Player::checkIfILoseLife(Manager *manager)
+    {
+      std::list<IGameComponent *> obj = manager->get(static_cast<int>((this->_y + 110) / 220), static_cast<int>((this->_x + 110) / 220));
+
+      for (std::list<IGameComponent *>::iterator it = obj.begin(); it != obj.end(); ++it)
+	{
+	  if (dynamic_cast<Empty *>(*it) == *it)
+	    {
+	      Empty *tmp = static_cast<Empty *>(*it);
+
+	      if (tmp->getPlayerTakeDomage() > 0)
+		this->explode(tmp->getPlayerTakeDomage());
+	    }
+	}
+    }
+
     void	Player::update(gdl::GameClock const & gameClock, Manager *manager)
     {
       // Input::Controller::KeyBoardManager::treatInput(input);
+
+      this->checkIfILoseLife(manager);
 
       const Event::IEvent* event = Event::EventManager::getEvent();
       if (event != NULL)
@@ -293,7 +312,7 @@ namespace BomberMan
     {
       this->setPv(this->_pv - damages);
       // animation dmg
-      std::cout << "Le player prend des degats" << std::endl;
+      std::cout << "Le player prend des degats : " << damages << std::endl;
       if (this->_pv <= 0)
 	std::cout << "J'suis mort" << std::endl;
     }

@@ -60,8 +60,8 @@ namespace BomberMan
       void	  initialize();
       bool	  checkMyMove(float, float, Manager *);
       bool        operator==(IGameComponent *other);
-
-      void	operator=(Player &);
+      void	  checkIfILoseLife(Manager *);
+      void	  operator=(Player &);
 
       bool	  getIsMoving() const;
       bool        getIsRunning() const;

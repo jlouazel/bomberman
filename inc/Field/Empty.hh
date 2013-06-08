@@ -22,6 +22,8 @@ namespace BomberMan
 	  Display::AObject *_textureExplosion;
 	  bool		   _explosion;
 	  gdl::Clock   *_clock;
+	  int		_frame;
+	  int		_playerTakeDomage;
         public:
 	  Empty(float x, float y, Display::AObject * asset, Display::ISound * sound, Display::IAnimation * anim);
 	  ~Empty();
@@ -30,6 +32,7 @@ namespace BomberMan
 	  void	draw(gdl::GameClock const &);
 	  void  update(gdl::GameClock const &, Manager *);
 	  bool  operator==(IGameComponent *);
+	  int	getPlayerTakeDomage() const;
         };
     }
 }

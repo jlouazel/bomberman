@@ -38,6 +38,8 @@ namespace BomberMan
 	this->_end = false;
 	this->_textureExplosion->initialize();
 	this->_clock = new gdl::Clock();
+	this->_frame = -1;
+	this->_playerTakeDomage = 0;
       }
 
       Empty::~Empty()
@@ -46,6 +48,18 @@ namespace BomberMan
 
       void        Empty::update(gdl::GameClock const & gameClock, Manager *manager)
       {
+	if (this->_playerTakeDomage != 0)
+	  {
+	    // std::cout << "KIKOU : " << this->_frame << std::endl;
+	    this->_frame++;
+	    // std::cout << "KIKOU2 : " << this->_frame << std::endl;
+	    if (this->_frame == 0)
+	      {
+		// std::cout << "END Of kikou" << std::endl;
+		this->_playerTakeDomage = 0;
+		this->_frame = -1;
+	      }
+	  }
  	this->_asset->update(gameClock);
 	this->_clock->update();
 	if (this->_clock->getTotalElapsedTime() >= 0.93)
@@ -68,8 +82,9 @@ namespace BomberMan
 
       void    Empty::explode(int damages)
       {
-	std::cout << "EXPLOSION" << std::endl;
+	// std::cout << "EXPLOSION in X = " << this->_x << " Y = " << this->_y << std::endl;
 	this->_explosion = true;
+	this->_playerTakeDomage = damages;
 	Display::Vector3f      vectorLen(0.0, 0.0, 0.0);
 	Display::Vector3f      vectorRot(0.0, 0.0, 0.0);
 	Display::Vector3f      vectorPosition(this->_x * 220, 0.0, this->_y * 220);
@@ -84,6 +99,11 @@ namespace BomberMan
 	  if (other->getX() == this->_x && other->getY() == this->_y)
 	    return (true);
 	return (false);
+      }
+
+      int	Empty::getPlayerTakeDomage() const
+      {
+	return (this->_playerTakeDomage);
       }
   }
 }
