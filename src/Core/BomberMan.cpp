@@ -64,9 +64,7 @@ namespace BomberMan
 
     void	BomberMan::_initializeSound() const
     {
-      Sound::SoundManager *manager = Sound::SoundManager::getInstance();
-      manager->addNewSound("resources/sounds/musicIntro2.mp3");
-      manager->playSound("resources/sounds/musicIntro2.mp3", true);
+      Sound::SoundManager::getInstance()->playSound("resources/sounds/musicIntro2.mp3", true);
     }
 
     void	BomberMan::_initializeOptions() const
@@ -109,7 +107,7 @@ namespace BomberMan
     void	BomberMan::draw(void)
     {
       glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-      glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+      glClearColor(0.0, 0.0, 0.0, 1.0f);
       glClearDepth(1.0f);
       glMatrixMode(GL_MODELVIEW);
       if (this->_intro)

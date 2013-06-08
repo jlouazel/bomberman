@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  8 13:44:23 2013 julien fortin
-// Last update Sat Jun  8 17:20:24 2013 julien fortin
+// Last update Sat Jun  8 19:48:16 2013 julien fortin
 //
 
 #include	"EndOfBomberMan.hh"
@@ -43,6 +43,16 @@ namespace BomberMan
     {
     }
 
+    unsigned int	BomberOptions::getWidth() const
+    {
+      return this->_width;
+    }
+
+    unsigned int	BomberOptions::getHeight() const
+    {
+      return this->_height;
+    }
+
     unsigned int	BomberOptions::getNbPlayer() const
     {
       return this->_nbPlayer;
@@ -73,6 +83,16 @@ namespace BomberMan
     void	BomberOptions::setNbIA(unsigned int n)
     {
       this->_nbIA = n;
+    }
+
+    void	BomberOptions::setWidth(unsigned int w)
+    {
+      this->_width = w;
+    }
+
+    void	BomberOptions::setHeight(unsigned int h)
+    {
+      this->_height = h;
     }
   }
 }

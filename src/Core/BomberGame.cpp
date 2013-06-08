@@ -16,12 +16,10 @@ namespace BomberMan
   {
     BomberGame::BomberGame()
     {
+      Sound::SoundManager::getInstance()->stopSound("resources/sounds/musicIntro2.mp3");
+      Sound::SoundManager::getInstance()->playSound("resources/sounds/ambianceGame.mp3", true);
+
       this->_manager = new Field::Manager;
-      Sound::SoundManager *manager = Sound::SoundManager::getInstance();
-      manager->addNewSound("resources/sounds/ambianceGame.mp3");
-      manager->stopSound("resources/sounds/musicIntro.mp3");
-      manager->playSound("resources/sounds/ambianceGame.mp3", true);
-      manager->addNewSound("resources/sounds/Dying.mp3");
 
       int LightPos[4] = {0,0,3,1};
       glEnable(GL_LIGHTING);
@@ -64,6 +62,8 @@ namespace BomberMan
       this->_infos["player"]->initialize();
       this->_infos["walter"] = new Display::Texture2d("images/WWmenu.png", vectorPosition2_, vectorRot_, vectorLen2_);
       this->_infos["walter"]->initialize();
+      this->_infos["jesse"] = new Display::Texture2d("images/JPmenu.png", vectorPosition2_, vectorRot_, vectorLen2_);
+      this->_infos["jesse"]->initialize();
       this->_infos["fiole0"] = new Display::Texture2d("images/Fiole0.png", vectorPosition3_, vectorRot_, vectorLen3_);
       this->_infos["fiole0"]->initialize();
       this->_infos["fiole10"] = new Display::Texture2d("images/Fiole10.png", vectorPosition3_, vectorRot_, vectorLen3_);
@@ -183,7 +183,11 @@ namespace BomberMan
       Display::Vector3f      newPosition2(startx, starty, 0);
       this->_infos.at("player")->setPosition(newPosition2);
       this->_infos.at("player")->draw();
-      this->_infos.at("walter")->draw();
+
+      // if (BomberOptions::getOptions()->getSkinForPlayer(player->getId()) == BomberOptions::WW)
+      // 	this->_infos.at("walter")->draw();
+      // else
+	this->_infos.at("jesse")->draw();
       switch (player->getPv())
 	{
 	case (0):
