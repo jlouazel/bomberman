@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 21:25:38 2013 julien fortin
-// Last update Sat Jun  8 04:07:51 2013 julien fortin
+// Last update Sat Jun  8 15:03:11 2013 julien fortin
 //
 
 #include	"MenuManager.hh"
@@ -56,12 +56,12 @@ namespace BomberMan
 
       vectorPosition.setY(31);
 
-      newOnglet = new OngletMenu(MenuEnum::MAPSIZE, "mapSize",
+      newOnglet = new OngletMenu(MenuEnum::MAPOPTIONS, "mapSize",
 				 new Texture2d("resources/images/mapSize.png",
 					       vectorPosition, vectorRotation, vectorLen));
       this->_menu->addOnglet(newOnglet);
 
-      this->_hover[1] = new OngletMenu(MenuEnum::MAPSIZE, "mapSize",
+      this->_hover[1] = new OngletMenu(MenuEnum::MAPOPTIONS, "mapSize",
 				       new Texture2d("resources/images/mapSizeHover.png",
 						     vectorPosition, vectorRotation, vectorLen));
       this->_hover[1]->initialize();

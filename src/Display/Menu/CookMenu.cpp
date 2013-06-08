@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 21:25:38 2013 julien fortin
-// Last update Sat Jun  8 04:07:18 2013 julien fortin
+// Last update Sat Jun  8 12:48:54 2013 julien fortin
 //
 
 #include	"MenuManager.hh"
@@ -25,6 +25,7 @@ namespace BomberMan
     CookMenu::CookMenu(Core::BomberMan* const core) : _core(core)
     {
       this->_current = 0;
+      this->_cursor = 0;
       this->_menu = new Menu("resources/images/bg.jpg");
       this->_menu->initialize();
 
@@ -42,18 +43,30 @@ namespace BomberMan
       this->_player[0]->initialize();
       this->_player[1]->initialize();
 
+      Vector3f      bP(25, 92, 0);
+      Vector3f      bL(50.0, 8.0, 0.0);
+
+      this->_back[0] = new OngletMenu(MenuEnum::CUSTOMIZE, "back",
+				      new Texture2d("resources/images/back.png",
+						    bP, vectorRotation, bL));
+      this->_back[1] = new OngletMenu(MenuEnum::CUSTOMIZE, "back",
+				      new Texture2d("resources/images/backHover.png",
+						    bP, vectorRotation, bL));
+      this->_back[0]->initialize();
+      this->_back[1]->initialize();
+
+
       Vector3f      vP(0, 44, 0);
       Vector3f      vL(20.0, 20.0, 0.0);
-      Vector3f      vR(0.0, 0.0, 0.0);
 
       this->_left = new OngletMenu(MenuEnum::NO, "<",
 				   new Texture2d("resources/images/ChevronGauche.png",
-						 vP, vR, vL));
+						 vP, vectorRotation, vL));
 
       vP.setX(80);
       this->_right = new OngletMenu(MenuEnum::NO, ">",
 				    new Texture2d("resources/images/ChevronDroite.png",
-						  vP, vR, vL));
+						  vP, vectorRotation, vL));
       this->_left->initialize();
       this->_right->initialize();
 
@@ -82,11 +95,22 @@ namespace BomberMan
 	      // Jessy
 	    }
 	  usleep(150000);
-	  MenuManager::getMenuManager()->menu(this->_player[this->_current]->getMenu());
+	  if (!this->_cursor)
+	    MenuManager::getMenuManager()->menu(this->_player[this->_current]->getMenu());
+	  else
+	    MenuManager::getMenuManager()->menu(this->_back[0]->getMenu());
         }
       else if ((move = dynamic_cast<const Event::Move*>(event)))
         {
-	  if (move->getDirection() == Event::EventDirection::RIGHT)
+	  if (move->getDirection() == Event::EventDirection::UP || move->getDirection() == Event::EventDirection::DOWN)
+	    {
+	      if (!this->_cursor)
+		this->_cursor = 1;
+	      else
+		this->_cursor = 0;
+	      usleep(150000);
+	    }
+	  else if (move->getDirection() == Event::EventDirection::RIGHT && !this->_cursor)
             {
 	      if (this->_current == 0)
 		this->_current = 1;
@@ -94,7 +118,7 @@ namespace BomberMan
 		this->_current = 1;
 	      usleep(150000);
 	    }
-          else if (move->getDirection() == Event::EventDirection::LEFT)
+          else if (move->getDirection() == Event::EventDirection::LEFT && !this->_cursor)
             {
 	      if (this->_current == 1)
 		this->_current = 0;
@@ -113,14 +137,18 @@ namespace BomberMan
         this->_menu->affAllOnglet();
       if (!this->_current)
 	{
-	  this->_right->affOnglet();
+	  if (!this->_cursor)
+	    this->_right->affOnglet();
 	  this->_player[0]->affOnglet();
 	}
       else
 	{
-	  this->_left->affOnglet();
+	  if (!this->_cursor)
+	    this->_left->affOnglet();
 	  this->_player[1]->affOnglet();
 	}
+
+      this->_back[this->_cursor]->affOnglet();
     }
 
     MenuEnum::eMenu	CookMenu::getType() const

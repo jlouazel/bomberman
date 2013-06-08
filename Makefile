@@ -5,7 +5,7 @@ RM          = rm -f
 NAME		= bomberman
 
 CPPFLAGS	+= -W -Wall -Wextra -O3
-CPPFLAGS	+= -W -Wall -Wextra -O3 -w -g3
+CPPFLAGS	+= -W -Wall -Wextra -O3 -g3
 
 CPPFLAGS	+= -I./inc/
 CPPFLAGS	+= -I./inc/Core/
@@ -14,13 +14,13 @@ CPPFLAGS	+= -I./inc/Display/
 CPPFLAGS	+= -I./inc/Display/Menu/
 CPPFLAGS	+= -I./inc/Field/
 CPPFLAGS	+= -I./inc/Unix/
-CPPFLAGS	+= -I./libgdl/include
 CPPFLAGS	+= -I./inc/Input/ -I./inc/Input/Controller/
 CPPFLAGS	+= -I./inc/Event/
 CPPFLAGS	+= -I./inc/Sound/
-CPPFLAGS	+= -I./fmod/inc/
+CPPFLAGS	+= -I./lib/fmod/inc/
+CPPFLAGS	+= -I./lib/libgdl/include
 
-LDFLAGS		=  -lpthread -L./libgdl/lib -Wl,--rpath=./libgdl/lib -lgdl_gl -lGL -lGLU ./fmod/lib/libfmodex64-4.44.14.so
+LDFLAGS		=  -lpthread -L./lib/libgdl/lib -Wl,--rpath=./lib/libgdl/lib -lgdl_gl -lGL -lGLU ./lib/fmod/lib/libfmodex64-4.44.14.so
 
 SRC_DIR		= src/
 
@@ -39,6 +39,7 @@ SRCS		= $(SRC_DIR)main.cpp \
 
 SRCS_CORE	= $(SRC_DIR)$(CORE)BomberMan.cpp \
 		$(SRC_DIR)$(CORE)BomberGame.cpp \
+		$(SRC_DIR)$(CORE)BomberOptions.cpp \
 		$(SRC_DIR)$(CORE)EndOfBomberMan.cpp \
 
 SRCS_DATA	= $(SRC_DIR)$(DATAFORMAT)ADataFormat.cpp \
@@ -59,9 +60,12 @@ SRCS_MENU	= $(SRC_DIR)$(DISPLAY)$(MENU)MainMenu.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)NewGameMenu.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)CookMenu.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)CustomizeMenu.cpp \
+		$(SRC_DIR)$(DISPLAY)$(MENU)MapOptionsMenu.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)QuickGame.cpp \
+		$(SRC_DIR)$(DISPLAY)$(MENU)PauseMenu.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)MenuManager.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)Menu.cpp \
+		$(SRC_DIR)$(DISPLAY)$(MENU)Quit.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)OngletMenu.cpp \
 
 

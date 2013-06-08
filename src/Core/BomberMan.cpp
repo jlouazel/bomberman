@@ -1,8 +1,9 @@
 #include	"BomberMan.hh"
-#include	"Resources.hh"
+#include	"BomberOptions.hh"
 #include	"EventManager.hh"
 #include	"InputManager.hh"
 #include	"MenuManager.hh"
+#include        "SoundManager.hh"
 
 namespace BomberMan
 {
@@ -13,6 +14,7 @@ namespace BomberMan
       this->_intro = true;
       this->_menu = false;
       this->_game = false;
+      this->_currentGame = 0;
     }
 
     BomberMan::~BomberMan()
@@ -28,7 +30,9 @@ namespace BomberMan
       this->_initializeIntro();
       this->_initializeInput();
       this->_initializeEvent();
+      this->_initializeSound();
       this->_initializeMenu();
+      this->_initializeOptions();
     }
 
     void	BomberMan::_initializeWindow()
@@ -58,6 +62,18 @@ namespace BomberMan
       Display::MenuManager::getMenuManager()->init(const_cast<BomberMan* const>(this));
     }
 
+    void	BomberMan::_initializeSound() const
+    {
+      Sound::SoundManager *manager = Sound::SoundManager::getInstance();
+      manager->addNewSound("resources/sounds/ambianceGame.mp3");
+      manager->playSound("resources/sounds/ambianceGame.mp3", true);
+    }
+
+    void	BomberMan::_initializeOptions() const
+    {
+      BomberOptions::getOptions();
+    }
+
     void	BomberMan::update(void)
     {
       Input::InputManager::getInputManager()->treatInput(this->input_);
@@ -75,17 +91,12 @@ namespace BomberMan
 
     void	BomberMan::_updateIntro()
     {
-      if (this->_intro) // On stop l'intro direct pour passer sur le menu;
+      if (this->_intro)
 	this->startMenu(Display::MenuEnum::MAIN);
     }
 
     void	BomberMan::_updateMenu()
     {
-      // if (this->_menu) // On stop le menu direct ppur rentrer sur le jeu;
-      // 	{
-      // 	  this->_startGame();
-      // 	  return;
-      // 	}
       Display::MenuManager::getMenuManager()->update();
     }
 
@@ -132,7 +143,6 @@ namespace BomberMan
       //Input::InputManager::deleteInputManager();
       // Event::EventManager::deleteEventManager();
       // Display::MenuManager::deleteMenuManager();
-      //Display::Resources::deleteResources();
     }
 
     void	BomberMan::startMenu(Display::MenuEnum::eMenu menu)
