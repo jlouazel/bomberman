@@ -22,7 +22,7 @@ namespace BomberMan
             this->rotation_ = rotation;
         }
 
-        void    AObject::setPosition(Vector3f &position)
+      void    AObject::setPosition(Vector3f &position)
         {
             this->position_ = position;
         }

@@ -27,19 +27,22 @@ namespace BomberMan
 	  this->_texture = gdl::Image::load(this->stringTexture_);
         }
 
-      void	Texture2d::update(gdl::GameClock const &gameClock)
+      void	Texture2d::setPosition(Vector3f&)
       {
-	(void)gameClock;
+
+      }
+
+      void	Texture2d::update(gdl::GameClock const &)
+      {
       }
 
       void	Texture2d::draw(void)
       {
-	// std::cout << this->stringTexture_ << std::endl;
-	std::cout << "Len X = " << this->len_.getX() << std::endl;
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	this->_texture.bind();
 	glMatrixMode (GL_PROJECTION);
+	glPushMatrix();
 	glLoadIdentity();
 	gluOrtho2D(0, WIDTH, 0, HEIGHT);
 	glBegin(GL_QUADS);
@@ -52,6 +55,7 @@ namespace BomberMan
 	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(this->position_.getX() + this->len_.getX(), this->position_.getY() + this->len_.getY(), 0.0f);
 	glEnd();
+	glPopMatrix();
 	glFlush();
       }
     }

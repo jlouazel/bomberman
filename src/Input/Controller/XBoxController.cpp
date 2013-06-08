@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sun May 19 00:17:06 2013 julien fortin
-// Last update Wed Jun  5 01:06:24 2013 julien fortin
+// Last update Sat Jun  8 13:38:42 2013 julien fortin
 //
 
 #include	<string>
@@ -138,6 +138,11 @@ namespace BomberMan
 	this->_execAction(this->_axis, this->_data.number);
       }
 
+      bool	XBoxController::_isRunning()
+      {
+	return this->_status[JS_RB] == XBoxButtonStatus::PRESSED;
+      }
+
       void	XBoxController::_buttonA()
       {
       }
@@ -242,7 +247,7 @@ namespace BomberMan
       {
       }
 
-      void	XBoxController::_calcProperties() const
+      void	XBoxController::_calcProperties()
       {
 	static int last = 0;
 	float intensity = sqrt(pow(this->_valueX, 2) + pow(this->_valueY, 2));
@@ -265,7 +270,8 @@ namespace BomberMan
 	  {
 	    if (!(last % 3))
 	      Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::NO,
-								(static_cast<int>(angle) + 90) % 360, false);
+								(static_cast<int>(angle) + 90) % 360,
+								this->_isRunning());
 
 	  }
 	last++;

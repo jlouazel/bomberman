@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 20:56:39 2013 julien fortin
-// Last update Sat Jun  8 03:59:56 2013 julien fortin
+// Last update Sat Jun  8 12:34:41 2013 julien fortin
 //
 
 #ifndef	__COOKMENU_HH__
@@ -30,10 +30,12 @@ namespace BomberMan
       Core::BomberMan* const	_core;
 
       std::map<unsigned int, IOnglet*>	_player;
+      std::map<unsigned int, IOnglet*>	_back;
       IOnglet*	_left;
       IOnglet*	_right;
 
-      unsigned int	_current;;
+      unsigned int	_current;
+      unsigned int	_cursor;
 
     protected:
     public:

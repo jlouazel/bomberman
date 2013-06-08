@@ -31,6 +31,7 @@ namespace BomberMan
 
 	  void	explode(int);
 	  void	draw(gdl::GameClock const &);
+	  void	draw2d(gdl::GameClock const &);
 	  void  update(gdl::GameClock const &, Manager *);
 	  bool  operator==(IGameComponent *);
 	  int	getPlayerTakeDomage() const;
