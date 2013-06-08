@@ -15,13 +15,14 @@ namespace BomberMan
     public:
       Texture2d(const std::string &texture, Vector3f &position,  Vector3f &rotation, Vector3f &len) : AObject(texture, position, rotation, len){}
 
-    private:
+    public:
       void	initialize();
+      void	setPosition(Vector3f &position);
       void	update(gdl::GameClock const &);
       void	draw(void);
       void	play(std::string const &, char) {};
       void	stop(std::string const &) {};
-      double	get_anim_speed(std::string const &) {};
+      double	get_anim_speed(std::string const &) { return 0; };
       void	set_anim_speed(std::string const &, double) {};
       void	info() {};
       void      setColor(unsigned char, unsigned char, unsigned char) {};
@@ -41,4 +42,5 @@ namespace BomberMan
     class Texture2d;
   }
 }
+
 #endif

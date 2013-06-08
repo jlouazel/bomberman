@@ -53,23 +53,26 @@ namespace BomberMan
       return angle;
     }
 
-    static void	addWalls(std::list<IGameComponent *> & components, unsigned int width, unsigned int height, unsigned int elemCnt)
+    static unsigned int	addWalls(std::list<IGameComponent *> & components, unsigned int width, unsigned int height, unsigned int elemCnt)
     {
       std::cout << "width" << width << std::endl;
       Display::Vector3f	vectorLen(0.0, 0.0, 0.0);
       Display::Vector3f	vectorRot(0.0, 0.0, 0.0);
       Display::Vector3f	vectorPosition((elemCnt / width) * 220, 0.0, (elemCnt % width) * 220);
+      unsigned int nbCuves = 0;
       if (elemCnt % width != 0 || elemCnt / width != height - 1)
 	{
 	  if ((elemCnt % width) % 2 != 0 && (elemCnt / width) % 2 != 0 && elemCnt % width != width - 1 && elemCnt / width != height - 1)
 	    {
 	      vectorRot.setY(rand() % 360);
 	      components.push_front(new Wall(false, 100, elemCnt / width, elemCnt % width, new Display::Texture3d("models/Cuve.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+	      nbCuves++;
 	    }
 	}
+      return nbCuves;
     }
 
-    static void addEmptyObject(std::list<IGameComponent *> & components, unsigned int width, unsigned int height, unsigned int elemCnt)
+    static unsigned int addEmptyObject(std::list<IGameComponent *> & components, unsigned int width, unsigned int height, unsigned int elemCnt)
     {
       Display::Vector3f	vectorLen(0.0, 0.0, 0.0);
       Display::Vector3f	vectorRot(0.0, 0.0, 0.0);
@@ -101,12 +104,10 @@ namespace BomberMan
 	  vectorRot.setY(270);
 	  if (elemCnt % width == 0)
 	    {
-	      std::cout << "LEFT" << std::endl;
 	      components.push_front(new Empty(false, elemCnt / width, elemCnt % width, new Display::Texture3d("models/ExplodedLineLeft.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
 	    }
 	  else if (elemCnt % width == width - 1)
 	    {
-	      std::cout << "RIGHT" << std::endl;
 	      components.push_front(new Empty(false, elemCnt / width, elemCnt % width, new Display::Texture3d("models/ExplodedLineRight.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
 	    }
 	  else
@@ -126,24 +127,25 @@ namespace BomberMan
 		}
 	    }
 	}
-      addWalls(components, width, height, elemCnt);
+      return addWalls(components, width, height, elemCnt);
     }
 
     Manager::Manager()
       : _width(0),
 	_height(0)
     {
+      this->_nbCuves = 0;
       srand(time(0));
       // for (; this->_width < 15 || this->_width > 100; this->_width = rand() % 100);
       // for (; this->_height < 15 || this->_height > 100; this->_height = rand() % 100);
 
-      this->_width = 10;
-      this->_height = 10;
+      this->_width = 50;
+      this->_height = 50;
 
       this->_map = std::vector<std::list<IGameComponent *> >(this->_width * this->_height, std::list<IGameComponent *>());
       unsigned int elemCnt = 0;
       for (std::vector<std::list<IGameComponent *> >::iterator it = this->_map.begin(); it != this->_map.end(); ++it)
-	addEmptyObject(*it, this->_width, this->_height, elemCnt++);
+	this->_nbCuves += addEmptyObject(*it, this->_width, this->_height, elemCnt++);
     }
 
 
@@ -230,25 +232,35 @@ namespace BomberMan
       return false;
     }
 
-    static void		eraseWall(std::list<IGameComponent *> & place)
+    static bool		eraseWall(std::list<IGameComponent *> & place)
     {
       for (std::list<IGameComponent *>::iterator it = place.begin(); it != place.end(); ++it)
 	if (dynamic_cast<Wall *>(*it) == *it)
 	  if (dynamic_cast<Wall *>(*it)->isBreakable() == true)
-	    it = place.erase(it);
+	    {
+	      it = place.erase(it);
+	      return true;
+	    }
+      return false;
     }
 
-    static void	createPlaceForPlayer(std::vector<std::list<IGameComponent *> >	& map, std::list<Player *> const & players, unsigned int width, unsigned int height)
+    static unsigned int	createPlaceForPlayer(std::vector<std::list<IGameComponent *> >	& map, std::list<Player *> const & players, unsigned int width, unsigned int height)
     {
+      unsigned int n;
       for (std::list<Player *>::const_iterator itPl = players.begin(); itPl != players.end(); ++itPl)
       	{
       	  if (static_cast<unsigned int>((*itPl)->getX()) == 0)
-	    eraseWall(map[1]);
+	    if (eraseWall(map[1]) == true)
+	      n++;
 	  else if (static_cast<unsigned int>((*itPl)->getX()) % 2 == 0)
-	    eraseWall(map[width]);
+	    if (eraseWall(map[width]) == true)
+	      n++;
 	  if (static_cast<unsigned int>((*itPl)->getY()) == 0)
-	    eraseWall(map[width]);
+	    if (eraseWall(map[width]) == true)
+	      n++;
+	  n++;
       	}
+      return n;
     }
 
     void			Manager::initFrame(int x, int y, int i)
@@ -271,7 +283,7 @@ namespace BomberMan
 	  for (x = 0; x != this->_width; x++)
 	    {
 	      unsigned int elemCnt = (x + (y * (this->_width)));
-	      if (!(x == 0 && y == this->_height - 1) &&isThereAWallHere(this->_map[elemCnt]) == false && isAPlayerHere(players, x, y) == false)
+	      if (!(x == 0 && y == this->_height - 1) && isThereAWallHere(this->_map[elemCnt]) == false && isAPlayerHere(players, x, y) == false)
 		{
 		  Display::Vector3f	vectorLen(0.0, 0.0, 0.0);
 		  Display::Vector3f	vectorRot(0.0, randAngle(5), 0.0);
@@ -280,7 +292,11 @@ namespace BomberMan
 		}
 	    }
 	}
-      createPlaceForPlayer(this->_map, players, this->_width, this->_height);
+      unsigned int nbCases = (this->_width * this->_height) - this->_nbCuves - 1 - createPlaceForPlayer(this->_map, players, this->_width, this->_height);
+      unsigned int freeCases = nbCases * (40.0 / 100.0);
+      while (nbCases != freeCases)
+	if (eraseWall(this->_map[rand() % (this->_width * this->_height)]) == true)
+	  nbCases--;
     }
   }
 }

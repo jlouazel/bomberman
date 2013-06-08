@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 21 16:18:25 2013 julien fortin
-// Last update Wed Jun  5 01:01:06 2013 julien fortin
+// Last update Fri Jun  7 08:49:41 2013 julien fortin
 //
 
 #ifndef	__MOVE_HH__

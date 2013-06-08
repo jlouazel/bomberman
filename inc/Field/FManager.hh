@@ -23,6 +23,7 @@ namespace BomberMan
     {
       unsigned int	_width;
       unsigned int	_height;
+      unsigned int	_nbCuves;
 
       std::vector<std::list<IGameComponent *> >	_map;
 

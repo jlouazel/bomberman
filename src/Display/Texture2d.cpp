@@ -4,7 +4,6 @@
 #include <unistd.h>
 #include <GL/gl.h>
 #include <GL/glut.h>
-#include	"Resources.hh"
 #include "MyGame.hpp"
 #include "Texture2d.hpp"
 
@@ -14,8 +13,6 @@ namespace BomberMan
     {
         void	Texture2d::initialize()
         {
-	  // std::cout << "lalala : " << this->stringTexture_ << std::endl;
-	  std::cout << "lalal la taille : " << this->len_.getX() << std::endl;
 	  this->len_.setX((this->len_.getX() * WIDTH / 100));
 	  this->len_.setY((this->len_.getY() * HEIGHT / 100));
 	  this->len_.setZ(this->len_.getZ());
@@ -28,8 +25,12 @@ namespace BomberMan
 	  this->position_.setY(newVector.getY());
 	  this->position_.setZ(newVector.getZ());
 	  this->_texture = gdl::Image::load(this->stringTexture_);
-	  //Resources::getResources()->getImage(this->stringTexture_);
         }
+
+      void	Texture2d::setPosition(Vector3f&)
+      {
+
+      }
 
       void	Texture2d::update(gdl::GameClock const &)
       {
@@ -37,12 +38,11 @@ namespace BomberMan
 
       void	Texture2d::draw(void)
       {
-	// std::cout << this->stringTexture_ << std::endl;
-	std::cout << "Len X = " << this->len_.getX() << std::endl;
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	this->_texture.bind();
 	glMatrixMode (GL_PROJECTION);
+	glPushMatrix();
 	glLoadIdentity();
 	gluOrtho2D(0, WIDTH, 0, HEIGHT);
 	glBegin(GL_QUADS);
@@ -55,6 +55,7 @@ namespace BomberMan
 	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(this->position_.getX() + this->len_.getX(), this->position_.getY() + this->len_.getY(), 0.0f);
 	glEnd();
+	glPopMatrix();
 	glFlush();
       }
     }

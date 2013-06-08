@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 manour_m. All rights reserved.
 //
 
-#include	"DropBomb.hh"
+#include	"Action.hh"
 #include "AObject.hpp"
 #include "Texture3d.hpp"
 #include "Player.hh"
@@ -187,7 +187,7 @@ namespace BomberMan
 		    this->move(0, z, angle, manager);
 		}
 	    }
-	  else if (dynamic_cast<const Event::DropBomb *>(event) == event && this->_nb_bomb_set < this->_nb_bomb_max)
+	  else if (dynamic_cast<const Event::Action *>(event) == event && this->_nb_bomb_set < this->_nb_bomb_max)
 	    this->setBomb(manager);
 	  delete event;
 	}

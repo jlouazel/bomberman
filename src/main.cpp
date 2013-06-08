@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 01:21:17 2013 julien fortin
-// Last update Tue Jun  4 03:54:20 2013 Happy
+// Last update Sat Jun  8 15:50:51 2013 Jean-Baptiste Louazel
 //
 
 #include	<iostream>
@@ -16,11 +16,16 @@ int	main()
 {
   try
     {
-      BomberMan::Core::BomberMan Game;
-      // BomberMan::Display::MyGame Game;
+      BomberMan::Core::BomberMan game;
 
-      Game.run();
-      // BomberMan::Core::BomberMan::getBomberMan()->run();
+      game.run();
+    }
+  catch (const BomberMan::Core::EndOfBomberMan &)
+    {
+    }
+  catch (const std::exception &e)
+    {
+      std::cerr << e.what() << std::endl;
     }
   catch (...)
     {

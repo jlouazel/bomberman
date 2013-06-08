@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Fri May 17 12:53:01 2013 julien fortin
-// Last update Tue Jun  4 16:35:30 2013 julien fortin
+// Last update Sat Jun  8 13:38:49 2013 julien fortin
 //
 
 #ifndef	__XBoxController__HH__
@@ -90,7 +90,7 @@ namespace BomberMan
 	std::map<int, int>					_countDir;
 
       private:
-	void	_calcProperties() const;
+	void	_calcProperties();
 
       private:
 	XBoxController();
@@ -102,6 +102,8 @@ namespace BomberMan
 	void	_handleAxis();
 
 	void	_execAction(std::map<int, void (XBoxController::*)()>&, int);
+
+	bool	_isRunning();
 
 	void	_buttonA();
 	void	_buttonB();

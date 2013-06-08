@@ -1,8 +1,9 @@
 #include	"BomberMan.hh"
-#include	"Resources.hh"
+#include	"BomberOptions.hh"
 #include	"EventManager.hh"
 #include	"InputManager.hh"
 #include	"MenuManager.hh"
+#include        "SoundManager.hh"
 
 namespace BomberMan
 {
@@ -13,6 +14,7 @@ namespace BomberMan
       this->_intro = true;
       this->_menu = false;
       this->_game = false;
+      this->_currentGame = 0;
     }
 
     BomberMan::~BomberMan()
@@ -25,11 +27,12 @@ namespace BomberMan
     void	BomberMan::initialize()
     {
       this->_initializeWindow();
-      this->_initializeResources();
       this->_initializeIntro();
       this->_initializeInput();
       this->_initializeEvent();
+      this->_initializeSound();
       this->_initializeMenu();
+      this->_initializeOptions();
     }
 
     void	BomberMan::_initializeWindow()
@@ -38,11 +41,6 @@ namespace BomberMan
       this->window_.setHeight(BOMBER_HEIGHT);
       this->window_.setWidth(BOMBER_WIDTH);
       this->window_.create();
-    }
-
-    void	BomberMan::_initializeResources() const
-    {
-      Display::Resources::getResources();
     }
 
     void	BomberMan::_initializeIntro()
@@ -61,7 +59,19 @@ namespace BomberMan
 
     void	BomberMan::_initializeMenu() const
     {
-      Display::MenuManager::getMenuManager();
+      Display::MenuManager::getMenuManager()->init(const_cast<BomberMan* const>(this));
+    }
+
+    void	BomberMan::_initializeSound() const
+    {
+      Sound::SoundManager *manager = Sound::SoundManager::getInstance();
+      manager->addNewSound("resources/sounds/ambianceGame.mp3");
+      manager->playSound("resources/sounds/ambianceGame.mp3", true);
+    }
+
+    void	BomberMan::_initializeOptions() const
+    {
+      BomberOptions::getOptions();
     }
 
     void	BomberMan::update(void)
@@ -81,17 +91,12 @@ namespace BomberMan
 
     void	BomberMan::_updateIntro()
     {
-      if (this->_intro) // On stop l'intro direct pour passer sur le menu;
-	this->_startMenu();
+      if (this->_intro)
+	this->startMenu(Display::MenuEnum::MAIN);
     }
 
     void	BomberMan::_updateMenu()
     {
-      if (this->_menu) // On stop le menu direct ppur rentrer sur le jeu;
-	{
-	  this->_startGame();
-	  return;
-	}
       Display::MenuManager::getMenuManager()->update();
     }
 
@@ -135,21 +140,20 @@ namespace BomberMan
 
     void	BomberMan::unload(void)
     {
-      Input::InputManager::deleteInputManager();
-      Event::EventManager::deleteEventManager();
-      Display::MenuManager::deleteMenuManager();
-      Display::Resources::deleteResources();
+      //Input::InputManager::deleteInputManager();
+      // Event::EventManager::deleteEventManager();
+      // Display::MenuManager::deleteMenuManager();
     }
 
-    void	BomberMan::_startMenu()
+    void	BomberMan::startMenu(Display::MenuEnum::eMenu menu)
     {
       this->_intro = false;
-      this->_game = false;
       this->_menu = true;
-      Display::MenuManager::getMenuManager()->menu(Display::Menu::MAIN);
+      this->_game = false;
+      Display::MenuManager::getMenuManager()->menu(menu);
     }
 
-    void	BomberMan::_startGame()
+    void	BomberMan::startGame()
     {
       this->_intro = false;
       this->_menu = false;
@@ -158,63 +162,3 @@ namespace BomberMan
     }
   }
 }
-
-
-
-    /*
-    static void	updateObjs(Field::IGameComponent * comp, gdl::GameClock const & gameClock)
-    {
-      comp->update(gameClock);
-    }
-
-    void	BomberMan::update(void)
-    {
-
-      // this->_currentGame->updateCamera(gameClock_, input_);
-      std::cout << "X = " << this->_currentGame->getPlayers().front()->getX() / 220 << std::endl;
-      std::cout << "Y = "<< this->_currentGame->getPlayers().front()->getY() / 220 << std::endl;
-      for (unsigned int y = 0; y != this->_currentGame->getManager()->Field::Manager::getHeight(); y++)
-      	for (unsigned int x = 0; x != this->_currentGame->getManager()->Field::Manager::getWidth(); x++)
-      	  for (std::list<Field::IGameComponent *>::iterator it = this->_currentGame->getManager()->Field::Manager::get(x, y).begin(); it != this->_currentGame->getManager()->Field::Manager::get(x, y).end(); ++it)
-	    if (y > (this->_currentGame->getPlayers().front()->getX() / 220) - 10 && y < (this->_currentGame->getPlayers().front()->getX() / 220) + 7 && x > (this->_currentGame->getPlayers().front()->getY() / 220) - 10 && x < (this->_currentGame->getPlayers().front()->getY() / 220) + 7)
-	      updateObjs(*it, gameClock_);
-      updateObjs(this->_currentGame->getPlayers().front(), gameClock_);
-    }
-
-    void	BomberMan::draw(void)
-    {
-      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-      glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-      glClearDepth(1.0f);
-      glMatrixMode(GL_MODELVIEW);
-      this->_drawGame();
-      Event::EventManager::getEventManager()->cleanEvent();
-    }
-
-    static void	affObjs(Field::IGameComponent * comp, gdl::GameClock const & gameClock, gdl::Input input)
-    {
-      comp->draw(gameClock, input);
-    }
-
-    void	BomberMan::_drawGame() const
-    {
-      // this->_currentGame->getManager()->Field::Manager::get(0, 0).front()->getAsset()->draw();
-      for (unsigned int y = 0; y != this->_currentGame->getManager()->Field::Manager::getHeight(); y++)
-	for (unsigned int x = 0; x != this->_currentGame->getManager()->Field::Manager::getWidth(); x++)
-	  for (std::list<Field::IGameComponent *>::iterator it = this->_currentGame->getManager()->Field::Manager::get(x, y).begin(); it != this->_currentGame->getManager()->Field::Manager::get(x, y).end(); ++it)
-	    if (y > (this->_currentGame->getPlayers().front()->getX() / 220) - 10 && y < (this->_currentGame->getPlayers().front()->getX() / 220) + 7 && x > (this->_currentGame->getPlayers().front()->getY() / 220) - 10 && x < (this->_currentGame->getPlayers().front()->getY() / 220) + 7)
-	      affObjs(*it, gameClock_, input_);
-
-      // for (std::list<Field::Player *>::iterator it2 = this->_currentGame->getPlayers().begin(); it2 != this->_currentGame->getPlayers().end(); ++it2)
-      // 	{
-      // 	  std::cout << "KIKOU J'aime la police" << std::endl;
-      // 	  affObjs(*it2, gameClock_, input_);
-      // 	  std::cout << "Dans mon slip" << std::endl;
-      // 	}
-      affObjs(this->_currentGame->getPlayers().front(), gameClock_, input_);
-    }
-
-    void	BomberMan::unload()
-    {
-    }
-    */

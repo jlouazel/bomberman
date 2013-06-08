@@ -2,29 +2,31 @@ CC          = g++
 
 RM          = rm -f
 
-NAME		= BomberMan
+NAME		= bomberman
 
-CPPFLAGS	+= -W -Wall -Wextra -O3 -w -g3
+CPPFLAGS	+= -W -Wall -Wextra -O2
 
 CPPFLAGS	+= -I./inc/
 CPPFLAGS	+= -I./inc/Core/
 CPPFLAGS	+= -I./inc/DataFormat/
 CPPFLAGS	+= -I./inc/Display/
+CPPFLAGS	+= -I./inc/Display/Menu/
 CPPFLAGS	+= -I./inc/Field/
 CPPFLAGS	+= -I./inc/Unix/
-CPPFLAGS	+= -I./libgdl/include
 CPPFLAGS	+= -I./inc/Input/ -I./inc/Input/Controller/
 CPPFLAGS	+= -I./inc/Event/
 CPPFLAGS	+= -I./inc/Sound/
-CPPFLAGS	+= -I./fmod/inc/
+CPPFLAGS	+= -I./lib/fmod/inc/
+CPPFLAGS	+= -I./lib/libgdl/include
 
-LDFLAGS		=  -lpthread -L./libgdl/lib -Wl,--rpath=./libgdl/lib -lgdl_gl -lGL -lGLU ./fmod/lib/libfmodex64-4.44.14.so
+LDFLAGS		=  -lpthread -L./lib/libgdl/lib -Wl,--rpath=./lib/libgdl/lib -lgdl_gl -lGL -lGLU ./lib/fmod/lib/libfmodex64-4.44.14.so
 
 SRC_DIR		= src/
 
 CORE        = Core/
 DATAFORMAT  = DataFormat/
 DISPLAY     = Display/
+MENU	    = Menu/
 FIELD       = Field/
 INPUT	    = Input/
 CONTROLLER  = Controller/
@@ -36,6 +38,7 @@ SRCS		= $(SRC_DIR)main.cpp \
 
 SRCS_CORE	= $(SRC_DIR)$(CORE)BomberMan.cpp \
 		$(SRC_DIR)$(CORE)BomberGame.cpp \
+		$(SRC_DIR)$(CORE)BomberOptions.cpp \
 		$(SRC_DIR)$(CORE)EndOfBomberMan.cpp \
 
 SRCS_DATA	= $(SRC_DIR)$(DATAFORMAT)ADataFormat.cpp \
@@ -43,19 +46,27 @@ SRCS_DATA	= $(SRC_DIR)$(DATAFORMAT)ADataFormat.cpp \
 		$(SRC_DIR)$(DATAFORMAT)Parser.cpp \
 		$(SRC_DIR)$(DATAFORMAT)Xml.cpp \
 
-SRCS_DISPLAY	= $(SRC_DIR)$(DISPLAY)MainMenu.cpp \
-		$(SRC_DIR)$(DISPLAY)MenuManager.cpp \
-		$(SRC_DIR)$(DISPLAY)AObject.cpp \
-		$(SRC_DIR)$(DISPLAY)Menu.cpp \
-		$(SRC_DIR)$(DISPLAY)OngletMenu.cpp \
+SRCS_DISPLAY	= $(SRC_DIR)$(DISPLAY)AObject.cpp \
 		$(SRC_DIR)$(DISPLAY)Texture2d.cpp \
 		$(SRC_DIR)$(DISPLAY)Texture3d.cpp \
 		$(SRC_DIR)$(DISPLAY)Vector.cpp \
 		$(SRC_DIR)$(DISPLAY)ASound.cpp \
 		$(SRC_DIR)$(DISPLAY)DisplayError.cpp \
 		$(SRC_DIR)$(DISPLAY)GDLSound.cpp \
-		$(SRC_DIR)$(DISPLAY)Resources.cpp \
-		$(SRC_DIR)$(DISPLAY)Camera.cpp
+		$(SRC_DIR)$(DISPLAY)Camera.cpp \
+
+SRCS_MENU	= $(SRC_DIR)$(DISPLAY)$(MENU)MainMenu.cpp \
+		$(SRC_DIR)$(DISPLAY)$(MENU)NewGameMenu.cpp \
+		$(SRC_DIR)$(DISPLAY)$(MENU)CookMenu.cpp \
+		$(SRC_DIR)$(DISPLAY)$(MENU)CustomizeMenu.cpp \
+		$(SRC_DIR)$(DISPLAY)$(MENU)MapOptionsMenu.cpp \
+		$(SRC_DIR)$(DISPLAY)$(MENU)QuickGame.cpp \
+		$(SRC_DIR)$(DISPLAY)$(MENU)PauseMenu.cpp \
+		$(SRC_DIR)$(DISPLAY)$(MENU)MenuManager.cpp \
+		$(SRC_DIR)$(DISPLAY)$(MENU)Menu.cpp \
+		$(SRC_DIR)$(DISPLAY)$(MENU)Quit.cpp \
+		$(SRC_DIR)$(DISPLAY)$(MENU)OngletMenu.cpp \
+
 
 SRCS_FIELD	= $(SRC_DIR)$(FIELD)AGameComponent.cpp \
 		$(SRC_DIR)$(FIELD)Empty.cpp \
@@ -77,7 +88,7 @@ SRCS_EVENT	= $(SRC_DIR)$(EVENT)AEvent.cpp \
 		$(SRC_DIR)$(EVENT)EventManager.cpp \
 		$(SRC_DIR)$(EVENT)EventError.cpp \
 		$(SRC_DIR)$(EVENT)Move.cpp \
-		$(SRC_DIR)$(EVENT)DropBomb.cpp \
+		$(SRC_DIR)$(EVENT)Action.cpp \
 
 SRCS_UNIX	= $(SRC_DIR)$(UNIX)UnixMutex.cpp \
 		$(SRC_DIR)$(UNIX)UnixThread.cpp \
@@ -96,6 +107,7 @@ OBJS		= $(SRCS:.cpp=.o) \
 		$(SRCS_CTLLR:.cpp=.o) \
 		$(SRCS_EVENT:.cpp=.o) \
 		$(SRCS_SOUND:.cpp=.o) \
+		$(SRCS_MENU:.cpp=.o) \
 
 all:		$(NAME)
 

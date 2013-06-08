@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 21 20:26:12 2013 julien fortin
-// Last update Thu Jun  6 19:43:37 2013 julien fortin
+// Last update Sat Jun  8 14:51:45 2013 julien fortin
 //
 
 #include	"EventManager.hh"
@@ -133,7 +133,7 @@ namespace BomberMan
 	if (!this->_multiples)
 	  {
 	    if (this->_input && (this->_input->isKeyDown(gdl::Keys::Left) ||
-				 ((this->_qwerty && (this->_input->isKeyDown(gdl::Keys::A))
+				 (((this->_qwerty && (this->_input->isKeyDown(gdl::Keys::A)))
 				   || (!this->_qwerty && this->_input->isKeyDown(gdl::Keys::Q))))))
 	      {
 		this->_multiples = true;
@@ -194,8 +194,8 @@ namespace BomberMan
 	if (!this->_multiples)
 	  {
 	    if (this->_input && (this->_input->isKeyDown(gdl::Keys::Left) ||
-				 ((this->_qwerty && (this->_input->isKeyDown(gdl::Keys::A))
-				   || this->_input->isKeyDown(gdl::Keys::Q)))))
+				 ((this->_qwerty && ((this->_input->isKeyDown(gdl::Keys::A))
+						     || this->_input->isKeyDown(gdl::Keys::Q))))))
 	      {
 		this->_multiples = true;
 		Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::DOWN_LEFT, 315.0,
@@ -233,7 +233,7 @@ namespace BomberMan
 
       void	KeyBoardManager::_action(const Field::Player* const)
       {
-	Event::EventManager::getEventManager()->gameEvent(Event::EventDirection::NO, Event::EventType::DROPBOMB, 0.0, 0.0);
+	Event::EventManager::getEventManager()->actionEvent();
       }
     }
   }
