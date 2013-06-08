@@ -45,6 +45,10 @@ namespace BomberMan
 
     void	BomberMan::_initializeIntro()
     {
+      if (!this->_videoIntro)
+	{
+	  this->_intro = false;
+	}
     }
 
     void	BomberMan::_initializeEvent() const
@@ -59,12 +63,15 @@ namespace BomberMan
 
     void	BomberMan::_initializeMenu() const
     {
-      Display::MenuManager::getMenuManager()->init(const_cast<BomberMan* const>(this));
+      if (this->_intro == false)
+	{
+	  Sound::SoundManager::getInstance()->playSound("resources/sounds/musicIntro2.mp3", true);
+	  Display::MenuManager::getMenuManager()->init(const_cast<BomberMan* const>(this));
+	}
     }
 
     void	BomberMan::_initializeSound() const
     {
-      Sound::SoundManager::getInstance()->playSound("resources/sounds/musicIntro2.mp3", true);
     }
 
     void	BomberMan::_initializeOptions() const
@@ -89,8 +96,6 @@ namespace BomberMan
 
     void	BomberMan::_updateIntro()
     {
-      if (this->_intro)
-	this->startMenu(Display::MenuEnum::MAIN);
     }
 
     void	BomberMan::_updateMenu()

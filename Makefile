@@ -19,7 +19,7 @@ CPPFLAGS	+= -I./inc/Sound/
 CPPFLAGS	+= -I./lib/fmod/inc/
 CPPFLAGS	+= -I./lib/libgdl/include
 
-LDFLAGS		=  -lpthread -L./lib/libgdl/lib -Wl,--rpath=./lib/libgdl/lib -lgdl_gl -lGL -lGLU ./lib/fmod/lib/libfmodex64-4.44.14.so
+LDFLAGS		=  -lpthread -L./lib/libgdl/lib -Wl,--rpath=./lib/libgdl/lib -lgdl_gl -lGL -lGLU ./lib/fmod/lib/libfmodex64-4.44.14.so -lopencv_core -lopencv_highgui -lopencv_imgproc
 
 SRC_DIR		= src/
 
@@ -54,6 +54,8 @@ SRCS_DISPLAY	= $(SRC_DIR)$(DISPLAY)AObject.cpp \
 		$(SRC_DIR)$(DISPLAY)DisplayError.cpp \
 		$(SRC_DIR)$(DISPLAY)GDLSound.cpp \
 		$(SRC_DIR)$(DISPLAY)Camera.cpp \
+		$(SRC_DIR)$(DISPLAY)Gif.cpp \
+		$(SRC_DIR)$(DISPLAY)Video.cpp \
 
 SRCS_MENU	= $(SRC_DIR)$(DISPLAY)$(MENU)MainMenu.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)NewGameMenu.cpp \
