@@ -25,10 +25,6 @@ namespace BomberMan
       glLightiv(GL_LIGHT0,GL_POSITION,LightPos);
 
 
-      Sound::SoundManager *manager = Sound::SoundManager::getInstance();
-      manager->addNewSound("sounds/ambianceGame.mp3");
-      // manager->playSound("sounds/ambianceGame.mp3", true);
-
       Display::Vector3f      vectorPosition(0, 0.0, 0);
       Display::Vector3f      vectorLen(0.0, 0.0, 0.0);
       Display::Vector3f      vectorRot(0.0, 0.0, 0.0);
@@ -63,29 +59,29 @@ namespace BomberMan
       this->_infos["floor"]->initialize();
       this->_infos["player"] = new Display::Texture2d("images/MMplayer.png", vectorPosition_, vectorRot_, vectorLen_);
       this->_infos["player"]->initialize();
-      this->_infos["walter"] = new Display::Texture2d("images/WWmenu.png", vectorPosition2_, vectorRot_, vectorLen2_);      
+      this->_infos["walter"] = new Display::Texture2d("images/WWmenu.png", vectorPosition2_, vectorRot_, vectorLen2_);
       this->_infos["walter"]->initialize();
-      this->_infos["fiole0"] = new Display::Texture2d("images/Fiole0.png", vectorPosition3_, vectorRot_, vectorLen3_);      
+      this->_infos["fiole0"] = new Display::Texture2d("images/Fiole0.png", vectorPosition3_, vectorRot_, vectorLen3_);
       this->_infos["fiole0"]->initialize();
-      this->_infos["fiole10"] = new Display::Texture2d("images/Fiole10.png", vectorPosition3_, vectorRot_, vectorLen3_);      
+      this->_infos["fiole10"] = new Display::Texture2d("images/Fiole10.png", vectorPosition3_, vectorRot_, vectorLen3_);
       this->_infos["fiole10"]->initialize();
-      this->_infos["fiole20"] = new Display::Texture2d("images/Fiole20.png", vectorPosition3_, vectorRot_, vectorLen3_);      
+      this->_infos["fiole20"] = new Display::Texture2d("images/Fiole20.png", vectorPosition3_, vectorRot_, vectorLen3_);
       this->_infos["fiole20"]->initialize();
-      this->_infos["fiole30"] = new Display::Texture2d("images/Fiole30.png", vectorPosition3_, vectorRot_, vectorLen3_);      
+      this->_infos["fiole30"] = new Display::Texture2d("images/Fiole30.png", vectorPosition3_, vectorRot_, vectorLen3_);
       this->_infos["fiole30"]->initialize();
-      this->_infos["fiole40"] = new Display::Texture2d("images/Fiole40.png", vectorPosition3_, vectorRot_, vectorLen3_);      
+      this->_infos["fiole40"] = new Display::Texture2d("images/Fiole40.png", vectorPosition3_, vectorRot_, vectorLen3_);
       this->_infos["fiole40"]->initialize();
-      this->_infos["fiole50"] = new Display::Texture2d("images/Fiole50.png", vectorPosition3_, vectorRot_, vectorLen3_);      
+      this->_infos["fiole50"] = new Display::Texture2d("images/Fiole50.png", vectorPosition3_, vectorRot_, vectorLen3_);
       this->_infos["fiole50"]->initialize();
-      this->_infos["fiole60"] = new Display::Texture2d("images/Fiole60.png", vectorPosition3_, vectorRot_, vectorLen3_);      
+      this->_infos["fiole60"] = new Display::Texture2d("images/Fiole60.png", vectorPosition3_, vectorRot_, vectorLen3_);
       this->_infos["fiole60"]->initialize();
-      this->_infos["fiole70"] = new Display::Texture2d("images/Fiole70.png", vectorPosition3_, vectorRot_, vectorLen3_);      
+      this->_infos["fiole70"] = new Display::Texture2d("images/Fiole70.png", vectorPosition3_, vectorRot_, vectorLen3_);
       this->_infos["fiole70"]->initialize();
-      this->_infos["fiole80"] = new Display::Texture2d("images/Fiole80.png", vectorPosition3_, vectorRot_, vectorLen3_);      
+      this->_infos["fiole80"] = new Display::Texture2d("images/Fiole80.png", vectorPosition3_, vectorRot_, vectorLen3_);
       this->_infos["fiole80"]->initialize();
-      this->_infos["fiole90"] = new Display::Texture2d("images/Fiole90.png", vectorPosition3_, vectorRot_, vectorLen3_);      
+      this->_infos["fiole90"] = new Display::Texture2d("images/Fiole90.png", vectorPosition3_, vectorRot_, vectorLen3_);
       this->_infos["fiole90"]->initialize();
-      this->_infos["fiole100"] = new Display::Texture2d("images/Fiole100.png", vectorPosition3_, vectorRot_, vectorLen3_);      
+      this->_infos["fiole100"] = new Display::Texture2d("images/Fiole100.png", vectorPosition3_, vectorRot_, vectorLen3_);
       this->_infos["fiole100"]->initialize();
     }
 
@@ -130,7 +126,7 @@ namespace BomberMan
       float	starty = 85;
 
       Field::Player * player = this->getPlayers().front();
-      
+
       for (int y = -5; y != 5; y++)
       	{
       	  for (int x = -5; x != 5; x++)
@@ -173,8 +169,8 @@ namespace BomberMan
       this->_infos.at("player")->setPosition(newPosition2);
       this->_infos.at("player")->draw();
       this->_infos.at("walter")->draw();
-      
-      switch (player->getPV())
+
+      switch (player->getPv())
 	{
 	case (0):
 	  {
@@ -184,7 +180,7 @@ namespace BomberMan
 	default:
 	  {
 	    this->_infos.at("Fiole0")->draw();
-	    break;	    
+	    break;
 	  }
 	}
     }

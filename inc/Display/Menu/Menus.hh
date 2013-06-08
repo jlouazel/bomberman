@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 22:06:06 2013 julien fortin
-// Last update Sat Jun  8 03:44:40 2013 julien fortin
+// Last update Sat Jun  8 11:54:29 2013 julien fortin
 //
 
 #ifndef	__MENUS_HH__
@@ -16,5 +16,6 @@
 #include	"QuickGame.hh"
 #include	"CustomizeMenu.hh"
 #include	"CookMenu.hh"
+#include	"Quit.hh"
 
 #endif

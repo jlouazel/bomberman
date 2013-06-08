@@ -14,13 +14,13 @@ CPPFLAGS	+= -I./inc/Display/
 CPPFLAGS	+= -I./inc/Display/Menu/
 CPPFLAGS	+= -I./inc/Field/
 CPPFLAGS	+= -I./inc/Unix/
-CPPFLAGS	+= -I./libgdl/include
 CPPFLAGS	+= -I./inc/Input/ -I./inc/Input/Controller/
 CPPFLAGS	+= -I./inc/Event/
 CPPFLAGS	+= -I./inc/Sound/
-CPPFLAGS	+= -I./fmod/inc/
+CPPFLAGS	+= -I./lib/fmod/inc/
+CPPFLAGS	+= -I./lib/libgdl/include
 
-LDFLAGS		=  -lpthread -L./libgdl/lib -Wl,--rpath=./libgdl/lib -lgdl_gl -lGL -lGLU ./fmod/lib/libfmodex64-4.44.14.so
+LDFLAGS		=  -lpthread -L./lib/libgdl/lib -Wl,--rpath=./lib/libgdl/lib -lgdl_gl -lGL -lGLU ./lib/fmod/lib/libfmodex64-4.44.14.so
 
 SRC_DIR		= src/
 
@@ -62,6 +62,7 @@ SRCS_MENU	= $(SRC_DIR)$(DISPLAY)$(MENU)MainMenu.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)QuickGame.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)MenuManager.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)Menu.cpp \
+		$(SRC_DIR)$(DISPLAY)$(MENU)Quit.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)OngletMenu.cpp \
 
 
