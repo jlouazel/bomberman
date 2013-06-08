@@ -79,7 +79,7 @@ namespace BomberMan
       {
 	if (this->_isGround == true)
 	  {
-	    std::cout << "Empty X = " << this->_x << " Y = " << this->_y << std::endl;
+	    // std::cout << "Empty X = " << this->_x << " Y = " << this->_y << std::endl;
 	    this->_explosion = true;
 	    this->_playerTakeDomage = damages * 10;
 	    Display::Vector3f      vectorLen(0.0, 0.0, 0.0);

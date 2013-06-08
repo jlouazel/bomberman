@@ -32,8 +32,8 @@ namespace BomberMan
 
     void	Texture3d::update(gdl::GameClock const & gameClock)
     {
-      this->model_.update(gameClock);
       this->play("Take 001", 1);
+      this->model_.update(gameClock);
     }
 
     void    Texture3d::play(std::string const & name, char state)

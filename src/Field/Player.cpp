@@ -144,7 +144,7 @@ namespace BomberMan
     void	Player::checkIfILoseLife(Manager *manager)
     {
       std::list<IGameComponent *> obj = manager->get(static_cast<int>((this->_y + 110) / 220), static_cast<int>((this->_x + 110) / 220));
-      std::cout << "Le player check en X = " << static_cast<int>((this->_y + 110) / 220) << " Y = " << static_cast<int>((this->_x + 110) / 220) << std::endl;
+      // std::cout << "Le player check en X = " << static_cast<int>((this->_y + 110) / 220) << " Y = " << static_cast<int>((this->_x + 110) / 220) << std::endl;
 
       for (std::list<IGameComponent *>::iterator it = obj.begin(); it != obj.end(); ++it)
 	{
@@ -316,7 +316,7 @@ namespace BomberMan
     {
       this->setPv(this->_pv - damages);
       // animation dmg
-      std::cout << "Le player prend des degats : " << damages << std::endl;
+      // std::cout << "Le player prend des degats : " << damages << std::endl;
       if (this->_pv <= 0)
 	std::cout << "J'suis mort" << std::endl;
     }
