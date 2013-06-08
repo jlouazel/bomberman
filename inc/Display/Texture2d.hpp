@@ -22,7 +22,7 @@ namespace BomberMan
       void	draw(void);
       void	play(std::string const &, char) {};
       void	stop(std::string const &) {};
-      double	get_anim_speed(std::string const &) {};
+      double	get_anim_speed(std::string const &) { return 0; };
       void	set_anim_speed(std::string const &, double) {};
       void	info() {};
       void      setColor(unsigned char, unsigned char, unsigned char) {};
@@ -42,4 +42,5 @@ namespace BomberMan
     class Texture2d;
   }
 }
+
 #endif

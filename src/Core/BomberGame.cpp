@@ -53,6 +53,8 @@ namespace BomberMan
       Display::Vector3f      vectorRot_(0.0, 0.0, 0.0);
       Display::Vector3f      vectorPosition2_(0, 70, 0);
       Display::Vector3f      vectorLen2_(20, 40, 0.0);
+      Display::Vector3f      vectorPosition3_(17, 80, 0);
+      Display::Vector3f      vectorLen3_(7, 15, 0.0);
       this->_infos["barrel"] = new Display::Texture2d("images/MMbarrel.png", vectorPosition_, vectorRot_, vectorLen_);
       this->_infos["barrel"]->initialize();
       this->_infos["wall"] = new Display::Texture2d("images/MMcuve.png", vectorPosition_, vectorRot_, vectorLen_);
@@ -63,6 +65,28 @@ namespace BomberMan
       this->_infos["player"]->initialize();
       this->_infos["walter"] = new Display::Texture2d("images/WWmenu.png", vectorPosition2_, vectorRot_, vectorLen2_);      
       this->_infos["walter"]->initialize();
+      this->_infos["fiole0"] = new Display::Texture2d("images/Fiole0.png", vectorPosition3_, vectorRot_, vectorLen3_);      
+      this->_infos["fiole0"]->initialize();
+      this->_infos["fiole10"] = new Display::Texture2d("images/Fiole10.png", vectorPosition3_, vectorRot_, vectorLen3_);      
+      this->_infos["fiole10"]->initialize();
+      this->_infos["fiole20"] = new Display::Texture2d("images/Fiole20.png", vectorPosition3_, vectorRot_, vectorLen3_);      
+      this->_infos["fiole20"]->initialize();
+      this->_infos["fiole30"] = new Display::Texture2d("images/Fiole30.png", vectorPosition3_, vectorRot_, vectorLen3_);      
+      this->_infos["fiole30"]->initialize();
+      this->_infos["fiole40"] = new Display::Texture2d("images/Fiole40.png", vectorPosition3_, vectorRot_, vectorLen3_);      
+      this->_infos["fiole40"]->initialize();
+      this->_infos["fiole50"] = new Display::Texture2d("images/Fiole50.png", vectorPosition3_, vectorRot_, vectorLen3_);      
+      this->_infos["fiole50"]->initialize();
+      this->_infos["fiole60"] = new Display::Texture2d("images/Fiole60.png", vectorPosition3_, vectorRot_, vectorLen3_);      
+      this->_infos["fiole60"]->initialize();
+      this->_infos["fiole70"] = new Display::Texture2d("images/Fiole70.png", vectorPosition3_, vectorRot_, vectorLen3_);      
+      this->_infos["fiole70"]->initialize();
+      this->_infos["fiole80"] = new Display::Texture2d("images/Fiole80.png", vectorPosition3_, vectorRot_, vectorLen3_);      
+      this->_infos["fiole80"]->initialize();
+      this->_infos["fiole90"] = new Display::Texture2d("images/Fiole90.png", vectorPosition3_, vectorRot_, vectorLen3_);      
+      this->_infos["fiole90"]->initialize();
+      this->_infos["fiole100"] = new Display::Texture2d("images/Fiole100.png", vectorPosition3_, vectorRot_, vectorLen3_);      
+      this->_infos["fiole100"]->initialize();
     }
 
     BomberGame::~BomberGame()
@@ -105,7 +129,7 @@ namespace BomberMan
       float	startx = 88;
       float	starty = 85;
 
-           Field::Player * player = this->getPlayers().front();
+      Field::Player * player = this->getPlayers().front();
       
       for (int y = -5; y != 5; y++)
       	{
@@ -144,10 +168,25 @@ namespace BomberMan
       		}
       	    }
       	}
+
       Display::Vector3f      newPosition2(startx, starty, 0);
       this->_infos.at("player")->setPosition(newPosition2);
       this->_infos.at("player")->draw();
-           this->_infos.at("walter")->draw();
+      this->_infos.at("walter")->draw();
+      
+      switch (player->getPV())
+	{
+	case (0):
+	  {
+	    this->_infos.at("Fiole0")->draw();
+	    break;
+	  }
+	default:
+	  {
+	    this->_infos.at("Fiole0")->draw();
+	    break;	    
+	  }
+	}
     }
 
     void	BomberGame::updateCamera(gdl::GameClock const & gameClock, gdl::Input & input)

@@ -34,19 +34,19 @@ namespace BomberMan
 
     Resources::Resources()
     {
-      this->_images["continueGame"] = gdl::Image::load("models/continuegame.png");
-      this->_images["newGame"] = gdl::Image::load("models/newgame.png");
-      this->_images["options"] = gdl::Image::load("models/options.png");
-      this->_images["credits"] = gdl::Image::load("models/credits.png");
-      this->_images["quit"] = gdl::Image::load("models/quit.png");
+      // this->_images["continueGame"] = gdl::Image::load("models/continuegame.png");
+      // this->_images["newGame"] = gdl::Image::load("models/newgame.png");
+      // this->_images["options"] = gdl::Image::load("models/options.png");
+      // this->_images["credits"] = gdl::Image::load("models/credits.png");
+      // this->_images["quit"] = gdl::Image::load("models/quit.png");
 
-      for (std::map<std::string, gdl::Image>::iterator it = this->_images.begin();
-      	   it != this->_images.end(); ++it)
-	it->second.bind();
+      // for (std::map<std::string, gdl::Image>::iterator it = this->_images.begin();
+      // 	   it != this->_images.end(); ++it)
+      // 	it->second.bind();
 
-      Vector3f      vectorPosition(0, 0, 0);
-      Vector3f      vectorLen(50.0, 8.0, 0.0);
-      Vector3f      vectorRotation(0.0, 0.0, 0.0);
+      // Vector3f      vectorPosition(0, 0, 0);
+      // Vector3f      vectorLen(50.0, 8.0, 0.0);
+      // Vector3f      vectorRotation(0.0, 0.0, 0.0);
 
       // this->_assets.insert(std::pair<std::string, AObject *>("marvin", new Texture3d("libgdl/assets/marvin.fbx", vectorPosition, vectorRotation, vectorLen)));
       // this->_assets.insert(std::pair<std::string, AObject *>("walter", new Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRotation, vectorLen)));
