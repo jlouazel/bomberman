@@ -48,12 +48,12 @@ namespace BomberMan
       unsigned int			getWidth() const;
       unsigned int			getHeight() const;
       std::list<IGameComponent *> &	get(unsigned int, unsigned int);
-      Object *				getContent(unsigned int, unsigned int);
       void				addComponent(unsigned int, unsigned int, IGameComponent *);
       void				delComponent(unsigned int, unsigned int, IGameComponent *);
       void				setExplosion(unsigned int, unsigned int, int);
       void				randomize(std::list<Player *> const &);
       void				initFrame(int, int, int);
+      Wall *				getWall(unsigned int, unsigned int) const;
     };
   }
 }

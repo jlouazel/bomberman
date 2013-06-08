@@ -22,6 +22,7 @@ namespace BomberMan
       this->_sound = sound;
       this->_animation = anim;
       this->_end = false;
+      this->_content = 0;
     }
 
     Wall::~Wall()

@@ -3,7 +3,6 @@
 #include <cstdlib>
 #include <ctime>
 #include <map>
-#include "Wall.hh"
 #include "FManager.hh"
 #include "Empty.hh"
 #include "Resources.hh"
@@ -12,6 +11,7 @@
 #include "Texture3d.hpp"
 #include "Player.hh"
 #include "ObjectFactory.hh"
+#include "Wall.hh"
 
 namespace BomberMan
 {
@@ -162,15 +162,6 @@ namespace BomberMan
       return this->_map[pos];
     }
 
-    Object *			Manager::getContent(unsigned int x, unsigned int y)
-    {
-      unsigned int    pos = y * this->_width + x;
-      for(std::list<IGameComponent *>::iterator it = this->_map[pos].begin(); it != this->_map[pos].end(); ++it)
-	if (dynamic_cast<Object *>(*it) == *it)
-	  return dynamic_cast<Object *>(*it);
-      return 0;
-    }
-
     unsigned int                    Manager::getWidth() const
     {
       return this->_width;
@@ -189,7 +180,7 @@ namespace BomberMan
 	    if (dynamic_cast<Object *>(*it) == *it)
 	      return;
 	}
-      this->_map[y * this->_width + x].push_front(newComponent);
+      this->_map[y * this->_width + x].push_back(newComponent);
     }
 
     void	Manager::delComponent(unsigned int x, unsigned int y, IGameComponent *toDel)
@@ -291,7 +282,15 @@ namespace BomberMan
         }
     }
 
-#include <unistd.h>
+    Wall *			Manager::getWall(unsigned int x, unsigned int y) const
+    {
+      for (std::list<IGameComponent *>::const_iterator it = this->_map[x + y * this->_width].begin();
+    	   it != this->_map[x + y * this->_width].end(); ++it)
+    	if (dynamic_cast<Wall *>(*it) == *it && dynamic_cast<Wall *>(*it)->isBreakable() == true)
+    	  return dynamic_cast<Wall *>(*it);
+      return 0;
+    }
+
     void			Manager::randomize(std::list<Player *> const & players)
     {
       unsigned int x, y , elemCnt = 0;

@@ -7,8 +7,8 @@
 
 #include "AGameComponent.hh"
 #include "Enums.hh"
-#include "FManager.hh"
 #include "Object.hh"
+#include "FManager.hh"
 
 namespace BomberMan
 {
