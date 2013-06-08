@@ -23,6 +23,15 @@ namespace BomberMan
   }
 }
 
+
+namespace BomberMan
+{
+  namespace Field
+  {
+    class Wall;
+  }
+}
+
 namespace BomberMan
 {
   namespace Field

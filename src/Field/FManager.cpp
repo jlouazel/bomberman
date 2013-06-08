@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include <algorithm>
 #include <sys/types.h>
 #include <cstdlib>
@@ -319,25 +321,25 @@ namespace BomberMan
       	{
       	  x = rand() % this->_width;
       	  y = rand() % this->_height;
-      	  if (isThereAWallHere(this->_map[y * this->_width + x], true) == true && this->getContent(elemCnt / this->_width, elemCnt % this->_width) == 0)
+      	  if (isThereAWallHere(this->_map[y * this->_width + x], true) == true && this->getWall(elemCnt / this->_width, elemCnt % this->_width)->getContent() == 0)
       	    {
       	      switch (rand() % 4)
-      		{
-      		case 0:
-      		  factory->create(std::make_pair(BOMB, NONE));
-      		  break;
-      		case 1:
-      		  factory->create(std::make_pair(BOMB, NONE));
-      		  break;
-      		case 2:
-      		  factory->create(std::make_pair(BOMB, NONE));
-      		  break;
-      		case 3:
-      		  factory->create(std::make_pair(BOMB, NONE));
-      		  break;
-      		default:
-      		  break;
-      		}
+      	      	{
+      	      	case 0:
+      	      	  this->getWall(elemCnt / this->_width, elemCnt % this->_width)->setContent(factory->create(std::make_pair(BOMB, NONE)));
+      	      	  break;
+      	      	case 1:
+      	      	  this->getWall(elemCnt / this->_width, elemCnt % this->_width)->setContent(factory->create(std::make_pair(BOMB, NONE)));
+      	      	  break;
+      	      	case 2:
+	      	  this->getWall(elemCnt / this->_width, elemCnt % this->_width)->setContent(factory->create(std::make_pair(BOMB, NONE)));
+      	      	  break;
+      	      	case 3:
+	      	  this->getWall(elemCnt / this->_width, elemCnt % this->_width)->setContent(factory->create(std::make_pair(BOMB, NONE)));
+      	      	  break;
+      	      	default:
+      	      	  break;
+      	      	}
       	      nbBonus++;
       	    }
       }
