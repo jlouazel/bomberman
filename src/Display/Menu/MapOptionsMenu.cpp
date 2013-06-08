@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 21:25:38 2013 julien fortin
-// Last update Sat Jun  8 15:15:24 2013 julien fortin
+// Last update Sat Jun  8 15:19:27 2013 julien fortin
 //
 
 #include	"MenuManager.hh"
@@ -61,6 +61,7 @@ namespace BomberMan
       event = Event::EventManager::getEventManager()->getEvent();
       if ((action = dynamic_cast<const Event::Action*>(event)))
         {
+	  usleep(150000);
 	  MenuManager::getMenuManager()->menu(this->_hover[this->_cursor]->getMenu());
 	}
       else if ((move = dynamic_cast<const Event::Move*>(event)))
