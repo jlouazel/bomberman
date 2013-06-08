@@ -28,7 +28,6 @@ namespace BomberMan
 
     private:
       void		_initializeWindow();
-      void		_initializeResources() const;
       void		_initializeIntro();
       void		_initializeInput() const;
       void		_initializeEvent() const;

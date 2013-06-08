@@ -39,11 +39,6 @@ namespace BomberMan
       this->window_.create();
     }
 
-    void	BomberMan::_initializeResources() const
-    {
-      //Display::Resources::getResources();
-    }
-
     void	BomberMan::_initializeIntro()
     {
     }
