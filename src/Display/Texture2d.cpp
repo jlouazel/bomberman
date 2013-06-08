@@ -27,9 +27,15 @@ namespace BomberMan
 	  this->_texture = gdl::Image::load(this->stringTexture_);
         }
 
-      void	Texture2d::setPosition(Vector3f&)
+      void	Texture2d::setPosition(Vector3f& position)
       {
+	  float posX = position.getX() * WIDTH / 100;
+	  float posY = (HEIGHT - (position.getY() * HEIGHT / 100) - this->len_.getY());
+	  Vector3f newVector(posX, posY, 0);
 
+	  this->position_.setX(newVector.getX());
+	  this->position_.setY(newVector.getY());
+	  this->position_.setZ(newVector.getZ());
       }
 
       void	Texture2d::update(gdl::GameClock const &)
