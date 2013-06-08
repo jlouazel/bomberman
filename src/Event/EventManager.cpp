@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 22:23:19 2013 julien fortin
-// Last update Thu Jun  6 19:49:25 2013 julien fortin
+// Last update Fri Jun  7 08:43:10 2013 julien fortin
 //
 
 #include	<algorithm>
@@ -13,10 +13,8 @@
 #include	"UnixMutex.hh"
 #include	"EventManager.hh"
 #include	"Move.hh"
-#include	"DropBomb.hh"
+#include	"Action.hh"
 #include	"EndOfBomberMan.hh"
-
-#include	<iostream>
 
 namespace BomberMan
 {
@@ -107,7 +105,6 @@ namespace BomberMan
 	    EventManager::getEventManager()->_event.push(event);
 	  EventManager::getEventManager()->_eventListMutex->unlock();
 	}
-      //std::cout << "#" << EventManager::getEventManager()->_event.size() << "\n";
     }
 
     void		EventManager::moveEvent(EventDirection::eEventDirection direction,
@@ -118,26 +115,18 @@ namespace BomberMan
       EventManager::addEvent(new Move(context, direction, angle, run));
     }
 
-    void		EventManager::actionEvent(EventDirection::eEventDirection,
-						  float, float)
+    void		EventManager::actionEvent()
     {
-      EventContext::eEventContext	context; //Core::getContext();
-
-      if (context == EventContext::MENU)
-	{ /* VALIDATION DE MENU */ }
-      else if (context == EventContext::GAME)
-	{ /* POSAGE DE BOMB */ }
-      else
-	{ /* PENDANT UN CHARGEMENT */ }
+      EventManager::addEvent(new Action());
     }
 
     void		EventManager::gameEvent(EventDirection::eEventDirection,
 						EventType::eEventType,
 						float, float)
     {
-      EventContext::eEventContext	context; //Core::getContext();
+      //EventContext::eEventContext	context; //Core::getContext();
 
-      EventManager::addEvent(new DropBomb(context));
+      EventManager::addEvent(new Action());
     }
 
     void		EventManager::coreEvent(EventType::eEventType)

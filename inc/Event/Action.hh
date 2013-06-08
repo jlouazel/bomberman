@@ -5,11 +5,11 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 21 16:18:25 2013 julien fortin
-// Last update Thu Jun  6 19:38:13 2013 julien fortin
+// Last update Fri Jun  7 08:50:16 2013 julien fortin
 //
 
-#ifndef	__DROPBOMB_HH__
-#define	__DROPBOMB_HH__
+#ifndef	__ACTION_HH__
+#define	__ACTION_HH__
 
 #include	"AEvent.hh"
 
@@ -17,16 +17,14 @@ namespace BomberMan
 {
   namespace Event
   {
-    class DropBomb : public AEvent
+    class Action : public AEvent
     {
     private:
-      EventDirection::eEventDirection	_direction;
-
     protected:
     public:
-      DropBomb(EventContext::eEventContext);
+      Action();
 
-      virtual ~DropBomb();
+      virtual ~Action();
       virtual void			interaction() const;
     };
   }
@@ -37,7 +35,7 @@ namespace BomberMan
 {
   namespace Event
   {
-    class DropBomb;
+    class Action;
   }
 }
 

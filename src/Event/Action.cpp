@@ -5,28 +5,28 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 21 16:21:04 2013 julien fortin
-// Last update Thu Jun  6 19:36:40 2013 julien fortin
+// Last update Fri Jun  7 08:54:03 2013 julien fortin
 //
 
-#include	"DropBomb.hh"
+#include	"Action.hh"
 
 namespace BomberMan
 {
   namespace Event
   {
-    DropBomb::DropBomb(EventContext::eEventContext context)
-      : AEvent(EventCategory::MOVE,
+    Action::Action()
+      : AEvent(EventCategory::ACTION,
 	       EventContext::GAME,
-	       EventType::DROPBOMB,
+	       EventType::ACTION,
 	       EventDirection::NO, 0, 0)
     {
     }
 
-    DropBomb::~DropBomb()
+    Action::~Action()
     {
     }
 
-    void	DropBomb::interaction() const
+    void	Action::interaction() const
     {
     }
   }

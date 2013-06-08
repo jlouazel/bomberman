@@ -4,7 +4,6 @@
 #include <unistd.h>
 #include <GL/gl.h>
 #include <GL/glut.h>
-#include	"Resources.hh"
 #include "MyGame.hpp"
 #include "Texture2d.hpp"
 
@@ -14,8 +13,6 @@ namespace BomberMan
     {
         void	Texture2d::initialize()
         {
-	  // std::cout << "lalala : " << this->stringTexture_ << std::endl;
-	  std::cout << "lalal la taille : " << this->len_.getX() << std::endl;
 	  this->len_.setX((this->len_.getX() * WIDTH / 100));
 	  this->len_.setY((this->len_.getY() * HEIGHT / 100));
 	  this->len_.setZ(this->len_.getZ());
@@ -28,11 +25,11 @@ namespace BomberMan
 	  this->position_.setY(newVector.getY());
 	  this->position_.setZ(newVector.getZ());
 	  this->_texture = gdl::Image::load(this->stringTexture_);
-	  //Resources::getResources()->getImage(this->stringTexture_);
         }
 
-      void	Texture2d::update(gdl::GameClock const &)
+      void	Texture2d::update(gdl::GameClock const &gameClock)
       {
+	(void)gameClock;
       }
 
       void	Texture2d::draw(void)

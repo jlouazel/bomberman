@@ -1,8 +1,9 @@
 #ifndef __BOMBERMAN_HH__
 #define __BOMBERMAN_HH__
 
-#include <Game.hpp>
-#include "BomberGame.hh"
+#include	<Game.hpp>
+#include	"MenuEnum.hh"
+#include	"BomberGame.hh"
 
 namespace BomberMan
 {
@@ -41,11 +42,6 @@ namespace BomberMan
       void		_updateMenu();
       void		_updateGame();
 
-    private:
-      void		_startMenu();
-      void		_startGame();
-
-
     public:
       BomberMan();
       virtual ~BomberMan();
@@ -54,6 +50,9 @@ namespace BomberMan
       virtual void	update(void);
       virtual void	unload(void);
       virtual void	draw(void);
+
+      void		startGame();
+      void		startMenu(Display::MenuEnum::eMenu);
     };
   }
 }
