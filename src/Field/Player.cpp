@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 manour_m. All rights reserved.
 //
 
+#include        "SoundManager.hh"
 #include	"Action.hh"
 #include "AObject.hpp"
 #include "Texture3d.hpp"
@@ -34,8 +35,11 @@ namespace BomberMan
       this->_run = new Display::Texture3d("models/WWrunning.fbx", position, rotation, len);
       this->_mark = new Display::Texture3d("models/PlayerMark.fbx", position, rotation, len);
       this->_bomb = new Object(0.0, 0.0, new Display::Texture3d("models/ExplodingBomb.fbx", position, rotation, len), 0, 0, BOMB, NONE, 2, 3);
-      this->_camera = 0; // initialise after.
+      this->_camera = 0; // initialise after
       this->_isMoving = false;
+      this->_dead = new Display::Texture3d("models/WWdead.fbx", position, rotation, len);;
+      this->_dying = new Display::Texture3d("models/WWdying.fbx", position, rotation, len);;
+      this->_clock = new gdl::Clock();
       this->_end = false;
     }
 
@@ -77,6 +81,13 @@ namespace BomberMan
       this->_walking->setRotation(newVectorRotation);
       this->_run->setPosition(newVectorPosition);
       this->_run->setRotation(newVectorRotation);
+
+      this->_dying->setPosition(newVectorPosition);
+      this->_dying->setRotation(newVectorRotation);
+
+      this->_dead->setPosition(newVectorPosition);
+      this->_dead->setRotation(newVectorRotation);
+
       this->_mark->setPosition(newVectorPosition);
       this->_camera->setLook(newVectorPosition);
       newVectorPosition.setX(newVectorPosition.getX() + this->_camera->getDistanceX());
@@ -119,6 +130,8 @@ namespace BomberMan
       this->_mark->setColor(0, 0, 255);
       this->_camera->initialize();
       this->_bomb->initialize();
+      this->_dead->initialize();
+      this->_dying->initialize();
     }
 
     bool        Player::checkMyMove(float x, float z, Manager *manager)
@@ -158,13 +171,31 @@ namespace BomberMan
 	}
     }
 
+    void        Player::imDyingDraw()
+    {
+      static int i = 0;
+
+      if (i < 25)
+        {
+          this->_dying->draw();
+	  i++;
+        }
+      else
+	this->_dead->draw();
+    }
+
     void	Player::update(gdl::GameClock const & gameClock, Manager *manager)
     {
       // Input::Controller::KeyBoardManager::treatInput(input);
       bool	moveOk = false;
       this->checkIfILoseLife(manager);
       int i = 0;
-
+      if (this->_pv <= 0)
+      	{
+	  this->_dying->update(gameClock);
+	  this->_dead->update(gameClock);
+      	  return;
+      	}
       const Event::IEvent* event;
       while ((event = Event::EventManager::getEvent()) != NULL)
 	{
@@ -184,7 +215,7 @@ namespace BomberMan
 	      else
 		{
 		  if (this->checkMyMove(this->_asset->getPosition().getZ(), this->_asset->getPosition().getX() + x, manager) == true)
-		    this->move(x, 0, angle, manager);
+		      this->move(x, 0, angle, manager);
 		  else if (this->checkMyMove(this->_asset->getPosition().getZ() + z, this->_asset->getPosition().getX(), manager) == true)
 		    this->move(0, z, angle, manager);
 		}
@@ -204,13 +235,18 @@ namespace BomberMan
 
     void	Player::draw(gdl::GameClock const & gameClock)
     {
-      if (this->_isRunning == true)
-	this->_run->draw();
-      else if (this->_isMoving == true)
-	this->_walking->draw();
+      if (this->_pv <= 0)
+	this->imDyingDraw();
       else
-	this->_asset->draw();
-      this->_mark->draw();
+	{
+	  if (this->_isRunning == true)
+	    this->_run->draw();
+	  else if (this->_isMoving == true)
+	    this->_walking->draw();
+	  else
+	    this->_asset->draw();
+	  this->_mark->draw();
+	}
       this->_camera->update(gameClock);
     }
 
@@ -318,7 +354,10 @@ namespace BomberMan
       // animation dmg
       // std::cout << "Le player prend des degats : " << damages << std::endl;
       if (this->_pv <= 0)
-	std::cout << "J'suis mort" << std::endl;
+	{
+	  Sound::SoundManager *manager = Sound::SoundManager::getInstance();
+	  manager->playSound("resources/sounds/Dying.mp3", false);
+	}
     }
 
     void	Player::setCamera(Display::Camera *camera)
