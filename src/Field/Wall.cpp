@@ -48,7 +48,7 @@ namespace BomberMan
       this->_pv = pv;
     }
 
-    void    Wall::explode(int damages)
+    void    Wall::explode(int damages, Manager *)
     {
       if (this->_breakable == true)
 	this->_end = true;

@@ -39,7 +39,7 @@ namespace BomberMan
       int         getTimer() const;
       void	  setX(float);
       void	  setY(float);
-      void        explode(int);
+      void        explode(int, Manager *);
       void	  bombExplode(int, eDirection, Manager *);
       bool	  checkCase(int x, int y, Manager *manager);
       void  draw(gdl::GameClock const & gameClock);

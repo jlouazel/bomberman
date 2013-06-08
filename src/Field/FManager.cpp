@@ -206,7 +206,7 @@ namespace BomberMan
 	    }
 	}
       for (std::list<IGameComponent *>::iterator it = this->_map[y * this->_width + x].begin(); it != this->_map[y * this->_width + x].end(); ++it)
-	(*it)->explode(power);
+	(*it)->explode(power, this);
     }
 
     static unsigned int		getPercent(unsigned int width, unsigned int height, unsigned int nbPlayers, unsigned int percent)
@@ -249,6 +249,18 @@ namespace BomberMan
 	  if (static_cast<unsigned int>((*itPl)->getY()) == 0)
 	    eraseWall(map[width]);
       	}
+    }
+
+    void			Manager::initFrame(int x, int y, int i)
+    {
+      for (std::list<IGameComponent *>::iterator it = this->_map[y * this->_width + x].begin(); it != this->_map[y * this->_width + x].end(); ++it)
+        {
+          if (dynamic_cast<Empty *>(*it) == *it)
+            {
+              Empty *tmp = static_cast<Empty *>(*it);
+	      tmp->setFrame(i);
+            }
+        }
     }
 
     void			Manager::randomize(std::list<Player *> const & players)

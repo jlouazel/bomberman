@@ -56,6 +56,9 @@ namespace BomberMan
       this->_runningTimer += gameClock.getElapsedTime();
       if (this->_runningTimer >= this->_timer)
 	{
+	  std::cout << "Y = " << this->_y << " X = " << this->_x << std::endl;
+	  manager->setExplosion(this->_y, this->_x, 10);
+	  manager->initFrame(this->_y, this->_x, 2);
 	  this->bombExplode(this->_power, UP, manager);
 	  this->bombExplode(this->_power, RIGHT, manager);
 	  this->bombExplode(this->_power, DOWN, manager);
@@ -95,7 +98,7 @@ namespace BomberMan
       return this->_timer;
     }
 
-    void        Object::explode(int power)
+    void        Object::explode(int power, Manager *)
     {
       if (this->_object_type == BOMB)
 	this->_runningTimer = this->_timer;
@@ -127,6 +130,7 @@ namespace BomberMan
 	    	    if (this->_x + i > manager->getHeight() - 1)
 	    	      return;
 	    	    manager->setExplosion(this->_y, this->_x + i, this->_power - i);
+		    manager->initFrame(this->_y, this->_x + i, 0);
 	    	    if (this->checkCase(this->_y, this->_x + i, manager) == true)
 	    	      return;
 	    	    i++;
@@ -139,6 +143,7 @@ namespace BomberMan
 	    	    if (this->_x - i < 0)
 	    	      return;
 	    	    manager->setExplosion(this->_y, this->_x - i, this->_power - i);
+		    manager->initFrame(this->_y, this->_x - i, 1);
 	    	    if (this->checkCase(this->_y, this->_x - i, manager) == true)
 	    	      return;
 	    	    i++;
@@ -151,6 +156,7 @@ namespace BomberMan
 	    	    if (this->_y - i < 0)
 	    	      return;
 	    	    manager->setExplosion(this->_y - i, this->_x, this->_power - i);
+		    manager->initFrame(this->_y - i, this->_x, 1);
 	    	    if (this->checkCase(this->_y - i, this->_x , manager) == true)
 	    	      return;
 	    	    i++;
@@ -163,6 +169,7 @@ namespace BomberMan
 	    	    if (this->_y + i > manager->getWidth() - 1)
 	    	      return;
 	    	    manager->setExplosion(this->_y + i, this->_x, this->_power - i);
+		    manager->initFrame(this->_y + i, this->_x, 0);
 	    	    if (this->checkCase(this->_y + i, this->_x, manager) == true)
 	    	      return;
 	    	    i++;

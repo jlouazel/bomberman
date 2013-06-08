@@ -29,11 +29,12 @@ namespace BomberMan
 	  Empty(bool isGround, float x, float y, Display::AObject * asset, Display::ISound * sound, Display::IAnimation * anim);
 	  ~Empty();
 
-	  void	explode(int);
+	  void	explode(int, Manager *);
 	  void	draw(gdl::GameClock const &);
 	  void  update(gdl::GameClock const &, Manager *);
 	  bool  operator==(IGameComponent *);
 	  int	getPlayerTakeDomage() const;
+	  void	setFrame(int);
         };
     }
 }

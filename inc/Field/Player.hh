@@ -31,6 +31,7 @@ namespace BomberMan
       Display::AObject *   _walking;
       Display::AObject *   _mark;
       Display::AObject *   _run;
+      Display::AObject *   _dead;
       Display::Camera *	  _camera;
       bool	  _isMoving;
       bool        _isRunning;
@@ -51,7 +52,7 @@ namespace BomberMan
       float       getSpeed() const;
       void        setSpeed(float);
       Object *    getBomb() const;
-      void        explode(int);
+      void        explode(int, Manager *);
       int         getPv() const;
       void        setPv(int);
       void	  setCamera(Display::Camera *);

@@ -39,7 +39,7 @@ namespace BomberMan
 	this->_end = false;
 	this->_textureExplosion->initialize();
 	this->_clock = new gdl::Clock();
-	this->_frame = -1;
+	this->_frame = 0;
 	this->_playerTakeDomage = 0;
       }
 
@@ -51,17 +51,14 @@ namespace BomberMan
       {
 	if (this->_playerTakeDomage != 0)
 	  {
-	    // std::cout << "KIKOU : " << this->_frame << std::endl;
-	    this->_frame++;
-	    // std::cout << "KIKOU2 : " << this->_frame << std::endl;
-	    if (this->_frame == 0)
+	    if (this->_frame >= 1)
 	      {
-		// std::cout << "END Of kikou" << std::endl;
 		this->_playerTakeDomage = 0;
-		this->_frame = -1;
+		this->_frame = 0;
 	      }
+	    this->_frame++;
 	  }
- 	this->_asset->update(gameClock);
+	this->_asset->update(gameClock);
 	this->_clock->update();
 	if (this->_clock->getTotalElapsedTime() >= 0.93)
 	  {
@@ -81,17 +78,26 @@ namespace BomberMan
 	  this->_textureExplosion->draw();
       }
 
-      void    Empty::explode(int damages)
+      void	Empty::setFrame(int i)
       {
-	// std::cout << "EXPLOSION in X = " << this->_x << " Y = " << this->_y << std::endl;
-	this->_explosion = true;
-	this->_playerTakeDomage = damages;
-	Display::Vector3f      vectorLen(0.0, 0.0, 0.0);
-	Display::Vector3f      vectorRot(0.0, 0.0, 0.0);
-	Display::Vector3f      vectorPosition(this->_x * 220, 0.0, this->_y * 220);
-	this->_textureExplosion = new Display::Texture3d("models/SmokeExplosion.fbx", vectorPosition, vectorRot, vectorLen);
-	this->_textureExplosion->initialize();
-	this->_clock->play();
+	this->_frame = i;
+      }
+
+
+      void    Empty::explode(int damages, Manager *manager)
+      {
+	if (this->_isGround == true)
+	  {
+	    std::cout << "Empty X = " << this->_x << " Y = " << this->_y << std::endl;
+	    this->_explosion = true;
+	    this->_playerTakeDomage = damages * 10;
+	    Display::Vector3f      vectorLen(0.0, 0.0, 0.0);
+	    Display::Vector3f      vectorRot(0.0, 0.0, 0.0);
+	    Display::Vector3f      vectorPosition(this->_x * 220, 0.0, this->_y * 220);
+	    this->_textureExplosion = new Display::Texture3d("models/SmokeExplosion.fbx", vectorPosition, vectorRot, vectorLen);
+	    this->_textureExplosion->initialize();
+	    this->_clock->play();
+	  }
       }
 
       bool	Empty::operator==(IGameComponent *other)
