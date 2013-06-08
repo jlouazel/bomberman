@@ -39,6 +39,7 @@ SRCS		= $(SRC_DIR)main.cpp \
 
 SRCS_CORE	= $(SRC_DIR)$(CORE)BomberMan.cpp \
 		$(SRC_DIR)$(CORE)BomberGame.cpp \
+		$(SRC_DIR)$(CORE)BomberOptions.cpp \
 		$(SRC_DIR)$(CORE)EndOfBomberMan.cpp \
 
 SRCS_DATA	= $(SRC_DIR)$(DATAFORMAT)ADataFormat.cpp \
@@ -60,6 +61,7 @@ SRCS_MENU	= $(SRC_DIR)$(DISPLAY)$(MENU)MainMenu.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)CookMenu.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)CustomizeMenu.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)QuickGame.cpp \
+		$(SRC_DIR)$(DISPLAY)$(MENU)PauseMenu.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)MenuManager.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)Menu.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)Quit.cpp \

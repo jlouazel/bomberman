@@ -33,6 +33,7 @@ namespace BomberMan
       void		_initializeEvent() const;
       void		_initializeMenu() const;
       void		_initializeSound() const;
+      void		_initializeOptions() const;
 
       void		_drawIntro() const;
       void		_drawMenu() const;

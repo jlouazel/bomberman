@@ -1,4 +1,5 @@
 #include	"BomberMan.hh"
+#include	"BomberOptions.hh"
 #include	"EventManager.hh"
 #include	"InputManager.hh"
 #include	"MenuManager.hh"
@@ -31,6 +32,7 @@ namespace BomberMan
       this->_initializeEvent();
       this->_initializeSound();
       this->_initializeMenu();
+      this->_initializeOptions();
     }
 
     void	BomberMan::_initializeWindow()
@@ -65,6 +67,11 @@ namespace BomberMan
       Sound::SoundManager *manager = Sound::SoundManager::getInstance();
       manager->addNewSound("resources/sounds/ambianceGame.mp3");
       manager->playSound("resources/sounds/ambianceGame.mp3", true);
+    }
+
+    void	BomberMan::_initializeOptions() const
+    {
+      BomberOptions::getOptions();
     }
 
     void	BomberMan::update(void)
@@ -151,7 +158,6 @@ namespace BomberMan
       this->_intro = false;
       this->_menu = false;
       this->_game = true;
-      //get GameOption::getOptions();
       this->_currentGame = new BomberGame;
     }
   }
