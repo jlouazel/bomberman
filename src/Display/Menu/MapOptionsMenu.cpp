@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 21:25:38 2013 julien fortin
-// Last update Sat Jun  8 15:19:27 2013 julien fortin
+// Last update Sat Jun  8 15:28:23 2013 julien fortin
 //
 
 #include	"MenuManager.hh"
@@ -42,7 +42,6 @@ namespace BomberMan
       this->_hover[0] = new OngletMenu(MenuEnum::CUSTOMIZE, "back",
        				       new Texture2d("resources/images/backHover.png",
 						     vectorPosition, vectorRotation, vectorLen));
-      this->_hover[0]->initialize();
 
       this->_menu->addOnglet(this->_hover[0]);
       this->_menu->initialize();

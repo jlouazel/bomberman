@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  8 13:39:38 2013 julien fortin
-// Last update Sat Jun  8 13:47:18 2013 julien fortin
+// Last update Sat Jun  8 15:37:48 2013 julien fortin
 //
 
 #ifndef	__BOMBEROPTIONS_HH__
@@ -26,10 +26,18 @@ namespace BomberMan
     private:
       static BomberOptions*	_options;
 
+      unsigned int		_nbPlayer;
+
     protected:
     public:
       static BomberOptions*	getOptions();
       static void		deleteOptions();
+
+
+      void		setNbPlayer(unsigned int);
+
+
+      unsigned int	getNbPlayer() const;
     };
   }
 }

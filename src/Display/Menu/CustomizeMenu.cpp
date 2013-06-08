@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 21:25:38 2013 julien fortin
-// Last update Sat Jun  8 15:03:11 2013 julien fortin
+// Last update Sat Jun  8 15:40:19 2013 julien fortin
 //
 
 #include	"MenuManager.hh"
@@ -54,30 +54,20 @@ namespace BomberMan
 							vectorPositionNbPlayer, vectorRotation, vectorLenNbPlayer));
       this->_nbPlayer[1]->initialize();
 
+
+
       vectorPosition.setY(31);
-
-      newOnglet = new OngletMenu(MenuEnum::MAPOPTIONS, "mapSize",
-				 new Texture2d("resources/images/mapSize.png",
-					       vectorPosition, vectorRotation, vectorLen));
-      this->_menu->addOnglet(newOnglet);
-
-      this->_hover[1] = new OngletMenu(MenuEnum::MAPOPTIONS, "mapSize",
-				       new Texture2d("resources/images/mapSizeHover.png",
-						     vectorPosition, vectorRotation, vectorLen));
-      this->_hover[1]->initialize();
-
-      vectorPosition.setY(44);
       newOnglet = new OngletMenu(MenuEnum::NO, "numberOfComputers",
 				 new Texture2d("resources/images/numberOfComputers.png",
 					       vectorPosition, vectorRotation, vectorLen));
       this->_menu->addOnglet(newOnglet);
-      this->_hover[2] = new OngletMenu(MenuEnum::NO, "numberOfComputers",
+      this->_hover[1] = new OngletMenu(MenuEnum::NO, "numberOfComputers",
 				       new Texture2d("resources/images/numberOfComputersHover.png",
 						     vectorPosition, vectorRotation, vectorLen));
-      this->_hover[2]->initialize();
+      this->_hover[1]->initialize();
 
 
-      vectorPositionNbPlayer.setY(43);
+      vectorPositionNbPlayer.setY(30);
       vectorPositionNbPlayer.setX(65);
       this->_arrow[0] = new OngletMenu(MenuEnum::NO, "<",
 				       new Texture2d("resources/images/ChevronGauche.png",
@@ -124,6 +114,22 @@ namespace BomberMan
       for (unsigned int i = 0; i < 10; i++)
 	this->_nbIA[i]->initialize();
 
+
+
+
+
+
+      vectorPosition.setY(44);
+
+      newOnglet = new OngletMenu(MenuEnum::MAPOPTIONS, "mapSize",
+				 new Texture2d("resources/images/mapSize.png",
+					       vectorPosition, vectorRotation, vectorLen));
+      this->_menu->addOnglet(newOnglet);
+
+      this->_hover[2] = new OngletMenu(MenuEnum::MAPOPTIONS, "mapSize",
+				       new Texture2d("resources/images/mapSizeHover.png",
+						     vectorPosition, vectorRotation, vectorLen));
+      this->_hover[2]->initialize();
 
 
       vectorPosition.setY(70);
@@ -253,7 +259,7 @@ namespace BomberMan
 	    this->_cursorNbPlayer = 0;
 	  usleep(150000);
 	}
-      else if (this->_cursor == 2)
+      else if (this->_cursor == 1)
 	{
 	  if (this->_currentsIA >= LIMIT_IA)
 	    this->_currentsIA = LIMIT_IA;
@@ -273,7 +279,7 @@ namespace BomberMan
 	    this->_cursorNbPlayer = 0;
 	  usleep(150000);
 	}
-      else if (this->_cursor == 2)
+      else if (this->_cursor == 1)
 	{
 	  if ((this->_currentsIA - 1) <= 0)
 	    this->_currentsIA = 0;

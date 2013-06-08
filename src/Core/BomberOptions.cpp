@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  8 13:44:23 2013 julien fortin
-// Last update Sat Jun  8 13:49:19 2013 julien fortin
+// Last update Sat Jun  8 15:38:29 2013 julien fortin
 //
 
 #include	"EndOfBomberMan.hh"
@@ -34,10 +34,21 @@ namespace BomberMan
 
     BomberOptions::BomberOptions()
     {
+      this->_nbPlayer = 1;
     }
 
     BomberOptions::~BomberOptions()
     {
+    }
+
+    unsigned int	BomberOptions::getNbPlayer() const
+    {
+      return this->_nbPlayer;
+    }
+
+    void	BomberOptions::setNbPlayer(unsigned int n)
+    {
+      this->_nbPlayer = n;
     }
   }
 }
