@@ -161,17 +161,19 @@ namespace BomberMan
     void	Player::update(gdl::GameClock const & gameClock, Manager *manager)
     {
       // Input::Controller::KeyBoardManager::treatInput(input);
-
+      bool	moveOk = false;
       this->checkIfILoseLife(manager);
+      int i = 0;
 
-      const Event::IEvent* event = Event::EventManager::getEvent();
-      if (event != NULL)
+      const Event::IEvent* event;
+      while ((event = Event::EventManager::getEvent()) != NULL)
 	{
-	  if (dynamic_cast<const Event::Move *>(event) == event)
+	  if (dynamic_cast<const Event::Move *>(event) == event && !moveOk)
 	    {
 	      const Event::Move *move = (const Event::Move *)event;
 	      this->_isRunning = move->isRunning();
 	      this->_isMoving = true;
+	      i++;
 
 	      float       angle =  move->getAngle() * 3.14159 / 180.0;
 	      float       x = -(cosf(angle) * this->_speed);
@@ -186,12 +188,13 @@ namespace BomberMan
 		  else if (this->checkMyMove(this->_asset->getPosition().getZ() + z, this->_asset->getPosition().getX(), manager) == true)
 		    this->move(0, z, angle, manager);
 		}
+	      moveOk = true;
 	    }
 	  else if (dynamic_cast<const Event::Action *>(event) == event && this->_nb_bomb_set < this->_nb_bomb_max)
 	    this->setBomb(manager);
 	  delete event;
 	}
-      else
+      if (i == 0)
 	{
 	  this->_isMoving = false;
 	  this->_isRunning = false;
