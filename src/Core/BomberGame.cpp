@@ -132,9 +132,9 @@ namespace BomberMan
       	  for (int x = -5; x != 5; x++)
       	    {
       	      Field::Player * tmp = this->getPlayers().front();
-      	      int	real_y = static_cast<int>(((tmp->getY() - 110) / 220) + 1) + y;
-      	      int	real_x = static_cast<int>(((tmp->getX() - 110) / 220) + 1) + x;
-      	      if (real_y >= 0 && real_y < this->getManager()->Field::Manager::getHeight() && real_x >= 0 && real_x < this->getManager()->Field::Manager::getWidth())
+      	      unsigned int	real_y = static_cast<int>(((tmp->getY() - 110) / 220) + 1) + y;
+      	      unsigned int	real_x = static_cast<int>(((tmp->getX() - 110) / 220) + 1) + x;
+      	      if (real_y < this->getManager()->Field::Manager::getHeight() && real_x < this->getManager()->Field::Manager::getWidth())
       		{
       		  int	imp = 0;
       		  for (std::list<Field::IGameComponent *>::iterator it = this->getManager()->Field::Manager::get(real_y, real_x).begin(); it != this->getManager()->Field::Manager::get(real_y, real_x).end(); ++it)
@@ -157,9 +157,9 @@ namespace BomberMan
       			}
       		      else if (!imp)
       			{
-      			  this->_infos.at("floor")->setPosition(newPosition);
-      			  this->_infos.at("floor")->draw();
-      			}
+			  this->_infos.at("floor")->setPosition(newPosition);
+			  this->_infos.at("floor")->draw();
+			}
       		    }
       		}
       	    }
@@ -169,7 +169,6 @@ namespace BomberMan
       this->_infos.at("player")->setPosition(newPosition2);
       this->_infos.at("player")->draw();
       this->_infos.at("walter")->draw();
-
       switch (player->getPv())
 	{
 	case (0):
@@ -237,6 +236,8 @@ namespace BomberMan
 
     void	BomberGame::updateCamera(gdl::GameClock const & gameClock, gdl::Input & input)
     {
+      static_cast<void>(gameClock);
+      static_cast<void>(input);
       // this->_camera.update(gameClock, input);
     }
 

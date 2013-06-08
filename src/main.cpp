@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 01:21:17 2013 julien fortin
-// Last update Sat Jun  8 15:40:04 2013 julien fortin
+// Last update Sat Jun  8 15:50:51 2013 Jean-Baptiste Louazel
 //
 
 #include	<iostream>
