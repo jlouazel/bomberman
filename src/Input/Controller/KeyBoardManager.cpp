@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 21 20:26:12 2013 julien fortin
-// Last update Sat Jun  8 14:51:45 2013 julien fortin
+// Last update Sat Jun  8 18:24:48 2013 julien fortin
 //
 
 #include	"EventManager.hh"
@@ -74,11 +74,12 @@ namespace BomberMan
 	this->_mappingP2.clear();
 
 	this->_mappingP2.push_back(gdl::Keys::Up);
-	this->_mappingP2.push_back(gdl::Keys::Left);
 	this->_mappingP2.push_back(gdl::Keys::Down);
+	this->_mappingP2.push_back(gdl::Keys::Left);
 	this->_mappingP2.push_back(gdl::Keys::Right);
 	this->_mappingP2.push_back(gdl::Keys::Return);
 
+	this->_mappingP1.push_back(gdl::Keys::S);
 	if (qwerty)
 	  {
 	    this->_keys[gdl::Keys::W] = &KeyBoardManager::_up;
@@ -93,7 +94,6 @@ namespace BomberMan
 	    this->_mappingP1.push_back(gdl::Keys::Z);
 	    this->_mappingP1.push_back(gdl::Keys::Q);
 	  }
-	this->_mappingP1.push_back(gdl::Keys::S);
 	this->_mappingP1.push_back(gdl::Keys::D);
 	this->_mappingP1.push_back(gdl::Keys::Space);
       }
@@ -170,12 +170,12 @@ namespace BomberMan
 	  }
       }
 
-      void	KeyBoardManager::_left(const Field::Player* const)
+      void	KeyBoardManager::_left(const Field::Player* const player)
       {
 	if (!this->_multiples)
 	  {
 	    Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::LEFT, 270.0,
-							      this->_activeSpeed(0));
+							      this->_activeSpeed(player));
 	  }
       }
 
@@ -194,8 +194,8 @@ namespace BomberMan
 	if (!this->_multiples)
 	  {
 	    if (this->_input && (this->_input->isKeyDown(gdl::Keys::Left) ||
-				 ((this->_qwerty && ((this->_input->isKeyDown(gdl::Keys::A))
-						     || this->_input->isKeyDown(gdl::Keys::Q))))))
+                                 (((this->_qwerty && (this->_input->isKeyDown(gdl::Keys::A)))
+                                   || (!this->_qwerty && this->_input->isKeyDown(gdl::Keys::Q))))))
 	      {
 		this->_multiples = true;
 		Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::DOWN_LEFT, 315.0,

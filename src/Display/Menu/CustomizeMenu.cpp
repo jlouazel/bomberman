@@ -5,9 +5,10 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 21:25:38 2013 julien fortin
-// Last update Sat Jun  8 15:40:19 2013 julien fortin
+// Last update Sat Jun  8 15:49:06 2013 julien fortin
 //
 
+#include	"BomberOptions.hh"
 #include	"MenuManager.hh"
 #include	"Texture2d.hpp"
 #include	"Vector.hpp"
@@ -113,9 +114,6 @@ namespace BomberMan
 						    vectorPositionNbPlayer, vectorRotation, vectorIA));
       for (unsigned int i = 0; i < 10; i++)
 	this->_nbIA[i]->initialize();
-
-
-
 
 
 
@@ -254,17 +252,29 @@ namespace BomberMan
       if (this->_cursor == 0)
 	{
 	  if (this->_cursorNbPlayer == 0)
-	    this->_cursorNbPlayer = 1;
+	    {
+	      this->_cursorNbPlayer = 1;
+	      Core::BomberOptions::getOptions()->setNbPlayer(2);
+	    }
 	  else
-	    this->_cursorNbPlayer = 0;
+	    {
+	      this->_cursorNbPlayer = 0;
+	      Core::BomberOptions::getOptions()->setNbPlayer(1);
+	    }
 	  usleep(150000);
 	}
       else if (this->_cursor == 1)
 	{
 	  if (this->_currentsIA >= LIMIT_IA)
-	    this->_currentsIA = LIMIT_IA;
+	    {
+	      this->_currentsIA = LIMIT_IA;
+	      Core::BomberOptions::getOptions()->setNbIA(LIMIT_IA);
+	    }
 	  else
-	    this->_currentsIA++;
+	    {
+	      this->_currentsIA++;
+	      Core::BomberOptions::getOptions()->setNbIA(this->_currentsIA);
+	    }
 	  usleep(150000);
 	}
     }
@@ -274,17 +284,29 @@ namespace BomberMan
       if (this->_cursor == 0)
 	{
 	  if (this->_cursorNbPlayer == 0)
-	    this->_cursorNbPlayer = 1;
+	    {
+	      this->_cursorNbPlayer = 1;
+	      Core::BomberOptions::getOptions()->setNbPlayer(2);
+	    }
 	  else
-	    this->_cursorNbPlayer = 0;
+	    {
+	      this->_cursorNbPlayer = 0;
+	      Core::BomberOptions::getOptions()->setNbPlayer(1);
+	    }
 	  usleep(150000);
 	}
       else if (this->_cursor == 1)
 	{
 	  if ((this->_currentsIA - 1) <= 0)
-	    this->_currentsIA = 0;
+	    {
+	      this->_currentsIA = 0;
+	      Core::BomberOptions::getOptions()->setNbIA(0);
+	    }
 	  else
-	    this->_currentsIA--;
+	    {
+	      this->_currentsIA--;
+	      Core::BomberOptions::getOptions()->setNbIA(this->_currentsIA);
+	    }
 	  usleep(150000);
 	}
     }
