@@ -13,7 +13,14 @@ namespace BomberMan
         : x(x), y(y), z(z)
         {
         }
-        
+
+      Vector3f::Vector3f(Vector3f const &other)
+      {
+	this->x = other.x;
+	this->y = other.y;
+	this->z = other.z;
+      }
+
         float	Vector3f::getX() const
         {
             return (this->x);

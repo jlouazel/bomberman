@@ -12,6 +12,7 @@
 #include "AObject.hpp"
 #include "Texture3d.hpp"
 #include "Player.hh"
+#include "Object.hh"
 #include "ObjectFactory.hh"
 #include "Wall.hh"
 
@@ -324,27 +325,30 @@ namespace BomberMan
 	    {
 	      int r = rand() % 4;
 	      std::cout << r << std::endl;
+	      Display::Vector3f     vectorLen(tmp->getAsset()->getLen());
+	      Display::Vector3f     vectorRot(tmp->getAsset()->getRotation());
+	      Display::Vector3f     vectorPosition(tmp->getAsset()->getPosition());
 	      switch (r)
-		{
-		case 0:
-		  tmp->setContent(factory->create(std::make_pair(BOMB, NONE)));
-		  break;
-		case 1:
-		  tmp->setContent(factory->create(std::make_pair(BOMB, NONE)));
-		  break;
-		case 2:
-		  tmp->setContent(factory->create(std::make_pair(BOMB, NONE)));
-		  break;
-		case 3:
-		  tmp->setContent(factory->create(std::make_pair(BOMB, NONE)));
-		  break;
-		default:
-		  break;
-		}
+	      	{
+	      	case 0:
+	      	  tmp->setContent(new Object(x, y, new Display::Texture3d("models/PorteeBonus.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, BUFF, RANGE, 0, 0));
+	      	  break;
+	      	case 1:
+	      	  tmp->setContent(new Object(x, y, new Display::Texture3d("models/SpeedBonus.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, BUFF, SPEED, 0, 0));
+	      	  break;
+	      	case 2:
+	      	  tmp->setContent(new Object(x, y, new Display::Texture3d("models/LifeBonus.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, BUFF, LIFE, 0, 0));
+	      	  break;
+	      	case 3:
+	      	  tmp->setContent(new Object(x, y, new Display::Texture3d("models/MoreBombBonus.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, BUFF, MORE, 0, 0));
+	      	  break;
+	      	default:
+	      	  break;
+	      	}
+	      tmp->getContent()->initialize();
 	      nbBonus++;
 	    }
 	}
     }
   }
 }
-
