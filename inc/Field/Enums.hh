@@ -13,9 +13,9 @@ namespace BomberMan
 {
     namespace Field
     {
-        enum eObjectType	{ BOMB, BUFF };
-        enum eBuffType      { NONE, LIFE, SPEED, RANGE };
-        enum eDirection		{ UP, UPRIGHT, RIGHT, DOWNRIGHT, DOWN, DOWNLEFT, LEFT, UPLEFT };
+      enum eObjectType	{ BOMB, BUFF };
+      enum eBuffType    { NONE, LIFE, SPEED, RANGE, MORE };
+      enum eDirection	{ UP, UPRIGHT, RIGHT, DOWNRIGHT, DOWN, DOWNLEFT, LEFT, UPLEFT };
     }
 }
 

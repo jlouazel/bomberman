@@ -19,8 +19,8 @@ namespace BomberMan
 {
   namespace Field
   {
-    Player::Player(int pv, float speed, int max, int set, float x, float y, BomberMan::Display::AObject * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim)
-      :   _pv(pv), _speed(speed), _nb_bomb_max(max), _nb_bomb_set(set)
+    Player::Player(int id, int pv, float speed, int max, int set, float x, float y, BomberMan::Display::AObject * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim)
+      :   _id(id), _pv(pv), _speed(speed), _nb_bomb_max(max), _nb_bomb_set(set)
     {
       Display::Vector3f	position(0, 0, 0);
       Display::Vector3f	rotation(0, 0, 0);
@@ -34,13 +34,16 @@ namespace BomberMan
       this->_walking = new Display::Texture3d("models/WWwalking.fbx", position, rotation, len);
       this->_run = new Display::Texture3d("models/WWrunning.fbx", position, rotation, len);
       this->_mark = new Display::Texture3d("models/PlayerMark.fbx", position, rotation, len);
-      this->_bomb = new Object(0.0, 0.0, new Display::Texture3d("models/ExplodingBomb.fbx", position, rotation, len), 0, 0, BOMB, NONE, 2, 3);
+      this->_bomb = new Object(0.0, 0.0, new Display::Texture3d("models/ExplodingBomb.fbx", position, rotation, len), 0, 0, BOMB, NONE, 2, 3, this->_id);
       this->_camera = 0; // initialise after
       this->_isMoving = false;
       this->_dead = new Display::Texture3d("models/WWdead.fbx", position, rotation, len);;
       this->_dying = new Display::Texture3d("models/WWdying.fbx", position, rotation, len);;
       this->_clock = new gdl::Clock();
       this->_end = false;
+      this->_nbCaisseDestroyed = 0;
+      this->_nbPlayerKilled = 0;
+      this->_nbBuffTaked = 0;
     }
 
     Player::Player(Player * cpy)
@@ -67,6 +70,36 @@ namespace BomberMan
     BomberMan::Display::AObject * Player::getAsset() const
     {
       return (this->_asset);
+    }
+
+    int		Player::getNbCaisseDestroyed() const
+    {
+      return (this->_nbCaisseDestroyed);
+    }
+
+    int		Player::getNbPlayerKilled() const
+    {
+      return (this->_nbPlayerKilled);
+    }
+
+    int		Player::getNbBuffTaked() const
+    {
+      return (this->_nbBuffTaked);
+    }
+
+    void	Player::setNbCaisseDestroyed(int newInt)
+    {
+      this->_nbCaisseDestroyed = newInt;
+    }
+
+    void	Player::setNbPlayerKilled(int newInt)
+    {
+      this->_nbPlayerKilled = newInt;
+    }
+
+    void	Player::setNbBuffTaked(int newInt)
+    {
+      this->_nbBuffTaked = newInt;
     }
 
     void        Player::move(float x, float z, float angle, Manager *manager)
@@ -101,7 +134,7 @@ namespace BomberMan
       Display::Vector3f rotation(0, 0, 0);
       Display::Vector3f len(0, 0, 0);
 
-      this->_bomb =  new Object(0.0, 0.0, new Display::Texture3d("models/ExplodingBomb.fbx", position, rotation, len),0, 0, BOMB, NONE, 3, 3);
+      this->_bomb =  new Object(0.0, 0.0, new Display::Texture3d("models/ExplodingBomb.fbx", position, rotation, len),0, 0, BOMB, NONE, 3, 3, this->_id);
       this->_bomb->initialize();
     }
 
@@ -157,7 +190,6 @@ namespace BomberMan
     void	Player::checkIfILoseLife(Manager *manager)
     {
       std::list<IGameComponent *> obj = manager->get(static_cast<int>((this->_y + 110) / 220), static_cast<int>((this->_x + 110) / 220));
-      // std::cout << "Le player check en X = " << static_cast<int>((this->_y + 110) / 220) << " Y = " << static_cast<int>((this->_x + 110) / 220) << std::endl;
 
       for (std::list<IGameComponent *>::iterator it = obj.begin(); it != obj.end(); ++it)
 	{
@@ -166,7 +198,7 @@ namespace BomberMan
 	      Empty *tmp = static_cast<Empty *>(*it);
 
 	      if (tmp->getPlayerTakeDomage() > 0)
-		this->explode(tmp->getPlayerTakeDomage(), manager);
+		this->explode(tmp->getPlayerTakeDomage(), manager, tmp->getIdBomb());
 	    }
 	}
     }
@@ -293,6 +325,11 @@ namespace BomberMan
       return this->_nb_bomb_set;
     }
 
+    int		Player::getId() const
+    {
+      return (this->_id);
+    }
+
     bool	  Player::getIsMoving() const
     {
       return this->_isMoving;
@@ -348,11 +385,10 @@ namespace BomberMan
       this->_pv = pv;
     }
 
-    void        Player::explode(int damages, Manager *)
+    void        Player::explode(int damages, Manager *, int idBomb)
     {
       this->setPv(this->_pv - damages);
-      // animation dmg
-      // std::cout << "Le player prend des degats : " << damages << std::endl;
+      // annimation je prend des degats.
       if (this->_pv <= 0)
 	{
 	  Sound::SoundManager *manager = Sound::SoundManager::getInstance();
