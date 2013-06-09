@@ -434,14 +434,17 @@ namespace BomberMan
 	  this->_infos.at("bomb")->setPosition(newPosition5);
 	  this->_infos.at("bomb")->draw();
 	}
-      // gdl::Text text;
-      // text.setText("LOOOL");
-      // if (id_player == 0)
-      // 	text.setPosition(100, 1000);
-      // else if (id_player == 1)
-      // 	text.setPosition(950, 1000);
-      // text.setSize(50);
-      // text.draw();
+      gdl::Text text;
+      std::ostringstream    ostream;
+
+      ostream << player->getNbCaisseDestroyed() * 100;
+      text.setText(ostream.str());
+      if (id_player == 0)
+        text.setPosition(120, 1020);
+      else if (id_player == 1)
+        text.setPosition(1080, 1020);
+      text.setSize(50);
+      text.draw();
     }
 
     void	BomberGame::drawForPlayer3D(gdl::GameClock const & gameClock, int id_player) const
