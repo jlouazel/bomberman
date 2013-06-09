@@ -591,6 +591,7 @@ namespace BomberMan
       bals.back()->addAttribute(std::make_pair("day", intToString(now->tm_mday)));
       bals.back()->addAttribute(std::make_pair("month", intToString(now->tm_mon)));
       bals.back()->addAttribute(std::make_pair("year", intToString(now->tm_year)));
+      bals.push_back(new DataFormat::Xml::Balise("infos", DataFormat::CLOSING));
 
       bals.push_back(new DataFormat::Xml::Balise("players", DataFormat::OPENING));
       for (std::list<Field::Player *>::iterator itPl = this->_players.begin(); itPl != this->_players.end(); ++itPl)
