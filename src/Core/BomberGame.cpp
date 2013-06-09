@@ -42,7 +42,7 @@ namespace BomberMan
       Display::Vector3f      vectorRot(0.0, 0.0, 0.0);
 
       this->_players.push_front(new Field::Player(0, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
-      this->_players.push_front(new Field::Player(0, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+      this->_players.push_front(new Field::Player(1, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
 
       this->_manager->randomize(this->_players);
 
@@ -165,13 +165,9 @@ namespace BomberMan
         {
 	  id = event->getPlayerId();
 	  Field::Player *actualPlayer;
-	  // for (std::list<Field::Player *>::iterator it = this->_players.begin(); it != this->_players.end(); ++it)
-	  //   {
-	  //     std::cout << "KIKOU" << std::endl;
-	  //     if ((*it)->getId() == id)
-	  // 	actualPlayer = (*it);
-	  //   }
-	  actualPlayer = this->_players.front();
+	  for (std::list<Field::Player *>::iterator it = this->_players.begin(); it != this->_players.end(); ++it)
+	    if ((*it)->getId() == id)
+	      actualPlayer = (*it);
 	  if (dynamic_cast<const Event::Pause *>(event) == event)
 	    {
 	      std::cout << "KIKOU" << std::endl;
