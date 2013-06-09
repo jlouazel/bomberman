@@ -52,16 +52,17 @@ namespace BomberMan
       void        move(float, float, float, Manager *);
       void	  newBomb();
       void	  setBomb(Manager *);
-      void        acquireObject();
       void        run(gdl::GameClock const &);
       int         getNbBombMax() const;
       void        setNbBombMax(int);
       int         getNbBombSet() const;
       float       getSpeed() const;
+      float       getRealSpeed() const;
       void        setSpeed(float);
       Object *    getBomb() const;
       void        explode(int, Manager *, int);
       int         getPv() const;
+      int	  getPower() const;
       void        setPv(int);
       void	  setCamera(Display::Camera *);
       void	  update(gdl::GameClock const &, Manager *);

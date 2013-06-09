@@ -156,10 +156,6 @@ namespace BomberMan
       this->_clock.back()->play();
     }
 
-    void        Player::acquireObject()
-    {
-    }
-
     void	Player::initialize()
     {
       this->_asset->initialize();
@@ -204,7 +200,10 @@ namespace BomberMan
 	      Empty *tmp = static_cast<Empty *>(*it);
 
 	      if (tmp->getPlayerTakeDomage() > 0)
-		this->explode(tmp->getPlayerTakeDomage(), manager, tmp->getIdBomb());
+		{
+		  Sound::SoundManager::getInstance()->playSound("./resources/sounds/TakingDamage.mp3", false);		  
+		  this->explode(tmp->getPlayerTakeDomage(), manager, tmp->getIdBomb());
+		}
 	    }
 	  else if (dynamic_cast<Object *>(*it) == *it)
 	    {
@@ -216,6 +215,7 @@ namespace BomberMan
 		    {
 		    case LIFE :
 		      {
+			Sound::SoundManager::getInstance()->playSound("./resources/sounds/LifeBonus.mp3", false);
 			this->_pv += 20;
 			if (this->_pv > 100)
 			  this->_pv = 100;
@@ -223,19 +223,25 @@ namespace BomberMan
 		      }
 		    case SPEED :
 		      {
-			this->_realSpeed+= 10;
-			if (this->_realSpeed > 60)
-			  this->_realSpeed = 60;
+			Sound::SoundManager::getInstance()->playSound("./resources/sounds/Speedbonus.mp3", false);
+			if (this->_realSpeed == 10)
+			  this->_realSpeed += 10;
+			else
+			  this->_realSpeed += 5;
+			if (this->_realSpeed > 50)
+			  this->_realSpeed = 50;
 			break;
 		      }
 		    case RANGE :
 		      {
+			Sound::SoundManager::getInstance()->playSound("./resources/sounds/PorteeBonus.mp3", false);
 			this->_power += 1;
 			this->_bomb->setPower(this->_power);
 			break;
 		      }
 		    case MORE :
 		      {
+			Sound::SoundManager::getInstance()->playSound("./resources/sounds/MoreBombsBonus.mp3", false);
 			this->_nb_bomb_max++;
 			break;
 		      }
@@ -264,6 +270,12 @@ namespace BomberMan
       bool	moveOk = false;
       int i = 0;
 
+      if (this->_pv <= 0)
+      	{
+	  this->_dying->update(gameClock);
+	  this->_dead->update(gameClock);
+      	  return;
+      	}
       for (std::list<gdl::Clock *>::iterator it = this->_clock.begin(); it != this->_clock.end(); ++it)
 	{
 	  (*it)->update();
@@ -274,12 +286,6 @@ namespace BomberMan
 	    }
 	}
       this->checkBuff(manager);
-      if (this->_pv <= 0)
-      	{
-	  this->_dying->update(gameClock);
-	  this->_dead->update(gameClock);
-      	  return;
-      	}
       const Event::IEvent* event;
       while ((event = Event::EventManager::getEvent()) != NULL)
 	{
@@ -415,6 +421,16 @@ namespace BomberMan
     float       Player::getSpeed() const
     {
       return this->_speed;
+    }
+
+    float       Player::getRealSpeed() const
+    {
+      return this->_realSpeed;
+    }
+
+    int		Player::getPower() const
+    {
+      return this->_power;
     }
 
     void        Player::setSpeed(float speed)
