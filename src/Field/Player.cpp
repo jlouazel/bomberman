@@ -92,7 +92,7 @@ namespace BomberMan
       this->_height = height;
       this->_map = &map;
       this->_playersList = &players;
-      Unix::UnixThread(0, &_startIAThread, 0, 0);
+      Unix::UnixThread *ia = new Unix::UnixThread(0, &_startIAThread, 0, 0);
     }
 
     extern "C"
