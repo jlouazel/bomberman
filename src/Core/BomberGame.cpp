@@ -59,6 +59,7 @@ namespace BomberMan
       Display::Vector3f      vectorLen2_(20, 40, 0.0);
       Display::Vector3f      vectorPosition3_(12, 87, 0);
       Display::Vector3f      vectorLen3_(5, 10, 0.0);
+
       this->_infos["barrel"] = new Display::Texture2d("images/MMbarrel.png", vectorPosition_, vectorRot_, vectorLen_);
       this->_infos["barrel"]->initialize();
       this->_infos["wall"] = new Display::Texture2d("images/MMcuve.png", vectorPosition_, vectorRot_, vectorLen_);
@@ -99,6 +100,10 @@ namespace BomberMan
       vectorLen3_.setY(100);
       this->_infos["background"] = new Display::Texture2d("images/black.png", vectorPosition3_, vectorRot_, vectorLen3_);
       this->_infos["background"]->initialize();
+      this->_infos["lose"] = new Display::Texture2d("images/YouAreDead.png", vectorPosition3_, vectorRot_, vectorLen3_);
+      this->_infos["lose"]->initialize();
+      this->_infos["win"] = new Display::Texture2d("images/YouWin.png", vectorPosition3_, vectorRot_, vectorLen3_);
+      this->_infos["win"]->initialize();
       this->_loading = false;
     }
 
@@ -192,6 +197,10 @@ namespace BomberMan
             }
           else if (actualPlayer && dynamic_cast<const Event::Action *>(event) == event && actualPlayer->getNbBombSet() < actualPlayer->getNbBombMax() && actualPlayer->getPv() > 0)
             actualPlayer->setBomb(this->_manager);
+	  // if (actualPlayer && actualPlayer->getPv() <= 0)
+	  //   {
+	      
+	  //   }
           delete event;
         }
       for (std::list<Field::Player *>::iterator it = this->_players.begin(); it != this->_players.end(); ++it)
