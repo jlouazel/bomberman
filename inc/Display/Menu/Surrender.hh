@@ -5,37 +5,33 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 20:56:39 2013 julien fortin
-// Last update Sun Jun  9 15:43:36 2013 julien fortin
+// Last update Sun Jun  9 15:19:07 2013 julien fortin
 //
 
-#ifndef	__CREDITSMENU_HH__
-#define	__CREDITSMENU_HH__
+#ifndef	__SURRENDER_HH__
+#define	__SURRENDER_HH__
 
-#include	"Video.hpp"
+#include	<map>
 #include	"IMenu.hh"
+#include	"Menu.hpp"
 #include	"BomberMan.hh"
 
 namespace BomberMan
 {
   namespace Display
   {
-    class CreditsMenu : public IMenu
+    class Surrender : public IMenu
     {
     private:
-      CreditsMenu(CreditsMenu const&);
-      CreditsMenu	&operator=(CreditsMenu const&);
+      Surrender(Surrender const&);
+      Surrender	&operator=(Surrender const&);
 
-      Core::BomberMan* const    _core;
-      Video*	_video;
-
-      gdl::Clock*		_creditTimer;
-      int			FPS;
-      float			constElapsedTime;
+      Core::BomberMan* const	_core;
 
     protected:
     public:
-      virtual ~CreditsMenu();
-      CreditsMenu(Core::BomberMan* const);
+      virtual ~Surrender();
+      Surrender(Core::BomberMan* const);
 
       virtual void		update();
       virtual void		draw();
@@ -49,7 +45,7 @@ namespace BomberMan
 {
   namespace Display
   {
-    class CreditsMenu;
+    class Surrender;
   }
 }
 #endif

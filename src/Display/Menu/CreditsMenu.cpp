@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 21:25:38 2013 julien fortin
-// Last update Sun Jun  9 06:40:01 2013 julien fortin
+// Last update Sun Jun  9 15:42:28 2013 julien fortin
 //
 
 #include	"MenuManager.hh"
@@ -19,7 +19,7 @@ namespace BomberMan
 {
   namespace Display
   {
-    CreditsMenu::CreditsMenu()
+    CreditsMenu::CreditsMenu(Core::BomberMan* const core) : _core(core)
     {
       this->_video = new Display::Video("./resources/videos/CreditsLight.avi",
 					"./resources/sounds/CreditsLight.mp3");
@@ -49,7 +49,7 @@ namespace BomberMan
 	  if (this->_video)
 	    this->_video->stopSound();
 	  Sound::SoundManager::getInstance()->playSound("./resources/sounds/musicIntro2.mp3", true);
-	  MenuManager::getMenuManager()->menu(Display::MenuEnum::MAIN);
+	  this->_core->startMenu(Display::MenuEnum::MAIN);
         }
       this->_creditTimer->update();
     }
