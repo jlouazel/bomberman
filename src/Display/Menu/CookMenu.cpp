@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 21:25:38 2013 julien fortin
-// Last update Sun Jun  9 02:24:32 2013 julien fortin
+// Last update Sun Jun  9 16:39:11 2013 julien fortin
 //
 
 #include	"BomberOptions.hh"
@@ -31,7 +31,7 @@ namespace BomberMan
       this->_menu->initialize();
 
       Vector3f      vectorPosition(17, 0, 0);
-      Vector3f      vectorLen(65.0, 100.0, 0.0);
+      Vector3f      vectorLen(65.0, 90.0, 0.0);
       Vector3f      vectorRotation(0.0, 0.0, 0.0);
 
       this->_player[0] = new OngletMenu(MenuEnum::LOADING, "go",
