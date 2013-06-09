@@ -56,7 +56,7 @@ namespace gdl
 		///
 		/// \return The time in float.
 		////////////////////////////////////////////////////////////
-		float	getElapsedTime(void) const;
+	  float	getElapsedTime(void) const;
 
 		////////////////////////////////////////////////////////////
 		/// Return the time between now and the start of the Game.

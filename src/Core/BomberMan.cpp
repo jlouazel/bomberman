@@ -1,3 +1,5 @@
+#include	<GameClock.hpp>
+#include	"Gif.hpp"
 #include	"BomberMan.hh"
 #include	"BomberOptions.hh"
 #include	"EventManager.hh"
@@ -14,7 +16,10 @@ namespace BomberMan
       this->_intro = true;
       this->_menu = false;
       this->_game = false;
+      this->_loading = false;
       this->_currentGame = 0;
+      this->FPS = 19;
+      this->constElapsedTime = 1.0 / static_cast<float>(this->FPS);
     }
 
     BomberMan::~BomberMan()
@@ -33,6 +38,7 @@ namespace BomberMan
       this->_initializeEvent();
       this->_initializeMenu();
       this->_initializeOptions();
+      this->_initializeLoading();
     }
 
     void	BomberMan::_initializeWindow()
@@ -47,6 +53,8 @@ namespace BomberMan
     {
       this->_introVideo = new Display::Video("./resources/videos/IntroBomberLight.avi",
 				    "./resources/sounds/IntroBomberLight.mp3");
+      this->_introTimer = new gdl::Clock();
+      this->_introTimer->play();
     }
 
     void	BomberMan::_initializeEvent() const
@@ -74,11 +82,18 @@ namespace BomberMan
       BomberOptions::getOptions();
     }
 
+    void	BomberMan::_initializeLoading() const
+    {
+      Display::Gif::getGif();
+    }
+
     void	BomberMan::update(void)
     {
       Input::InputManager::getInputManager()->treatInput(this->input_);
       if (this->_intro)
 	this->_updateIntro();
+      else if (this->_loading)
+	this->_updateLoading();
       else
 	{
 	  if (this->_menu)
@@ -91,8 +106,12 @@ namespace BomberMan
 
     void	BomberMan::_updateIntro()
     {
-      if (this->_introVideo->isFinished())
-	this->startMenu(Display::MenuEnum::MAIN);
+      if (this->_introVideo->isFinished() || this->input_.isKeyDown(gdl::Keys::Escape))
+	{
+	  this->_introVideo->stopSound();
+	  Sound::SoundManager::getInstance()->playSound("./resources/sounds/musicIntro2.mp3", true);
+	  this->startMenu(Display::MenuEnum::MAIN);
+	}
     }
 
     void	BomberMan::_updateMenu()
@@ -106,6 +125,16 @@ namespace BomberMan
 	this->_currentGame->update(this->gameClock_);
     }
 
+    void	BomberMan::_updateLoading()
+    {
+      if (this->_currentGame)
+	if (this->_currentGame->isLoaded())
+	  {
+	    this->_loading = false;
+	    this->_game = true;
+	  }
+    }
+
     void	BomberMan::draw(void)
     {
       glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -114,6 +143,8 @@ namespace BomberMan
       glMatrixMode(GL_MODELVIEW);
       if (this->_intro)
 	this->_drawIntro();
+      else if (this->_loading)
+	this->_drawLoading();
       else
 	{
 	  if (this->_menu)
@@ -125,7 +156,19 @@ namespace BomberMan
 
     void	BomberMan::_drawIntro() const
     {
+      float	elapsedTime;
+
       this->_introVideo->draw();
+      this->_introTimer->update();
+      elapsedTime = this->_introTimer->getElapsedTime();
+      //      std::cout << constElapsedTime << std::endl;
+      if (elapsedTime < constElapsedTime)
+	usleep((constElapsedTime - elapsedTime) * 1000000);
+    }
+
+    void	BomberMan::_drawLoading() const
+    {
+      Display::Gif::getGif()->draw();
     }
 
     void	BomberMan::_drawMenu() const
@@ -151,6 +194,7 @@ namespace BomberMan
       this->_intro = false;
       this->_menu = true;
       this->_game = false;
+      this->_loading = false;
       Display::MenuManager::getMenuManager()->menu(menu);
     }
 
@@ -158,7 +202,8 @@ namespace BomberMan
     {
       this->_intro = false;
       this->_menu = false;
-      this->_game = true;
+      this->_game = false;
+      this->_loading = true;
       this->_currentGame = new BomberGame;//(BomberOptions::getOptions()->isQuickGame());
     }
   }

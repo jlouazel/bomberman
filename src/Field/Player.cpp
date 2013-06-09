@@ -200,7 +200,10 @@ namespace BomberMan
 	      Empty *tmp = static_cast<Empty *>(*it);
 
 	      if (tmp->getPlayerTakeDomage() > 0)
-		this->explode(tmp->getPlayerTakeDomage(), manager, tmp->getIdBomb());
+		{
+		  Sound::SoundManager::getInstance()->playSound("./resources/sounds/TakingDamage.mp3", false);		  
+		  this->explode(tmp->getPlayerTakeDomage(), manager, tmp->getIdBomb());
+		}
 	    }
 	  else if (dynamic_cast<Object *>(*it) == *it)
 	    {
@@ -212,6 +215,7 @@ namespace BomberMan
 		    {
 		    case LIFE :
 		      {
+			Sound::SoundManager::getInstance()->playSound("./resources/sounds/LifeBonus.mp3", false);
 			this->_pv += 20;
 			if (this->_pv > 100)
 			  this->_pv = 100;
@@ -219,6 +223,7 @@ namespace BomberMan
 		      }
 		    case SPEED :
 		      {
+			Sound::SoundManager::getInstance()->playSound("./resources/sounds/Speedbonus.mp3", false);
 			if (this->_realSpeed == 10)
 			  this->_realSpeed += 10;
 			else
@@ -229,12 +234,14 @@ namespace BomberMan
 		      }
 		    case RANGE :
 		      {
+			Sound::SoundManager::getInstance()->playSound("./resources/sounds/PorteeBonus.mp3", false);
 			this->_power += 1;
 			this->_bomb->setPower(this->_power);
 			break;
 		      }
 		    case MORE :
 		      {
+			Sound::SoundManager::getInstance()->playSound("./resources/sounds/MoreBombsBonus.mp3", false);
 			this->_nb_bomb_max++;
 			break;
 		      }
@@ -415,6 +422,16 @@ namespace BomberMan
     float       Player::getSpeed() const
     {
       return this->_speed;
+    }
+
+    float       Player::getRealSpeed() const
+    {
+      return this->_realSpeed;
+    }
+
+    int		Player::getPower() const
+    {
+      return this->_power;
     }
 
     void        Player::setSpeed(float speed)

@@ -24,16 +24,21 @@ namespace BomberMan
       // Object score
       // camera + bordel opengl
 
+      bool	_loading;
+
     protected:
     public:
       ~BomberGame();
       BomberGame();
+
+      bool				isLoaded() const;
 
       void				update(gdl::GameClock const&);
       void				draw(gdl::GameClock const&) const;
 
       Field::Manager*			getManager() const;
       std::list<Field::Player *>	getPlayers() const;
+      void				save();
 
       void updateCamera(gdl::GameClock const & gameClock, gdl::Input & input);
     };

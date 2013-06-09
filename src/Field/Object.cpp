@@ -1,5 +1,6 @@
 #include "Object.hh"
 #include "Wall.hh"
+#include "SoundManager.hh"
 
 namespace BomberMan
 {
@@ -58,7 +59,12 @@ namespace BomberMan
       this->_runningTimer += gameClock.getElapsedTime();
       if (this->_runningTimer >= this->_timer && this->_object_type == BOMB)
 	{
+<<<<<<< HEAD
 	  manager->setExplosion(this->_y, this->_x, this->_power, this->_idPlayer);
+=======
+	  Sound::SoundManager::getInstance()->playSound("./resources/sounds/SmokeExplosion.mp3", false);
+	  manager->setExplosion(this->_y, this->_x, this->_power);
+>>>>>>> 3f3f5c601c3d104ea20fb4381cf3ed0a70645d75
 	  manager->initFrame(this->_y, this->_x, 1);
 	  this->bombExplode(this->_power, UP, manager);
 	  this->bombExplode(this->_power, RIGHT, manager);

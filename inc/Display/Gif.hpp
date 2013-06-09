@@ -11,13 +11,21 @@ namespace BomberMan
     class Gif
     {
     private:
+      static Gif*	_gif;
+
       int			number_of_frames;
       std::list<AObject *>	_frames;
 
     public:
-      Gif(const std::string &texture_begining, Vector3f &position, Vector3f &rotation, Vector3f &len, int number_of_frames);
+      Gif(const std::string &texture_begining,
+	  Vector3f &position,
+	  Vector3f &rotation,
+	  Vector3f &len, int number_of_frames);
 
     public:
+      static Gif*	getGif();
+      static void	deleteGif();
+
       void	initialize();
       void	draw(void);
     };

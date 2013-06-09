@@ -1,5 +1,4 @@
 #include <iostream>
-
 #include <algorithm>
 #include <sys/types.h>
 #include <cstdlib>
@@ -15,6 +14,7 @@
 #include "Object.hh"
 #include "ObjectFactory.hh"
 #include "Wall.hh"
+#include "Vector.hpp"
 
 namespace BomberMan
 {
@@ -146,6 +146,7 @@ namespace BomberMan
 
       this->_map = std::vector<std::list<IGameComponent *> >(this->_width * this->_height, std::list<IGameComponent *>());
       unsigned int elemCnt = 0;
+
       for (std::vector<std::list<IGameComponent *> >::iterator it = this->_map.begin(); it != this->_map.end(); ++it)
 	this->_nbCuves += addEmptyObject(*it, this->_width, this->_height, elemCnt++);
     }

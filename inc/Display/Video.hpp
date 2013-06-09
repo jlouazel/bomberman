@@ -23,6 +23,8 @@ namespace BomberMan
     public:
       void	draw(void);
       bool	isFinished();
+
+      void	stopSound() const;
     };
   }
 }
