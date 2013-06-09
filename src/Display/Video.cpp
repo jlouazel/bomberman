@@ -41,6 +41,8 @@ namespace BomberMan
 	    glVertex2f(800, 0);
 	    glEnd();
 	  }	
+	else
+	  this->_isFinished = true;	  
       }
       
       bool	Video::isFinished()
