@@ -19,12 +19,13 @@ namespace BomberMan
       bool	_breakable;
       int	_pv;
       Object *	_content;
+      int	_whoDestroyedMe;
 
     public:
       Wall(bool breakable, int pv, float x, float y, Display::AObject * asset, Display::ISound * sound = 0, Display::IAnimation * anim = 0);
       ~Wall();
 
-      void	explode(int, Manager *);
+      void	explode(int, Manager *, int);
       int     getPv() const;
       void    setPv(int);
       void  draw(gdl::GameClock const & gameClock);
@@ -33,6 +34,7 @@ namespace BomberMan
       bool	isBreakable() const;
       Object *	getContent() const;
       void	setContent(Object *);
+      int	getWhoDestroyedMe() const;
     };
   }
 }

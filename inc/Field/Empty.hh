@@ -25,17 +25,19 @@ namespace BomberMan
 	  gdl::Clock   *_clock;
 	  int		_frame;
 	  int		_playerTakeDomage;
+	  int		_idBomb;
         public:
 	  Empty(bool isGround, float x, float y, Display::AObject * asset, Display::ISound * sound, Display::IAnimation * anim);
 	  ~Empty();
 
-	  void	explode(int, Manager *);
+	  void	explode(int, Manager *, int);
 	  void	draw(gdl::GameClock const &);
 	  void	draw2d(gdl::GameClock const &);
 	  void  update(gdl::GameClock const &, Manager *);
 	  bool  operator==(IGameComponent *);
 	  int	getPlayerTakeDomage() const;
 	  void	setFrame(int);
+	  int	getIdBomb() const;
         };
     }
 }

@@ -32,10 +32,16 @@ namespace BomberMan
       this->_clock = new gdl::Clock();
       this->_frame = 0;
       this->_playerTakeDomage = 0;
+      this->_idBomb = -1;
     }
 
     Empty::~Empty()
     {
+    }
+
+    int   Empty::getIdBomb() const
+    {
+      return (this->_idBomb);
     }
 
       void        Empty::update(gdl::GameClock const & gameClock, Manager *manager)
@@ -54,6 +60,7 @@ namespace BomberMan
 	if (this->_clock->getTotalElapsedTime() >= 0.93)
 	  {
 	    this->_explosion = false;
+	    this->_idBomb = -1;
 	    this->_clock->pause();
 	    this->_clock->reset();
 	    this->_clock->pause();
@@ -75,11 +82,12 @@ namespace BomberMan
       }
 
 
-      void    Empty::explode(int damages, Manager *manager)
+    void    Empty::explode(int damages, Manager *manager, int idBomb)
       {
 	if (this->_isGround == true)
 	  {
 	    // std::cout << "Empty X = " << this->_x << " Y = " << this->_y << std::endl;
+	    this->_idBomb = idBomb;
 	    this->_explosion = true;
 	    this->_playerTakeDomage = damages * 10;
 	    Display::Vector3f      vectorLen(0.0, 0.0, 0.0);

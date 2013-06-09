@@ -5,8 +5,8 @@ namespace BomberMan
 {
   namespace Field
   {
-    Object::Object(float x, float y, BomberMan::Display::AObject * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim, eObjectType objectType, eBuffType buffType, int power, int timer)
-      : _object_type(objectType), _buff_type(buffType), _power(power), _timer(timer)
+    Object::Object(float x, float y, BomberMan::Display::AObject * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim, eObjectType objectType, eBuffType buffType, int power, int timer, int idPlayer)
+      : _object_type(objectType), _buff_type(buffType), _power(power), _timer(timer), _idPlayer(idPlayer)
     {
       this->_x = x;
       this->_y = y;
@@ -54,11 +54,10 @@ namespace BomberMan
     {
       this->_asset->update(gameClock);
       this->_runningTimer += gameClock.getElapsedTime();
-      if (this->_runningTimer >= this->_timer)
+      if (this->_runningTimer >= this->_timer && this->_object_type == BOMB)
 	{
-	  std::cout << "Y = " << this->_y << " X = " << this->_x << std::endl;
-	  manager->setExplosion(this->_y, this->_x, 10);
-	  manager->initFrame(this->_y, this->_x, 2);
+	  manager->setExplosion(this->_y, this->_x, this->_power);
+	  manager->initFrame(this->_y, this->_x, 1);
 	  this->bombExplode(this->_power, UP, manager);
 	  this->bombExplode(this->_power, RIGHT, manager);
 	  this->bombExplode(this->_power, DOWN, manager);
@@ -98,7 +97,7 @@ namespace BomberMan
       return this->_timer;
     }
 
-    void        Object::explode(int power, Manager *)
+    void        Object::explode(int power, Manager *, int idBomb)
     {
       if (this->_object_type == BOMB)
 	this->_runningTimer = this->_timer;

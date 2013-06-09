@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 21:25:38 2013 julien fortin
-// Last update Sat Jun  8 18:22:58 2013 julien fortin
+// Last update Sun Jun  9 02:24:32 2013 julien fortin
 //
 
 #include	"BomberOptions.hh"
@@ -34,10 +34,10 @@ namespace BomberMan
       Vector3f      vectorLen(65.0, 100.0, 0.0);
       Vector3f      vectorRotation(0.0, 0.0, 0.0);
 
-      this->_player[0] = new OngletMenu(MenuEnum::QUICKGAME, "go",
+      this->_player[0] = new OngletMenu(MenuEnum::LOADING, "go",
 					new Texture2d("resources/images/WWmenu.png",
 						      vectorPosition, vectorRotation, vectorLen));
-      this->_player[1] = new OngletMenu(MenuEnum::QUICKGAME, "go",
+      this->_player[1] = new OngletMenu(MenuEnum::LOADING, "go",
 					new Texture2d("resources/images/JPmenu.png",
 						      vectorPosition, vectorRotation, vectorLen));
 
@@ -98,7 +98,10 @@ namespace BomberMan
 	    }
 	  usleep(150000);
 	  if (!this->_cursor)
-	    MenuManager::getMenuManager()->menu(this->_player[this->_current]->getMenu());
+	    {
+	      Core::BomberOptions::getOptions()->setNotQuickGame();
+	      MenuManager::getMenuManager()->menu(this->_player[this->_current]->getMenu());
+	    }
 	  else
 	    MenuManager::getMenuManager()->menu(this->_back[0]->getMenu());
 	}

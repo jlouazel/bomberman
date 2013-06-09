@@ -27,10 +27,10 @@ namespace BomberMan
     void	BomberMan::initialize()
     {
       this->_initializeWindow();
+      this->_initializeSound();
       this->_initializeIntro();
       this->_initializeInput();
       this->_initializeEvent();
-      this->_initializeSound();
       this->_initializeMenu();
       this->_initializeOptions();
     }
@@ -45,6 +45,8 @@ namespace BomberMan
 
     void	BomberMan::_initializeIntro()
     {
+      this->_introVideo = new Display::Video("./resources/videos/IntroBomberLight.avi",
+				    "./resources/sounds/IntroBomberLight.mp3");
     }
 
     void	BomberMan::_initializeEvent() const
@@ -64,7 +66,7 @@ namespace BomberMan
 
     void	BomberMan::_initializeSound() const
     {
-      Sound::SoundManager::getInstance()->playSound("resources/sounds/musicIntro2.mp3", true);
+      Sound::SoundManager::getInstance();
     }
 
     void	BomberMan::_initializeOptions() const
@@ -89,7 +91,7 @@ namespace BomberMan
 
     void	BomberMan::_updateIntro()
     {
-      if (this->_intro)
+      if (this->_introVideo->isFinished())
 	this->startMenu(Display::MenuEnum::MAIN);
     }
 
@@ -123,6 +125,7 @@ namespace BomberMan
 
     void	BomberMan::_drawIntro() const
     {
+      this->_introVideo->draw();
     }
 
     void	BomberMan::_drawMenu() const
@@ -156,7 +159,7 @@ namespace BomberMan
       this->_intro = false;
       this->_menu = false;
       this->_game = true;
-      this->_currentGame = new BomberGame;
+      this->_currentGame = new BomberGame;//(BomberOptions::getOptions()->isQuickGame());
     }
   }
 }

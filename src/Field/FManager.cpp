@@ -141,8 +141,8 @@ namespace BomberMan
       // for (; this->_width < 15 || this->_width > 100; this->_width = rand() % 100);
       // for (; this->_height < 15 || this->_height > 100; this->_height = rand() % 100);
 
-      this->_width = 4;
-      this->_height = 4;
+      this->_width = 100;
+      this->_height = 100;
 
       this->_map = std::vector<std::list<IGameComponent *> >(this->_width * this->_height, std::list<IGameComponent *>());
       unsigned int elemCnt = 0;
@@ -173,15 +173,31 @@ namespace BomberMan
       return this->_height;
     }
 
-    void	Manager::addComponent(unsigned int x, unsigned int y, IGameComponent *newComponent)
+    void			Manager::setBuffToFalse(unsigned int x, unsigned int y)
+    {
+      unsigned int    pos;
+
+      pos = y * this->_width + x;
+      for (std::list<IGameComponent *>::iterator it = this->_map[pos].begin(); it != this->_map[pos].end(); ++it)
+	if (dynamic_cast<Object *>(*it) == *it)
+	  {
+	    Field::Object *tmp = static_cast<Object *>(*it);
+
+	    if (tmp->getObjectType() == BUFF)
+	      (*it)->setEnd(true);
+	  }
+    }
+
+    bool	Manager::addComponent(unsigned int x, unsigned int y, IGameComponent *newComponent)
     {
       if (dynamic_cast<Object *>(newComponent) == newComponent)
 	{
 	  for (std::list<IGameComponent *>::iterator it = this->_map[y * this->_width + x].begin(); it != this->_map[y * this->_width + x].end(); ++it)
 	    if (dynamic_cast<Object *>(*it) == *it)
-	      return;
+	      return (false);
 	}
       this->_map[y * this->_width + x].push_back(newComponent);
+      return (true);
     }
 
     void	Manager::delComponent(unsigned int x, unsigned int y, IGameComponent *toDel)
@@ -209,7 +225,7 @@ namespace BomberMan
 	    }
 	}
       for (std::list<IGameComponent *>::iterator it = this->_map[y * this->_width + x].begin(); it != this->_map[y * this->_width + x].end(); ++it)
-	(*it)->explode(power, this);
+	(*it)->explode(power, this, -1);
     }
 
     static bool			isAPlayerHere(std::list<Player *> const & players, unsigned int x, unsigned int y)
@@ -283,10 +299,7 @@ namespace BomberMan
       for (std::list<IGameComponent *>::const_iterator it = this->_map[x + y * this->_width].begin(); it != this->_map[x + y * this->_width].end(); ++it)
 	{
 	  if (dynamic_cast<Wall *>(*it) == *it && dynamic_cast<Wall *>(*it)->isBreakable() == true)
-	    {
-	      std::cout << "OUI" << std::endl;
-	      return *it;
-	    }
+	    return *it;
 	}
       return 0;
     }
@@ -316,7 +329,7 @@ namespace BomberMan
 	  nbCases--;
       unsigned int nbBonus = 0;
       ObjectFactory * factory = new ObjectFactory;
-      while (nbBonus != static_cast<unsigned int>(hopeFullCases * (60.0 / 100.0)))
+      while (nbBonus != static_cast<unsigned int>(hopeFullCases * (70.0 / 100.0))) /* % bonus */
       	{
 	  x = rand() % this->_width;
 	  y = rand() % this->_height;
@@ -331,16 +344,16 @@ namespace BomberMan
 	      switch (r)
 	      	{
 	      	case 0:
-	      	  tmp->setContent(new Object(x, y, new Display::Texture3d("models/PorteeBonus.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, BUFF, RANGE, 0, 0));
+	      	  tmp->setContent(new Object(x, y, new Display::Texture3d("models/PorteeBonus.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, BUFF, RANGE, 0, 0, -1));
 	      	  break;
 	      	case 1:
-	      	  tmp->setContent(new Object(x, y, new Display::Texture3d("models/SpeedBonus.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, BUFF, SPEED, 0, 0));
+	      	  tmp->setContent(new Object(x, y, new Display::Texture3d("models/SpeedBonus.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, BUFF, SPEED, 0, 0, -1));
 	      	  break;
 	      	case 2:
-	      	  tmp->setContent(new Object(x, y, new Display::Texture3d("models/LifeBonus.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, BUFF, LIFE, 0, 0));
+	      	  tmp->setContent(new Object(x, y, new Display::Texture3d("models/LifeBonus.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, BUFF, LIFE, 0, 0, -1));
 	      	  break;
 	      	case 3:
-	      	  tmp->setContent(new Object(x, y, new Display::Texture3d("models/MoreBombBonus.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, BUFF, MORE, 0, 0));
+	      	  tmp->setContent(new Object(x, y, new Display::Texture3d("models/MoreBombBonus.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, BUFF, MORE, 0, 0, -1));
 	      	  break;
 	      	default:
 	      	  break;

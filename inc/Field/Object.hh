@@ -25,9 +25,10 @@ namespace BomberMan
       int             _power;
       int             _timer;
       float	      _runningTimer;
+      int	      _idPlayer;
 
     public:
-      Object(float x, float y, Display::AObject * asset, Display::ISound * sound, Display::IAnimation * anim, eObjectType, eBuffType, int, int);
+      Object(float x, float y, Display::AObject * asset, Display::ISound * sound, Display::IAnimation * anim, eObjectType, eBuffType, int, int, int);
       Object(const Object &);
       ~Object();
 
@@ -38,7 +39,7 @@ namespace BomberMan
       int         getTimer() const;
       void	  setX(float);
       void	  setY(float);
-      void        explode(int, Manager *);
+      void        explode(int, Manager *, int);
       void	  bombExplode(int, eDirection, Manager *);
       bool	  checkCase(int x, int y, Manager *manager);
       void  draw(gdl::GameClock const & gameClock);

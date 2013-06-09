@@ -23,40 +23,46 @@ namespace BomberMan
     class Player : public AGameComponent
     {
     protected:
-      int		_pv;
-      float		_speed;
-      int		_nb_bomb_max;
-      int		_nb_bomb_set;
-      Object *		_bomb;
-      gdl::Clock   *	_clock;
+      int	  _id;
+      int         _pv;
+      float       _speed;
+      float	  _realSpeed;
+      int         _nb_bomb_max;
+      int         _nb_bomb_set;
+      int	  _power;
+      Object *    _bomb;
+      std::list<gdl::Clock *>   _clock;
       Display::AObject *   _walking;
       Display::AObject *   _mark;
       Display::AObject *   _run;
-
       Display::AObject *   _dead;
       Display::AObject *   _dying;
       Display::Camera *	  _camera;
       bool	  _isMoving;
       bool        _isRunning;
+      int         _nbCaisseDestroyed;
+      int         _nbPlayerKilled;
+      int	  _nbBuffTaked;
 
     public:
-      Player(int pv, float speed, int max, int set, float x, float y, Display::AObject * asset, Display::ISound * sound, Display::IAnimation * anim);
+      Player(int id, int pv, float speed, int max, int set, float x, float y, Display::AObject * asset, Display::ISound * sound, Display::IAnimation * anim);
       Player(Player *);
       ~Player();
 
       void        move(float, float, float, Manager *);
       void	  newBomb();
       void	  setBomb(Manager *);
-      void        acquireObject();
       void        run(gdl::GameClock const &);
       int         getNbBombMax() const;
       void        setNbBombMax(int);
       int         getNbBombSet() const;
       float       getSpeed() const;
+      float       getRealSpeed() const;
       void        setSpeed(float);
       Object *    getBomb() const;
-      void        explode(int, Manager *);
+      void        explode(int, Manager *, int);
       int         getPv() const;
+      int	  getPower() const;
       void        setPv(int);
       void	  setCamera(Display::Camera *);
       void	  update(gdl::GameClock const &, Manager *);
@@ -64,7 +70,7 @@ namespace BomberMan
       void	  initialize();
       bool	  checkMyMove(float, float, Manager *);
       bool        operator==(IGameComponent *other);
-      void	  checkIfILoseLife(Manager *);
+      void	  checkBuff(Manager *);
       void	  operator=(Player &);
       void	  imDyingDraw();
       bool	  getIsMoving() const;
@@ -74,6 +80,13 @@ namespace BomberMan
       Display::Camera *	  getCamera() const;
       Display::AObject *  getWalking() const;
       Display::AObject *  getAsset() const;
+      int		  getNbBuffTaked() const;
+      int		  getNbPlayerKilled() const;
+      int		  getNbCaisseDestroyed() const;
+      void		  setNbBuffTaked(int);
+      void		  setNbPlayerKilled(int);
+      void		  setNbCaisseDestroyed(int);
+      int		  getId() const;
     };
   }
 }

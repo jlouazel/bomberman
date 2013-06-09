@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 21:25:38 2013 julien fortin
-// Last update Sat Jun  8 18:40:36 2013 julien fortin
+// Last update Sat Jun  8 21:53:29 2013 julien fortin
 //
 
 #include	"BomberOptions.hh"
@@ -212,9 +212,9 @@ namespace BomberMan
       int	f = this->_currentsIA / 10;
       int	s = this->_currentsIA % 10;
 
-      if (this->_currentsIA > 0)
+      if (this->_cursor == 1 && this->_currentsIA > 0)
 	this->_arrow[0]->affOnglet();
-      if (this->_currentsIA != LIMIT_IA)
+      if (this->_cursor == 1 && this->_currentsIA != LIMIT_IA)
 	this->_arrow[1]->affOnglet();
 
 

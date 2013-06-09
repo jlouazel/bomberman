@@ -22,7 +22,9 @@ namespace BomberMan
     public:
       virtual ~IGameComponent(){}
 
-      virtual void					explode(int, Manager *) = 0;
+      virtual void					explode(int, Manager *, int) = 0;
+      virtual bool			isEnd() const = 0;
+      virtual void        setEnd(bool) = 0;
       virtual void  draw(gdl::GameClock const &) = 0;
       virtual void  update(gdl::GameClock const &, Manager *) = 0;
 
@@ -37,7 +39,6 @@ namespace BomberMan
       virtual Display::IAnimation *	getAnimation() const = 0;
       virtual void					setAnimation(Display::IAnimation *) = 0;
       virtual bool			operator==(IGameComponent *) = 0;
-      virtual bool			isEnd() const = 0;
     };
   }
 }

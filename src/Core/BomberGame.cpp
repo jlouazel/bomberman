@@ -19,8 +19,8 @@ namespace BomberMan
   {
     BomberGame::BomberGame()
     {
-      Sound::SoundManager::getInstance()->stopSound("resources/sounds/musicIntro2.mp3");
-      Sound::SoundManager::getInstance()->playSound("resources/sounds/ambianceGame.mp3", true);
+      Sound::SoundManager::getInstance()->stopSound("./resources/sounds/musicIntro2.mp3");
+      Sound::SoundManager::getInstance()->playSound("./resources/sounds/ambianceGame.mp3", true);
 
       this->_manager = new Field::Manager;
 
@@ -33,7 +33,7 @@ namespace BomberMan
       Display::Vector3f      vectorLen(0.0, 0.0, 0.0);
       Display::Vector3f      vectorRot(0.0, 0.0, 0.0);
 
-      this->_players.push_front(new Field::Player(100, 14, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+      this->_players.push_front(new Field::Player(0, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
 
       this->_manager->randomize(this->_players);
 
@@ -107,25 +107,28 @@ namespace BomberMan
 	this->save();
       for (unsigned int y = 0; y != this->getManager()->Field::Manager::getHeight(); y++)
 	for (unsigned int x = 0; x != this->getManager()->Field::Manager::getWidth(); x++)
-	  for (std::list<Field::IGameComponent *>::iterator it = this->getManager()->Field::Manager::get(x, y).begin(); it != this->getManager()->Field::Manager::get(x, y).end(); ++it)
-	    {
-	      if ((*it)->isEnd() == true)
-		{
-		  if (dynamic_cast<Field::Wall *>(*it) == *it)
-		    {
-		      Field::Wall *actualWall = static_cast<Field::Wall *>(*it);
-		      Field::Object *buff = actualWall->getContent();
-		      if (buff)
-			{
-			  std::cout << "Je dois add un buff" << std::endl;
-			  this->_manager->addComponent(x, y, buff);
-			}
-		    }
-		  it = this->_manager->get(x, y).erase(it);
-		}
-	      else
-		updateObjs(*it, gameClock, this->_manager);
-	    }
+	  {
+	    for (std::list<Field::IGameComponent *>::iterator it = this->getManager()->Field::Manager::get(x, y).begin(); it != this->getManager()->Field::Manager::get(x, y).end(); ++it)
+	      {
+		if ((*it)->isEnd() == true)
+		  {
+		    if (dynamic_cast<Field::Wall *>(*it) == *it)
+		      {
+			Field::Wall *actualWall = static_cast<Field::Wall *>(*it);
+			Field::Object *buff = actualWall->getContent();
+			if (buff)
+			  this->_manager->get(x, y).insert(it, buff);
+			int	idPlayer = actualWall->getWhoDestroyedMe();
+			for (std::list<Field::Player *>::iterator it = this->_players.begin(); it != this->_players.end(); ++it)
+			  if ((*it)->getId() == idPlayer)
+			    (*it)->setNbCaisseDestroyed((*it)->getNbCaisseDestroyed() + 1);
+		      }
+		    it = this->_manager->get(x, y).erase(it);
+		  }
+		else
+		  updateObjs(*it, gameClock, this->_manager);
+	      }
+	  }
       updateObjs(this->getPlayers().front(), gameClock, this->_manager);
     }
 
@@ -288,10 +291,6 @@ namespace BomberMan
     {
       time_t t = time(0);
       struct tm * now = localtime(&t);
-      std::cout << (now->tm_year + 1900) << '-' 
-	   << (now->tm_mon + 1) << '-'
-	   <<  now->tm_mday
-		<< std::endl;
       static std::string extend = ".xml";
       static std::string path = ".data/.saves/";
       DataFormat::Xml xml;
@@ -322,11 +321,10 @@ namespace BomberMan
       bals.push_back(new DataFormat::Xml::Balise("infos", DataFormat::CLOSING));
 
       bals.push_back(new DataFormat::Xml::Balise("players", DataFormat::OPENING));
-      unsigned int id = 1;
       for (std::list<Field::Player *>::iterator itPl = this->_players.begin(); itPl != this->_players.end(); ++itPl)
 	{
 	  bals.push_back(new DataFormat::Xml::Balise("player", DataFormat::OPENING));
-	  bals.back()->addAttribute(std::make_pair("id", intToString(id)));
+	  bals.back()->addAttribute(std::make_pair("id", intToString((*itPl)->getId())));
 	  bals.back()->addAttribute(std::make_pair("x", intToString((*itPl)->getX())));
 	  bals.back()->addAttribute(std::make_pair("y", intToString((*itPl)->getY())));
 	  bals.push_back(new DataFormat::Xml::Balise("pv", DataFormat::OPENING));
@@ -335,12 +333,27 @@ namespace BomberMan
 	  bals.push_back(new DataFormat::Xml::Balise("speed", DataFormat::OPENING));
 	  bals.back()->setContent(intToString((*itPl)->getSpeed()));
 	  bals.push_back(new DataFormat::Xml::Balise("speed", DataFormat::CLOSING));
+	  bals.push_back(new DataFormat::Xml::Balise("realSpeed", DataFormat::OPENING));
+	  bals.back()->setContent(intToString((*itPl)->getRealSpeed()));
+	  bals.push_back(new DataFormat::Xml::Balise("realSpeed", DataFormat::CLOSING));
+	  bals.push_back(new DataFormat::Xml::Balise("power", DataFormat::OPENING));
+	  bals.back()->setContent(intToString((*itPl)->getPower()));
+	  bals.push_back(new DataFormat::Xml::Balise("power", DataFormat::CLOSING));
 	  bals.push_back(new DataFormat::Xml::Balise("bombmax", DataFormat::OPENING));
 	  bals.back()->setContent(intToString((*itPl)->getNbBombMax()));
 	  bals.push_back(new DataFormat::Xml::Balise("bombmax", DataFormat::CLOSING));
 	  bals.push_back(new DataFormat::Xml::Balise("bombset", DataFormat::OPENING));
 	  bals.back()->setContent(intToString((*itPl)->getNbBombSet()));
 	  bals.push_back(new DataFormat::Xml::Balise("bombset", DataFormat::CLOSING));
+	  bals.push_back(new DataFormat::Xml::Balise("nbCaisseDestroyed", DataFormat::OPENING));
+	  bals.back()->setContent(intToString((*itPl)->getNbCaisseDestroyed()));
+	  bals.push_back(new DataFormat::Xml::Balise("nbCaisseDestroyed", DataFormat::CLOSING));
+	  bals.push_back(new DataFormat::Xml::Balise("nbPlayerKilled", DataFormat::OPENING));
+	  bals.back()->setContent(intToString((*itPl)->getNbPlayerKilled()));
+	  bals.push_back(new DataFormat::Xml::Balise("nbPlayerKilled", DataFormat::CLOSING));
+	  bals.push_back(new DataFormat::Xml::Balise("nbBuffTaked", DataFormat::OPENING));
+	  bals.back()->setContent(intToString((*itPl)->getNbBuffTaked()));
+	  bals.push_back(new DataFormat::Xml::Balise("nbBuffTaked", DataFormat::CLOSING));
 	  bals.push_back(new DataFormat::Xml::Balise("player", DataFormat::CLOSING));
 	}
       bals.push_back(new DataFormat::Xml::Balise("players", DataFormat::CLOSING));
