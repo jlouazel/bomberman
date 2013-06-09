@@ -123,6 +123,8 @@ namespace BomberMan
     {
       if (this->_currentGame)
 	this->_currentGame->update(this->gameClock_);
+      else
+	this->startMenu(Display::MenuEnum::MAIN);
     }
 
     void	BomberMan::_updateLoading()
@@ -175,10 +177,12 @@ namespace BomberMan
       Display::MenuManager::getMenuManager()->draw();
     }
 
-    void	BomberMan::_drawGame() const
+    void	BomberMan::_drawGame()
     {
       if (this->_currentGame)
 	this->_currentGame->draw(this->gameClock_);
+      else
+	this->startMenu(Display::MenuEnum::MAIN);
     }
 
     void	BomberMan::unload(void)
@@ -203,7 +207,20 @@ namespace BomberMan
       this->_menu = false;
       this->_game = false;
       this->_loading = true;
-      this->_currentGame = new BomberGame;//(BomberOptions::getOptions()->isQuickGame());
+      this->_currentGame = new BomberGame;
+    }
+
+    void	BomberMan::resumeGame()
+    {
+      this->_intro = false;
+      this->_menu = false;
+      this->_game = true;
+      this->_loading = false;
+    }
+
+    void	BomberMan::surrender()
+    {
+      this->startMenu(Display::MenuEnum::MAIN);
     }
   }
 }

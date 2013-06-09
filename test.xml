@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <backup id="1370785955">
 <infos>
 <second>
@@ -5,6 +6,15 @@
 </second>
 <minute>
 52
+=======
+<backup id="1370784537">
+<infos>
+<second>
+57
+</second>
+<minute>
+28
+>>>>>>> c920afdfe506b053033770da6f29a483177a8243
 </minute>
 <hour>
 15
@@ -85,6 +95,7 @@
 <case x="1" y="0">
 </case>
 <case x="2" y="0">
+<<<<<<< HEAD
 </case>
 <case x="3" y="0">
 </case>
@@ -97,6 +108,10 @@
 <case x="6" y="0">
 <wall x="1">
 </wall>
+=======
+</case>
+<case x="3" y="0">
+>>>>>>> c920afdfe506b053033770da6f29a483177a8243
 </case>
 <case x="7" y="0">
 </case>
@@ -104,6 +119,7 @@
 <wall x="1">
 </wall>
 </case>
+<<<<<<< HEAD
 <case x="9" y="0">
 </case>
 <case x="10" y="0">
@@ -135,12 +151,39 @@
 </wall>
 </case>
 <case x="19" y="0">
+=======
+<case x="2" y="1">
+</case>
+<case x="3" y="1">
+<wall x="1">
+</wall>
+</case>
+<case x="0" y="2">
+</case>
+<case x="1" y="2">
+<wall x="1">
+</wall>
+</case>
+<case x="2" y="2">
+<wall x="1">
+</wall>
+</case>
+<case x="3" y="2">
+<wall x="1">
+</wall>
+>>>>>>> c920afdfe506b053033770da6f29a483177a8243
 </case>
 <case x="20" y="0">
 <wall x="1">
 </wall>
 </case>
+<<<<<<< HEAD
 <case x="21" y="0">
+=======
+<case x="1" y="3">
+<wall x="1">
+</wall>
+>>>>>>> c920afdfe506b053033770da6f29a483177a8243
 </case>
 <case x="22" y="0">
 <wall x="1">

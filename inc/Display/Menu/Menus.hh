@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 22:06:06 2013 julien fortin
-// Last update Sun Jun  9 06:31:22 2013 julien fortin
+// Last update Sun Jun  9 15:27:23 2013 julien fortin
 //
 
 #ifndef	__MENUS_HH__
@@ -21,5 +21,7 @@
 #include	"Loading.hh"
 #include	"LaunchGame.hh"
 #include	"CreditsMenu.hh"
+#include	"Resume.hh"
+#include	"Surrender.hh"
 
 #endif

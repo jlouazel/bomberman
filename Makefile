@@ -59,6 +59,8 @@ SRCS_DISPLAY	= $(SRC_DIR)$(DISPLAY)AObject.cpp \
 
 SRCS_MENU	= $(SRC_DIR)$(DISPLAY)$(MENU)MainMenu.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)NewGameMenu.cpp \
+		$(SRC_DIR)$(DISPLAY)$(MENU)Resume.cpp \
+		$(SRC_DIR)$(DISPLAY)$(MENU)Surrender.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)Loading.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)CreditsMenu.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)CookMenu.cpp \

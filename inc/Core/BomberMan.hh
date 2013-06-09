@@ -46,7 +46,7 @@ namespace BomberMan
 
       void		_drawIntro() const;
       void		_drawMenu() const;
-      void		_drawGame() const;
+      void		_drawGame();
       void		_drawLoading() const;
 
       void		_updateIntro();
@@ -63,6 +63,8 @@ namespace BomberMan
       virtual void	unload(void);
       virtual void	draw(void);
 
+      void		surrender();
+      void		resumeGame();
       void		startGame();
       void		startMenu(Display::MenuEnum::eMenu);
     };
