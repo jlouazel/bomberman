@@ -150,10 +150,13 @@ namespace BomberMan
       this->_dead->setRotation(newVectorRotation);
 
       this->_mark->setPosition(newVectorPosition);
-      this->_camera->setLook(newVectorPosition);
-      newVectorPosition.setX(newVectorPosition.getX() + this->_camera->getDistanceX());
-      newVectorPosition.setY(newVectorPosition.getY() + this->_camera->getDistanceY());
-      this->_camera->setPosition(newVectorPosition);
+      if (this->_camera)
+	{
+	  this->_camera->setLook(newVectorPosition);
+	  newVectorPosition.setX(newVectorPosition.getX() + this->_camera->getDistanceX());
+	  newVectorPosition.setY(newVectorPosition.getY() + this->_camera->getDistanceY());
+	  this->_camera->setPosition(newVectorPosition);
+	}
     }
 
     void	Player::newBomb()
@@ -188,7 +191,8 @@ namespace BomberMan
       this->_mark->initialize();
       this->_run->initialize();
       this->_mark->setColor(0, 0, 255);
-      this->_camera->initialize();
+      if (this->_camera != 0)
+	this->_camera->initialize();
       this->_bomb->initialize();
       this->_dead->initialize();
       this->_dying->initialize();
@@ -511,7 +515,8 @@ namespace BomberMan
 
     void         Player::updateCamera(gdl::GameClock const & gameClock)
     {
-      this->_camera->update(gameClock);
+      if (this->_camera)
+	this->_camera->update(gameClock);
     }
   }
 }

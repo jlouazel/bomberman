@@ -43,11 +43,17 @@ namespace BomberMan
 
       BomberOptions::getOptions()->getNbPlayer();
       BomberOptions::getOptions()->getNbIA();
+      std::cout << "Nb player : " << BomberOptions::getOptions()->getNbPlayer() << std::endl;
+      std::cout << "Nb IA : " << BomberOptions::getOptions()->getNbIA() << std::endl;
       this->_players.push_back(new Field::Player(0, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
       this->_players.back()->setCamera(new Display::Camera(BomberOptions::getOptions()->getNbPlayer()));
-      this->_players.push_back(new Field::Player(1, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
-      this->_players.back()->setCamera(new Display::Camera(BomberOptions::getOptions()->getNbPlayer()));
-
+      if (BomberOptions::getOptions()->getNbPlayer() == 2)
+	{
+	  this->_players.push_back(new Field::Player(1, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+	  this->_players.back()->setCamera(new Display::Camera(BomberOptions::getOptions()->getNbPlayer()));
+	}
+      for (unsigned int i = 1; i < BomberOptions::getOptions()->getNbIA(); i++)
+	this->_players.push_back(new Field::Player(i + 1, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
       this->_manager->randomize(this->_players);
 
       std::list<Field::Player *>::iterator it = this->_players.begin();
@@ -277,9 +283,9 @@ namespace BomberMan
       this->_infos.at("player")->setPosition(newPosition2);
       this->_infos.at("player")->draw();
 
-      // if (BomberOptions::getOptions()->getSkinForPlayer(player->getId()) == BomberOptions::WW)
-      // 	this->_infos.at("walter")->draw();
-      // else
+      if (BomberOptions::getOptions()->getSkinForPlayer(player->getId()) == BomberOptions::WW)
+      	this->_infos.at("walter")->draw();
+      else
       	this->_infos.at("jesse")->draw();
       switch (player->getPv())
       	{
