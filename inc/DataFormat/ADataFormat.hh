@@ -20,14 +20,14 @@ namespace BomberMan
 
             explicit ADataFormat(eFormat, std::string const &);
 
-        public:
-            virtual ~ADataFormat();
+	public:
+	  virtual ~ADataFormat();
 
-            eFormat					getFormat() const;
-            std::ifstream const &	getInFile() const;
-            virtual void			generate(std::string const &) const = 0;
+	  eFormat					getFormat() const;
+	  std::ifstream const &	getInFile() const;
+	  virtual void			generate(std::string const &) const = 0;
 
-            std::map<int, std::string const> const &	getContent() const;
+	  std::map<int, std::string const> const &	getContent() const;
         };
     }
 }

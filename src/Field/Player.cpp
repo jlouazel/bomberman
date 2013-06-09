@@ -416,6 +416,16 @@ namespace BomberMan
       return this->_speed;
     }
 
+    float       Player::getRealSpeed() const
+    {
+      return this->_realSpeed;
+    }
+
+    int		Player::getPower() const
+    {
+      return this->_power;
+    }
+
     void        Player::setSpeed(float speed)
     {
       this->_speed = speed;
