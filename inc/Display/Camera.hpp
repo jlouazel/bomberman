@@ -20,9 +20,10 @@ namespace BomberMan
       int	heightScreen_;
       int	distanceX;
       int	distanceY;
+      int	_config;
 
     public:
-      Camera(void);
+      Camera(int);
 
       Vector3f	getPosition() const;
       Vector3f	getRotation() const;
@@ -36,7 +37,7 @@ namespace BomberMan
       void		setRotation(Vector3f &);
       void		setLook(Vector3f &);
       void		setAngle(float);
-      void		initialize(void);
+      void		initialize();
       void		update(gdl::GameClock const &);
     };
   }

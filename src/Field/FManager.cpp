@@ -23,7 +23,7 @@ namespace BomberMan
     static std::string const	randomiseDecor()
     {
       unsigned int r = rand() % 100;
-      if (r >= 0 && r <= 2)
+      if (r > 0 && r <= 2)
 	return "models/Wall3bis1.fbx";
       else
 	if (r >= 3 && r <= 15)
@@ -230,7 +230,7 @@ namespace BomberMan
       	}
     }
 
-    void	Manager::setExplosion(unsigned int x, unsigned int y, int power)
+    void	Manager::setExplosion(unsigned int x, unsigned int y, int power, int idBomb)
     {
       for (std::list<IGameComponent *>::iterator it = this->_map[y * this->_width + x].begin(); it != this->_map[y * this->_width + x].end(); ++it)
 	{
@@ -242,7 +242,7 @@ namespace BomberMan
 	    }
 	}
       for (std::list<IGameComponent *>::iterator it = this->_map[y * this->_width + x].begin(); it != this->_map[y * this->_width + x].end(); ++it)
-	(*it)->explode(power, this, -1);
+	(*it)->explode(power, this, idBomb);
     }
 
     static bool			isAPlayerHere(std::list<Player *> const & players, unsigned int x, unsigned int y)
@@ -274,7 +274,7 @@ namespace BomberMan
       return false;
     }
 
-    static unsigned int	createPlaceForPlayer(std::vector<std::list<IGameComponent *> >	& map, std::list<Player *> const & players, unsigned int width, unsigned int height)
+    static unsigned int	createPlaceForPlayer(std::vector<std::list<IGameComponent *> >	& map, std::list<Player *> const & players, unsigned int width, unsigned int)
     {
       unsigned int n = 0;
       for (std::list<Player *>::const_iterator itPl = players.begin(); itPl != players.end(); ++itPl)
@@ -309,6 +309,11 @@ namespace BomberMan
 	      tmp->setFrame(i);
             }
         }
+    }
+
+    const std::vector<std::list<IGameComponent *> >	&Manager::getMap() const
+    {
+      return this->_map;
     }
 
     IGameComponent * Manager::getWall(unsigned int x, unsigned int y) const
@@ -353,7 +358,6 @@ namespace BomberMan
 	  if (tmp && tmp->getContent() == 0)
 	    {
 	      int r = rand() % 4;
-	      std::cout << r << std::endl;
 	      Display::Vector3f     vectorLen(tmp->getAsset()->getLen());
 	      Display::Vector3f     vectorRot(tmp->getAsset()->getRotation());
 	      Display::Vector3f     vectorPosition(tmp->getAsset()->getPosition());

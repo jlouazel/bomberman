@@ -86,9 +86,8 @@ namespace BomberMan
     bool    Texture3d::anim_is_ended() const
     {
       bool res;
-      std::cout << "KIKOU1" << std::endl;
+
       res = this->model_.anim_is_ended("Take 001");
-      std::cout << "KIKOU2" << std::endl;
       return (res);
     }
   }

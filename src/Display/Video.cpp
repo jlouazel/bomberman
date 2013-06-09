@@ -10,6 +10,7 @@ namespace BomberMan
       {
 	this->_isFinished = false;
 	this->_sound = associated_sound;
+	this->_playSound = true;
 	this->_flux = cvCaptureFromAVI(video.c_str());
 	if (!this->_flux)
 	  this->_isFinished = true;
@@ -17,12 +18,10 @@ namespace BomberMan
 
       void	Video::draw(void)
       {
-	static int	i = 0;
-
-	if (i == 0)
+	if (this->_playSound)
 	  {
 	    Sound::SoundManager::getInstance()->playSound(this->_sound, false);
-	    i = 1;
+	    this->_playSound = false;
 	  }
 	if (cvGrabFrame(this->_flux))
 	  {

@@ -24,7 +24,6 @@ namespace BomberMan
       static EventManager*	_eventManager;
 
       std::queue<const IEvent*>	_event;
-      std::queue<const IEvent*>	_eventMenu;
       BomberMan::Unix::IMutex*	_eventListMutex;
       bool			_menuMode;
 
@@ -32,22 +31,16 @@ namespace BomberMan
     public:
       ~EventManager();
       EventManager();
-
-      static void			setMenuMode(bool);
-
       static const IEvent*		getEvent();
       static EventManager*		getEventManager();
       static void			deleteEventManager();
 
       static void			addEvent(const IEvent*);
 
-      void			actionEvent();
+      void			actionEvent(int);
       void			moveEvent(EventDirection::eEventDirection,
-						  float, bool);
-      void			gameEvent(EventDirection::eEventDirection,
-						  EventType::eEventType,
-						  float, float);
-      void			coreEvent(EventType::eEventType);
+					  float, bool, int);
+      void			pauseEvent();
       void			cleanEvent();
     };
   }
@@ -61,5 +54,4 @@ namespace BomberMan
     class EventManager;
   }
 }
-
 #endif

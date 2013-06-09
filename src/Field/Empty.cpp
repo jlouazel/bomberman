@@ -44,49 +44,52 @@ namespace BomberMan
       return (this->_idBomb);
     }
 
-      void        Empty::update(gdl::GameClock const & gameClock, Manager *manager)
-      {
-	if (this->_playerTakeDomage != 0)
-	  {
-	    if (this->_frame >= 1)
-	      {
-		this->_playerTakeDomage = 0;
-		this->_frame = 0;
-	      }
-	    this->_frame++;
-	  }
-	this->_asset->update(gameClock);
-	this->_clock->update();
-	if (this->_clock->getTotalElapsedTime() >= 0.93)
-	  {
-	    this->_explosion = false;
-	    this->_idBomb = -1;
-	    this->_clock->pause();
-	    this->_clock->reset();
-	    this->_clock->pause();
-	  }
-	if (this->_explosion == true)
-	  this->_textureExplosion->update(gameClock);
-      }
+    void        Empty::update(gdl::GameClock const & gameClock, Manager *)
+    {
+      if (this->_playerTakeDomage != 0)
+	{
+	  if (this->_frame >= 1)
+	    {
+	      this->_playerTakeDomage = 0;
+	      this->_frame = 0;
+	    }
+	  this->_frame++;
+	}
+      this->_asset->update(gameClock);
+      this->_clock->update();
+      if (this->_clock->getTotalElapsedTime() >= 0.93)
+	{
+	  this->_explosion = false;
+	  this->_idBomb = -1;
+	  this->_clock->pause();
+	  this->_clock->reset();
+	  this->_clock->pause();
+	}
+      if (this->_explosion == true)
+	this->_textureExplosion->update(gameClock);
+    }
 
-    void        Empty::draw(gdl::GameClock const & gameClock)
+    void        Empty::draw(gdl::GameClock const &)
     {
       this->_asset->draw();
       if (this->_explosion == true)
 	this->_textureExplosion->draw();
     }
 
-      void	Empty::setFrame(int i)
-      {
-	this->_frame = i;
-      }
+    void	Empty::setFrame(int i)
+    {
+      this->_frame = i;
+    }
 
+    void	Empty::setIdBomb(int i)
+    {
+      this->_idBomb = i;
+    }
 
-    void    Empty::explode(int damages, Manager *manager, int idBomb)
+    void    Empty::explode(int damages, Manager *, int idBomb)
       {
 	if (this->_isGround == true)
 	  {
-	    // std::cout << "Empty X = " << this->_x << " Y = " << this->_y << std::endl;
 	    this->_idBomb = idBomb;
 	    this->_explosion = true;
 	    this->_playerTakeDomage = damages * 10;

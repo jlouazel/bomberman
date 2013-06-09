@@ -18,6 +18,12 @@ namespace BomberMan
       this->addNewSound("./resources/sounds/musicIntro2.mp3");
       this->addNewSound("./resources/sounds/IntroBomberLight.mp3");
       this->addNewSound("./resources/sounds/CreditsLight.mp3");
+      this->addNewSound("./resources/sounds/TakingDamage.mp3");
+      this->addNewSound("./resources/sounds/LifeBonus.mp3");
+      this->addNewSound("./resources/sounds/MoreBombsBonus.mp3");
+      this->addNewSound("./resources/sounds/PorteeBonus.mp3");
+      this->addNewSound("./resources/sounds/Speedbonus.mp3");
+      this->addNewSound("./resources/sounds/SmokeExplosion.mp3");
     }
 
     SoundManager	*SoundManager::getInstance()

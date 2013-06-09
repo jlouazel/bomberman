@@ -5,9 +5,10 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 21:25:38 2013 julien fortin
-// Last update Sun Jun  9 02:30:20 2013 julien fortin
+// Last update Sun Jun  9 15:26:43 2013 julien fortin
 //
 
+#include	"Gif.hpp"
 #include	"MenuManager.hh"
 #include	"Texture2d.hpp"
 #include	"Vector.hpp"
@@ -38,11 +39,12 @@ namespace BomberMan
 
     void	LaunchGame::draw()
     {
+      Gif::getGif()->draw();
     }
 
     MenuEnum::eMenu	LaunchGame::getType() const
     {
-      return MenuEnum::NEWGAME;
+      return MenuEnum::LAUNCHGAME;
     }
   }
 }

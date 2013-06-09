@@ -9,22 +9,33 @@ namespace BomberMan
 {
   namespace Display
   {
-    Camera::Camera(void)
-      : position_(-500.0f, 900.0f, 0.0f), rotation_(0.0f, 0.0f, 0.0f), look_(0.0f, 0.0f, 0.0f)
+    Camera::Camera(int config)
+      : position_(-180.0f, 420.0f, 0.0f), rotation_(0.0f, 0.0f, 0.0f), look_(0.0f, 0.0f, 0.0f)
     {
-      this->angle_ = 3.14159265359 * 50.0 / 180.0;
       this->heightScreen_ = (int)(((tanf(this->angle_ / 2.0) * 300.0) * 2.0));
       this->widthScreen_ = (int)(((tanf(this->angle_ / 2.0) * 300.0) * 2.0));
+      this->_config = config;
+      if (this->_config == 1)
+      	{
+	  this->position_.setX(-200);
+	  this->position_.setY(520);
+	  this->angle_ = 3.14159265359 * 80.0 / 180.0;
+      	}
+      else
+      	{
+	  this->position_.setX(-180);
+	  this->position_.setY(420);
+	  this->angle_ = 3.14159265359 * 80.0 / 180.0;
+	}
       this->distanceX = position_.getX();
       this->distanceY = position_.getY();
     }
 
-    void		Camera::initialize(void)
+    void		Camera::initialize()
     {
       glMatrixMode(GL_PROJECTION);
       glLoadIdentity();
-      std::cout << "ANGLE : " << this->angle_ << std::endl;
-      gluPerspective((this->angle_ * 180.0) / 3.14159265359, (WIDTH / 2)/HEIGHT, 1.0f, 10000.0f);
+      gluPerspective((this->angle_ * 180) / 3.14159265359, WIDTH/HEIGHT, 1.0f, 10000.0f);
       gluLookAt(position_.getX(), position_.getY(), position_.getZ(),
 		this->look_.getX(), this->look_.getY(), this->look_.getZ(),
 		0.0f, 1.0f, 0.0f);

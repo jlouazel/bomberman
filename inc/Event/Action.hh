@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 21 16:18:25 2013 julien fortin
-// Last update Fri Jun  7 08:50:16 2013 julien fortin
+// Last update Sun Jun  9 14:15:49 2013 julien fortin
 //
 
 #ifndef	__ACTION_HH__
@@ -22,7 +22,7 @@ namespace BomberMan
     private:
     protected:
     public:
-      Action();
+      Action(int);
 
       virtual ~Action();
       virtual void			interaction() const;

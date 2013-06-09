@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 21 16:21:04 2013 julien fortin
-// Last update Wed Jun  5 01:03:50 2013 julien fortin
+// Last update Sun Jun  9 13:55:04 2013 julien fortin
 //
 
 #include	"Move.hh"
@@ -16,11 +16,11 @@ namespace BomberMan
   {
     Move::Move(EventContext::eEventContext context,
 	       EventDirection::eEventDirection direction,
-	       float angle, bool run)
+	       float angle, bool run, int playerId)
       : AEvent(EventCategory::MOVE,
 	       context,
 	       EventType::MOVE,
-	       direction, 0, 0)
+	       direction, 0, 0, playerId)
     {
       this->_angle = angle;
       this->_run = run;

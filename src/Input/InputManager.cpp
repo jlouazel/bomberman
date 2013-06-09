@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 22:20:00 2013 julien fortin
-// Last update Sun Jun  9 04:13:04 2013 julien fortin
+// Last update Sun Jun  9 18:18:02 2013 Happy
 //
 
 #include	<string>
@@ -170,7 +170,6 @@ namespace BomberMan
 	{
 	  if (*it)
 	    {
-	      std::cout << "DETACHLOL\n";
 	      //REVENT REMOVE CONTROLLER
 	      this->_controller.remove(*it);
 	      delete *it;

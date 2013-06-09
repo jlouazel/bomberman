@@ -6,6 +6,9 @@
 //  Copyright (c) 2013 manour_m. All rights reserved.
 //
 
+#include	"UnixThread.hh"
+#include	<math.h>
+#include	<unistd.h>
 #include        "SoundManager.hh"
 #include	"Action.hh"
 #include "AObject.hpp"
@@ -14,6 +17,8 @@
 #include "Vector.hpp"
 #include "Wall.hh"
 #include "Empty.hh"
+
+#define	ABS(x) (x > 0 ? (x) : (-x))
 
 namespace BomberMan
 {
@@ -46,6 +51,8 @@ namespace BomberMan
       this->_nbBuffTaked = 0;
       this->_realSpeed = speed;
       this->_nb_bomb_set = 0;
+      this->_moveOk = false;
+      this->_realDead = false;
     }
 
     Player::Player(Player * cpy)
@@ -67,6 +74,55 @@ namespace BomberMan
     Player::~Player()
     {
       delete this->_bomb;
+    }
+
+    void         Player::goThere(float my_x, float my_y, float to_x, float to_y) const
+    {
+      float     angle;
+
+      angle = atan(ABS(to_y - my_y) / ABS(to_x - my_x)) * 180 / M_PI;
+      Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::NO, (static_cast<int>(angle) + 90) % 360, true, this->_id);
+    }
+
+    static Player* _player = 0;
+
+    void        Player::startIA(int width, int height, const std::vector<std::list<IGameComponent *> > &map, const std::list<Player *> &players)
+    {
+      _player = this;
+      this->_width = width;
+      this->_height = height;
+      this->_map = &map;
+      this->_playersList = &players;
+      Unix::UnixThread *ia = new Unix::UnixThread(0, &_startIAThread, 0, 0);
+    }
+
+    extern "C"
+    {
+      void*     _startIAThread(void*)
+      {
+	if (_player)
+	  _player->launchIA();
+        return 0;
+      }
+    }
+
+    void	Player::launchIA() const
+    {
+      int	width = this->_width, height = this->_height;
+      const std::vector<std::list<IGameComponent *> >	*map = this->_map;
+      const std::list<Player *>				*players = this->_playersList;
+
+      while (!this->_end)
+        {
+          goThere(this->_x, this->_y, players->front()->getX(), players->front()->getY());
+	  usleep(5000);
+	  //          if (!isInBombRow(width, height, map, my_x, my_y))
+	  //     if (!betterTakeBuff(width, height, map))
+	  //      if (!shouldGetCloserToKill(width, height, map))
+	  //        Event::EventManager::getEventManager()->actionEvent(this->_currentPlayerId);
+        }
+      int	return_value = 0;
+      pthread_exit(static_cast<void *>(&return_value));
     }
 
     BomberMan::Display::AObject * Player::getAsset() const
@@ -104,7 +160,7 @@ namespace BomberMan
       this->_nbBuffTaked = newInt;
     }
 
-    void        Player::move(float x, float z, float angle, Manager *manager)
+    void        Player::move(float x, float z, float angle, Manager *)
     {
       this->_x = this->_asset->getPosition().getX() + x;
       this->_y = this->_asset->getPosition().getZ() + z;
@@ -124,10 +180,13 @@ namespace BomberMan
       this->_dead->setRotation(newVectorRotation);
 
       this->_mark->setPosition(newVectorPosition);
-      this->_camera->setLook(newVectorPosition);
-      newVectorPosition.setX(newVectorPosition.getX() + this->_camera->getDistanceX());
-      newVectorPosition.setY(newVectorPosition.getY() + this->_camera->getDistanceY());
-      this->_camera->setPosition(newVectorPosition);
+      if (this->_camera)
+	{
+	  this->_camera->setLook(newVectorPosition);
+	  newVectorPosition.setX(newVectorPosition.getX() + this->_camera->getDistanceX());
+	  newVectorPosition.setY(newVectorPosition.getY() + this->_camera->getDistanceY());
+	  this->_camera->setPosition(newVectorPosition);
+	}
     }
 
     void	Player::newBomb()
@@ -146,7 +205,6 @@ namespace BomberMan
       int	Y = (this->_y + 110) / 220;
       IGameComponent *toadd(this->_bomb);
 
-      std::cout << "Je pose une bombe haha" << std::endl;
       this->newBomb();
       toadd->setX(X);
       toadd->setY(Y);
@@ -163,7 +221,8 @@ namespace BomberMan
       this->_mark->initialize();
       this->_run->initialize();
       this->_mark->setColor(0, 0, 255);
-      this->_camera->initialize();
+      if (this->_camera != 0)
+	this->_camera->initialize();
       this->_bomb->initialize();
       this->_dead->initialize();
       this->_dying->initialize();
@@ -174,8 +233,8 @@ namespace BomberMan
       if ((x + 110 - 20) / 220 < 0 || (x + 110 + 20) / 220 > (manager->getWidth()) ||
 	  (z + 110 - 20) / 220 < 0 || (z + 110 + 20) / 220 > (manager->getHeight()))
 	return (false);
-      for (int y = 0; y < manager->getHeight(); y++)
-	for (int X = 0; X < manager->getWidth(); X++)
+      for (unsigned int y = 0; y < manager->getHeight(); y++)
+	for (unsigned int X = 0; X < manager->getWidth(); X++)
 	  {
 	    std::list<IGameComponent *> obj = manager->get(X, y);
 
@@ -200,7 +259,10 @@ namespace BomberMan
 	      Empty *tmp = static_cast<Empty *>(*it);
 
 	      if (tmp->getPlayerTakeDomage() > 0)
-		this->explode(tmp->getPlayerTakeDomage(), manager, tmp->getIdBomb());
+		{
+		  Sound::SoundManager::getInstance()->playSound("./resources/sounds/TakingDamage.mp3", false);
+		  this->explode(tmp->getPlayerTakeDomage(), manager, tmp->getIdBomb());
+		}
 	    }
 	  else if (dynamic_cast<Object *>(*it) == *it)
 	    {
@@ -212,6 +274,7 @@ namespace BomberMan
 		    {
 		    case LIFE :
 		      {
+			Sound::SoundManager::getInstance()->playSound("./resources/sounds/LifeBonus.mp3", false);
 			this->_pv += 20;
 			if (this->_pv > 100)
 			  this->_pv = 100;
@@ -219,6 +282,7 @@ namespace BomberMan
 		      }
 		    case SPEED :
 		      {
+			Sound::SoundManager::getInstance()->playSound("./resources/sounds/Speedbonus.mp3", false);
 			if (this->_realSpeed == 10)
 			  this->_realSpeed += 10;
 			else
@@ -229,15 +293,19 @@ namespace BomberMan
 		      }
 		    case RANGE :
 		      {
+			Sound::SoundManager::getInstance()->playSound("./resources/sounds/PorteeBonus.mp3", false);
 			this->_power += 1;
 			this->_bomb->setPower(this->_power);
 			break;
 		      }
 		    case MORE :
 		      {
+			Sound::SoundManager::getInstance()->playSound("./resources/sounds/MoreBombsBonus.mp3", false);
 			this->_nb_bomb_max++;
 			break;
 		      }
+		    case NONE:
+		      break;
 		    }
 		  manager->setBuffToFalse(static_cast<int>((this->_y + 110) / 220), static_cast<int>((this->_x + 110) / 220));
 		}
@@ -255,14 +323,19 @@ namespace BomberMan
 	  i++;
         }
       else
-	this->_dead->draw();
+	{
+	  this->_dead->draw();
+	  this->_realDead = true;
+	}
+    }
+
+    bool	Player::getRealDead() const
+    {
+      return (this->_realDead);
     }
 
     void	Player::update(gdl::GameClock const & gameClock, Manager *manager)
     {
-      bool	moveOk = false;
-      int i = 0;
-
       if (this->_pv <= 0)
       	{
 	  this->_dying->update(gameClock);
@@ -279,44 +352,10 @@ namespace BomberMan
 	    }
 	}
       this->checkBuff(manager);
-      const Event::IEvent* event;
-      while ((event = Event::EventManager::getEvent()) != NULL)
-	{
-	  if (dynamic_cast<const Event::Move *>(event) == event && !moveOk)
-	    {
-	      const Event::Move *move = (const Event::Move *)event;
-	      this->_isRunning = move->isRunning();
-	      this->_isMoving = true;
-	      i++;
-
-	      float       angle =  move->getAngle() * 3.14159 / 180.0;
-	      float       x = -(cosf(angle) * this->_speed);
-	      float       z = sinf(angle) * this->_speed;
-
-	      if (this->checkMyMove(this->_asset->getPosition().getZ() + z, this->_asset->getPosition().getX() + x, manager) == true)
-		this->move(x, z, angle, manager);
-	      else
-		{
-		  if (this->checkMyMove(this->_asset->getPosition().getZ(), this->_asset->getPosition().getX() + x, manager) == true)
-		      this->move(x, 0, angle, manager);
-		  else if (this->checkMyMove(this->_asset->getPosition().getZ() + z, this->_asset->getPosition().getX(), manager) == true)
-		    this->move(0, z, angle, manager);
-		}
-	      moveOk = true;
-	    }
-	  else if (dynamic_cast<const Event::Action *>(event) == event && this->_nb_bomb_set < this->_nb_bomb_max)
-	    this->setBomb(manager);
-	  delete event;
-	}
-      if (i == 0)
-	{
-	  this->_isMoving = false;
-	  this->_isRunning = false;
-	}
       this->run(gameClock);
     }
 
-    void	Player::draw(gdl::GameClock const & gameClock)
+    void	Player::draw(gdl::GameClock const &)
     {
       if (this->_pv <= 0)
 	this->imDyingDraw();
@@ -330,7 +369,17 @@ namespace BomberMan
 	    this->_asset->draw();
 	  this->_mark->draw();
 	}
-      this->_camera->update(gameClock);
+      this->_moveOk = false;
+    }
+
+    void	Player::setMoveOk(bool cond)
+    {
+      this->_moveOk = cond;
+    }
+
+    bool	Player::getMoveOk() const
+    {
+      return (this->_moveOk);
     }
 
     void        Player::run(gdl::GameClock const &gameClock)
@@ -391,6 +440,16 @@ namespace BomberMan
       return this->_isMoving;
     }
 
+    void        Player::setIsMoving(bool cond)
+    {
+      this->_isMoving = cond;
+    }
+
+    void        Player::setIsRunning(bool cond)
+    {
+      this->_isRunning = cond;
+    }
+
     Display::AObject *  Player::getRun() const
     {
       return this->_run;
@@ -446,7 +505,7 @@ namespace BomberMan
       this->_pv = pv;
     }
 
-    void        Player::explode(int damages, Manager *, int idBomb)
+    void        Player::explode(int damages, Manager *, int)
     {
       this->setPv(this->_pv - damages);
       // annimation je prend des degats.
@@ -490,6 +549,12 @@ namespace BomberMan
 	  this->_isMoving = cpy.getIsMoving();
 	  this->_isRunning = cpy.getIsRunning();
 	}
+    }
+
+    void         Player::updateCamera(gdl::GameClock const & gameClock)
+    {
+      if (this->_camera)
+	this->_camera->update(gameClock);
     }
   }
 }

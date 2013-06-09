@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat May 18 18:23:52 2013 julien fortin
-// Last update Thu May 30 18:39:01 2013 Jean-Baptiste Louazel
+// Last update Sun Jun  9 13:14:07 2013 julien fortin
 //
 
 #ifndef	__IEVENT_HH__
@@ -15,24 +15,25 @@
 
 namespace BomberMan
 {
-    namespace Event
+  namespace Event
+  {
+    class IEvent
     {
-        class IEvent
-        {
-        private:
-        protected:
-        public:
-            virtual ~IEvent() {}
-            
-            virtual void								interaction() const = 0;
-            virtual float								getX() const = 0;
-            virtual float								getY() const = 0;
-            virtual EventType::eEventType				getType() const = 0;
-            virtual EventContext::eEventContext		getContext() const = 0;
-            virtual EventCategory::eEventCategory		getCategory() const = 0;
-            virtual EventDirection::eEventDirection	getDirection() const = 0;
-        };
-    }
+    private:
+      protected:
+      public:
+      virtual ~IEvent() {}
+
+      virtual void				interaction() const = 0;
+      virtual int				getPlayerId() const = 0;
+      virtual float				getX() const = 0;
+      virtual float				getY() const = 0;
+      virtual EventType::eEventType		getType() const = 0;
+      virtual EventContext::eEventContext	getContext() const = 0;
+      virtual EventCategory::eEventCategory	getCategory() const = 0;
+      virtual EventDirection::eEventDirection	getDirection() const = 0;
+    };
+  }
 }
 
 #else

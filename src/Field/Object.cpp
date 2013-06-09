@@ -1,5 +1,6 @@
 #include "Object.hh"
 #include "Wall.hh"
+#include "SoundManager.hh"
 
 namespace BomberMan
 {
@@ -35,6 +36,7 @@ namespace BomberMan
     void	Object::setX(float x)
     {
       Display::Vector3f newVectorPosition(x * 220, this->_asset->getPosition().getY(), this->_asset->getPosition().getZ());
+
       this->_x = x;
       this->_asset->setPosition(newVectorPosition);
     }
@@ -42,6 +44,7 @@ namespace BomberMan
     void	Object::setY(float y)
     {
       Display::Vector3f newVectorPosition(this->_asset->getPosition().getX(), this->_asset->getPosition().getY(), y * 220);
+
       this->_y = y;
       this->_asset->setPosition(newVectorPosition);
     }
@@ -57,7 +60,8 @@ namespace BomberMan
       this->_runningTimer += gameClock.getElapsedTime();
       if (this->_runningTimer >= this->_timer && this->_object_type == BOMB)
 	{
-	  manager->setExplosion(this->_y, this->_x, this->_power);
+	  Sound::SoundManager::getInstance()->playSound("./resources/sounds/SmokeExplosion.mp3", false);
+	  manager->setExplosion(this->_y, this->_x, this->_power, this->_idPlayer);
 	  manager->initFrame(this->_y, this->_x, 1);
 	  this->bombExplode(this->_power, UP, manager);
 	  this->bombExplode(this->_power, RIGHT, manager);
@@ -68,7 +72,7 @@ namespace BomberMan
 	}
     }
 
-    void        Object::draw(gdl::GameClock const & gameClock)
+    void        Object::draw(gdl::GameClock const &)
     {
       this->_asset->draw();
     }
@@ -98,7 +102,7 @@ namespace BomberMan
       return this->_timer;
     }
 
-    void        Object::explode(int power, Manager *, int idBomb)
+    void        Object::explode(int, Manager *, int)
     {
       if (this->_object_type == BOMB)
 	this->_runningTimer = this->_timer;
@@ -116,7 +120,7 @@ namespace BomberMan
       return (false);
     }
 
-    void        Object::bombExplode(int damages, eDirection direction, Manager *manager)
+    void        Object::bombExplode(int, eDirection direction, Manager *manager)
     {
       if (this->_object_type == BOMB)
       	{
@@ -129,12 +133,13 @@ namespace BomberMan
 	    	  {
 	    	    if (this->_x + i > manager->getHeight() - 1)
 	    	      return;
-	    	    manager->setExplosion(this->_y, this->_x + i, this->_power - i);
+	    	    manager->setExplosion(this->_y, this->_x + i, this->_power - i, this->_idPlayer);
 		    manager->initFrame(this->_y, this->_x + i, 0);
 	    	    if (this->checkCase(this->_y, this->_x + i, manager) == true)
 	    	      return;
 	    	    i++;
 	    	  }
+		break;
 	      }
 	    case DOWN :
 	      {
@@ -142,12 +147,13 @@ namespace BomberMan
 	    	  {
 	    	    if (this->_x - i < 0)
 	    	      return;
-	    	    manager->setExplosion(this->_y, this->_x - i, this->_power - i);
+	    	    manager->setExplosion(this->_y, this->_x - i, this->_power - i, this->_idPlayer);
 		    manager->initFrame(this->_y, this->_x - i, 1);
 	    	    if (this->checkCase(this->_y, this->_x - i, manager) == true)
 	    	      return;
 	    	    i++;
 	    	  }
+		break;
 	      }
 	    case LEFT :
 	      {
@@ -155,12 +161,13 @@ namespace BomberMan
 	    	  {
 	    	    if (this->_y - i < 0)
 	    	      return;
-	    	    manager->setExplosion(this->_y - i, this->_x, this->_power - i);
+	    	    manager->setExplosion(this->_y - i, this->_x, this->_power - i, this->_idPlayer);
 		    manager->initFrame(this->_y - i, this->_x, 1);
 	    	    if (this->checkCase(this->_y - i, this->_x , manager) == true)
 	    	      return;
 	    	    i++;
 	    	  }
+		break;
 	      }
 	    case RIGHT :
 	      {
@@ -168,13 +175,22 @@ namespace BomberMan
 	    	  {
 	    	    if (this->_y + i > manager->getWidth() - 1)
 	    	      return;
-	    	    manager->setExplosion(this->_y + i, this->_x, this->_power - i);
+	    	    manager->setExplosion(this->_y + i, this->_x, this->_power - i, this->_idPlayer);
 		    manager->initFrame(this->_y + i, this->_x, 0);
 	    	    if (this->checkCase(this->_y + i, this->_x, manager) == true)
 	    	      return;
 	    	    i++;
 	    	  }
+		break;
 	      }
+	    case UPRIGHT:
+	      break;
+	    case DOWNRIGHT:
+	      break;
+	    case UPLEFT:
+	      break;
+	    case DOWNLEFT:
+	      break;
 	    }
 	}
     }

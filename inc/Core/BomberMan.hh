@@ -2,6 +2,7 @@
 #define __BOMBERMAN_HH__
 
 #include	<Game.hpp>
+#include	<GameClock.hpp>
 #include	"Video.hpp"
 #include	"MenuEnum.hh"
 #include	"BomberGame.hh"
@@ -29,6 +30,9 @@ namespace BomberMan
       BomberGame*		_currentGame;
       Display::Video*		_introVideo;
       Display::Video*		_creditVideo;
+      gdl::Clock*		_introTimer;
+      int			FPS;
+      float			constElapsedTime;
 
     private:
       void		_initializeWindow();
@@ -42,7 +46,7 @@ namespace BomberMan
 
       void		_drawIntro() const;
       void		_drawMenu() const;
-      void		_drawGame() const;
+      void		_drawGame();
       void		_drawLoading() const;
 
       void		_updateIntro();
@@ -59,6 +63,10 @@ namespace BomberMan
       virtual void	unload(void);
       virtual void	draw(void);
 
+      static BomberMan*	getCore();
+
+      void		surrender();
+      void		resumeGame();
       void		startGame();
       void		startMenu(Display::MenuEnum::eMenu);
     };

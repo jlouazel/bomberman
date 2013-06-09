@@ -1,3 +1,4 @@
+#include	<GameClock.hpp>
 #include	"Gif.hpp"
 #include	"BomberMan.hh"
 #include	"BomberOptions.hh"
@@ -10,6 +11,13 @@ namespace BomberMan
 {
   namespace Core
   {
+    static BomberMan*	_core = 0;
+
+    BomberMan*	BomberMan::getCore()
+    {
+      return _core;
+    }
+
     BomberMan::BomberMan() : gdl::Game()
     {
       this->_intro = true;
@@ -17,6 +25,8 @@ namespace BomberMan
       this->_game = false;
       this->_loading = false;
       this->_currentGame = 0;
+      this->FPS = 19;
+      this->constElapsedTime = 1.0 / static_cast<float>(this->FPS);
     }
 
     BomberMan::~BomberMan()
@@ -28,6 +38,7 @@ namespace BomberMan
 
     void	BomberMan::initialize()
     {
+      _core = this;
       this->_initializeWindow();
       this->_initializeSound();
       this->_initializeIntro();
@@ -49,7 +60,9 @@ namespace BomberMan
     void	BomberMan::_initializeIntro()
     {
       this->_introVideo = new Display::Video("./resources/videos/IntroBomberLight.avi",
-					     "./resources/sounds/IntroBomberLight.mp3");
+				    "./resources/sounds/IntroBomberLight.mp3");
+      this->_introTimer = new gdl::Clock();
+      this->_introTimer->play();
     }
 
     void	BomberMan::_initializeEvent() const
@@ -118,6 +131,8 @@ namespace BomberMan
     {
       if (this->_currentGame)
 	this->_currentGame->update(this->gameClock_);
+      else
+	this->startMenu(Display::MenuEnum::MAIN);
     }
 
     void	BomberMan::_updateLoading()
@@ -151,7 +166,13 @@ namespace BomberMan
 
     void	BomberMan::_drawIntro() const
     {
+      float	elapsedTime;
+
       this->_introVideo->draw();
+      this->_introTimer->update();
+      elapsedTime = this->_introTimer->getElapsedTime();
+      if (elapsedTime < constElapsedTime)
+	usleep((constElapsedTime - elapsedTime) * 1000000);
     }
 
     void	BomberMan::_drawLoading() const
@@ -164,10 +185,12 @@ namespace BomberMan
       Display::MenuManager::getMenuManager()->draw();
     }
 
-    void	BomberMan::_drawGame() const
+    void	BomberMan::_drawGame()
     {
       if (this->_currentGame)
 	this->_currentGame->draw(this->gameClock_);
+      else
+	this->startMenu(Display::MenuEnum::MAIN);
     }
 
     void	BomberMan::unload(void)
@@ -192,7 +215,20 @@ namespace BomberMan
       this->_menu = false;
       this->_game = false;
       this->_loading = true;
-      this->_currentGame = new BomberGame;//(BomberOptions::getOptions()->isQuickGame());
+      this->_currentGame = new BomberGame;
+    }
+
+    void	BomberMan::resumeGame()
+    {
+      this->_intro = false;
+      this->_menu = false;
+      this->_game = true;
+      this->_loading = false;
+    }
+
+    void	BomberMan::surrender()
+    {
+      this->startMenu(Display::MenuEnum::MAIN);
     }
   }
 }

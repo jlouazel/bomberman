@@ -59,7 +59,10 @@ SRCS_DISPLAY	= $(SRC_DIR)$(DISPLAY)AObject.cpp \
 
 SRCS_MENU	= $(SRC_DIR)$(DISPLAY)$(MENU)MainMenu.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)NewGameMenu.cpp \
+		$(SRC_DIR)$(DISPLAY)$(MENU)Resume.cpp \
+		$(SRC_DIR)$(DISPLAY)$(MENU)Surrender.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)Loading.cpp \
+		$(SRC_DIR)$(DISPLAY)$(MENU)CreditsMenu.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)CookMenu.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)CustomizeMenu.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)MapOptionsMenu.cpp \
@@ -91,6 +94,7 @@ SRCS_EVENT	= $(SRC_DIR)$(EVENT)AEvent.cpp \
 		$(SRC_DIR)$(EVENT)EventManager.cpp \
 		$(SRC_DIR)$(EVENT)EventError.cpp \
 		$(SRC_DIR)$(EVENT)Move.cpp \
+		$(SRC_DIR)$(EVENT)Pause.cpp \
 		$(SRC_DIR)$(EVENT)Action.cpp \
 
 SRCS_UNIX	= $(SRC_DIR)$(UNIX)UnixMutex.cpp \
