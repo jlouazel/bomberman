@@ -1,3 +1,4 @@
+#include	<GameClock.hpp>
 #include	"BomberMan.hh"
 #include	"BomberOptions.hh"
 #include	"EventManager.hh"
@@ -15,6 +16,8 @@ namespace BomberMan
       this->_menu = false;
       this->_game = false;
       this->_currentGame = 0;
+      this->FPS = 22;
+      this->constElapsedTime = 1.0 / static_cast<float>(this->FPS);
     }
 
     BomberMan::~BomberMan()
@@ -47,6 +50,8 @@ namespace BomberMan
     {
       this->_introVideo = new Display::Video("./resources/videos/IntroBomberLight.avi",
 				    "./resources/sounds/IntroBomberLight.mp3");
+      this->_introTimer = new gdl::Clock();
+      this->_introTimer->play();
     }
 
     void	BomberMan::_initializeEvent() const
@@ -125,6 +130,13 @@ namespace BomberMan
 
     void	BomberMan::_drawIntro() const
     {
+      float	elapsedTime;
+
+      this->_introTimer->update();
+      elapsedTime = this->_introTimer->getElapsedTime();
+      std::cout << (constElapsedTime - elapsedTime) * 1000000 << std::endl;
+      if (elapsedTime < constElapsedTime)
+	usleep((constElapsedTime - elapsedTime) * 1000000);
       this->_introVideo->draw();
     }
 
