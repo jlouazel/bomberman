@@ -295,6 +295,11 @@ namespace BomberMan
         }
     }
 
+    const std::vector<std::list<IGameComponent *> >	&Manager::getMap() const
+    {
+      return this->_map;
+    }
+
     IGameComponent * Manager::getWall(unsigned int x, unsigned int y) const
     {
       for (std::list<IGameComponent *>::const_iterator it = this->_map[x + y * this->_width].begin(); it != this->_map[x + y * this->_width].end(); ++it)
