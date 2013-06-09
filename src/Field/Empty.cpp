@@ -76,11 +76,15 @@ namespace BomberMan
 	this->_textureExplosion->draw();
     }
 
-      void	Empty::setFrame(int i)
-      {
-	this->_frame = i;
-      }
+    void	Empty::setFrame(int i)
+    {
+      this->_frame = i;
+    }
 
+    void	Empty::setIdBomb(int i)
+    {
+      this->_idBomb = i;
+    }
 
     void    Empty::explode(int damages, Manager *manager, int idBomb)
       {

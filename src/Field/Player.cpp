@@ -263,6 +263,7 @@ namespace BomberMan
       bool	moveOk = false;
       int i = 0;
 
+      std::cout << this->_nbCaisseDestroyed << std::endl;
       if (this->_pv <= 0)
       	{
 	  this->_dying->update(gameClock);

@@ -38,6 +38,7 @@ namespace BomberMan
 	  int	getPlayerTakeDomage() const;
 	  void	setFrame(int);
 	  int	getIdBomb() const;
+	  void	setIdBomb(int);
         };
     }
 }

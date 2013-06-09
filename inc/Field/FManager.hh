@@ -59,7 +59,7 @@ namespace BomberMan
       std::list<IGameComponent *> &	get(unsigned int, unsigned int);
       bool				addComponent(unsigned int, unsigned int, IGameComponent *);
       void				delComponent(unsigned int, unsigned int, IGameComponent *);
-      void				setExplosion(unsigned int, unsigned int, int);
+      void				setExplosion(unsigned int, unsigned int, int, int);
       void				randomize(std::list<Player *> const &);
       void				initFrame(int, int, int);
       void				setBuffToFalse(unsigned int, unsigned int);
