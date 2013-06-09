@@ -1,0 +1,48 @@
+<backup id="1370799642">
+  <infos>
+    <second>
+      42
+    </second>
+    <minute>
+      40
+    </minute>
+    <hour>
+      19
+    </hour>
+    <day>
+      9
+    </day>
+    <month>
+      6
+    </month>
+    <year>
+      2013
+    </year>
+  </infos>
+  <players>
+    <player id="0" x="0" y="0" pv="100" speed="10" readSpeed="10" power="3" bombmax="1" bombset="0" nbCaisseDestroyed="0" nbPlayerKilled="0" buffTaked="0">
+    </player>
+  </players>
+  <field width="4" height="4">
+    <wall x="2" y="0">
+    </wall>
+    <object x="2" y="0" objectType="1" buffType="3" power="0" timer="0">
+    </object>
+    <wall x="3" y="0">
+    </wall>
+    <object x="3" y="0" objectType="1" buffType="2" power="0" timer="0">
+    </object>
+    <wall x="2" y="1">
+    </wall>
+    <object x="2" y="1" objectType="1" buffType="2" power="0" timer="0">
+    </object>
+    <wall x="1" y="2">
+    </wall>
+    <wall x="3" y="2">
+    </wall>
+    <object x="3" y="2" objectType="1" buffType="4" power="0" timer="0">
+    </object>
+    <wall x="3" y="3">
+    </wall>
+  </field>
+</backup>
