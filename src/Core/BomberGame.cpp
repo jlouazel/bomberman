@@ -108,10 +108,20 @@ namespace BomberMan
       vectorLen3_.setY(100);
       this->_infos["background"] = new Display::Texture2d("images/black.png", vectorPosition3_, vectorRot_, vectorLen3_);
       this->_infos["background"]->initialize();
-      this->_infos["lose"] = new Display::Texture2d("images/YouAreDead.png", vectorPosition3_, vectorRot_, vectorLen3_);
-      this->_infos["lose"]->initialize();
-      this->_infos["win"] = new Display::Texture2d("images/YouWin.png", vectorPosition3_, vectorRot_, vectorLen3_);
-      this->_infos["win"]->initialize();
+      this->_infos["clean"] = new Display::Texture2d("images/BlackFond.png", vectorPosition3_, vectorRot_, vectorLen3_);
+      this->_infos["clean"]->initialize();
+      vectorPosition3_.setX(25);
+      vectorPosition3_.setY(0);
+      vectorLen3_.setX(50);
+      vectorLen3_.setY(100);
+      this->_infos["lose1"] = new Display::Texture2d("images/YouAreDead.png", vectorPosition3_, vectorRot_, vectorLen3_);
+      this->_infos["lose1"]->initialize();
+      this->_infos["win1"] = new Display::Texture2d("images/YouWin.png", vectorPosition3_, vectorRot_, vectorLen3_);
+      this->_infos["win1"]->initialize();
+      this->_infos["lose2"] = new Display::Texture2d("images/YouAreDead.png", vectorPosition3_, vectorRot_, vectorLen3_);
+      this->_infos["lose2"]->initialize();
+      this->_infos["win2"] = new Display::Texture2d("images/YouWin.png", vectorPosition3_, vectorRot_, vectorLen3_);
+      this->_infos["win2"]->initialize();
       this->_loading = false;
     }
 
@@ -177,10 +187,7 @@ namespace BomberMan
 	    if ((*it)->getId() == id)
 	      actualPlayer = (*it);
 	  if (dynamic_cast<const Event::Pause *>(event) == event)
-	    {
-	      std::cout << "KIKOU" << std::endl;
-	      event->interaction();
-	    }
+	    event->interaction();
           else if (actualPlayer && dynamic_cast<const Event::Move *>(event) == event && actualPlayer->getMoveOk() == false && actualPlayer->getPv() > 0)
             {
               const Event::Move *move = dynamic_cast<const Event::Move *>(event);
@@ -205,10 +212,6 @@ namespace BomberMan
             }
           else if (actualPlayer && dynamic_cast<const Event::Action *>(event) == event && actualPlayer->getNbBombSet() < actualPlayer->getNbBombMax() && actualPlayer->getPv() > 0)
             actualPlayer->setBomb(this->_manager);
-	  // if (actualPlayer && actualPlayer->getPv() <= 0)
-	  //   {
-	      
-	  //   }
           delete event;
         }
       for (std::list<Field::Player *>::iterator it = this->_players.begin(); it != this->_players.end(); ++it)
@@ -226,6 +229,14 @@ namespace BomberMan
       comp->draw(gameClock);
     }
 
+    bool	BomberGame::checkIfIWin(int id_player) const
+    {
+      for (std::list<Field::Player *>::const_iterator it = this->_players.begin(); it != this->_players.end(); ++it)
+        if ((*it)->getId() != id_player && (*it)->getPv() > 0)
+	  return (false);
+      return (true);
+    }
+
     void	BomberGame::drawForPlayer2D(gdl::GameClock const &, int id_player) const
     {
       this->_infos.at("background")->draw();
@@ -240,7 +251,22 @@ namespace BomberMan
           player = (*it);
       if (player == 0)
         return;
-
+      if (this->checkIfIWin(id_player) == true)
+      	{
+	  this->_infos.at("clean")->draw();
+          if (id_player == 0)
+            this->_infos.at("win1")->draw();
+          else if (id_player == 1)
+            this->_infos.at("win2")->draw();
+      	}
+      if (player->getRealDead() == true)
+	{
+	  this->_infos.at("clean")->draw();
+	  if (id_player == 0)
+	    this->_infos.at("lose1")->draw();
+	  else if (id_player == 1)
+	    this->_infos.at("lose2")->draw();
+	}
       for (int y = -5; y != 5; y++)
       	{
       	  for (int x = -5; x != 5; x++)
