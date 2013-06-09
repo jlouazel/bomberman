@@ -9,11 +9,7 @@
 #include	"Texture2d.hpp"
 #include	"Wall.hh"
 #include	"Player.hh"
-<<<<<<< HEAD
-#include	"Gif.hpp"
-=======
 #include	"Xml.hh"
->>>>>>> a67bff5836fe43afaa9b4dd715eda66c51afff53
 #include	<iostream>
 #include	<sstream>
 

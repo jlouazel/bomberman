@@ -122,7 +122,6 @@ namespace BomberMan
 
     void	BomberMan::_updateLoading()
     {
-      std::cout << "UpdateLoad" << std::endl;
       if (this->_currentGame)
 	if (this->_currentGame->isLoaded())
 	  {
@@ -157,7 +156,6 @@ namespace BomberMan
 
     void	BomberMan::_drawLoading() const
     {
-      std::cout << "DrawLoad" << std::endl;
       Display::Gif::getGif()->draw();
     }
 

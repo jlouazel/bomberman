@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 18:26:57 2013 julien fortin
-// Last update Sun Jun  9 02:28:32 2013 julien fortin
+// Last update Sun Jun  9 06:35:25 2013 julien fortin
 //
 
 #include	"Menus.hh"
@@ -59,6 +59,7 @@ namespace BomberMan
 	  this->_menu[MenuEnum::PAUSE] = new PauseMenu(core);
 	  this->_menu[MenuEnum::LOADING] = new Loading;
 	  this->_menu[MenuEnum::LAUNCHGAME] = new LaunchGame(core);
+	  this->_menu[MenuEnum::CREDITS] = new CreditsMenu;
 	  this->_init = true;
 	}
     }
