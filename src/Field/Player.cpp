@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 manour_m. All rights reserved.
 //
 
+#include	<math.h>
+#include	<unistd.h>
 #include        "SoundManager.hh"
 #include	"Action.hh"
 #include "AObject.hpp"
@@ -14,6 +16,8 @@
 #include "Vector.hpp"
 #include "Wall.hh"
 #include "Empty.hh"
+
+#define	ABS(x) (x > 0 ? (x) : (-x))
 
 namespace BomberMan
 {
@@ -68,6 +72,27 @@ namespace BomberMan
     Player::~Player()
     {
       delete this->_bomb;
+    }
+
+    void         Player::goThere(float my_x, float my_y, float to_x, float to_y) const
+    {
+      float     angle;
+
+      angle = atan(ABS(to_y - my_y) / ABS(to_x - my_x)) * 180 / M_PI;
+      Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::NO, (static_cast<int>(angle) + 90) % 360, true, this->_id);
+    }
+
+    void        Player::startIA(int width, int height, const std::vector<std::list<IGameComponent *> > &map, const std::list<Player *> &players) const
+    {
+      while (!this->_end)
+        {
+          goThere(this->_x, this->_y, players.front()->getX(), players.front()->getY());
+	  usleep(5000);
+	  //          if (!isInBombRow(width, height, map, my_x, my_y))
+	  //     if (!betterTakeBuff(width, height, map))
+	  //      if (!shouldGetCloserToKill(width, height, map))
+	  //        Event::EventManager::getEventManager()->actionEvent(this->_currentPlayerId);
+        }
     }
 
     BomberMan::Display::AObject * Player::getAsset() const
