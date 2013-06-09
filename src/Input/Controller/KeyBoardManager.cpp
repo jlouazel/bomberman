@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 21 20:26:12 2013 julien fortin
-// Last update Sun Jun  9 17:30:16 2013 julien fortin
+// Last update Sun Jun  9 20:25:12 2013 julien fortin
 //
 
 #include	"EventManager.hh"
@@ -37,10 +37,7 @@ namespace BomberMan
 
       KeyBoardManager::KeyBoardManager()
       {
-	// BomberMan::getBomberMan()->getPlayer(0);
-	// BomberMan::getBomberMan()->getPlayer(1);
 	this->_input = 0;
-
 	this->initMapping(true);
 
 	this->_keys[gdl::Keys::S] = &KeyBoardManager::_down;
@@ -124,7 +121,7 @@ namespace BomberMan
 	this->_treatInputForPlayer(input, this->_mappingP2);
       }
 
-      bool	KeyBoardManager::_activeSpeed(const Field::Player* const player)
+      bool	KeyBoardManager::_activeSpeed(const Field::Player* const)
       {
 	return this->_input->isKeyDown(this->_run[this->_currentPlayerId]);
       }
@@ -133,9 +130,16 @@ namespace BomberMan
       {
 	if (!this->_multiples)
 	  {
-	    if (this->_input && (this->_input->isKeyDown(gdl::Keys::Left) ||
-				 (((this->_qwerty && (this->_input->isKeyDown(gdl::Keys::A)))
-				   || (!this->_qwerty && this->_input->isKeyDown(gdl::Keys::Q))))))
+	    if (!this->_currentPlayerId && (((this->_qwerty && (this->_input->isKeyDown(gdl::Keys::A)))
+					     || (!this->_qwerty && this->_input->isKeyDown(gdl::Keys::Q)))))
+	      {
+		this->_multiples = true;
+		Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::UP_LEFT, 225.0,
+								  this->_activeSpeed(player),
+								  this->_currentPlayerId);
+		return true;
+	      }
+	    else if (this->_currentPlayerId && (this->_input->isKeyDown(gdl::Keys::Left)))
 	      {
 		this->_multiples = true;
 		Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::UP_LEFT, 225.0,
@@ -151,7 +155,15 @@ namespace BomberMan
       {
 	if (!this->_multiples)
 	  {
-	    if (this->_input && (this->_input->isKeyDown(gdl::Keys::D) || this->_input->isKeyDown(gdl::Keys::Right)))
+	    if (!this->_currentPlayerId && this->_input->isKeyDown(gdl::Keys::D))
+	      {
+		this->_multiples = true;
+		Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::UP_RIGHT, 135.0,
+								  this->_activeSpeed(player),
+								  this->_currentPlayerId);
+		return true;
+	      }
+	    else if (this->_currentPlayerId && this->_input->isKeyDown(gdl::Keys::Right))
 	      {
 		this->_multiples = true;
 		Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::UP_RIGHT, 135.0,
@@ -199,9 +211,16 @@ namespace BomberMan
       {
 	if (!this->_multiples)
 	  {
-	    if (this->_input && (this->_input->isKeyDown(gdl::Keys::Left) ||
-                                 (((this->_qwerty && (this->_input->isKeyDown(gdl::Keys::A)))
-                                   || (!this->_qwerty && this->_input->isKeyDown(gdl::Keys::Q))))))
+	    if (!this->_currentPlayerId && ((this->_qwerty && (this->_input->isKeyDown(gdl::Keys::A)))
+					    || (!this->_qwerty && this->_input->isKeyDown(gdl::Keys::Q))))
+	      {
+		this->_multiples = true;
+		Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::DOWN_LEFT, 315.0,
+								  this->_activeSpeed(player),
+								  this->_currentPlayerId);
+		return true;
+	      }
+	    else if (this->_currentPlayerId && this->_input->isKeyDown(gdl::Keys::Left))
 	      {
 		this->_multiples = true;
 		Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::DOWN_LEFT, 315.0,
@@ -217,7 +236,16 @@ namespace BomberMan
       {
 	if (!this->_multiples)
 	  {
-	    if (this->_input && (this->_input->isKeyDown(gdl::Keys::D) || this->_input->isKeyDown(gdl::Keys::Right)))
+	    if (!this->_currentPlayerId && this->_input->isKeyDown(gdl::Keys::D))
+	      {
+		this->_multiples = true;
+		Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::DOWN_RIGHT,
+								  45.0,
+								  this->_activeSpeed(player),
+								  this->_currentPlayerId);
+		return true;
+	      }
+	    else if (this->_currentPlayerId && this->_input->isKeyDown(gdl::Keys::Right))
 	      {
 		this->_multiples = true;
 		Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::DOWN_RIGHT,

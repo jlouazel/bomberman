@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 21:25:38 2013 julien fortin
-// Last update Sat Jun  8 21:53:29 2013 julien fortin
+// Last update Sun Jun  9 20:13:00 2013 julien fortin
 //
 
 #include	"BomberOptions.hh"
@@ -172,7 +172,10 @@ namespace BomberMan
 	    {
 	      usleep(150000);
 	      if (this->_hover[this->_cursor]->getMenu() != MenuEnum::NO)
-		MenuManager::getMenuManager()->menu(this->_hover[this->_cursor]->getMenu());
+		{
+		  Core::BomberOptions::getOptions()->setNbIA(this->_currentsIA);
+		  MenuManager::getMenuManager()->menu(this->_hover[this->_cursor]->getMenu());
+		}
 	    }
 	}
       else if ((move = dynamic_cast<const Event::Move*>(event)))
@@ -297,7 +300,7 @@ namespace BomberMan
 	}
       else if (this->_cursor == 1)
 	{
-	  if ((this->_currentsIA - 1) <= 0)
+	  if (this->_currentsIA <= 0)
 	    {
 	      this->_currentsIA = 0;
 	      Core::BomberOptions::getOptions()->setNbIA(0);
