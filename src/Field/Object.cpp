@@ -71,7 +71,7 @@ namespace BomberMan
 	}
     }
 
-    void        Object::draw(gdl::GameClock const & gameClock)
+    void        Object::draw(gdl::GameClock const &)
     {
       this->_asset->draw();
     }
@@ -101,7 +101,7 @@ namespace BomberMan
       return this->_timer;
     }
 
-    void        Object::explode(int power, Manager *, int idBomb)
+    void        Object::explode(int, Manager *, int)
     {
       if (this->_object_type == BOMB)
 	this->_runningTimer = this->_timer;
@@ -119,7 +119,7 @@ namespace BomberMan
       return (false);
     }
 
-    void        Object::bombExplode(int damages, eDirection direction, Manager *manager)
+    void        Object::bombExplode(int, eDirection direction, Manager *manager)
     {
       if (this->_object_type == BOMB)
       	{
@@ -138,6 +138,7 @@ namespace BomberMan
 	    	      return;
 	    	    i++;
 	    	  }
+		break;
 	      }
 	    case DOWN :
 	      {
@@ -151,6 +152,7 @@ namespace BomberMan
 	    	      return;
 	    	    i++;
 	    	  }
+		break;
 	      }
 	    case LEFT :
 	      {
@@ -164,6 +166,7 @@ namespace BomberMan
 	    	      return;
 	    	    i++;
 	    	  }
+		break;
 	      }
 	    case RIGHT :
 	      {
@@ -177,7 +180,16 @@ namespace BomberMan
 	    	      return;
 	    	    i++;
 	    	  }
+		break;
 	      }
+	    case UPRIGHT:
+	      break;
+	    case DOWNRIGHT:
+	      break;
+	    case UPLEFT:
+	      break;
+	    case DOWNLEFT:
+	      break;
 	    }
 	}
     }

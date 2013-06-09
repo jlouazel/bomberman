@@ -29,12 +29,12 @@ namespace BomberMan
     {
     }
 
-    void        Wall::update(gdl::GameClock const & gameClock, Manager *manager)
+    void        Wall::update(gdl::GameClock const & gameClock, Manager *)
     {
       this->_asset->update(gameClock);
     }
 
-    void        Wall::draw(gdl::GameClock const & gameClock)
+    void        Wall::draw(gdl::GameClock const &)
     {
       this->_asset->draw();
     }
@@ -49,7 +49,7 @@ namespace BomberMan
       this->_pv = pv;
     }
 
-    void    Wall::explode(int damages, Manager *, int idBomb)
+    void    Wall::explode(int, Manager *, int idBomb)
     {
       if (this->_breakable == true)
 	{

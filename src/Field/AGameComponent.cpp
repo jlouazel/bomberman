@@ -51,9 +51,7 @@ namespace BomberMan
 
     void				AGameComponent::setEnd(bool newBool)
     {
-      std::cout << "KIKOU JE SET JE END" << std::endl;
       this->_end = newBool;
-      std::cout << "KIKOU J'AI FINI DE SET LE END" << std::endl;
     }
 
     BomberMan::Display::IAnimation *    AGameComponent::getAnimation() const
