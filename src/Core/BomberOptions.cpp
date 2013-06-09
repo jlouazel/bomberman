@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  8 13:44:23 2013 julien fortin
-// Last update Sun Jun  9 18:51:19 2013 julien fortin
+// Last update Sun Jun  9 22:44:40 2013 julien fortin
 //
 
 #include	"EndOfBomberMan.hh"
@@ -49,11 +49,20 @@ namespace BomberMan
       this->setSkinForPlayer(2, BomberOptions::JP);
       this->_nbPlayer = 1;
       this->_nbIA = 3;
+      this->_width = 0;
+      this->_height = 0;
+      this->_wallDensity = 70;
+      this->_buffDensity = 20;
     }
 
     unsigned int	BomberOptions::getBuffDensity() const
     {
       return this->_buffDensity;
+    }
+
+    unsigned int	BomberOptions::getWallDensity() const
+    {
+      return this->_wallDensity;
     }
 
     unsigned int	BomberOptions::getWidth() const
@@ -91,6 +100,11 @@ namespace BomberMan
     void	BomberOptions::setBuffDensity(unsigned int b)
     {
       this->_buffDensity = b;
+    }
+
+    void	BomberOptions::setWallDensity(unsigned int b)
+    {
+      this->_wallDensity = b;
     }
 
     void	BomberOptions::setNotQuickGame()

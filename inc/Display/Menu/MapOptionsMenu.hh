@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 20:56:39 2013 julien fortin
-// Last update Sun Jun  9 18:40:15 2013 julien fortin
+// Last update Sun Jun  9 22:33:28 2013 julien fortin
 //
 
 #ifndef	__MAPOPTIONSMENU_HH__
@@ -39,12 +39,13 @@ namespace BomberMan
       unsigned int	_height;
       unsigned int	_width;
       unsigned int	_buffDensity;
+      unsigned int	_wallDensity;
 
       void	_cursorMove();
       void	_cursorRight();
       void	_cursorLeft();
 
-      static const unsigned int	_nbOnglet = 3;
+      static const unsigned int	_nbOnglet = 4;
 
     public:
 
