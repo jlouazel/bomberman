@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  8 13:44:23 2013 julien fortin
-// Last update Sun Jun  9 01:42:03 2013 julien fortin
+// Last update Sun Jun  9 18:51:19 2013 julien fortin
 //
 
 #include	"EndOfBomberMan.hh"
@@ -51,6 +51,11 @@ namespace BomberMan
       this->_nbIA = 3;
     }
 
+    unsigned int	BomberOptions::getBuffDensity() const
+    {
+      return this->_buffDensity;
+    }
+
     unsigned int	BomberOptions::getWidth() const
     {
       return this->_width;
@@ -81,6 +86,11 @@ namespace BomberMan
     bool	BomberOptions::isQuickGame() const
     {
       return this->_quickGame;
+    }
+
+    void	BomberOptions::setBuffDensity(unsigned int b)
+    {
+      this->_buffDensity = b;
     }
 
     void	BomberOptions::setNotQuickGame()

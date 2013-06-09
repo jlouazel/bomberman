@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  8 13:39:38 2013 julien fortin
-// Last update Sun Jun  9 01:41:25 2013 julien fortin
+// Last update Sun Jun  9 18:52:47 2013 julien fortin
 //
 
 #ifndef	__BOMBEROPTIONS_HH__
@@ -34,6 +34,7 @@ namespace BomberMan
       unsigned int		_nbIA;
       unsigned int		_width;
       unsigned int		_height;
+      unsigned int		_buffDensity;
 
     public:
       enum ePlayerSkin { WW, JP, NOSKIN };
@@ -47,6 +48,7 @@ namespace BomberMan
       static void		deleteOptions();
 
       bool		isQuickGame() const;
+      unsigned int	getBuffDensity() const;
       unsigned int	getWidth() const;
       unsigned int	getHeight() const;
       unsigned int	getNbPlayer() const;
@@ -55,6 +57,7 @@ namespace BomberMan
 
       void		init();
 
+      void		setBuffDensity(unsigned int);
       void		setNotQuickGame();
       void		setWidth(unsigned int);
       void		setHeight(unsigned int);
