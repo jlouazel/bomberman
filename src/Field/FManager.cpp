@@ -1,3 +1,4 @@
+#include "BomberOptions.hh"
 #include <iostream>
 #include <algorithm>
 #include <sys/types.h>
@@ -345,12 +346,12 @@ namespace BomberMan
 	    }
 	}
       unsigned int nbCases = (this->_width * this->_height) - this->_nbCuves - 1 - createPlaceForPlayer(this->_map, players, this->_width, this->_height);
-      unsigned int hopeFullCases = static_cast<unsigned int>(nbCases * (60.0 / 100.0)); /* % caisses */
+      unsigned int hopeFullCases = static_cast<unsigned int>(nbCases * (Core::BomberOptions::getOptions()->getWallDensity() / 100.0)); /* % caisses */
       while (nbCases != hopeFullCases)
 	if (eraseWall(this->_map[rand() % (this->_width * this->_height)]) == true)
 	  nbCases--;
       unsigned int nbBonus = 0;
-      while (nbBonus != static_cast<unsigned int>(hopeFullCases * (70.0 / 100.0))) /* % bonus */
+      while (nbBonus != static_cast<unsigned int>(hopeFullCases * (Core::BomberOptions::getOptions()->getBuffDensity() / 100.0)))
       	{
 	  x = rand() % this->_width;
 	  y = rand() % this->_height;

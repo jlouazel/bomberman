@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 20:56:39 2013 julien fortin
-// Last update Sun Jun  9 21:57:32 2013 julien fortin
+// Last update Sun Jun  9 23:18:48 2013 julien fortin
 //
 
 #ifndef	__LOADGAME_HH__
@@ -33,9 +33,6 @@ namespace BomberMan
       Core::BomberMan* const	_core;
 
       std::map<unsigned int, IOnglet*>	_arrow;
-
-      void	_cursorRight();
-      void	_cursorLeft();
 
     protected:
     public:

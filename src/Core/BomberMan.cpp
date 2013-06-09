@@ -229,7 +229,10 @@ namespace BomberMan
       this->_menu = false;
       this->_game = false;
       this->_loading = true;
-      this->_currentGame = new BomberGame(true, this->_file);
+      if (this->_file == "")
+	this->startMenu(Display::MenuEnum::MAIN);
+      else
+	this->_currentGame = new BomberGame(true, this->_file);
     }
 
     void	BomberMan::resumeGame()
