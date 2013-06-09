@@ -16,8 +16,8 @@ namespace BomberMan
   {
     BomberGame::BomberGame()
     {
-      Sound::SoundManager::getInstance()->stopSound("resources/sounds/musicIntro2.mp3");
-      Sound::SoundManager::getInstance()->playSound("resources/sounds/ambianceGame.mp3", true);
+      Sound::SoundManager::getInstance()->stopSound("./resources/sounds/musicIntro2.mp3");
+      Sound::SoundManager::getInstance()->playSound("./resources/sounds/ambianceGame.mp3", true);
 
       this->_manager = new Field::Manager;
 

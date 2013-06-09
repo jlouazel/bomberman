@@ -9,18 +9,25 @@ namespace BomberMan
       Video::Video(const std::string &video, const std::string &associated_sound)
       {
 	this->_isFinished = false;
-	Sound::SoundManager::getInstance()->playSound(associated_sound, false);
+	this->_sound = associated_sound;
 	this->_flux = cvCaptureFromAVI(video.c_str());
 	if (!this->_flux)
 	  this->_isFinished = true;
       }
-
+      
       void	Video::draw(void)
       {
+	static int	i = 0;
+
+	if (i == 0)
+	  {
+	    Sound::SoundManager::getInstance()->playSound(this->_sound,true);	    
+	    i = 1;
+	  }
 	if (cvGrabFrame(this->_flux))
 	  {
 	    IplImage* image = cvRetrieveFrame(this->_flux);
-
+	    
 	    cvCvtColor(image, image, CV_BGR2RGB);
 	    gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, image->width,
 			      image->height, GL_RGB, GL_UNSIGNED_BYTE, image->imageData);

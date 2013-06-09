@@ -13,11 +13,11 @@ namespace BomberMan
       FMOD_System_Create(&this->_system);
       FMOD_System_Init(this->_system, 1024, FMOD_INIT_NORMAL, 0);
 
-      this->addNewSound("resources/sounds/ambianceGame.mp3");
-      this->addNewSound("resources/sounds/Dying.mp3");
-      this->addNewSound("resources/sounds/musicIntro2.mp3");
-      this->addNewSound("resources/sounds/IntroBomberLight.mp3");
-      this->addNewSound("resources/sounds/CreditsLight.mp3");
+      this->addNewSound("./resources/sounds/ambianceGame.mp3");
+      this->addNewSound("./resources/sounds/Dying.mp3");
+      this->addNewSound("./resources/sounds/musicIntro2.mp3");
+      this->addNewSound("./resources/sounds/IntroBomberLight.mp3");
+      this->addNewSound("./resources/sounds/CreditsLight.mp3");
     }
 
     SoundManager	*SoundManager::getInstance()
@@ -40,6 +40,7 @@ namespace BomberMan
 
     void	SoundManager::playSound(const std::string &sound, bool loop)
     {
+      std::cout << "Je play " << sound << std::endl;
       if (loop)
 	{
 	  FMOD_Sound_SetLoopCount(this->_sounds[sound], -1);

@@ -444,7 +444,7 @@ namespace BomberMan
       if (this->_pv <= 0)
 	{
 	  Sound::SoundManager *manager = Sound::SoundManager::getInstance();
-	  manager->playSound("resources/sounds/Dying.mp3", false);
+	  manager->playSound("./resources/sounds/Dying.mp3", false);
 	}
     }
 

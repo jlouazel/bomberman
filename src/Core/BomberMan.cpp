@@ -91,6 +91,8 @@ namespace BomberMan
 
     void	BomberMan::_updateIntro()
     {
+      if (this->_introVideo->isFinished())
+	this->startMenu(Display::MenuEnum::MAIN);
     }
 
     void	BomberMan::_updateMenu()
