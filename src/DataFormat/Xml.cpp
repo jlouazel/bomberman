@@ -1,8 +1,6 @@
-#include <list>
+#include <iostream>
 #include <fstream>
 #include <sstream>
-#include <string>
-#include <utility>
 #include <algorithm>
 #include "ADataFormat.hh"
 #include "Parser.hh"
@@ -328,8 +326,18 @@ namespace BomberMan
       this->_children = children;
     }
 
-    std::list<std::pair <std::string const, std::string const> > const & Xml::Balise::getAttributes() const {
+    attr const & Xml::Balise::getAttributes() const {
       return this->_attributes;
+    }
+
+    std::string const  Xml::Balise::getAttrValue(std::string const & attName) const
+    {
+      for (std::list<std::pair<std::string const, std::string const> >::const_iterator it = this->getAttributes().begin(); it != this->getAttributes().end(); ++it)
+	{
+	  if (it->first.empty() == false && it->first == attName)
+	    return it->second;
+	}
+      return "";
     }
 
     void Xml::Balise::setAttributes(std::list<std::pair<std::string const, std::string const> > const & attr) {
@@ -370,6 +378,50 @@ namespace BomberMan
     void		Xml::Balise::addAttribute(std::pair<std::string, std::string> att)
     {
       this->_attributes.push_back(att);
+    }
+
+    std::list<Xml::Balise *> const & Xml::getBalises() const
+    {
+      return this->_balises;
+    }
+
+    Xml::Balise *	Xml::getBalisesWthName(std::string const & name) const
+    {
+      for (std::list<Xml::Balise *>::const_iterator it = this->_balises.begin(); it != this->_balises.end(); ++it)
+	if ((*it)->getName() == name && (*it)->getState() == OPENING)
+	  return *it;
+      return 0;
+    }
+
+    Xml::Balise *	Xml::getBalisesWtAttribute(std::string const & name, attr const & atts) const
+    {
+      std::list<Xml::Balise *>::const_iterator it;
+      for (it = this->_balises.begin(); it != this->_balises.end(); ++it)
+	if ((*it)->getName() == name && (*it)->getState() == OPENING)
+	  {
+	    attr::const_iterator it2;
+	    for (it2 = atts.begin(); it2 != atts.end(); ++it2)
+	      {
+		for (attr::const_iterator it3  = (*it)->getAttributes().begin(); it3 != (*it)->getAttributes().end(); ++it3)
+		  {
+		    if ((*it3).first != (*it2).first || (*it3).second != (*it2).second)
+		      break;
+		    return *it;
+		  }
+	      }
+	  }
+      return 0;
+    }
+
+
+    void		Xml::deleteBalisesWthName(std::string const & name)
+    {
+      for (std::list<Xml::Balise *>::iterator it = this->_balises.begin(); it != this->_balises.end(); ++it)
+	if ((*it)->getName() == name)
+	  {
+	    it = this->_balises.erase(it);
+	    return ;
+	  }
     }
   }
 }

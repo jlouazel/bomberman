@@ -52,6 +52,7 @@ namespace BomberMan
       this->_realSpeed = speed;
       this->_nb_bomb_set = 0;
       this->_moveOk = false;
+      this->_realDead = false;
     }
 
     Player::Player(Player * cpy)
@@ -322,7 +323,15 @@ namespace BomberMan
 	  i++;
         }
       else
-	this->_dead->draw();
+	{
+	  this->_dead->draw();
+	  this->_realDead = true;
+	}
+    }
+
+    bool	Player::getRealDead() const
+    {
+      return (this->_realDead);
     }
 
     void	Player::update(gdl::GameClock const & gameClock, Manager *manager)

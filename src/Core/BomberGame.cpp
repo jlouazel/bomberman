@@ -1,15 +1,24 @@
+#include	<iostream>
+#include	<sstream>
 #include	"BomberOptions.hh"
 #include	<ctime>
+#include	<unistd.h>
 #include	<fmod.h>
+#include	<fstream>
 #include	<Input.hpp>
 #include	<Clock.hpp>
 #include	<GameClock.hpp>
-#include	"BomberGame.hh"
+
+#include	"EndOfBomberMan.hh"
 #include	"SoundManager.hh"
 #include	"Texture3d.hpp"
 #include	"Texture2d.hpp"
-#include	"Wall.hh"
+#include	"BomberGame.hh"
 #include	"Player.hh"
+#include	"Enums.hh"
+#include	"Gif.hpp"
+#include	"Xml.hh"
+#include	"Wall.hh"
 #include	"Gif.hpp"
 #include	"Xml.hh"
 #include	"MyGame.hpp"
@@ -30,8 +39,8 @@ namespace BomberMan
       Sound::SoundManager::getInstance()->stopSound("./resources/sounds/musicIntro2.mp3");
       Sound::SoundManager::getInstance()->playSound("./resources/sounds/ambianceGame.mp3", true);
 
-      this->_manager = new Field::Manager;
-
+      // this->_manager = new Field::Manager;
+      this->load(".data/.saves/1370799642.xml");
       int LightPos[4] = {0,0,3,1};
       glEnable(GL_LIGHTING);
       glEnable(GL_LIGHT0);
@@ -41,6 +50,12 @@ namespace BomberMan
       Display::Vector3f      vectorLen(0.0, 0.0, 0.0);
       Display::Vector3f      vectorRot(0.0, 0.0, 0.0);
 
+      // this->_players.push_front(new Field::Player(0, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+
+      //      this->_manager->randomize(this->_players);
+
+      // std::list<Field::Player *>::iterator it = this->_players.begin();
+      // for (; it != this->_players.end(); ++it)
       BomberOptions::getOptions()->getNbPlayer();
       BomberOptions::getOptions()->getNbIA();
       std::cout << "Nb player : " << BomberOptions::getOptions()->getNbPlayer() << std::endl;
@@ -111,10 +126,20 @@ namespace BomberMan
       vectorLen3_.setY(100);
       this->_infos["background"] = new Display::Texture2d("images/black.png", vectorPosition3_, vectorRot_, vectorLen3_);
       this->_infos["background"]->initialize();
-      this->_infos["lose"] = new Display::Texture2d("images/YouAreDead.png", vectorPosition3_, vectorRot_, vectorLen3_);
-      this->_infos["lose"]->initialize();
-      this->_infos["win"] = new Display::Texture2d("images/YouWin.png", vectorPosition3_, vectorRot_, vectorLen3_);
-      this->_infos["win"]->initialize();
+      this->_infos["clean"] = new Display::Texture2d("images/BlackFond.png", vectorPosition3_, vectorRot_, vectorLen3_);
+      this->_infos["clean"]->initialize();
+      vectorPosition3_.setX(25);
+      vectorPosition3_.setY(0);
+      vectorLen3_.setX(50);
+      vectorLen3_.setY(100);
+      this->_infos["lose1"] = new Display::Texture2d("images/YouAreDead.png", vectorPosition3_, vectorRot_, vectorLen3_);
+      this->_infos["lose1"]->initialize();
+      this->_infos["win1"] = new Display::Texture2d("images/YouWin.png", vectorPosition3_, vectorRot_, vectorLen3_);
+      this->_infos["win1"]->initialize();
+      this->_infos["lose2"] = new Display::Texture2d("images/YouAreDead.png", vectorPosition3_, vectorRot_, vectorLen3_);
+      this->_infos["lose2"]->initialize();
+      this->_infos["win2"] = new Display::Texture2d("images/YouWin.png", vectorPosition3_, vectorRot_, vectorLen3_);
+      this->_infos["win2"]->initialize();
       this->_loading = false;
     }
 
@@ -136,7 +161,9 @@ namespace BomberMan
     {
       static int i = 0;
       if (i++ == 0)
-	this->save();
+	{
+	  //this->save();
+	}
       for (unsigned int y = 0; y != this->getManager()->Field::Manager::getHeight(); y++)
 	for (unsigned int x = 0; x != this->getManager()->Field::Manager::getWidth(); x++)
 	  {
@@ -180,10 +207,7 @@ namespace BomberMan
 	    if ((*it)->getId() == id)
 	      actualPlayer = (*it);
 	  if (dynamic_cast<const Event::Pause *>(event) == event)
-	    {
-	      std::cout << "KIKOU" << std::endl;
-	      event->interaction();
-	    }
+	    event->interaction();
           else if (actualPlayer && dynamic_cast<const Event::Move *>(event) == event && actualPlayer->getMoveOk() == false && actualPlayer->getPv() > 0)
             {
               const Event::Move *move = dynamic_cast<const Event::Move *>(event);
@@ -229,6 +253,14 @@ namespace BomberMan
       comp->draw(gameClock);
     }
 
+    bool	BomberGame::checkIfIWin(int id_player) const
+    {
+      for (std::list<Field::Player *>::const_iterator it = this->_players.begin(); it != this->_players.end(); ++it)
+        if ((*it)->getId() != id_player && (*it)->getPv() > 0)
+	  return (false);
+      return (true);
+    }
+
     void	BomberGame::drawForPlayer2D(gdl::GameClock const &, int id_player) const
     {
       this->_infos.at("background")->draw();
@@ -243,7 +275,22 @@ namespace BomberMan
           player = (*it);
       if (player == 0)
         return;
-
+      if (this->checkIfIWin(id_player) == true)
+      	{
+	  this->_infos.at("clean")->draw();
+          if (id_player == 0)
+            this->_infos.at("win1")->draw();
+          else if (id_player == 1)
+            this->_infos.at("win2")->draw();
+      	}
+      if (player->getRealDead() == true)
+	{
+	  this->_infos.at("clean")->draw();
+	  if (id_player == 0)
+	    this->_infos.at("lose1")->draw();
+	  else if (id_player == 1)
+	    this->_infos.at("lose2")->draw();
+	}
       for (int y = -5; y != 5; y++)
       	{
       	  for (int x = -5; x != 5; x++)
@@ -286,6 +333,10 @@ namespace BomberMan
       this->_infos.at("player")->setPosition(newPosition2);
       this->_infos.at("player")->draw();
 
+      // if (BomberOptions::getOptions()->getSkinForPlayer(player->getId()) == BomberOptions::WW)
+      // 	this->_infos.at("walter")->draw();
+      // else
+      this->_infos.at("jesse")->draw();
       if (BomberOptions::getOptions()->getSkinForPlayer(player->getId()) == BomberOptions::WW)
       	this->_infos.at("walter")->draw();
       else
@@ -441,17 +492,97 @@ namespace BomberMan
       return s.str();
     }
 
+    static unsigned int stringToInt(std::string const & str)
+    {
+      int ret;
+      std::stringstream s;
+      s << str.c_str();
+      s >> ret;
+      return ret;
+    }
+    void	BomberGame::load(std::string const & filename)
+    {
+      DataFormat::Xml xml(filename);
+      unsigned int width = stringToInt(xml.getBalisesWthName("field")->getAttrValue("width"));
+      unsigned int height = stringToInt(xml.getBalisesWthName("field")->getAttrValue("height"));
+      std::list<Field::IGameComponent *> objs;
+      Field::Manager * manager = new Field::Manager(width, height);
+      for (std::list<DataFormat::Xml::Balise *>::const_iterator it = xml.getBalises().begin(); it != xml.getBalises().end(); ++it)
+	{
+	  if ((*it)->getName().empty() != true && (*it)->getName() == "wall" && (*it)->getState() == DataFormat::OPENING)
+	    {
+	      unsigned int x = stringToInt((*it)->getAttrValue("x"));
+	      unsigned int y = stringToInt((*it)->getAttrValue("y"));
+	      Display::Vector3f	vectorLen(0.0, 0.0, 0.0);
+	      Display::Vector3f	vectorRot(0.0, manager->randAngle(5), 0.0);
+	      Display::Vector3f	vectorPosition(y * 220, 0.0, x * 220);
+	      manager->addComponent(x, y, new Field::Wall(true, 1, y, x, new Display::Texture3d("models/Barrel.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+	    }
+	  else if ((*it)->getName().empty() != true && (*it)->getName() == "object" && (*it)->getState() == DataFormat::OPENING)
+	    {
+	      unsigned int x = stringToInt((*it)->getAttrValue("x"));
+	      unsigned int y = stringToInt((*it)->getAttrValue("y"));
+	      Display::Vector3f	vectorLen(0.0, 0.0, 0.0);
+	      Display::Vector3f	vectorRot(0.0, 0.0, 0.0);
+	      Display::Vector3f	vectorPosition(y * 220, 0.0, x * 220);
+	      switch (stringToInt((*it)->getAttrValue("buffType")))
+	      	{
+	      	case 0:
+		  if (dynamic_cast<Field::Wall *>(manager->get(x, y).front()) == manager->get(x, y).front())
+		    dynamic_cast<Field::Wall *>(manager->get(x, y).front())->setContent(new Field::Object(y, x, new Display::Texture3d("models/PorteeBonus.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, Field::BUFF, Field::RANGE, 0, 0, -1));
+		  else
+		    manager->addComponent(x, y, new Field::Object(y, x, new Display::Texture3d("models/PorteeBonus.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, Field::BUFF, Field::RANGE, 0, 0, -1));
+	      	  break;
+	      	case 1:
+		  if (dynamic_cast<Field::Wall *>(manager->get(x, y).front()) == manager->get(x, y).front())
+		    dynamic_cast<Field::Wall *>(manager->get(x, y).front())->setContent(new Field::Object(y, x, new Display::Texture3d("models/SpeedBonus.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, Field::BUFF, Field::SPEED, 0, 0, -1));
+		  else
+		    manager->addComponent(x, y, new Field::Object(y, x, new Display::Texture3d("models/SpeedBonus.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, Field::BUFF, Field::SPEED, 0, 0, -1));
+	      	  break;
+	      	case 2:
+		  if (dynamic_cast<Field::Wall *>(manager->get(x, y).front()) == manager->get(x, y).front())
+		    dynamic_cast<Field::Wall *>(manager->get(x, y).front())->setContent(new Field::Object(y, x, new Display::Texture3d("models/LifeBonus.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, Field::BUFF, Field::LIFE, 0, 0, -1));
+		  else
+		    manager->addComponent(x, y, new Field::Object(y, x, new Display::Texture3d("models/LifeBonus.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, Field::BUFF, Field::LIFE, 0, 0, -1));
+	      	  break;
+	      	case 3:
+		  if (dynamic_cast<Field::Wall *>(manager->get(x, y).front()) == manager->get(x, y).front())
+		    dynamic_cast<Field::Wall *>(manager->get(x, y).front())->setContent(new Field::Object(y, x, new Display::Texture3d("models/MoreBombBonus.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, Field::BUFF, Field::MORE, 0, 0, -1));
+		  else
+		    manager->addComponent(x, y, new Field::Object(y, x, new Display::Texture3d("models/MoreBombBonus.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, Field::BUFF, Field::MORE, 0, 0, -1));
+	      	  break;
+	      	default:
+	      	  break;
+	      	}
+	    }
+	  for (std::list<DataFormat::Xml::Balise *>::const_iterator it = xml.getBalises().begin(); it != xml.getBalises().end(); ++it)
+	    {
+	      if ((*it)->getName().empty() != true && (*it)->getName() == "player" && (*it)->getState() == DataFormat::OPENING)
+		{
+		  Display::Vector3f      vectorPosition(stringToInt((*it)->getAttrValue("y")) * 220, 0, stringToInt((*it)->getAttrValue("x")) * 220);
+		  Display::Vector3f      vectorLen(0, 0, 0.0);
+		  Display::Vector3f      vectorRot(0.0, 0.0, 0.0);
+		  this->_players.push_back(new Field::Player(stringToInt((*it)->getAttrValue("id")), stringToInt((*it)->getAttrValue("pv")), stringToInt((*it)->getAttrValue("speed")), stringToInt((*it)->getAttrValue("bombmax")), stringToInt((*it)->getAttrValue("bombset")), stringToInt((*it)->getAttrValue("x")), stringToInt((*it)->getAttrValue("y")), new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+		}
+	    }
+	}
+      this->_manager = manager;
+    }
+
     void	BomberGame::save()
     {
+      if (access(".data/", F_OK) == -1 || access(".data/.saves/", F_OK) == -1)
+	throw(EndOfBomberMan("unable to access saves directory", "save method", "./data/.saves/"));
       time_t t = time(0);
       struct tm * now = localtime(&t);
       static std::string extend = ".xml";
       static std::string path = ".data/.saves/";
+      std::string name = intToString(time(0));
       DataFormat::Xml xml;
       std::list<DataFormat::Xml::Balise *> bals;
 
       bals.push_back(new DataFormat::Xml::Balise("backup", DataFormat::OPENING));
-      bals.back()->addAttribute(std::make_pair("id", intToString(time(0))));
+      bals.back()->addAttribute(std::make_pair("id", name));
 
       bals.push_back(new DataFormat::Xml::Balise("infos", DataFormat::OPENING));
       bals.push_back(new DataFormat::Xml::Balise("second", DataFormat::OPENING));
@@ -481,6 +612,17 @@ namespace BomberMan
 	  bals.back()->addAttribute(std::make_pair("id", intToString((*itPl)->getId())));
 	  bals.back()->addAttribute(std::make_pair("x", intToString((*itPl)->getX())));
 	  bals.back()->addAttribute(std::make_pair("y", intToString((*itPl)->getY())));
+	  bals.back()->addAttribute(std::make_pair("pv", intToString((*itPl)->getPv())));
+	  bals.back()->addAttribute(std::make_pair("speed", intToString((*itPl)->getSpeed())));
+	  bals.back()->addAttribute(std::make_pair("readSpeed", intToString((*itPl)->getRealSpeed())));
+	  bals.back()->addAttribute(std::make_pair("power", intToString((*itPl)->getPower())));
+	  bals.back()->addAttribute(std::make_pair("bombmax", intToString((*itPl)->getNbBombMax())));
+	  bals.back()->addAttribute(std::make_pair("bombset", intToString((*itPl)->getNbBombSet())));
+
+	  bals.back()->addAttribute(std::make_pair("nbCaisseDestroyed", intToString((*itPl)->getNbCaisseDestroyed())));
+	  bals.back()->addAttribute(std::make_pair("nbPlayerKilled", intToString((*itPl)->getNbPlayerKilled())));
+	  bals.back()->addAttribute(std::make_pair("buffTaked", intToString((*itPl)->getNbBuffTaked())));
+
 	  bals.push_back(new DataFormat::Xml::Balise("pv", DataFormat::OPENING));
 	  bals.back()->setContent(intToString((*itPl)->getPv()));
 	  bals.push_back(new DataFormat::Xml::Balise("pv", DataFormat::CLOSING));
@@ -507,6 +649,7 @@ namespace BomberMan
 	  bals.push_back(new DataFormat::Xml::Balise("nbBuffTaked", DataFormat::OPENING));
 	  bals.back()->setContent(intToString((*itPl)->getNbBuffTaked()));
 	  bals.push_back(new DataFormat::Xml::Balise("nbBuffTaked", DataFormat::CLOSING));
+
 	  bals.push_back(new DataFormat::Xml::Balise("player", DataFormat::CLOSING));
 	}
       bals.push_back(new DataFormat::Xml::Balise("players", DataFormat::CLOSING));
@@ -517,30 +660,43 @@ namespace BomberMan
       for (unsigned int y = 0; y != this->_manager->getHeight(); y++)
 	for (unsigned int x = 0; x != this->_manager->getWidth(); x++)
 	  {
-	    bals.push_back(new DataFormat::Xml::Balise("case", DataFormat::OPENING));
-	    bals.back()->addAttribute(std::make_pair("x", intToString(x)));
-	    bals.back()->addAttribute(std::make_pair("y", intToString(y)));
-	    for (std::list<Field::IGameComponent *>::iterator it = this->_manager->get(x, y).begin(); it != this->_manager->get(x, y).end(); ++it)
-	      {
-		if (dynamic_cast<Field::Wall *>(*it) == *it)
-		  {
-		    bals.push_back(new DataFormat::Xml::Balise("wall", DataFormat::OPENING));
-		    bals.back()->addAttribute(std::make_pair("x", intToString(dynamic_cast<Field::Wall *>(*it)->isBreakable())));
-		    if (dynamic_cast<Field::Wall *>(*it)->isBreakable() == true)
-		      if (dynamic_cast<Field::Wall *>(*it)->getContent() != 0)
-			{
+	    std::list<Field::IGameComponent *>::iterator it;
+	    for (it = this->_manager->get(x, y).begin(); it != this->_manager->get(x, y).end(); ++it)
+	      if (dynamic_cast<Field::Wall *>(*it) == *it && dynamic_cast<Field::Wall *>(*it)->isBreakable() == true)
+		{
+		  bals.push_back(new DataFormat::Xml::Balise("wall", DataFormat::OPENING));
+		  bals.back()->addAttribute(std::make_pair("x", intToString(x)));
+		  bals.back()->addAttribute(std::make_pair("y", intToString(y)));
+		  bals.push_back(new DataFormat::Xml::Balise("wall", DataFormat::CLOSING));
+		  if (dynamic_cast<Field::Wall *>(*it)->getContent() != 0)
+		    {
+		      bals.push_back(new DataFormat::Xml::Balise("object", DataFormat::OPENING));
+		      bals.back()->addAttribute(std::make_pair("x", intToString(x)));
+		      bals.back()->addAttribute(std::make_pair("y", intToString(y)));
+		      bals.back()->addAttribute(std::make_pair("objectType", intToString(dynamic_cast<Field::Wall *>(*it)->getContent()->getObjectType())));
+		      bals.back()->addAttribute(std::make_pair("buffType", intToString(dynamic_cast<Field::Wall *>(*it)->getContent()->getBuffType())));
+		      bals.back()->addAttribute(std::make_pair("power", intToString(dynamic_cast<Field::Wall *>(*it)->getContent()->getPower())));
+		      bals.back()->addAttribute(std::make_pair("timer", intToString(dynamic_cast<Field::Wall *>(*it)->getContent()->getTimer())));
+		      bals.push_back(new DataFormat::Xml::Balise("object", DataFormat::CLOSING));
+		    }
+		}
+	      else if (dynamic_cast<Field::Object *>(*it) == *it)
+		{
+		  bals.push_back(new DataFormat::Xml::Balise("object", DataFormat::OPENING));
+		  bals.back()->addAttribute(std::make_pair("x", intToString(x)));
+		  bals.back()->addAttribute(std::make_pair("y", intToString(y)));
 
-			}
-		    bals.push_back(new DataFormat::Xml::Balise("wall", DataFormat::CLOSING));
-		  }
-	      }
-	    bals.push_back(new DataFormat::Xml::Balise("case", DataFormat::CLOSING));
+		  bals.back()->addAttribute(std::make_pair("objectType", intToString(dynamic_cast<Field::Wall *>(*it)->getContent()->getObjectType())));
+		  bals.back()->addAttribute(std::make_pair("buffType", intToString(dynamic_cast<Field::Wall *>(*it)->getContent()->getBuffType())));
+		  bals.back()->addAttribute(std::make_pair("power", intToString(dynamic_cast<Field::Wall *>(*it)->getContent()->getPower())));
+		  bals.back()->addAttribute(std::make_pair("timer", intToString(dynamic_cast<Field::Wall *>(*it)->getContent()->getTimer())));
+		  bals.push_back(new DataFormat::Xml::Balise("object", DataFormat::CLOSING));
+		}
 	  }
       bals.push_back(new DataFormat::Xml::Balise("field", DataFormat::CLOSING));
       bals.push_back(new DataFormat::Xml::Balise("backup", DataFormat::CLOSING));
-
       xml.addBalises(bals);
-      xml.generate("test" + extend);
+      xml.generate(path + name + extend);
     }
   }
 }

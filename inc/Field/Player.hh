@@ -44,6 +44,7 @@ namespace BomberMan
       int         _nbPlayerKilled;
       int	  _nbBuffTaked;
       bool	  _moveOk;
+      bool	  _realDead;
 
       int	_width;
       int	_height;
@@ -102,6 +103,7 @@ namespace BomberMan
       void		  setMoveOk(bool);
       bool		  getMoveOk() const;
       void		  updateCamera(gdl::GameClock const & gameClock);
+      bool		  getRealDead() const;
       void		  startIA(int, int, const std::vector<std::list<IGameComponent *> > &, const std::list<Player *> &);
     };
   }

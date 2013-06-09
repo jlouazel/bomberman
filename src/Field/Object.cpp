@@ -12,6 +12,7 @@ namespace BomberMan
       this->_x = x;
       this->_y = y;
       this->_asset = asset;
+      this->_asset->initialize();
       this->_sound = sound;
       this->_animation = anim;
       this->_runningTimer = 0;
