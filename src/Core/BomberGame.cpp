@@ -41,6 +41,8 @@ namespace BomberMan
       Display::Vector3f      vectorLen(0.0, 0.0, 0.0);
       Display::Vector3f      vectorRot(0.0, 0.0, 0.0);
 
+      BomberOptions::getOptions()->getNbPlayer();
+      BomberOptions::getOptions()->getNbIA();
       this->_players.push_back(new Field::Player(0, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
       this->_players.back()->setCamera(new Display::Camera(BomberOptions::getOptions()->getNbPlayer()));
       this->_players.push_back(new Field::Player(1, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
@@ -261,7 +263,7 @@ namespace BomberMan
       		}
       	    }
       	}
-      
+
       Display::Vector3f      newPosition2(startx, starty, 0);
       this->_infos.at("player")->setPosition(newPosition2);
       this->_infos.at("player")->draw();
