@@ -2,6 +2,7 @@
 #define __BOMBERMAN_HH__
 
 #include	<Game.hpp>
+#include	"Video.hpp"
 #include	"MenuEnum.hh"
 #include	"BomberGame.hh"
 
@@ -25,6 +26,8 @@ namespace BomberMan
 
     private:
       BomberGame*	_currentGame;
+      Display::Video*		_introVideo;
+      Display::Video*		_creditVideo;
 
     private:
       void		_initializeWindow();

@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 21:01:45 2013 julien fortin
-// Last update Sat Jun  8 15:02:45 2013 julien fortin
+// Last update Sun Jun  9 02:33:01 2013 julien fortin
 //
 
 #ifndef	__MENUENUM_HH__
@@ -21,8 +21,9 @@ namespace BomberMan
 	{
 	  NO,
 	  MAIN,
-	  NEWGAME,
 	  LOAD,
+	  NEWGAME,
+	  LOADING,
 	  OPTIONS,
 	  CREDITS,
 	  QUIT,
@@ -30,6 +31,7 @@ namespace BomberMan
 	  CUSTOMIZE,
 	  MAPOPTIONS,
 	  COOK,
+	  LAUNCHGAME,
 	  PAUSE
 	};
     };

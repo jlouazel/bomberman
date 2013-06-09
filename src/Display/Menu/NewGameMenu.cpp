@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 21:25:38 2013 julien fortin
-// Last update Sat Jun  8 01:14:27 2013 julien fortin
+// Last update Sun Jun  9 01:32:18 2013 julien fortin
 //
 
 #include	"MenuManager.hh"
@@ -31,12 +31,12 @@ namespace BomberMan
       Vector3f      vectorLen(50.0, 8.0, 0.0);
       Vector3f      vectorRotation(0.0, 0.0, 0.0);
 
-      IOnglet *newOnglet = new OngletMenu(MenuEnum::QUICKGAME, "quickGame",
+      IOnglet *newOnglet = new OngletMenu(MenuEnum::LOADING, "quickGame",
 					  new Texture2d("resources/images/quickGame.png",
 							vectorPosition, vectorRotation, vectorLen));
       this->_menu->addOnglet(newOnglet);
 
-      this->_hover[0] = new OngletMenu(MenuEnum::QUICKGAME, "quickGame",
+      this->_hover[0] = new OngletMenu(MenuEnum::LOADING, "quickGame",
 				       new Texture2d("resources/images/quickGameHover.png",
 						     vectorPosition, vectorRotation, vectorLen));
 

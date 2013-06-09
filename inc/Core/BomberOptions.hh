@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  8 13:39:38 2013 julien fortin
-// Last update Sat Jun  8 19:53:44 2013 julien fortin
+// Last update Sun Jun  9 01:41:25 2013 julien fortin
 //
 
 #ifndef	__BOMBEROPTIONS_HH__
@@ -28,6 +28,8 @@ namespace BomberMan
     private:
       static BomberOptions*	_options;
 
+      bool			_quickGame;
+
       unsigned int		_nbPlayer;
       unsigned int		_nbIA;
       unsigned int		_width;
@@ -44,12 +46,16 @@ namespace BomberMan
       static BomberOptions*	getOptions();
       static void		deleteOptions();
 
+      bool		isQuickGame() const;
       unsigned int	getWidth() const;
       unsigned int	getHeight() const;
       unsigned int	getNbPlayer() const;
       unsigned int	getNbIA() const;
       ePlayerSkin	getSkinForPlayer(unsigned int) const;
 
+      void		init();
+
+      void		setNotQuickGame();
       void		setWidth(unsigned int);
       void		setHeight(unsigned int);
       void		setSkinForPlayer(unsigned int, ePlayerSkin);

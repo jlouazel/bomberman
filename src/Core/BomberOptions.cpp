@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  8 13:44:23 2013 julien fortin
-// Last update Sat Jun  8 19:48:16 2013 julien fortin
+// Last update Sun Jun  9 01:42:03 2013 julien fortin
 //
 
 #include	"EndOfBomberMan.hh"
@@ -34,13 +34,21 @@ namespace BomberMan
 
     BomberOptions::BomberOptions()
     {
-      this->_nbPlayer = 1;
-      this->setSkinForPlayer(1, BomberOptions::WW);
-      this->setSkinForPlayer(2, BomberOptions::JP);
+      this->init();
     }
 
     BomberOptions::~BomberOptions()
     {
+    }
+
+    void		BomberOptions::init()
+    {
+      this->_quickGame = true;
+      this->_nbPlayer = 1;
+      this->setSkinForPlayer(1, BomberOptions::WW);
+      this->setSkinForPlayer(2, BomberOptions::JP);
+      this->_nbPlayer = 1;
+      this->_nbIA = 3;
     }
 
     unsigned int	BomberOptions::getWidth() const
@@ -68,6 +76,16 @@ namespace BomberMan
       if (this->_skins.count(id) > 0)
 	return this->_skins.at(id);
       return NOSKIN;
+    }
+
+    bool	BomberOptions::isQuickGame() const
+    {
+      return this->_quickGame;
+    }
+
+    void	BomberOptions::setNotQuickGame()
+    {
+      this->_quickGame = false;
     }
 
     void	BomberOptions::setSkinForPlayer(unsigned int i, ePlayerSkin s)
