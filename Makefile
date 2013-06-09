@@ -1,10 +1,10 @@
-CC          = g++
+xCC          = g++
 
 RM          = rm -f
 
 NAME		= bomberman
 
-CPPFLAGS	+= -W -Wall -Wextra -O2 -g3
+CPPFLAGS	+= -W -Wall -Wextra -O2
 
 CPPFLAGS	+= -I./inc/
 CPPFLAGS	+= -I./inc/Core/
@@ -40,6 +40,7 @@ SRCS_CORE	= $(SRC_DIR)$(CORE)BomberMan.cpp \
 		$(SRC_DIR)$(CORE)BomberGame.cpp \
 		$(SRC_DIR)$(CORE)BomberOptions.cpp \
 		$(SRC_DIR)$(CORE)EndOfBomberMan.cpp \
+		$(SRC_DIR)$(CORE)LoadFile.cpp
 
 SRCS_DATA	= $(SRC_DIR)$(DATAFORMAT)ADataFormat.cpp \
 		$(SRC_DIR)$(DATAFORMAT)FormatError.cpp \
@@ -81,7 +82,7 @@ SRCS_FIELD	= $(SRC_DIR)$(FIELD)AGameComponent.cpp \
 		$(SRC_DIR)$(FIELD)ObjectFactory.cpp \
 		$(SRC_DIR)$(FIELD)Wall.cpp \
 		$(SRC_DIR)$(FIELD)FManager.cpp \
-		$(SRC_DIR)$(FIELD)Player.cpp
+		$(SRC_DIR)$(FIELD)Player.cpp \
 
 SRCS_INPUT	= $(SRC_DIR)$(INPUT)InputManager.cpp \
 		$(SRC_DIR)$(INPUT)InputError.cpp \
