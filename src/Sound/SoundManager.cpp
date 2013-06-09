@@ -16,8 +16,8 @@ namespace BomberMan
       this->addNewSound("resources/sounds/ambianceGame.mp3");
       this->addNewSound("resources/sounds/Dying.mp3");
       this->addNewSound("resources/sounds/musicIntro2.mp3");
-      this->addNewSound("resources/sounds/IntroBomber.mp3");
-      this->addNewSound("resources/sounds/Credits.mp3");
+      this->addNewSound("resources/sounds/IntroBomberLight.mp3");
+      this->addNewSound("resources/sounds/CreditsLight.mp3");
     }
 
     SoundManager	*SoundManager::getInstance()

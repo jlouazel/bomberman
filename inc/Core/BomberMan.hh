@@ -2,8 +2,7 @@
 #define __BOMBERMAN_HH__
 
 #include	<Game.hpp>
-#include	<opencv/cv.h>
-#include	<opencv/highgui.h>
+#include	"Video.hpp"
 #include	"MenuEnum.hh"
 #include	"BomberGame.hh"
 
@@ -27,8 +26,9 @@ namespace BomberMan
 
     private:
       BomberGame*	_currentGame;
-      CvCapture*	_videoIntro;
-      
+      Display::Video*		_introVideo;
+      Display::Video*		_creditVideo;
+
     private:
       void		_initializeWindow();
       void		_initializeIntro();
