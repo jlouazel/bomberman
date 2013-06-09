@@ -24,7 +24,7 @@ namespace BomberMan
 {
   namespace Field
   {
-    Player::Player(int id, int pv, float speed, int max, int set, float x, float y, BomberMan::Display::AObject * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim)
+    Player::Player(int id, int pv, float speed, int max, int set, float x, float y, BomberMan::Display::AObject * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim, unsigned char r, unsigned char g, unsigned char b)
       :   _id(id), _pv(pv), _speed(speed), _nb_bomb_max(max), _nb_bomb_set(set)
     {
       Display::Vector3f	position(0, 0, 0);
@@ -53,6 +53,9 @@ namespace BomberMan
       this->_nb_bomb_set = 0;
       this->_moveOk = false;
       this->_realDead = false;
+      this->_colorG = g;
+      this->_colorR = r;
+      this->_colorB = b;
     }
 
     Player::Player(Player * cpy)
@@ -220,7 +223,7 @@ namespace BomberMan
       this->_walking->initialize();
       this->_mark->initialize();
       this->_run->initialize();
-      this->_mark->setColor(0, 0, 255);
+      this->_mark->setColor(this->_colorR, this->_colorG, this->_colorB);
       if (this->_camera != 0)
 	this->_camera->initialize();
       this->_bomb->initialize();

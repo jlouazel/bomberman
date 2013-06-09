@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 21 16:21:04 2013 julien fortin
-// Last update Sun Jun  9 14:15:14 2013 julien fortin
+// Last update Sun Jun  9 21:07:39 2013 julien fortin
 //
 
 #include	"Action.hh"
@@ -26,7 +26,7 @@ namespace BomberMan
     {
     }
 
-    void	Action::interaction() const
+    void	Action::interaction(bool) const
     {
     }
   }

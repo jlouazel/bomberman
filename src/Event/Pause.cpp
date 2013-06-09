@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 21 16:21:04 2013 julien fortin
-// Last update Sun Jun  9 16:13:00 2013 julien fortin
+// Last update Sun Jun  9 21:14:31 2013 julien fortin
 //
 
 #include	"MenuManager.hh"
@@ -27,9 +27,12 @@ namespace BomberMan
     {
     }
 
-    void	Pause::interaction() const
+    void	Pause::interaction(bool finish) const
     {
-      Core::BomberMan::getCore()->startMenu(Display::MenuEnum::PAUSE);
+      if (finish)
+	Core::BomberMan::getCore()->startMenu(Display::MenuEnum::MAIN);
+      else
+	Core::BomberMan::getCore()->startMenu(Display::MenuEnum::PAUSE);
     }
   }
 }
