@@ -168,7 +168,7 @@ namespace BomberMan
 	      std::cout << "KIKOU" << std::endl;
 	      event->interaction();
 	    }
-          else if (actualPlayer && dynamic_cast<const Event::Move *>(event) == event && actualPlayer->getMoveOk() == false)
+          else if (actualPlayer && dynamic_cast<const Event::Move *>(event) == event && actualPlayer->getMoveOk() == false && actualPlayer->getPv() > 0)
             {
               const Event::Move *move = dynamic_cast<const Event::Move *>(event);
               actualPlayer->setIsRunning(move->isRunning());
@@ -190,7 +190,7 @@ namespace BomberMan
                 }
               actualPlayer->setMoveOk(true);
             }
-          else if (actualPlayer && dynamic_cast<const Event::Action *>(event) == event && actualPlayer->getNbBombSet() < actualPlayer->getNbBombMax())
+          else if (actualPlayer && dynamic_cast<const Event::Action *>(event) == event && actualPlayer->getNbBombSet() < actualPlayer->getNbBombMax() && actualPlayer->getPv() > 0)
             actualPlayer->setBomb(this->_manager);
           delete event;
         }
