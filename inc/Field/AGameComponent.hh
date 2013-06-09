@@ -24,7 +24,7 @@ namespace BomberMan
     public:
       virtual ~AGameComponent(){}
 
-      virtual void					explode(int, Manager *) = 0;
+      virtual void					explode(int, Manager *, int) = 0;
       virtual bool                      operator==(IGameComponent *) = 0;
       virtual bool        isEnd() const;
       virtual void  draw(gdl::GameClock const &) = 0;

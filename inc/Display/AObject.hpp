@@ -45,7 +45,7 @@ namespace BomberMan
       void			setLen(Vector3f &);
       Vector3f		getRotation() const;
       Vector3f		getPosition() const;
-      Vector3f		getLen() const;
+      Vector3f	        getLen() const;
     };
   }
 }

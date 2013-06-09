@@ -23,6 +23,7 @@ namespace BomberMan
     class Player : public AGameComponent
     {
     protected:
+      int	  _id;
       int         _pv;
       float       _speed;
       int         _nb_bomb_max;
@@ -32,15 +33,17 @@ namespace BomberMan
       Display::AObject *   _walking;
       Display::AObject *   _mark;
       Display::AObject *   _run;
-
       Display::AObject *   _dead;
       Display::AObject *   _dying;
       Display::Camera *	  _camera;
       bool	  _isMoving;
       bool        _isRunning;
+      int         _nbCaisseDestroyed;
+      int         _nbPlayerKilled;
+      int	  _nbBuffTaked;
 
     public:
-      Player(int pv, float speed, int max, int set, float x, float y, Display::AObject * asset, Display::ISound * sound, Display::IAnimation * anim);
+      Player(int id, int pv, float speed, int max, int set, float x, float y, Display::AObject * asset, Display::ISound * sound, Display::IAnimation * anim);
       Player(Player *);
       ~Player();
 
@@ -55,7 +58,7 @@ namespace BomberMan
       float       getSpeed() const;
       void        setSpeed(float);
       Object *    getBomb() const;
-      void        explode(int, Manager *);
+      void        explode(int, Manager *, int);
       int         getPv() const;
       void        setPv(int);
       void	  setCamera(Display::Camera *);
@@ -74,6 +77,13 @@ namespace BomberMan
       Display::Camera *	  getCamera() const;
       Display::AObject *  getWalking() const;
       Display::AObject *  getAsset() const;
+      int		  getNbBuffTaked() const;
+      int		  getNbPlayerKilled() const;
+      int		  getNbCaisseDestroyed() const;
+      void		  setNbBuffTaked(int);
+      void		  setNbPlayerKilled(int);
+      void		  setNbCaisseDestroyed(int);
+      int		  getId() const;
     };
   }
 }
