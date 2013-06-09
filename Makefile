@@ -57,10 +57,11 @@ SRCS_DISPLAY	= $(SRC_DIR)$(DISPLAY)AObject.cpp \
 
 SRCS_MENU	= $(SRC_DIR)$(DISPLAY)$(MENU)MainMenu.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)NewGameMenu.cpp \
+		$(SRC_DIR)$(DISPLAY)$(MENU)Loading.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)CookMenu.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)CustomizeMenu.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)MapOptionsMenu.cpp \
-		$(SRC_DIR)$(DISPLAY)$(MENU)QuickGame.cpp \
+		$(SRC_DIR)$(DISPLAY)$(MENU)LaunchGame.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)PauseMenu.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)MenuManager.cpp \
 		$(SRC_DIR)$(DISPLAY)$(MENU)Menu.cpp \

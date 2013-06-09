@@ -156,7 +156,7 @@ namespace BomberMan
       this->_intro = false;
       this->_menu = false;
       this->_game = true;
-      this->_currentGame = new BomberGame;
+      this->_currentGame = new BomberGame;//(BomberOptions::getOptions()->isQuickGame());
     }
   }
 }

@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 20:56:39 2013 julien fortin
-// Last update Sat Jun  8 15:14:03 2013 julien fortin
+// Last update Sun Jun  9 00:55:04 2013 julien fortin
 //
 
 #ifndef	__MAPOPTIONSMENU_HH__
@@ -30,20 +30,21 @@ namespace BomberMan
 
       Menu*			_menu;
       unsigned int		_cursor;
-      unsigned int		_cursorNbPlayer;
-      int			_currentsIA;
       Core::BomberMan* const	_core;
 
-      std::map<unsigned int, IOnglet*>	_nbPlayer;
-      std::map<unsigned int, IOnglet*>	_nbIA;
-      std::map<unsigned int, IOnglet*>	_hover;
+      std::map<unsigned int, IOnglet*>	_nb;
       std::map<unsigned int, IOnglet*>	_arrow;
+
+      IOnglet*	_back;
+
+      unsigned int	_height;
+      unsigned int	_width;
 
       void	_cursorMove();
       void	_cursorRight();
       void	_cursorLeft();
 
-      static const unsigned int	_nbOnglet = 0;
+      static const unsigned int	_nbOnglet = 2;
 
     public:
 
