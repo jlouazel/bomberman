@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 21:25:38 2013 julien fortin
-// Last update Sat Jun  8 13:31:10 2013 julien fortin
+// Last update Sun Jun  9 14:38:19 2013 julien fortin
 //
 
 #include	"MenuManager.hh"
@@ -17,7 +17,6 @@
 #include	"EventManager.hh"
 #include	"PauseMenu.hh"
 #include	<unistd.h>
-
 #include	<iostream>
 
 namespace BomberMan
@@ -33,58 +32,57 @@ namespace BomberMan
       Vector3f      vectorLen(50.0, 8.0, 0.0);
       Vector3f      vectorRotation(0.0, 0.0, 0.0);
 
-      IOnglet *newOnglet = new OngletMenu(MenuEnum::NEWGAME, "newGame",
-					  new Texture2d("resources/images/newgame.png",
+      IOnglet *newOnglet = new OngletMenu(MenuEnum::RESUME, "resume",
+					  new Texture2d("resources/images/resume.png",
 							vectorPosition, vectorRotation, vectorLen));
       this->_menu->addOnglet(newOnglet);
 
-      this->_hover[0] = new OngletMenu(MenuEnum::NEWGAME, "newGame",
-				       new Texture2d("resources/images/newgameHover.png",
+      this->_hover[0] = new OngletMenu(MenuEnum::RESUME, "resume",
+				       new Texture2d("resources/images/resumeHover.png",
 						     vectorPosition, vectorRotation, vectorLen));
 
       vectorPosition.setY(28);
-      newOnglet = new OngletMenu(MenuEnum::LOAD, "continueGame",
-				 new Texture2d("resources/images/continuegame.png",
-					       vectorPosition, vectorRotation, vectorLen));
-      this->_menu->addOnglet(newOnglet);
-
-      this->_hover[1] = new OngletMenu(MenuEnum::LOAD, "continueGame",
-				       new Texture2d("resources/images/continuegameHover.png",
-						     vectorPosition, vectorRotation, vectorLen));
-      this->_hover[1]->initialize();
-
-      vectorPosition.setY(41);
       newOnglet = new OngletMenu(MenuEnum::OPTIONS, "options",
 				 new Texture2d("resources/images/options.png",
 					       vectorPosition, vectorRotation, vectorLen));
       this->_menu->addOnglet(newOnglet);
 
-      this->_hover[2] = new OngletMenu(MenuEnum::OPTIONS, "options",
+      this->_hover[1] = new OngletMenu(MenuEnum::OPTIONS, "continueGame",
 				       new Texture2d("resources/images/optionsHover.png",
+						     vectorPosition, vectorRotation, vectorLen));
+      this->_hover[1]->initialize();
+
+      vectorPosition.setY(41);
+      newOnglet = new OngletMenu(MenuEnum::SAVE, "save",
+				 new Texture2d("resources/images/save.png",
+					       vectorPosition, vectorRotation, vectorLen));
+      this->_menu->addOnglet(newOnglet);
+
+      this->_hover[2] = new OngletMenu(MenuEnum::SAVE, "save",
+				       new Texture2d("resources/images/saveHover.png",
 						     vectorPosition, vectorRotation, vectorLen));
       this->_hover[2]->initialize();
 
       vectorPosition.setY(54);
-      newOnglet = new OngletMenu(MenuEnum::CREDITS, "credits",
-				 new Texture2d("resources/images/credits.png",
+      newOnglet = new OngletMenu(MenuEnum::LOAD, "load",
+				 new Texture2d("resources/images/load.png",
 					       vectorPosition, vectorRotation, vectorLen));
       this->_menu->addOnglet(newOnglet);
 
 
-      this->_hover[3] = new OngletMenu(MenuEnum::CREDITS, "credits",
-				       new Texture2d("resources/images/creditsHover.png",
+      this->_hover[3] = new OngletMenu(MenuEnum::LOAD, "load",
+				       new Texture2d("resources/images/loadHover.png",
 						     vectorPosition, vectorRotation, vectorLen));
       this->_hover[3]->initialize();
 
       vectorPosition.setY(67);
-      newOnglet = new OngletMenu(MenuEnum::QUIT, "quit",
-				 new Texture2d("resources/images/quit.png",
+      newOnglet = new OngletMenu(MenuEnum::SURRENDER, "surrender",
+				 new Texture2d("resources/images/surrender.png",
 					       vectorPosition, vectorRotation, vectorLen));
       this->_menu->addOnglet(newOnglet);
 
-      this->_hover[4] = new OngletMenu(MenuEnum::QUIT,
-				       "quit",
-				       new Texture2d("resources/images/quitHover.png",
+      this->_hover[4] = new OngletMenu(MenuEnum::SURRENDER, "surrender",
+				       new Texture2d("resources/images/surrenderHover.png",
 						     vectorPosition, vectorRotation, vectorLen));
       this->_hover[4]->initialize();
 

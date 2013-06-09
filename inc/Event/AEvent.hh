@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 14 17:55:11 2013 julien fortin
-// Last update Thu May 30 18:38:11 2013 Jean-Baptiste Louazel
+// Last update Sun Jun  9 13:50:13 2013 julien fortin
 //
 
 #ifndef	__AEVENT_HH__
@@ -15,36 +15,38 @@
 
 namespace BomberMan
 {
-    namespace Event
+  namespace Event
+  {
+    class AEvent : public IEvent
     {
-        class AEvent : public IEvent
-        {
-        private:
-            float								_x;
-            float								_y;
-            EventType::eEventType				_type;
-            EventContext::eEventContext			_context;
-            EventDirection::eEventDirection		_direction;
-            EventCategory::eEventCategory		_category;
-            
-        public:
-            virtual ~AEvent();
-            
-            AEvent(EventCategory::eEventCategory,
-                   EventContext::eEventContext,
-                   EventType::eEventType,
-                   EventDirection::eEventDirection,
-                   float, float);
-            
-            virtual void							interaction() const = 0;
-            virtual float							getX() const;
-            virtual float							getY() const;
-            virtual EventType::eEventType			getType() const;
-            virtual EventDirection::eEventDirection	getDirection() const;
-            virtual EventContext::eEventContext		getContext() const;
-            virtual EventCategory::eEventCategory	getCategory() const;
-        };
-    }
+    private:
+      int					_playerId;
+      float					_x;
+      float					_y;
+      EventType::eEventType			_type;
+      EventContext::eEventContext		_context;
+      EventDirection::eEventDirection		_direction;
+      EventCategory::eEventCategory		_category;
+
+    public:
+      virtual ~AEvent();
+
+      AEvent(EventCategory::eEventCategory,
+	     EventContext::eEventContext,
+	     EventType::eEventType,
+	     EventDirection::eEventDirection,
+	     float, float, int);
+
+      virtual void				interaction() const = 0;
+      virtual int				getPlayerId() const;
+      virtual float				getX() const;
+      virtual float				getY() const;
+      virtual EventType::eEventType		getType() const;
+      virtual EventDirection::eEventDirection	getDirection() const;
+      virtual EventContext::eEventContext	getContext() const;
+      virtual EventCategory::eEventCategory	getCategory() const;
+    };
+  }
 }
 
 #else

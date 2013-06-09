@@ -92,6 +92,7 @@ SRCS_EVENT	= $(SRC_DIR)$(EVENT)AEvent.cpp \
 		$(SRC_DIR)$(EVENT)EventManager.cpp \
 		$(SRC_DIR)$(EVENT)EventError.cpp \
 		$(SRC_DIR)$(EVENT)Move.cpp \
+		$(SRC_DIR)$(EVENT)Pause.cpp \
 		$(SRC_DIR)$(EVENT)Action.cpp \
 
 SRCS_UNIX	= $(SRC_DIR)$(UNIX)UnixMutex.cpp \

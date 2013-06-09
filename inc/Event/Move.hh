@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 21 16:18:25 2013 julien fortin
-// Last update Fri Jun  7 08:49:41 2013 julien fortin
+// Last update Sun Jun  9 13:55:34 2013 julien fortin
 //
 
 #ifndef	__MOVE_HH__
@@ -26,7 +26,7 @@ namespace BomberMan
 
     protected:
     public:
-      Move(EventContext::eEventContext, EventDirection::eEventDirection, float, bool);
+      Move(EventContext::eEventContext, EventDirection::eEventDirection, float, bool, int);
       virtual ~Move();
 
 

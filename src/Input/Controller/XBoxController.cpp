@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sun May 19 00:17:06 2013 julien fortin
-// Last update Sat Jun  8 13:38:42 2013 julien fortin
+// Last update Sun Jun  9 14:26:10 2013 julien fortin
 //
 
 #include	<string>
@@ -32,6 +32,15 @@ namespace BomberMan
       XBoxController::XBoxController(std::string const &path)
 	: _fd(path, O_RDONLY)
       {
+	static int	playerId = 0;
+
+	if (playerId < 2)
+	  {
+	    this->_playerId = playerId;
+	    playerId++;
+	  }
+	else
+	  this->_playerId = 1;
 	this->_path = path;
 
 	this->_currentX = XBoxAxis::NO;
@@ -265,13 +274,13 @@ namespace BomberMan
 	      angle = 180 - angle;
 	  }
 
-	//	std::cout << "INTENSITY:" << intensity << "\tANGLE:" << angle << "\n";
 	if (intensity >= 10000.0)
 	  {
 	    if (!(last % 3))
 	      Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::NO,
 								(static_cast<int>(angle) + 90) % 360,
-								this->_isRunning());
+								this->_isRunning(),
+								this->_playerId);
 
 	  }
 	last++;
@@ -301,33 +310,10 @@ namespace BomberMan
 
       void	XBoxController::_makeEventMove(Event::EventDirection::eEventDirection dir, float angle)
       {
-	// std::cout << "\tDIR:" << dir << "\n\n";
-	// int	maxDir;
-
-	// this->_countDir[dir] += 1;
-	// maxDir = this->_getMaxCountDir();
-	// if (dir != maxDir)
-	//   {
-	//   }
-
-	// if (dir == Event::EventDirection::UP)
-	//   std::cout << "UP " << angle << "\n";
-	// else if (dir == Event::EventDirection::DOWN)
-	//   std::cout << "DOWN " << angle << "\n";
-	// else if (dir == Event::EventDirection::LEFT)
-	//   std::cout << "LEFT " << angle << "\n";
-	// else if (dir == Event::EventDirection::RIGHT)
-	//   std::cout << "RIGHT " << angle << "\n";
-	// else if (dir == Event::EventDirection::UP_LEFT)
-	//   std::cout << "UP_LEFT " << angle << "\n";
-	// else if (dir == Event::EventDirection::UP_RIGHT)
-	//   std::cout << "UP_RIGHT " << angle << "\n";
-	// else if (dir == Event::EventDirection::DOWN_LEFT)
-	//   std::cout << "DOWN_LEFT " << angle << "\n";
-	// else if (dir == Event::EventDirection::DOWN_RIGHT)
-	//   std::cout << "DOWN_RIGHT " << angle << "\n";
-
-
+	Event::EventManager::getEventManager()->moveEvent(dir,
+							  angle,
+							  this->_isRunning(),
+							  this->_playerId);
       }
     }
   }

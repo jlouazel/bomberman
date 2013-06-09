@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Fri May 17 12:53:01 2013 julien fortin
-// Last update Sat Jun  8 13:38:49 2013 julien fortin
+// Last update Sun Jun  9 14:21:34 2013 julien fortin
 //
 
 #ifndef	__XBoxController__HH__
@@ -56,6 +56,7 @@ namespace BomberMan
       private:
 	Unix::Fd	_fd;
 	std::string	_path;
+	int		_playerId;
 
       private:
 	struct XBoxAxis

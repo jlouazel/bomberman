@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 21 20:23:08 2013 julien fortin
-// Last update Wed Jun  5 13:56:33 2013 julien fortin
+// Last update Sun Jun  9 14:10:54 2013 julien fortin
 //
 
 #ifndef	__KEYBOARDMANAGER_HH__
@@ -44,6 +44,8 @@ namespace BomberMan
 	gdl::Input*	_input;
 
       private:
+	int	_currentPlayerId;
+
 	void	_up(const Field::Player* const);
 
 	bool	_upLeft(const Field::Player* const);

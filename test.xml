@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <backup id="1370781817">
 <infos>
 <second>
@@ -8,6 +9,18 @@
 </minute>
 <hour>
 14
+=======
+<backup id="1370775851">
+<infos>
+<second>
+11
+</second>
+<minute>
+4
+</minute>
+<hour>
+13
+>>>>>>> 6704afdef77bac90cdddc241df6efb015206a02c
 </hour>
 <day>
 9
@@ -79,7 +92,7 @@
 </nbBuffTaked>
 </player>
 </players>
-<field width="100" height="100">
+<field width="4" height="4">
 <case x="0" y="0">
 </case>
 <case x="1" y="0">
@@ -88,6 +101,7 @@
 </case>
 <case x="3" y="0">
 </case>
+<<<<<<< HEAD
 <case x="4" y="0">
 <wall x="1">
 </wall>
@@ -400,6 +414,8 @@
 <wall x="1">
 </wall>
 </case>
+=======
+>>>>>>> 6704afdef77bac90cdddc241df6efb015206a02c
 <case x="0" y="1">
 </case>
 <case x="1" y="1">
@@ -407,6 +423,7 @@
 </wall>
 </case>
 <case x="2" y="1">
+<<<<<<< HEAD
 <wall x="1">
 </wall>
 </case>
@@ -415,47 +432,44 @@
 </wall>
 </case>
 <case x="4" y="1">
+=======
+>>>>>>> 6704afdef77bac90cdddc241df6efb015206a02c
 <wall x="1">
 </wall>
 </case>
-<case x="5" y="1">
-<wall x="0">
-</wall>
+<case x="3" y="1">
 </case>
+<<<<<<< HEAD
 <case x="6" y="1">
-</case>
-<case x="7" y="1">
-<wall x="0">
+=======
+<case x="0" y="2">
+<wall x="1">
 </wall>
+>>>>>>> 6704afdef77bac90cdddc241df6efb015206a02c
 </case>
-<case x="8" y="1">
+<case x="1" y="2">
 <wall x="1">
 </wall>
 </case>
-<case x="9" y="1">
-<wall x="0">
-</wall>
+<case x="2" y="2">
 </case>
-<case x="10" y="1">
-<wall x="1">
-</wall>
+<case x="3" y="2">
 </case>
-<case x="11" y="1">
-<wall x="0">
-</wall>
-</case>
+<<<<<<< HEAD
 <case x="12" y="1">
 <wall x="1">
 </wall>
+=======
+<case x="0" y="3">
+>>>>>>> 6704afdef77bac90cdddc241df6efb015206a02c
 </case>
-<case x="13" y="1">
-<wall x="0">
-</wall>
+<case x="1" y="3">
 </case>
-<case x="14" y="1">
+<case x="2" y="3">
 <wall x="1">
 </wall>
 </case>
+<<<<<<< HEAD
 <case x="15" y="1">
 <wall x="0">
 </wall>
@@ -33995,6 +34009,9 @@
 </wall>
 </case>
 <case x="99" y="99">
+=======
+<case x="3" y="3">
+>>>>>>> 6704afdef77bac90cdddc241df6efb015206a02c
 </case>
 </field>
 </backup>
