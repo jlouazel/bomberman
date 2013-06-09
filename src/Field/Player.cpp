@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 manour_m. All rights reserved.
 //
 
+#include	"UnixThread.hh"
 #include	<math.h>
 #include	<unistd.h>
 #include        "SoundManager.hh"
@@ -83,17 +84,45 @@ namespace BomberMan
       Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::NO, (static_cast<int>(angle) + 90) % 360, true, this->_id);
     }
 
-    void        Player::startIA(int width, int height, const std::vector<std::list<IGameComponent *> > &map, const std::list<Player *> &players) const
+    static Player* _player = 0;
+
+    void        Player::startIA(int width, int height, const std::vector<std::list<IGameComponent *> > &map, const std::list<Player *> &players)
     {
+      _player = this;
+      this->_width = width;
+      this->_height = height;
+      this->_map = &map;
+      this->_playersList = &players;
+      Unix::UnixThread *ia = new Unix::UnixThread(0, &_startIAThread, 0, 0);
+    }
+
+    extern "C"
+    {
+      void*     _startIAThread(void*)
+      {
+	if (_player)
+	  _player->launchIA();
+        return 0;
+      }
+    }
+
+    void	Player::launchIA() const
+    {
+      int	width = this->_width, height = this->_height;
+      const std::vector<std::list<IGameComponent *> >	*map = this->_map;
+      const std::list<Player *>				*players = this->_playersList;
+
       while (!this->_end)
         {
-          goThere(this->_x, this->_y, players.front()->getX(), players.front()->getY());
+          goThere(this->_x, this->_y, players->front()->getX(), players->front()->getY());
 	  usleep(5000);
 	  //          if (!isInBombRow(width, height, map, my_x, my_y))
 	  //     if (!betterTakeBuff(width, height, map))
 	  //      if (!shouldGetCloserToKill(width, height, map))
 	  //        Event::EventManager::getEventManager()->actionEvent(this->_currentPlayerId);
         }
+      int	return_value = 0;
+      pthread_exit(static_cast<void *>(&return_value));
     }
 
     BomberMan::Display::AObject * Player::getAsset() const
@@ -231,7 +260,7 @@ namespace BomberMan
 
 	      if (tmp->getPlayerTakeDomage() > 0)
 		{
-		  Sound::SoundManager::getInstance()->playSound("./resources/sounds/TakingDamage.mp3", false);		  
+		  Sound::SoundManager::getInstance()->playSound("./resources/sounds/TakingDamage.mp3", false);
 		  this->explode(tmp->getPlayerTakeDomage(), manager, tmp->getIdBomb());
 		}
 	    }

@@ -46,6 +46,11 @@ namespace BomberMan
       bool	  _moveOk;
       bool	  _realDead;
 
+      int	_width;
+      int	_height;
+      const std::vector<std::list<IGameComponent *> > *_map;
+      const std::list<Player *>			      *_playersList;
+
     private:
       void         goThere(float, float, float, float) const;
 
@@ -54,6 +59,7 @@ namespace BomberMan
       Player(Player *);
       ~Player();
 
+      void	launchIA() const;
       void        move(float, float, float, Manager *);
       void	  newBomb();
       void	  setBomb(Manager *);
@@ -97,10 +103,19 @@ namespace BomberMan
       void		  setMoveOk(bool);
       bool		  getMoveOk() const;
       void		  updateCamera(gdl::GameClock const & gameClock);
+<<<<<<< HEAD
       void		  startIA(int, int, const std::vector<std::list<IGameComponent *> > &, const std::list<Player *> &) const;
       bool		  getRealDead() const;
+=======
+      void		  startIA(int, int, const std::vector<std::list<IGameComponent *> > &, const std::list<Player *> &);
+>>>>>>> 07afcaef71e2b2472ecf5afa741adee4547e3180
     };
   }
+}
+
+extern "C"
+{
+  void* _startIAThread(void*);
 }
 
 #else

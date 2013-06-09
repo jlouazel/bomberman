@@ -53,7 +53,10 @@ namespace BomberMan
 	  this->_players.back()->setCamera(new Display::Camera(BomberOptions::getOptions()->getNbPlayer()));
 	}
       for (unsigned int i = 1; i < BomberOptions::getOptions()->getNbIA(); i++)
-	this->_players.push_back(new Field::Player(i + 1, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+	{
+	  this->_players.push_back(new Field::Player(i + 1, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+	  this->_players.back()->startIA(this->_manager->getWidth(), this->_manager->getHeight(), this->_manager->getMap(), this->_players);
+	}
       this->_manager->randomize(this->_players);
 
       std::list<Field::Player *>::iterator it = this->_players.begin();
@@ -212,6 +215,13 @@ namespace BomberMan
             }
           else if (actualPlayer && dynamic_cast<const Event::Action *>(event) == event && actualPlayer->getNbBombSet() < actualPlayer->getNbBombMax() && actualPlayer->getPv() > 0)
             actualPlayer->setBomb(this->_manager);
+<<<<<<< HEAD
+=======
+	  // if (actualPlayer && actualPlayer->getPv() <= 0)
+	  //   {
+
+	  //   }
+>>>>>>> 07afcaef71e2b2472ecf5afa741adee4547e3180
           delete event;
         }
       for (std::list<Field::Player *>::iterator it = this->_players.begin(); it != this->_players.end(); ++it)
