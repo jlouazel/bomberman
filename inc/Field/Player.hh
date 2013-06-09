@@ -45,7 +45,9 @@ namespace BomberMan
       int	  _nbBuffTaked;
       bool	  _moveOk;
       bool	  _realDead;
-
+      unsigned char _colorG;
+      unsigned char _colorR;
+      unsigned char _colorB;
       int	_width;
       int	_height;
       const std::vector<std::list<IGameComponent *> > *_map;
@@ -55,7 +57,7 @@ namespace BomberMan
       void         goThere(float, float, float, float) const;
 
     public:
-      Player(int id, int pv, float speed, int max, int set, float x, float y, Display::AObject * asset, Display::ISound * sound, Display::IAnimation * anim);
+      Player(int id, int pv, float speed, int max, int set, float x, float y, Display::AObject * asset, Display::ISound * sound, Display::IAnimation * anim, unsigned char r, unsigned char g, unsigned char b);
       Player(Player *);
       ~Player();
 

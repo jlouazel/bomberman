@@ -18,6 +18,7 @@ namespace BomberMan
 
       void	Video::draw(void)
       {
+	this->_isFinished = false;
 	if (this->_playSound)
 	  {
 	    Sound::SoundManager::getInstance()->playSound(this->_sound, false);
@@ -48,7 +49,11 @@ namespace BomberMan
 	    glEnd();
 	  }
 	else
-	  this->_isFinished = true;
+	  {
+	    this->_isFinished = true;
+	    cvSetCaptureProperty(this->_flux, CV_CAP_PROP_POS_FRAMES, 0);
+	    this->_playSound = true;
+	  }
       }
 
       bool	Video::isFinished()

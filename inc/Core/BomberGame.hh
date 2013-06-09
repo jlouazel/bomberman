@@ -4,6 +4,7 @@
 #include	<map>
 #include	<list>
 #include	<GameClock.hpp>
+#include	<Clock.hpp>
 #include	"Camera.hpp"
 #include	"Player.hh"
 #include	"Texture2d.hpp"
@@ -21,6 +22,9 @@ namespace BomberMan
       std::list<Field::Player *>	_players;
       std::list<Display::Camera *>      _camera;
       std::map<std::string, Display::AObject *>	_infos;
+      gdl::Clock                        *_clock;
+      int                               _fps;
+      float                             _constElapsedTime;
       // Object score
       // camera + bordel opengl
 

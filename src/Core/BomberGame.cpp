@@ -8,7 +8,6 @@
 #include	<Input.hpp>
 #include	<Clock.hpp>
 #include	<GameClock.hpp>
-
 #include	"EndOfBomberMan.hh"
 #include	"SoundManager.hh"
 #include	"Texture3d.hpp"
@@ -26,8 +25,10 @@
 #include	"EventEnum.hh"
 #include	"Action.hh"
 #include	"Pause.hh"
+#include	"Text.hpp"
 #include	<iostream>
 #include	<sstream>
+#include	<unistd.h>
 
 namespace BomberMan
 {
@@ -60,16 +61,16 @@ namespace BomberMan
       BomberOptions::getOptions()->getNbIA();
       std::cout << "Nb player : " << BomberOptions::getOptions()->getNbPlayer() << std::endl;
       std::cout << "Nb IA : " << BomberOptions::getOptions()->getNbIA() << std::endl;
-      this->_players.push_back(new Field::Player(0, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+      this->_players.push_back(new Field::Player(0, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, 0, 0, 255));
       this->_players.back()->setCamera(new Display::Camera(BomberOptions::getOptions()->getNbPlayer()));
       if (BomberOptions::getOptions()->getNbPlayer() == 2)
 	{
-	  this->_players.push_back(new Field::Player(1, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+	  this->_players.push_back(new Field::Player(1, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, 255, 0, 0));
 	  this->_players.back()->setCamera(new Display::Camera(BomberOptions::getOptions()->getNbPlayer()));
 	}
       for (unsigned int i = 1; i < BomberOptions::getOptions()->getNbIA(); i++)
 	{
-	  this->_players.push_back(new Field::Player(i + 1, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+	  this->_players.push_back(new Field::Player(i + 1, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, rand() % 255, rand() % 255, rand() % 255));
 	  this->_players.back()->startIA(this->_manager->getWidth(), this->_manager->getHeight(), this->_manager->getMap(), this->_players);
 	}
       this->_manager->randomize(this->_players);
@@ -83,8 +84,10 @@ namespace BomberMan
       Display::Vector3f      vectorRot_(0.0, 0.0, 0.0);
       Display::Vector3f      vectorPosition2_(0, 70, 0);
       Display::Vector3f      vectorLen2_(20, 40, 0.0);
-      Display::Vector3f      vectorPosition3_(12, 87, 0);
+      Display::Vector3f      vectorPosition3_(20, 75, 0);
       Display::Vector3f      vectorLen3_(5, 10, 0.0);
+      Display::Vector3f      vectorPosition4_(20, 85, 0);
+      Display::Vector3f      vectorLen4_(5, 5, 0.0);
 
       this->_infos["barrel"] = new Display::Texture2d("images/MMbarrel.png", vectorPosition_, vectorRot_, vectorLen_);
       this->_infos["barrel"]->initialize();
@@ -140,7 +143,14 @@ namespace BomberMan
       this->_infos["lose2"]->initialize();
       this->_infos["win2"] = new Display::Texture2d("images/YouWin.png", vectorPosition3_, vectorRot_, vectorLen3_);
       this->_infos["win2"]->initialize();
+      this->_infos["bomb"] = new Display::Texture2d("images/Bomb.png", vectorPosition4_, vectorRot_, vectorLen4_);
+      this->_infos["bomb"]->initialize();
       this->_loading = false;
+
+      this->_clock = new gdl::Clock();
+      this->_clock->play();
+      this->_fps = 30;
+      this->_constElapsedTime = 1.0 / static_cast<float>(this->_fps);
     }
 
     BomberGame::~BomberGame()
@@ -159,6 +169,7 @@ namespace BomberMan
 
     void	BomberGame::update(gdl::GameClock const & gameClock)
     {
+      this->_clock->update();
       static int i = 0;
       if (i++ == 0)
 	{
@@ -404,6 +415,20 @@ namespace BomberMan
       	    break;
       	  }
       	}
+      for (int i = player->getNbBombMax() - player->getNbBombSet() - 1; i >= 0; i--)
+	{
+	  Display::Vector3f      newPosition5(20 + (i * 3), 90, 0);
+	  this->_infos.at("bomb")->setPosition(newPosition5);
+	  this->_infos.at("bomb")->draw();
+	}
+      // gdl::Text text;
+      // text.setText("LOOOL");
+      // if (id_player == 0)
+      // 	text.setPosition(100, 1000);
+      // else if (id_player == 1)
+      // 	text.setPosition(950, 1000);
+      // text.setSize(50);
+      // text.draw();
     }
 
     void	BomberGame::drawForPlayer3D(gdl::GameClock const & gameClock, int id_player) const
@@ -448,6 +473,8 @@ namespace BomberMan
 
     void	BomberGame::draw(gdl::GameClock const & gameClock) const
     {
+      float     elapsedTime = this->_clock->getElapsedTime();
+      this->_clock->getUpdateElapsedTime();
       if (BomberOptions::getOptions()->getNbPlayer() == 2)
 	{
 	  glViewport(0, 0, WIDTH / 2, HEIGHT);
@@ -465,6 +492,11 @@ namespace BomberMan
 	  this->drawForPlayer3D(gameClock, 0);
 	  this->drawForPlayer2D(gameClock, 0);
 	}
+      if (elapsedTime < this->_constElapsedTime)
+        {
+	  std::cout << "elapsedTime = " << elapsedTime << " const : " << this->_constElapsedTime << " " << (this->_constElapsedTime - elapsedTime) * 1000000 << std::endl;
+          usleep((this->_constElapsedTime - elapsedTime) * 1000000);
+        }
     }
 
     void	BomberGame::updateCamera(gdl::GameClock const & gameClock, gdl::Input & input)
@@ -562,7 +594,12 @@ namespace BomberMan
 		  Display::Vector3f      vectorPosition(stringToInt((*it)->getAttrValue("y")) * 220, 0, stringToInt((*it)->getAttrValue("x")) * 220);
 		  Display::Vector3f      vectorLen(0, 0, 0.0);
 		  Display::Vector3f      vectorRot(0.0, 0.0, 0.0);
-		  this->_players.push_back(new Field::Player(stringToInt((*it)->getAttrValue("id")), stringToInt((*it)->getAttrValue("pv")), stringToInt((*it)->getAttrValue("speed")), stringToInt((*it)->getAttrValue("bombmax")), stringToInt((*it)->getAttrValue("bombset")), stringToInt((*it)->getAttrValue("x")), stringToInt((*it)->getAttrValue("y")), new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+		  if (stringToInt((*it)->getAttrValue("id")) == 0)
+		    this->_players.push_back(new Field::Player(stringToInt((*it)->getAttrValue("id")), stringToInt((*it)->getAttrValue("pv")), stringToInt((*it)->getAttrValue("speed")), stringToInt((*it)->getAttrValue("bombmax")), stringToInt((*it)->getAttrValue("bombset")), stringToInt((*it)->getAttrValue("x")), stringToInt((*it)->getAttrValue("y")), new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, 0, 0, 255));
+		  else if (stringToInt((*it)->getAttrValue("id")) == 1)
+		    this->_players.push_back(new Field::Player(stringToInt((*it)->getAttrValue("id")), stringToInt((*it)->getAttrValue("pv")), stringToInt((*it)->getAttrValue("speed")), stringToInt((*it)->getAttrValue("bombmax")), stringToInt((*it)->getAttrValue("bombset")), stringToInt((*it)->getAttrValue("x")), stringToInt((*it)->getAttrValue("y")), new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, 255, 0, 0));
+		  else
+		    this->_players.push_back(new Field::Player(stringToInt((*it)->getAttrValue("id")), stringToInt((*it)->getAttrValue("pv")), stringToInt((*it)->getAttrValue("speed")), stringToInt((*it)->getAttrValue("bombmax")), stringToInt((*it)->getAttrValue("bombset")), stringToInt((*it)->getAttrValue("x")), stringToInt((*it)->getAttrValue("y")), new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, rand() % 255, rand() % 255, rand() % 255));
 		}
 	    }
 	}
