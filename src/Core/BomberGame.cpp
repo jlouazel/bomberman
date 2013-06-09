@@ -11,6 +11,7 @@
 #include	"Player.hh"
 #include	"Gif.hpp"
 #include	"Xml.hh"
+#include	"MyGame.hpp"
 #include	<iostream>
 #include	<sstream>
 
@@ -145,7 +146,7 @@ namespace BomberMan
       comp->draw(gameClock);
     }
 
-    void	BomberGame::draw(gdl::GameClock const & gameClock) const
+    void	BomberGame::drawForPlayer(gdl::GameClock const & gameClock, int id_player) const
     {
       for (unsigned int y = 0; y != this->getManager()->Field::Manager::getHeight(); y++)
 	for (unsigned int x = 0; x != this->getManager()->Field::Manager::getWidth(); x++)
@@ -154,120 +155,129 @@ namespace BomberMan
 	      affObjs(*it, gameClock);
       affObjs(this->getPlayers().front(), gameClock);
 
-      float	startx = 88;
-      float	starty = 85;
+      // float	startx = 88;
+      // float	starty = 85;
 
-      Field::Player * player = this->getPlayers().front();
+      // Field::Player * player = this->getPlayers().front();
 
-      for (int y = -5; y != 5; y++)
-      	{
-      	  for (int x = -5; x != 5; x++)
-      	    {
-      	      Field::Player * tmp = this->getPlayers().front();
-      	      unsigned int	real_y = static_cast<int>(((tmp->getY() - 110) / 220) + 1) + y;
-      	      unsigned int	real_x = static_cast<int>(((tmp->getX() - 110) / 220) + 1) + x;
-      	      if (real_y < this->getManager()->Field::Manager::getHeight() && real_x < this->getManager()->Field::Manager::getWidth())
-      		{
-      		  int	imp = 0;
-      		  for (std::list<Field::IGameComponent *>::iterator it = this->getManager()->Field::Manager::get(real_y, real_x).begin(); it != this->getManager()->Field::Manager::get(real_y, real_x).end(); ++it)
-      		    {
-      		      Display::Vector3f      newPosition(startx + y * 1.5, starty - x * 2 ,0);
-      		      if (dynamic_cast<Field::Wall *>(*it) == *it)
-      			{
-      			  Field::Wall * tmp = static_cast<Field::Wall *>(*it);
-      			  if (tmp->isBreakable())
-      			    {
-      			      this->_infos.at("barrel")->setPosition(newPosition);
-      			      this->_infos.at("barrel")->draw();
-      			    }
-      			  else
-      			    {
-      			      this->_infos.at("wall")->setPosition(newPosition);
-      			      this->_infos.at("wall")->draw();
-      			    }
-      			  imp = 1;
-      			}
-      		      else if (!imp)
-      			{
-			  this->_infos.at("floor")->setPosition(newPosition);
-			  this->_infos.at("floor")->draw();
-			}
-      		    }
-      		}
-      	    }
-      	}
+      // for (int y = -5; y != 5; y++)
+      // 	{
+      // 	  for (int x = -5; x != 5; x++)
+      // 	    {
+      // 	      Field::Player * tmp = this->getPlayers().front();
+      // 	      unsigned int	real_y = static_cast<int>(((tmp->getY() - 110) / 220) + 1) + y;
+      // 	      unsigned int	real_x = static_cast<int>(((tmp->getX() - 110) / 220) + 1) + x;
+      // 	      if (real_y < this->getManager()->Field::Manager::getHeight() && real_x < this->getManager()->Field::Manager::getWidth())
+      // 		{
+      // 		  int	imp = 0;
+      // 		  for (std::list<Field::IGameComponent *>::iterator it = this->getManager()->Field::Manager::get(real_y, real_x).begin(); it != this->getManager()->Field::Manager::get(real_y, real_x).end(); ++it)
+      // 		    {
+      // 		      Display::Vector3f      newPosition(startx + y * 1.5, starty - x * 2 ,0);
+      // 		      if (dynamic_cast<Field::Wall *>(*it) == *it)
+      // 			{
+      // 			  Field::Wall * tmp = static_cast<Field::Wall *>(*it);
+      // 			  if (tmp->isBreakable())
+      // 			    {
+      // 			      this->_infos.at("barrel")->setPosition(newPosition);
+      // 			      this->_infos.at("barrel")->draw();
+      // 			    }
+      // 			  else
+      // 			    {
+      // 			      this->_infos.at("wall")->setPosition(newPosition);
+      // 			      this->_infos.at("wall")->draw();
+      // 			    }
+      // 			  imp = 1;
+      // 			}
+      // 		      else if (!imp)
+      // 			{
+      // 			  this->_infos.at("floor")->setPosition(newPosition);
+      // 			  this->_infos.at("floor")->draw();
+      // 			}
+      // 		    }
+      // 		}
+      // 	    }
+      // 	}
+      
+      // Display::Vector3f      newPosition2(startx, starty, 0);
+      // this->_infos.at("player")->setPosition(newPosition2);
+      // this->_infos.at("player")->draw();
 
-      Display::Vector3f      newPosition2(startx, starty, 0);
-      this->_infos.at("player")->setPosition(newPosition2);
-      this->_infos.at("player")->draw();
+      // // if (BomberOptions::getOptions()->getSkinForPlayer(player->getId()) == BomberOptions::WW)
+      // // 	this->_infos.at("walter")->draw();
+      // // else
+      // 	this->_infos.at("jesse")->draw();
+      // switch (player->getPv())
+      // 	{
+      // 	case (0):
+      // 	  {
+      // 	    this->_infos.at("fiole0")->draw();
+      // 	    break;
+      // 	  }
+      // 	case (10):
+      // 	  {
+      // 	    this->_infos.at("fiole10")->draw();
+      // 	    break;
+      // 	  }
+      // 	case (20):
+      // 	  {
+      // 	    this->_infos.at("fiole20")->draw();
+      // 	    break;
+      // 	  }
+      // 	case (30):
+      // 	  {
+      // 	    this->_infos.at("fiole30")->draw();
+      // 	    break;
+      // 	  }
+      // 	case (40):
+      // 	  {
+      // 	    this->_infos.at("fiole40")->draw();
+      // 	    break;
+      // 	  }
+      // 	case (50):
+      // 	  {
+      // 	    this->_infos.at("fiole50")->draw();
+      // 	    break;
+      // 	  }
+      // 	case (60):
+      // 	  {
+      // 	    this->_infos.at("fiole60")->draw();
+      // 	    break;
+      // 	  }
+      // 	case (70):
+      // 	  {
+      // 	    this->_infos.at("fiole70")->draw();
+      // 	    break;
+      // 	  }
+      // 	case (80):
+      // 	  {
+      // 	    this->_infos.at("fiole80")->draw();
+      // 	    break;
+      // 	  }
+      // 	case (90):
+      // 	  {
+      // 	    this->_infos.at("fiole90")->draw();
+      // 	    break;
+      // 	  }
+      // 	case (100):
+      // 	  {
+      // 	    this->_infos.at("fiole100")->draw();
+      // 	    break;
+      // 	  }
+      // 	default:
+      // 	  {
+      // 	    this->_infos.at("fiole0")->draw();
+      // 	    break;
+      // 	  }
+      // 	}
+    }
 
-      // if (BomberOptions::getOptions()->getSkinForPlayer(player->getId()) == BomberOptions::WW)
-      // 	this->_infos.at("walter")->draw();
-      // else
-	this->_infos.at("jesse")->draw();
-      switch (player->getPv())
-	{
-	case (0):
-	  {
-	    this->_infos.at("fiole0")->draw();
-	    break;
-	  }
-	case (10):
-	  {
-	    this->_infos.at("fiole10")->draw();
-	    break;
-	  }
-	case (20):
-	  {
-	    this->_infos.at("fiole20")->draw();
-	    break;
-	  }
-	case (30):
-	  {
-	    this->_infos.at("fiole30")->draw();
-	    break;
-	  }
-	case (40):
-	  {
-	    this->_infos.at("fiole40")->draw();
-	    break;
-	  }
-	case (50):
-	  {
-	    this->_infos.at("fiole50")->draw();
-	    break;
-	  }
-	case (60):
-	  {
-	    this->_infos.at("fiole60")->draw();
-	    break;
-	  }
-	case (70):
-	  {
-	    this->_infos.at("fiole70")->draw();
-	    break;
-	  }
-	case (80):
-	  {
-	    this->_infos.at("fiole80")->draw();
-	    break;
-	  }
-	case (90):
-	  {
-	    this->_infos.at("fiole90")->draw();
-	    break;
-	  }
-	case (100):
-	  {
-	    this->_infos.at("fiole100")->draw();
-	    break;
-	  }
-	default:
-	  {
-	    this->_infos.at("fiole0")->draw();
-	    break;
-	  }
-	}
+    void	BomberGame::draw(gdl::GameClock const & gameClock) const
+    {
+      glViewport(0, 0, WIDTH / 2, HEIGHT);
+      this->drawForPlayer(gameClock, 0);      
+      
+      glViewport(WIDTH / 2, 0, WIDTH / 2, HEIGHT);
+      this->drawForPlayer(gameClock, 1);
     }
 
     void	BomberGame::updateCamera(gdl::GameClock const & gameClock, gdl::Input & input)
