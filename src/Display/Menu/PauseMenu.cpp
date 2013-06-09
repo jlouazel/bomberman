@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 21:25:38 2013 julien fortin
-// Last update Sun Jun  9 14:38:19 2013 julien fortin
+// Last update Sun Jun  9 15:16:19 2013 julien fortin
 //
 
 #include	"MenuManager.hh"
@@ -106,6 +106,8 @@ namespace BomberMan
 	{
 	  if (this->_hover.count(this->_cursor) > 0)
 	    {
+	      if (this->_cursor == 2)
+		{/* SAVE */}
 	      usleep(150000);
 	      MenuManager::getMenuManager()->menu(this->_hover[this->_cursor]->getMenu());
 	    }
