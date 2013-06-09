@@ -21,7 +21,7 @@ namespace BomberMan
 
 	if (i == 0)
 	  {
-	    Sound::SoundManager::getInstance()->playSound(this->_sound,true);	    
+	    Sound::SoundManager::getInstance()->playSound(this->_sound, false);	    
 	    i = 1;
 	  }
 	if (cvGrabFrame(this->_flux))
