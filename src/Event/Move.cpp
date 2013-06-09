@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 21 16:21:04 2013 julien fortin
-// Last update Sun Jun  9 13:55:04 2013 julien fortin
+// Last update Sun Jun  9 21:07:24 2013 julien fortin
 //
 
 #include	"Move.hh"
@@ -46,7 +46,7 @@ namespace BomberMan
       return this->_run;
     }
 
-    void	Move::interaction() const
+    void	Move::interaction(bool) const
     {
     }
   }

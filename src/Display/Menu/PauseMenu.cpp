@@ -5,10 +5,11 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 21:25:38 2013 julien fortin
-// Last update Sun Jun  9 16:59:20 2013 julien fortin
+// Last update Sun Jun  9 21:19:55 2013 julien fortin
 //
 
 #include	<GL/gl.h>
+#include	"BomberGame.hh"
 #include	"MenuManager.hh"
 #include	"Texture2d.hpp"
 #include	"Vector.hpp"
@@ -109,9 +110,20 @@ namespace BomberMan
 	  if (this->_hover.count(this->_cursor) > 0)
 	    {
 	      if (this->_cursor == 2)
-		{/* SAVE */}
-	      usleep(150000);
-	      MenuManager::getMenuManager()->menu(this->_hover[this->_cursor]->getMenu());
+		{
+		  if (this->_core->getCurrentGame())
+		    {
+		      this->_core->getCurrentGame()->save();
+		      this->_core->resumeGame();
+		      return ;
+		    }
+		  usleep(150000);
+		}
+	      else
+		{
+		  usleep(150000);
+		  MenuManager::getMenuManager()->menu(this->_hover[this->_cursor]->getMenu());
+		}
 	    }
 	}
       else if ((move = dynamic_cast<const Event::Move*>(event)))

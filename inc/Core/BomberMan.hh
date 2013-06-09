@@ -65,6 +65,8 @@ namespace BomberMan
 
       static BomberMan*	getCore();
 
+      BomberGame*	getCurrentGame() const;
+
       void		surrender();
       void		resumeGame();
       void		startGame();

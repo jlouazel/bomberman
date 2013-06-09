@@ -207,7 +207,7 @@ namespace BomberMan
 	    if ((*it)->getId() == id)
 	      actualPlayer = (*it);
 	  if (dynamic_cast<const Event::Pause *>(event) == event)
-	    event->interaction();
+	    event->interaction(this->checkIfEnd());
           else if (actualPlayer && dynamic_cast<const Event::Move *>(event) == event && actualPlayer->getMoveOk() == false && actualPlayer->getPv() > 0)
             {
               const Event::Move *move = dynamic_cast<const Event::Move *>(event);
@@ -251,6 +251,16 @@ namespace BomberMan
     static void affObjs(Field::IGameComponent * comp, gdl::GameClock const & gameClock)
     {
       comp->draw(gameClock);
+    }
+
+    bool	BomberGame::checkIfEnd() const
+    {
+      int	i = 0;
+
+      for (std::list<Field::Player *>::const_iterator it = this->_players.begin(); it != this->_players.end(); ++it)
+        if ((*it)->getPv() > 0)
+	  i++;
+      return i > 1 ? false : true;
     }
 
     bool	BomberGame::checkIfIWin(int id_player) const
@@ -606,38 +616,9 @@ namespace BomberMan
 	  bals.back()->addAttribute(std::make_pair("power", intToString((*itPl)->getPower())));
 	  bals.back()->addAttribute(std::make_pair("bombmax", intToString((*itPl)->getNbBombMax())));
 	  bals.back()->addAttribute(std::make_pair("bombset", intToString((*itPl)->getNbBombSet())));
-
 	  bals.back()->addAttribute(std::make_pair("nbCaisseDestroyed", intToString((*itPl)->getNbCaisseDestroyed())));
 	  bals.back()->addAttribute(std::make_pair("nbPlayerKilled", intToString((*itPl)->getNbPlayerKilled())));
 	  bals.back()->addAttribute(std::make_pair("buffTaked", intToString((*itPl)->getNbBuffTaked())));
-
-	  bals.push_back(new DataFormat::Xml::Balise("pv", DataFormat::OPENING));
-	  bals.back()->setContent(intToString((*itPl)->getPv()));
-	  bals.push_back(new DataFormat::Xml::Balise("pv", DataFormat::CLOSING));
-	  bals.push_back(new DataFormat::Xml::Balise("speed", DataFormat::OPENING));
-	  bals.back()->setContent(intToString((*itPl)->getSpeed()));
-	  bals.push_back(new DataFormat::Xml::Balise("speed", DataFormat::CLOSING));
-	  bals.push_back(new DataFormat::Xml::Balise("realSpeed", DataFormat::OPENING));
-	  bals.back()->setContent(intToString((*itPl)->getRealSpeed()));
-	  bals.push_back(new DataFormat::Xml::Balise("realSpeed", DataFormat::CLOSING));
-	  bals.push_back(new DataFormat::Xml::Balise("power", DataFormat::OPENING));
-	  bals.back()->setContent(intToString((*itPl)->getPower()));
-	  bals.push_back(new DataFormat::Xml::Balise("power", DataFormat::CLOSING));
-	  bals.push_back(new DataFormat::Xml::Balise("bombmax", DataFormat::OPENING));
-	  bals.back()->setContent(intToString((*itPl)->getNbBombMax()));	  bals.push_back(new DataFormat::Xml::Balise("bombmax", DataFormat::CLOSING));
-	  bals.push_back(new DataFormat::Xml::Balise("bombset", DataFormat::OPENING));
-	  bals.back()->setContent(intToString((*itPl)->getNbBombSet()));
-	  bals.push_back(new DataFormat::Xml::Balise("bombset", DataFormat::CLOSING));
-	  bals.push_back(new DataFormat::Xml::Balise("nbCaisseDestroyed", DataFormat::OPENING));
-	  bals.back()->setContent(intToString((*itPl)->getNbCaisseDestroyed()));
-	  bals.push_back(new DataFormat::Xml::Balise("nbCaisseDestroyed", DataFormat::CLOSING));
-	  bals.push_back(new DataFormat::Xml::Balise("nbPlayerKilled", DataFormat::OPENING));
-	  bals.back()->setContent(intToString((*itPl)->getNbPlayerKilled()));
-	  bals.push_back(new DataFormat::Xml::Balise("nbPlayerKilled", DataFormat::CLOSING));
-	  bals.push_back(new DataFormat::Xml::Balise("nbBuffTaked", DataFormat::OPENING));
-	  bals.back()->setContent(intToString((*itPl)->getNbBuffTaked()));
-	  bals.push_back(new DataFormat::Xml::Balise("nbBuffTaked", DataFormat::CLOSING));
-
 	  bals.push_back(new DataFormat::Xml::Balise("player", DataFormat::CLOSING));
 	}
       bals.push_back(new DataFormat::Xml::Balise("players", DataFormat::CLOSING));

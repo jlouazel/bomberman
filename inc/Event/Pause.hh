@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 21 16:18:25 2013 julien fortin
-// Last update Sun Jun  9 12:58:49 2013 julien fortin
+// Last update Sun Jun  9 21:06:55 2013 julien fortin
 //
 
 #ifndef	__PAUSE_HH__
@@ -24,7 +24,7 @@ namespace BomberMan
     public:
       Pause();
       virtual ~Pause();
-      virtual void	interaction() const;
+      virtual void	interaction(bool = false) const;
     };
   }
 }
