@@ -141,8 +141,8 @@ namespace BomberMan
       // for (; this->_width < 15 || this->_width > 100; this->_width = rand() % 100);
       // for (; this->_height < 15 || this->_height > 100; this->_height = rand() % 100);
 
-      this->_width = 4;
-      this->_height = 4;
+      this->_width = 100;
+      this->_height = 100;
 
       this->_map = std::vector<std::list<IGameComponent *> >(this->_width * this->_height, std::list<IGameComponent *>());
       unsigned int elemCnt = 0;

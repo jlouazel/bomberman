@@ -11,6 +11,7 @@
 #include	"Player.hh"
 #include	"Gif.hpp"
 #include	"Xml.hh"
+#include	"MyGame.hpp"
 #include	<iostream>
 #include	<sstream>
 
@@ -36,13 +37,14 @@ namespace BomberMan
       Display::Vector3f      vectorRot(0.0, 0.0, 0.0);
 
       this->_players.push_front(new Field::Player(0, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+      // this->_players.push_front(new Field::Player(0, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
 
       this->_manager->randomize(this->_players);
 
       std::list<Field::Player *>::iterator it = this->_players.begin();
       for (; it != this->_players.end(); ++it)
 	{
-	  this->_camera.push_back(new Display::Camera());
+	  this->_camera.push_back(new Display::Camera(this->_players.size()));
 	  (*it)->setCamera(this->_camera.back());
 	}
 
@@ -147,10 +149,11 @@ namespace BomberMan
 
     void	BomberGame::draw(gdl::GameClock const & gameClock) const
     {
+      // glViewport(0, 0, WIDTH /2, HEIGHT);
       for (unsigned int y = 0; y != this->getManager()->Field::Manager::getHeight(); y++)
 	for (unsigned int x = 0; x != this->getManager()->Field::Manager::getWidth(); x++)
 	  for (std::list<Field::IGameComponent *>::iterator it = this->getManager()->Field::Manager::get(x, y).begin(); it != this->getManager()->Field::Manager::get(x, y).end(); ++it)
-	    if (y > ((this->getPlayers().front()->getX() - 110) / 220) - 3 && y < ((this->getPlayers().front()->getX() + 110) / 220) + 4 && x > ((this->getPlayers().front()->getY() - 110) / 220) - 3 && x < ((this->getPlayers().front()->getY() + 110) / 220) + 3)
+	    if (y > ((this->getPlayers().front()->getX() - 110) / 220) - 2 && y < ((this->getPlayers().front()->getX() + 110) / 220) + 4 && x > ((this->getPlayers().front()->getY() - 110) / 220) - 3 && x < ((this->getPlayers().front()->getY() + 110) / 220) + 3)
 	      affObjs(*it, gameClock);
       affObjs(this->getPlayers().front(), gameClock);
 

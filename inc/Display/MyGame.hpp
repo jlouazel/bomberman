@@ -35,7 +35,6 @@ namespace BomberMan
     {
     private:
       std::list<AObject*>	objects_;
-      Camera			camera_;
       Menu			menu_;
       //Engine::Core *		_core;
 
