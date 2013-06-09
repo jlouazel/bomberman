@@ -46,7 +46,6 @@ namespace BomberMan
 
     void	SoundManager::playSound(const std::string &sound, bool loop)
     {
-      std::cout << "Je play " << sound << std::endl;
       if (loop)
 	{
 	  FMOD_Sound_SetLoopCount(this->_sounds[sound], -1);

@@ -59,20 +59,20 @@ namespace BomberMan
       // for (; it != this->_players.end(); ++it)
       BomberOptions::getOptions()->getNbPlayer();
       BomberOptions::getOptions()->getNbIA();
-      std::cout << "Nb player : " << BomberOptions::getOptions()->getNbPlayer() << std::endl;
-      std::cout << "Nb IA : " << BomberOptions::getOptions()->getNbIA() << std::endl;
-      this->_players.push_back(new Field::Player(0, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, 0, 0, 255));
+      this->_players.push_back(new Field::Player(0, 100, 10, 1, 0, this->_manager->getWidth(), 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, 0, 0, 255));
       this->_players.back()->setCamera(new Display::Camera(BomberOptions::getOptions()->getNbPlayer()));
       if (BomberOptions::getOptions()->getNbPlayer() == 2)
 	{
 	  this->_players.push_back(new Field::Player(1, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, 255, 0, 0));
 	  this->_players.back()->setCamera(new Display::Camera(BomberOptions::getOptions()->getNbPlayer()));
 	}
-      for (unsigned int i = 1; i < BomberOptions::getOptions()->getNbIA(); i++)
+      for (unsigned int i = 1; i <= BomberOptions::getOptions()->getNbIA(); ++i)
 	{
 	  this->_players.push_back(new Field::Player(i + 1, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, rand() % 255, rand() % 255, rand() % 255));
 	  this->_players.back()->startIA(this->_manager->getWidth(), this->_manager->getHeight(), this->_manager->getMap(), this->_players);
+	  std::cout << "IA : "<< i << " is ready" << std::endl;
 	}
+
       this->_manager->randomize(this->_players);
 
       std::list<Field::Player *>::iterator it = this->_players.begin();
@@ -468,16 +468,7 @@ namespace BomberMan
       for (std::list<Field::Player *>::const_iterator it = this->_players.begin(); it != this->_players.end(); ++it)
 	{
 	  if ((*it) != actualPlayer)
-	    {
-	      if (BomberOptions::getOptions()->getNbPlayer() == 1)
-		{
-		  if ((((*it)->getY() - 110) / 220) > ((actualPlayer->getX() - 110) / 220) - 2 && (((*it)->getY() - 110) / 220) < ((actualPlayer->getX() + 110) / 220) + 3 && (((*it)->getX() - 110) / 220) > ((actualPlayer->getY() - 110) / 220) - 2 && (((*it)->getX() - 110) / 220) < ((actualPlayer->getY() + 110) / 220) + 2)
-		    affObjs(*it, gameClock);
-		}
-	      else
-		if ((((*it)->getY() - 110) / 220) > ((actualPlayer->getX() - 110) / 220) - 1 && (((*it)->getY() - 110) / 220) < ((actualPlayer->getX() + 110) / 220) + 3 && (((*it)->getX() - 110) / 220) > ((actualPlayer->getY() - 110) / 220) - 2 && (((*it)->getX() - 110) / 220) < ((actualPlayer->getY() + 110) / 220) + 2)
-		  affObjs(*it, gameClock);
-	    }
+	    affObjs(*it, gameClock);
 	}
     }
 
@@ -503,10 +494,7 @@ namespace BomberMan
 	  this->drawForPlayer2D(gameClock, 0);
 	}
       if (elapsedTime < this->_constElapsedTime)
-        {
-	  std::cout << "elapsedTime = " << elapsedTime << " const : " << this->_constElapsedTime << " " << (this->_constElapsedTime - elapsedTime) * 1000000 << std::endl;
-          usleep((this->_constElapsedTime - elapsedTime) * 1000000);
-        }
+	usleep((this->_constElapsedTime - elapsedTime) * 1000000);
     }
 
     void	BomberGame::updateCamera(gdl::GameClock const & gameClock, gdl::Input & input)
