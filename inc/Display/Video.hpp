@@ -15,6 +15,7 @@ namespace BomberMan
     private:
       CvCapture*        _flux;
       bool		_isFinished;
+      bool		_playSound;
       std::string	_sound;
 
     public:

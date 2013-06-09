@@ -27,6 +27,10 @@ namespace BomberMan
 
       Video*	_video;
 
+      gdl::Clock*		_creditTimer;
+      int			FPS;
+      float			constElapsedTime;
+
     protected:
     public:
       virtual ~CreditsMenu();

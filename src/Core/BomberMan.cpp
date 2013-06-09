@@ -161,7 +161,6 @@ namespace BomberMan
       this->_introVideo->draw();
       this->_introTimer->update();
       elapsedTime = this->_introTimer->getElapsedTime();
-      //      std::cout << constElapsedTime << std::endl;
       if (elapsedTime < constElapsedTime)
 	usleep((constElapsedTime - elapsedTime) * 1000000);
     }

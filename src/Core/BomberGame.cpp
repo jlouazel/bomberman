@@ -1,3 +1,4 @@
+#include	"BomberOptions.hh"
 #include	<ctime>
 #include	<fmod.h>
 #include	<Input.hpp>
@@ -273,11 +274,18 @@ namespace BomberMan
 
     void	BomberGame::draw(gdl::GameClock const & gameClock) const
     {
-      glViewport(0, 0, WIDTH / 2, HEIGHT);
-      this->drawForPlayer(gameClock, 0);      
-      
-      glViewport(WIDTH / 2, 0, WIDTH / 2, HEIGHT);
-      this->drawForPlayer(gameClock, 1);
+      if (BomberOptions::getOptions()->getNbPlayer() == 2)
+	{
+	  glViewport(0, 0, WIDTH / 2, HEIGHT);
+	  this->drawForPlayer(gameClock, 0);      	  
+	  glViewport(WIDTH / 2, 0, WIDTH / 2, HEIGHT);
+	  this->drawForPlayer(gameClock, 1);
+	}
+      else
+	{
+	  glViewport(0, 0, WIDTH, HEIGHT);
+	  this->drawForPlayer(gameClock, 0);      	  
+	}
     }
 
     void	BomberGame::updateCamera(gdl::GameClock const & gameClock, gdl::Input & input)
@@ -358,8 +366,7 @@ namespace BomberMan
 	  bals.back()->setContent(intToString((*itPl)->getPower()));
 	  bals.push_back(new DataFormat::Xml::Balise("power", DataFormat::CLOSING));
 	  bals.push_back(new DataFormat::Xml::Balise("bombmax", DataFormat::OPENING));
-	  bals.back()->setContent(intToString((*itPl)->getNbBombMax()));
-	  bals.push_back(new DataFormat::Xml::Balise("bombmax", DataFormat::CLOSING));
+	  bals.back()->setContent(intToString((*itPl)->getNbBombMax()));	  bals.push_back(new DataFormat::Xml::Balise("bombmax", DataFormat::CLOSING));
 	  bals.push_back(new DataFormat::Xml::Balise("bombset", DataFormat::OPENING));
 	  bals.back()->setContent(intToString((*itPl)->getNbBombSet()));
 	  bals.push_back(new DataFormat::Xml::Balise("bombset", DataFormat::CLOSING));
