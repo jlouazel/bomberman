@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 22:20:00 2013 julien fortin
-// Last update Wed Jun  5 17:05:01 2013 julien fortin
+// Last update Sun Jun  9 04:13:04 2013 julien fortin
 //
 
 #include	<string>
@@ -41,6 +41,7 @@ namespace BomberMan
     {
       if (InputManager::_inputManager)
 	delete InputManager::_inputManager;
+      InputManager::_inputManager = 0;
     }
 
     InputManager::InputManager()

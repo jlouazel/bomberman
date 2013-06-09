@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 21:25:38 2013 julien fortin
-// Last update Sun Jun  9 02:23:29 2013 julien fortin
+// Last update Sun Jun  9 04:12:01 2013 julien fortin
 //
 
 #include	"MenuManager.hh"
@@ -35,7 +35,7 @@ namespace BomberMan
 
     MenuEnum::eMenu	Loading::getType() const
     {
-      return MenuEnum::QUIT;
+      return MenuEnum::LOADING;
     }
   }
 }

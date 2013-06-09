@@ -14,20 +14,20 @@ namespace BomberMan
 	if (!this->_flux)
 	  this->_isFinished = true;
       }
-      
+
       void	Video::draw(void)
       {
 	static int	i = 0;
 
 	if (i == 0)
 	  {
-	    Sound::SoundManager::getInstance()->playSound(this->_sound, false);	    
+	    Sound::SoundManager::getInstance()->playSound(this->_sound, false);
 	    i = 1;
 	  }
 	if (cvGrabFrame(this->_flux))
 	  {
 	    IplImage* image = cvRetrieveFrame(this->_flux);
-	    
+
 	    cvCvtColor(image, image, CV_BGR2RGB);
 	    gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, image->width,
 			      image->height, GL_RGB, GL_UNSIGNED_BYTE, image->imageData);
@@ -47,14 +47,19 @@ namespace BomberMan
 	    glTexCoord2f(1.0f, 0.0f);
 	    glVertex2f(800, 0);
 	    glEnd();
-	  }	
+	  }
 	else
-	  this->_isFinished = true;	  
+	  this->_isFinished = true;
       }
-      
+
       bool	Video::isFinished()
       {
 	return (this->_isFinished);
+      }
+
+      void	Video::stopSound() const
+      {
+	Sound::SoundManager::getInstance()->stopSound(this->_sound);
       }
     }
 }

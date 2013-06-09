@@ -8,6 +8,7 @@
 #include	"Texture2d.hpp"
 #include	"Wall.hh"
 #include	"Player.hh"
+#include	"Gif.hpp"
 #include	<iostream>
 
 namespace BomberMan
@@ -16,6 +17,7 @@ namespace BomberMan
   {
     BomberGame::BomberGame()
     {
+      this->_loading = true;
       Sound::SoundManager::getInstance()->stopSound("./resources/sounds/musicIntro2.mp3");
       Sound::SoundManager::getInstance()->playSound("./resources/sounds/ambianceGame.mp3", true);
 
@@ -86,6 +88,7 @@ namespace BomberMan
       this->_infos["fiole90"]->initialize();
       this->_infos["fiole100"] = new Display::Texture2d("images/Fiole100.png", vectorPosition3_, vectorRot_, vectorLen3_);
       this->_infos["fiole100"]->initialize();
+      this->_loading = false;
     }
 
     BomberGame::~BomberGame()
@@ -95,6 +98,11 @@ namespace BomberMan
     static void updateObjs(Field::IGameComponent * comp, gdl::GameClock const & gameClock, Field::Manager *manager)
     {
       comp->update(gameClock, manager);
+    }
+
+    bool	BomberGame::isLoaded() const
+    {
+      return !this->_loading;
     }
 
     void	BomberGame::update(gdl::GameClock const & gameClock)
