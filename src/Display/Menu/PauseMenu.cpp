@@ -5,9 +5,10 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 21:25:38 2013 julien fortin
-// Last update Sun Jun  9 16:05:09 2013 julien fortin
+// Last update Sun Jun  9 16:59:20 2013 julien fortin
 //
 
+#include	<GL/gl.h>
 #include	"MenuManager.hh"
 #include	"Texture2d.hpp"
 #include	"Vector.hpp"
@@ -18,6 +19,7 @@
 #include	"PauseMenu.hh"
 #include	<unistd.h>
 #include	<iostream>
+#include	"MyGame.hpp"
 
 namespace BomberMan
 {
@@ -137,6 +139,7 @@ namespace BomberMan
 
     void	PauseMenu::draw()
     {
+      glViewport(0, 0, WIDTH, HEIGHT);
       if (this->_menu)
 	this->_menu->affAllOnglet();
     }
