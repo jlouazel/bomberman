@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 21:25:38 2013 julien fortin
-// Last update Sun Jun  9 01:06:32 2013 julien fortin
+// Last update Sun Jun  9 19:01:19 2013 julien fortin
 //
 
 #include	"BomberOptions.hh"
@@ -19,6 +19,8 @@
 #include	"MapOptionsMenu.hh"
 #include	<unistd.h>
 
+#define BUFFMAX		99
+#define	BUFFMIN		1
 #define	MIN_SIZE	3
 #define	MAX_SIZE	999
 #define	LIMIT_IA	32
@@ -32,24 +34,57 @@ namespace BomberMan
       this->_cursor = 0;
       this->_width = 6;
       this->_height = 7;
+      this->_buffDensity = 42;
       this->_menu = new Menu("resources/images/bg.jpg");
 
+      Vector3f		vP(10, 16, 0);
       Vector3f		vectorPosition(25, 18, 0);
       Vector3f		vectorLen(50.0, 8.0, 0.0), vArrow(9.0, 10.0, 0.0);
       Vector3f		vectorRotation(0.0, 0.0, 0.0);
       Vector3f		vectorLenNb(9.0, 11.0, 0.0);
 
+
+      IOnglet *newOnglet = new OngletMenu(MenuEnum::NO, "width",
+					  new Texture2d("resources/images/width.png",
+							vP, vectorRotation, vectorLen));
+      this->_menu->addOnglet(newOnglet);
+      this->_hover[0] = new OngletMenu(MenuEnum::NO, "width",
+				      new Texture2d("resources/images/widthHover.png",
+						    vP, vectorRotation, vectorLen));
+
+      vP.setY(30);
+      newOnglet = new OngletMenu(MenuEnum::NO, "height",
+				 new Texture2d("resources/images/hieght.png",
+					       vP, vectorRotation, vectorLen));
+      this->_menu->addOnglet(newOnglet);
+      this->_hover[1] = new OngletMenu(MenuEnum::NO, "height",
+				      new Texture2d("resources/images/hieghtHover.png",
+						    vP, vectorRotation, vectorLen));
+      this->_hover[1]->initialize();
+
+
+      vP.setY(42);
+      newOnglet = new OngletMenu(MenuEnum::NO, "buffDensity",
+                                 new Texture2d("resources/images/buffDensity.png",
+                                               vP, vectorRotation, vectorLen));
+      this->_menu->addOnglet(newOnglet);
+      this->_hover[2] = new OngletMenu(MenuEnum::NO, "buffDensity",
+				       new Texture2d("resources/images/buffDensityHover.png",
+						     vP, vectorRotation, vectorLen));
+      this->_hover[2]->initialize();
+
+
       vectorPosition.setY(80);
-      IOnglet *newOnglet = new OngletMenu(MenuEnum::CUSTOMIZE, "back",
+      newOnglet = new OngletMenu(MenuEnum::CUSTOMIZE, "back",
 					  new Texture2d("resources/images/back.png",
 							vectorPosition, vectorRotation, vectorLen));
       this->_menu->addOnglet(newOnglet);
-      this->_menu->initialize();
 
-      this->_back = new OngletMenu(MenuEnum::CUSTOMIZE, "back",
+
+      this->_hover[3] = new OngletMenu(MenuEnum::CUSTOMIZE, "back",
        				       new Texture2d("resources/images/backHover.png",
 						     vectorPosition, vectorRotation, vectorLen));
-      this->_back->initialize();
+      this->_hover[3]->initialize();
 
       this->_arrow[0] = new OngletMenu(MenuEnum::NO, "<",
                                        new Texture2d("resources/images/ChevronGauche.png",
@@ -94,6 +129,9 @@ namespace BomberMan
                                                     vectorPosition, vectorRotation, vectorLenNb));
       for (unsigned int i = 0; i < 10; i++)
         this->_nb[i]->initialize();
+
+      this->_menu->addOnglet(this->_hover[0]);
+      this->_menu->initialize();
     }
 
     MapOptionsMenu::~MapOptionsMenu()
@@ -111,7 +149,7 @@ namespace BomberMan
         {
 	  usleep(150000);
 	  if (this->_cursor == MapOptionsMenu::_nbOnglet)
-	    MenuManager::getMenuManager()->menu(this->_back->getMenu());
+	    MenuManager::getMenuManager()->menu(this->_hover[this->_cursor]->getMenu());
 	}
       else if ((move = dynamic_cast<const Event::Move*>(event)))
         {
@@ -142,8 +180,8 @@ namespace BomberMan
 
     void	MapOptionsMenu::draw()
     {
-      Vector3f      vPosition(40.0, 15.0, 0);
-      Vector3f      vPositionArrow(32.0, 15.0, 0);
+      Vector3f      vPosition(65.0, 15.0, 0);
+      Vector3f      vPositionArrow(57.0, 15.0, 0);
 
       if (this->_menu)
       	this->_menu->affAllOnglet();
@@ -154,10 +192,10 @@ namespace BomberMan
 
       this->_nb[f]->getImage()->setPosition(vPosition);
       this->_nb[f]->affOnglet();
-      vPosition.setX(45);
+      vPosition.setX(70);
       this->_nb[s]->getImage()->setPosition(vPosition);
       this->_nb[s]->affOnglet();
-      vPosition.setX(50);
+      vPosition.setX(75);
       this->_nb[l]->getImage()->setPosition(vPosition);
       this->_nb[l]->affOnglet();
 
@@ -170,15 +208,15 @@ namespace BomberMan
       	    }
       	  if (this->_width < MAX_SIZE)
       	    {
-      	      vPositionArrow.setX(59);
+      	      vPositionArrow.setX(84);
       	      this->_arrow[1]->getImage()->setPosition(vPositionArrow);
       	      this->_arrow[1]->affOnglet();
       	    }
       	}
 
-      vPosition.setX(40.0);
+      vPosition.setX(65.0);
       vPosition.setY(28.0);
-      vPositionArrow.setX(32.0);
+      vPositionArrow.setX(57.0);
       vPositionArrow.setY(28.0);
 
       f = this->_height / 100;
@@ -187,10 +225,10 @@ namespace BomberMan
 
       this->_nb[f]->getImage()->setPosition(vPosition);
       this->_nb[f]->affOnglet();
-      vPosition.setX(45);
+      vPosition.setX(70);
       this->_nb[s]->getImage()->setPosition(vPosition);
       this->_nb[s]->affOnglet();
-      vPosition.setX(50);
+      vPosition.setX(75);
       this->_nb[l]->getImage()->setPosition(vPosition);
       this->_nb[l]->affOnglet();
 
@@ -203,14 +241,42 @@ namespace BomberMan
       	    }
       	  if (this->_height < MAX_SIZE)
       	    {
-      	      vPositionArrow.setX(59);
+      	      vPositionArrow.setX(84);
       	      this->_arrow[1]->getImage()->setPosition(vPositionArrow);
       	      this->_arrow[1]->affOnglet();
       	    }
       	}
 
-      if (this->_cursor == MapOptionsMenu::_nbOnglet)
-	this->_back->affOnglet();
+
+
+      vPosition.setX(68.0);
+      vPosition.setY(40.0);
+      vPositionArrow.setX(60.0);
+      vPositionArrow.setY(40.0);
+
+      f = this->_buffDensity / 10;
+      s = this->_buffDensity % 10;
+
+      this->_nb[f]->getImage()->setPosition(vPosition);
+      this->_nb[f]->affOnglet();
+      vPosition.setX(73);
+      this->_nb[s]->getImage()->setPosition(vPosition);
+      this->_nb[s]->affOnglet();
+
+      if (this->_cursor == 2)
+      	{
+      	  if (this->_buffDensity > BUFFMIN)
+      	    {
+      	      this->_arrow[0]->getImage()->setPosition(vPositionArrow);
+      	      this->_arrow[0]->affOnglet();
+      	    }
+      	  if (this->_buffDensity < BUFFMAX)
+      	    {
+      	      vPositionArrow.setX(82);
+      	      this->_arrow[1]->getImage()->setPosition(vPositionArrow);
+      	      this->_arrow[1]->affOnglet();
+      	    }
+      	}
     }
 
     MenuEnum::eMenu	MapOptionsMenu::getType() const
@@ -222,6 +288,8 @@ namespace BomberMan
     {
       if (this->_cursor > MapOptionsMenu::_nbOnglet)
         this->_cursor = 0;
+      this->_menu->popBackOnglet();
+      this->_menu->addOnglet(this->_hover[this->_cursor]);
       usleep(150000);
     }
 
@@ -245,6 +313,18 @@ namespace BomberMan
 	  Core::BomberOptions::getOptions()->setHeight(this->_width);
 	  usleep(50000);
 	}
+      else
+	{
+	  if (this->_cursor == 2)
+	    {
+	      if (this->_buffDensity > BUFFMAX)
+		this->_buffDensity = BUFFMAX;
+	      else if (this->_buffDensity < BUFFMAX)
+		this->_buffDensity++;
+	      Core::BomberOptions::getOptions()->setBuffDensity(this->_buffDensity);
+	      usleep(50000);
+	    }
+	}
     }
 
     void	MapOptionsMenu::_cursorLeft()
@@ -266,6 +346,18 @@ namespace BomberMan
 	    this->_height--;
 	  Core::BomberOptions::getOptions()->setHeight(this->_width);
 	  usleep(50000);
+	}
+      else
+	{
+	  if (this->_cursor == 2)
+	    {
+	      if (this->_buffDensity < BUFFMIN)
+		this->_buffDensity = MIN_SIZE;
+	      else if (this->_buffDensity > BUFFMIN)
+		this->_buffDensity--;
+	      Core::BomberOptions::getOptions()->setBuffDensity(this->_buffDensity);
+	      usleep(50000);
+	    }
 	}
     }
   }

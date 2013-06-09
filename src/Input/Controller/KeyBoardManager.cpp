@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 21 20:26:12 2013 julien fortin
-// Last update Sun Jun  9 14:16:28 2013 julien fortin
+// Last update Sun Jun  9 17:30:16 2013 julien fortin
 //
 
 #include	"EventManager.hh"
@@ -54,7 +54,7 @@ namespace BomberMan
 	this->_keys[gdl::Keys::Return] = &KeyBoardManager::_action;
 
 	this->_run[0] = gdl::Keys::LShift;
-	//this->_run[0] = gdl::Keys::;
+	this->_run[1] = gdl::Keys::RShift;
       }
 
       KeyBoardManager::~KeyBoardManager()
@@ -126,9 +126,7 @@ namespace BomberMan
 
       bool	KeyBoardManager::_activeSpeed(const Field::Player* const player)
       {
-	if (this->_input && this->_run.count(player) > 0)
-	  return this->_input->isKeyDown(this->_run[player]);
-	return false;
+	return this->_input->isKeyDown(this->_run[this->_currentPlayerId]);
       }
 
       bool	KeyBoardManager::_upLeft(const Field::Player* const player)
