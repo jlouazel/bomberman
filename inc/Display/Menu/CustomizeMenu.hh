@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 20:56:39 2013 julien fortin
-// Last update Sat Jun  8 02:50:10 2013 julien fortin
+// Last update Sun Jun  9 20:06:34 2013 julien fortin
 //
 
 #ifndef	__CUSTOMIZEMENU_HH__
@@ -31,7 +31,7 @@ namespace BomberMan
       Menu*			_menu;
       unsigned int		_cursor;
       unsigned int		_cursorNbPlayer;
-      int			_currentsIA;
+      unsigned int		_currentsIA;
       Core::BomberMan* const	_core;
 
       std::map<unsigned int, IOnglet*>	_nbPlayer;
