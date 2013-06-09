@@ -398,6 +398,16 @@ namespace BomberMan
       return this->_isMoving;
     }
 
+    void        Player::setIsMoving(bool cond)
+    {
+      this->_isMoving = cond;
+    }
+
+    void        Player::setIsRunning(bool cond)
+    {
+      this->_isRunning = cond;
+    }
+
     Display::AObject *  Player::getRun() const
     {
       return this->_run;

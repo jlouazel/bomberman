@@ -75,6 +75,8 @@ namespace BomberMan
       void	  imDyingDraw();
       bool	  getIsMoving() const;
       bool        getIsRunning() const;
+      void	  setIsMoving(bool);
+      void        setIsRunning(bool);
       Display::AObject *  getRun() const;
       Display::AObject *  getMark() const;
       Display::Camera *	  getCamera() const;

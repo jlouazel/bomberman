@@ -43,9 +43,11 @@ namespace BomberMan
       void				save();
 
       void updateCamera(gdl::GameClock const & gameClock, gdl::Input & input);
+      void eventPlayer();
     };
   }
 }
+
 #else
 namespace BomberMan
 {

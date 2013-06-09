@@ -13,6 +13,10 @@
 #include	"Gif.hpp"
 #include	"Xml.hh"
 #include	"MyGame.hpp"
+#include	"EventManager.hh"
+#include	"EventEnum.hh"
+#include	"Action.hh"
+#include	"Pause.hh"
 #include	<iostream>
 #include	<sstream>
 
@@ -150,48 +154,62 @@ namespace BomberMan
       updateObjs(this->getPlayers().front(), gameClock, this->_manager);
     }
 
-    void	eventPlayer()
+    void	BomberGame::eventPlayer()
     {
       int	id;
       const Event::IEvent* event;
+      bool      moveOk = false;
+      int	i = 0;
 
       while ((event = Event::EventManager::getEvent()) != NULL)
         {
 	  id = event->getPlayerId();
-      //     if (dynamic_cast<const Event::Move *>(event) == event && !moveOk)
-      //       {
-      //         const Event::Move *move = dynamic_cast<const Event::Move *>(event);
-      //         this->_isRunning = move->isRunning();
-      //         this->_isMoving = true;
-      //         i++;
+	  Field::Player *actualPlayer;
+	  // for (std::list<Field::Player *>::iterator it = this->_players.begin(); it != this->_players.end(); ++it)
+	  //   {
+	  //     std::cout << "KIKOU" << std::endl;
+	  //     if ((*it)->getId() == id)
+	  // 	actualPlayer = (*it);
+	  //   }
+	  actualPlayer = this->_players.front();
+	  if (dynamic_cast<const Event::Pause *>(event) == event)
+	    {
+	      std::cout << "KIKOU" << std::endl;
+	      event->interaction();
+	    }
+          else if (dynamic_cast<const Event::Move *>(event) == event && !moveOk)
+            {
+              const Event::Move *move = dynamic_cast<const Event::Move *>(event);
+              actualPlayer->setIsRunning(move->isRunning());
+              actualPlayer->setIsMoving(true);
+              i++;
 
-      //         float       angle =  move->getAngle() * 3.14159 / 180.0;
-      //         float       x = -(cosf(angle) * this->_speed);
-      //         float       z = sinf(angle) * this->_speed;
+              float       angle =  move->getAngle() * 3.14159 / 180.0;
+              float       x = -(cosf(angle) * actualPlayer->getSpeed());
+              float       z = sinf(angle) * actualPlayer->getSpeed();
 
-      //         if (this->checkMyMove(this->_asset->getPosition().getZ() + z, this->_asset->getPosition().getX() + x, manager) == true)
-      //           this->move(x, z, angle, manager);
-      //         else
-      //           {
-      //             if (this->checkMyMove(this->_asset->getPosition().getZ(), this->_asset->getPosition().getX() + x, manager) == true)
-      // 		    this->move(x, 0, angle, manager);
-      //             else if (this->checkMyMove(this->_asset->getPosition().getZ() + z, this->_asset->getPosition().getX(), manager) == true)
-      //               this->move(0, z, angle, manager);
-      //           }
-      //         moveOk = true;
-      //       }
-      //     else if (dynamic_cast<const Event::Action *>(event) == event && this->_nb_bomb_set < this->_nb_bomb_max)
-      //       this->setBomb(manager);
-      //     delete event;
-      //   }
+              if (actualPlayer->checkMyMove(actualPlayer->getAsset()->getPosition().getZ() + z, actualPlayer->getAsset()->getPosition().getX() + x, this->_manager) == true)
+                actualPlayer->move(x, z, angle, this->_manager);
+              else
+                {
+                  if (actualPlayer->checkMyMove(actualPlayer->getAsset()->getPosition().getZ(), actualPlayer->getAsset()->getPosition().getX() + x, this->_manager) == true)
+      		    actualPlayer->move(x, 0, angle, this->_manager);
+                  else if (actualPlayer->checkMyMove(actualPlayer->getAsset()->getPosition().getZ() + z, actualPlayer->getAsset()->getPosition().getX(), this->_manager) == true)
+                    actualPlayer->move(0, z, angle, this->_manager);
+                }
+              moveOk = true;
+            }
+          else if (dynamic_cast<const Event::Action *>(event) == event && actualPlayer->getNbBombSet() < actualPlayer->getNbBombMax())
+            actualPlayer->setBomb(this->_manager);
+          delete event;
+        }
       // if (i == 0)
       //   {
       //     this->_isMoving = false;
       //     this->_isRunning = false;
       //   }
-	}
     }
-
+  
     static void affObjs(Field::IGameComponent * comp, gdl::GameClock const & gameClock)
     {
       comp->draw(gameClock);
