@@ -23,12 +23,12 @@ namespace BomberMan
     class Player : public AGameComponent
     {
     protected:
-      int         _pv;
-      float       _speed;
-      int         _nb_bomb_max;
-      int         _nb_bomb_set;
-      Object *    _bomb;
-      gdl::Clock   *_clock;
+      int		_pv;
+      float		_speed;
+      int		_nb_bomb_max;
+      int		_nb_bomb_set;
+      Object *		_bomb;
+      gdl::Clock   *	_clock;
       Display::AObject *   _walking;
       Display::AObject *   _mark;
       Display::AObject *   _run;

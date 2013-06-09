@@ -5,12 +5,13 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 01:21:17 2013 julien fortin
-// Last update Sat Jun  8 15:50:51 2013 Jean-Baptiste Louazel
+// Last update Sun Jun  9 01:35:27 2013 Jean-Baptiste Louazel
 //
 
 #include	<iostream>
 #include	"EndOfBomberMan.hh"
 #include	"BomberMan.hh"
+#include	"FormatError.hh"
 
 int	main()
 {
@@ -23,9 +24,9 @@ int	main()
   catch (const BomberMan::Core::EndOfBomberMan &)
     {
     }
-  catch (const std::exception &e)
+  catch (const BomberMan::DataFormat::FormatError & e)
     {
-      std::cerr << e.what() << std::endl;
+      std::cerr << e.getWhat() << "-" << e.getWhere() << "-" << e.getDetails() << std::endl;
     }
   catch (...)
     {

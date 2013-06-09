@@ -1,3 +1,4 @@
+#include	<ctime>
 #include	<fmod.h>
 #include	<Input.hpp>
 #include	<Clock.hpp>
@@ -8,7 +9,9 @@
 #include	"Texture2d.hpp"
 #include	"Wall.hh"
 #include	"Player.hh"
+#include	"Xml.hh"
 #include	<iostream>
+#include	<sstream>
 
 namespace BomberMan
 {
@@ -99,6 +102,9 @@ namespace BomberMan
 
     void	BomberGame::update(gdl::GameClock const & gameClock)
     {
+      static int i = 0;
+      if (i++ == 0)
+	this->save();
       for (unsigned int y = 0; y != this->getManager()->Field::Manager::getHeight(); y++)
 	for (unsigned int x = 0; x != this->getManager()->Field::Manager::getWidth(); x++)
 	  for (std::list<Field::IGameComponent *>::iterator it = this->getManager()->Field::Manager::get(x, y).begin(); it != this->getManager()->Field::Manager::get(x, y).end(); ++it)
@@ -268,6 +274,107 @@ namespace BomberMan
     std::list<Field::Player *> BomberGame::getPlayers() const
     {
       return this->_players;
+    }
+
+    template <typename T>
+    static std::string intToString(T i)
+    {
+      std::stringstream s;
+      s << i;
+      return s.str();
+    }
+
+    void	BomberGame::save()
+    {
+      time_t t = time(0);
+      struct tm * now = localtime(&t);
+      std::cout << (now->tm_year + 1900) << '-' 
+	   << (now->tm_mon + 1) << '-'
+	   <<  now->tm_mday
+		<< std::endl;
+      static std::string extend = ".xml";
+      static std::string path = ".data/.saves/";
+      DataFormat::Xml xml;
+      std::list<DataFormat::Xml::Balise *> bals;
+
+      bals.push_back(new DataFormat::Xml::Balise("backup", DataFormat::OPENING));
+      bals.back()->addAttribute(std::make_pair("id", intToString(time(0))));
+
+      bals.push_back(new DataFormat::Xml::Balise("infos", DataFormat::OPENING));
+      bals.push_back(new DataFormat::Xml::Balise("second", DataFormat::OPENING));
+      bals.back()->setContent(intToString(now->tm_sec));
+      bals.push_back(new DataFormat::Xml::Balise("second", DataFormat::CLOSING));
+      bals.push_back(new DataFormat::Xml::Balise("minute", DataFormat::OPENING));
+      bals.back()->setContent(intToString(now->tm_min));
+      bals.push_back(new DataFormat::Xml::Balise("minute", DataFormat::CLOSING));
+      bals.push_back(new DataFormat::Xml::Balise("hour", DataFormat::OPENING));
+      bals.back()->setContent(intToString(now->tm_hour));
+      bals.push_back(new DataFormat::Xml::Balise("hour", DataFormat::CLOSING));
+      bals.push_back(new DataFormat::Xml::Balise("day", DataFormat::OPENING));
+      bals.back()->setContent(intToString(now->tm_mday));
+      bals.push_back(new DataFormat::Xml::Balise("day", DataFormat::CLOSING));
+      bals.push_back(new DataFormat::Xml::Balise("month", DataFormat::OPENING));
+      bals.back()->setContent(intToString(now->tm_mon + 1));
+      bals.push_back(new DataFormat::Xml::Balise("month", DataFormat::CLOSING));
+      bals.push_back(new DataFormat::Xml::Balise("year", DataFormat::OPENING));
+      bals.back()->setContent(intToString(now->tm_year + 1900));
+      bals.push_back(new DataFormat::Xml::Balise("year", DataFormat::CLOSING));
+      bals.push_back(new DataFormat::Xml::Balise("infos", DataFormat::CLOSING));
+
+      bals.push_back(new DataFormat::Xml::Balise("players", DataFormat::OPENING));
+      unsigned int id = 1;
+      for (std::list<Field::Player *>::iterator itPl = this->_players.begin(); itPl != this->_players.end(); ++itPl)
+	{
+	  bals.push_back(new DataFormat::Xml::Balise("player", DataFormat::OPENING));
+	  bals.back()->addAttribute(std::make_pair("id", intToString(id)));
+	  bals.back()->addAttribute(std::make_pair("x", intToString((*itPl)->getX())));
+	  bals.back()->addAttribute(std::make_pair("y", intToString((*itPl)->getY())));
+	  bals.push_back(new DataFormat::Xml::Balise("pv", DataFormat::OPENING));
+	  bals.back()->setContent(intToString((*itPl)->getPv()));
+	  bals.push_back(new DataFormat::Xml::Balise("pv", DataFormat::CLOSING));
+	  bals.push_back(new DataFormat::Xml::Balise("speed", DataFormat::OPENING));
+	  bals.back()->setContent(intToString((*itPl)->getSpeed()));
+	  bals.push_back(new DataFormat::Xml::Balise("speed", DataFormat::CLOSING));
+	  bals.push_back(new DataFormat::Xml::Balise("bombmax", DataFormat::OPENING));
+	  bals.back()->setContent(intToString((*itPl)->getNbBombMax()));
+	  bals.push_back(new DataFormat::Xml::Balise("bombmax", DataFormat::CLOSING));
+	  bals.push_back(new DataFormat::Xml::Balise("bombset", DataFormat::OPENING));
+	  bals.back()->setContent(intToString((*itPl)->getNbBombSet()));
+	  bals.push_back(new DataFormat::Xml::Balise("bombset", DataFormat::CLOSING));
+	  bals.push_back(new DataFormat::Xml::Balise("player", DataFormat::CLOSING));
+	}
+      bals.push_back(new DataFormat::Xml::Balise("players", DataFormat::CLOSING));
+
+      bals.push_back(new DataFormat::Xml::Balise("field", DataFormat::OPENING));
+      bals.back()->addAttribute(std::make_pair("width", intToString(this->_manager->getWidth())));
+      bals.back()->addAttribute(std::make_pair("height", intToString(this->_manager->getHeight())));
+      for (unsigned int y = 0; y != this->_manager->getHeight(); y++)
+	for (unsigned int x = 0; x != this->_manager->getWidth(); x++)
+	  {
+	    bals.push_back(new DataFormat::Xml::Balise("case", DataFormat::OPENING));
+	    bals.back()->addAttribute(std::make_pair("x", intToString(x)));
+	    bals.back()->addAttribute(std::make_pair("y", intToString(y)));
+	    for (std::list<Field::IGameComponent *>::iterator it = this->_manager->get(x, y).begin(); it != this->_manager->get(x, y).end(); ++it)
+	      {
+		if (dynamic_cast<Field::Wall *>(*it) == *it)
+		  {
+		    bals.push_back(new DataFormat::Xml::Balise("wall", DataFormat::OPENING));
+		    bals.back()->addAttribute(std::make_pair("x", intToString(dynamic_cast<Field::Wall *>(*it)->isBreakable())));
+		    if (dynamic_cast<Field::Wall *>(*it)->isBreakable() == true)
+		      if (dynamic_cast<Field::Wall *>(*it)->getContent() != 0)
+			{
+
+			}
+		    bals.push_back(new DataFormat::Xml::Balise("wall", DataFormat::CLOSING));
+		  }
+	      }
+	    bals.push_back(new DataFormat::Xml::Balise("case", DataFormat::CLOSING));
+	  }
+      bals.push_back(new DataFormat::Xml::Balise("field", DataFormat::CLOSING));
+      bals.push_back(new DataFormat::Xml::Balise("backup", DataFormat::CLOSING));
+
+      xml.addBalises(bals);
+      xml.generate("test" + extend);
     }
   }
 }

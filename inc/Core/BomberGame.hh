@@ -34,6 +34,7 @@ namespace BomberMan
 
       Field::Manager*			getManager() const;
       std::list<Field::Player *>	getPlayers() const;
+      void				save();
 
       void updateCamera(gdl::GameClock const & gameClock, gdl::Input & input);
     };
