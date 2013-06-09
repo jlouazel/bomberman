@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 21:25:38 2013 julien fortin
-// Last update Sun Jun  9 15:42:28 2013 julien fortin
+// Last update Sun Jun  9 18:17:18 2013 Happy
 //
 
 #include	"MenuManager.hh"
@@ -59,7 +59,6 @@ namespace BomberMan
       float	elapsedTime;
 
       elapsedTime = this->_creditTimer->getElapsedTime();
-      //      std::cout << elapsedTime << std::endl;
       this->_creditTimer->getUpdateElapsedTime();
       this->_video->draw();
       if (elapsedTime < constElapsedTime)

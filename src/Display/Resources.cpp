@@ -90,7 +90,6 @@ namespace BomberMan
 
     AObject *		Resources::getAsset(const std::string & name)
     {
-      std::cout << this->_assets.count(name) << std::endl;
       if (this->_assets.count(name) > 0)
 	{
 	  this->_assets[name];

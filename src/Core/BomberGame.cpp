@@ -41,19 +41,14 @@ namespace BomberMan
       Display::Vector3f      vectorLen(0.0, 0.0, 0.0);
       Display::Vector3f      vectorRot(0.0, 0.0, 0.0);
 
-      this->_players.push_front(new Field::Player(0, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
-      this->_players.push_front(new Field::Player(1, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+      this->_players.push_back(new Field::Player(0, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+      this->_players.back()->setCamera(new Display::Camera(BomberOptions::getOptions()->getNbPlayer()));
+      this->_players.push_back(new Field::Player(1, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+      this->_players.back()->setCamera(new Display::Camera(BomberOptions::getOptions()->getNbPlayer()));
 
       this->_manager->randomize(this->_players);
 
       std::list<Field::Player *>::iterator it = this->_players.begin();
-      for (; it != this->_players.end(); ++it)
-	{
-	  this->_camera.push_back(new Display::Camera(BomberOptions::getOptions()->getNbPlayer()));
-	  (*it)->setCamera(this->_camera.back());
-	}
-
-      it = this->_players.begin();
       for (; it != this->_players.end(); ++it)
 	(*it)->initialize();
 
@@ -150,21 +145,21 @@ namespace BomberMan
 		  updateObjs(*it, gameClock, this->_manager);
 	      }
 	  }
+      for (std::list<Field::Player *>::iterator it = this->_players.begin(); it != this->_players.end(); ++it)
+	updateObjs(*it, gameClock, this->_manager);
       this->eventPlayer();
-      updateObjs(this->getPlayers().front(), gameClock, this->_manager);
     }
 
     void	BomberGame::eventPlayer()
     {
       int	id;
       const Event::IEvent* event;
-      bool      moveOk = false;
       int	i = 0;
 
       while ((event = Event::EventManager::getEvent()) != NULL)
         {
 	  id = event->getPlayerId();
-	  Field::Player *actualPlayer;
+	  Field::Player *actualPlayer = 0;
 	  for (std::list<Field::Player *>::iterator it = this->_players.begin(); it != this->_players.end(); ++it)
 	    if ((*it)->getId() == id)
 	      actualPlayer = (*it);
@@ -173,7 +168,7 @@ namespace BomberMan
 	      std::cout << "KIKOU" << std::endl;
 	      event->interaction();
 	    }
-          else if (dynamic_cast<const Event::Move *>(event) == event && !moveOk)
+          else if (actualPlayer && dynamic_cast<const Event::Move *>(event) == event && actualPlayer->getMoveOk() == false)
             {
               const Event::Move *move = dynamic_cast<const Event::Move *>(event);
               actualPlayer->setIsRunning(move->isRunning());
@@ -193,32 +188,41 @@ namespace BomberMan
                   else if (actualPlayer->checkMyMove(actualPlayer->getAsset()->getPosition().getZ() + z, actualPlayer->getAsset()->getPosition().getX(), this->_manager) == true)
                     actualPlayer->move(0, z, angle, this->_manager);
                 }
-              moveOk = true;
+              actualPlayer->setMoveOk(true);
             }
-          else if (dynamic_cast<const Event::Action *>(event) == event && actualPlayer->getNbBombSet() < actualPlayer->getNbBombMax())
+          else if (actualPlayer && dynamic_cast<const Event::Action *>(event) == event && actualPlayer->getNbBombSet() < actualPlayer->getNbBombMax())
             actualPlayer->setBomb(this->_manager);
           delete event;
         }
-      // if (i == 0)
-      //   {
-      //     this->_isMoving = false;
-      //     this->_isRunning = false;
-      //   }
+      for (std::list<Field::Player *>::iterator it = this->_players.begin(); it != this->_players.end(); ++it)
+	{
+	  if ((*it)->getMoveOk() == false)
+	    {
+	      (*it)->setIsMoving(false);
+	      (*it)->setIsRunning(false);
+	    }
+	}
     }
-  
+
     static void affObjs(Field::IGameComponent * comp, gdl::GameClock const & gameClock)
     {
       comp->draw(gameClock);
     }
 
-    void	BomberGame::drawForPlayer2D(gdl::GameClock const & gameClock, int id_player) const
+    void	BomberGame::drawForPlayer2D(gdl::GameClock const &, int id_player) const
     {
       this->_infos.at("background")->draw();
 
       float	startx = 88;
       float	starty = 85;
 
-      Field::Player * player = this->getPlayers().front();
+      Field::Player * player = 0;
+
+      for (std::list<Field::Player *>::const_iterator it = this->_players.begin(); it != this->_players.end(); ++it)
+        if ((*it)->getId() == id_player)
+          player = (*it);
+      if (player == 0)
+        return;
 
       for (int y = -5; y != 5; y++)
       	{
@@ -333,21 +337,42 @@ namespace BomberMan
 
     void	BomberGame::drawForPlayer3D(gdl::GameClock const & gameClock, int id_player) const
     {
+      Field::Player *actualPlayer = 0;
+      for (std::list<Field::Player *>::const_iterator it = this->_players.begin(); it != this->_players.end(); ++it)
+	if ((*it)->getId() == id_player)
+	  actualPlayer = (*it);
+      if (actualPlayer == 0)
+	return;
+      actualPlayer->updateCamera(gameClock);
+      affObjs(actualPlayer, gameClock);
       for (unsigned int y = 0; y != this->getManager()->Field::Manager::getHeight(); y++)
 	for (unsigned int x = 0; x != this->getManager()->Field::Manager::getWidth(); x++)
 	  for (std::list<Field::IGameComponent *>::iterator it = this->getManager()->Field::Manager::get(x, y).begin(); it != this->getManager()->Field::Manager::get(x, y).end(); ++it)
 	    {
 	      if (BomberOptions::getOptions()->getNbPlayer() == 1)
 		{
-		  if (y > ((this->getPlayers().front()->getX() - 110) / 220) - 2 && y < ((this->getPlayers().front()->getX() + 110) / 220) + 3 && x > ((this->getPlayers().front()->getY() - 110) / 220) - 2 && x < ((this->getPlayers().front()
+		  if (y > ((actualPlayer->getX() - 110) / 220) - 2 && y < ((actualPlayer->getX() + 110) / 220) + 3 && x > ((actualPlayer->getY() - 110) / 220) - 2 && x < ((actualPlayer
 ->getY() + 110) / 220) + 2)
 		    affObjs(*it, gameClock);
 		}
 	      else
-		if (y > ((this->getPlayers().front()->getX() - 110) / 220) - 1 && y < ((this->getPlayers().front()->getX() + 110) / 220) + 3 && x > ((this->getPlayers().front()->getY() - 110) / 220) - 2 && x < ((this->getPlayers().front()->getY() + 110) / 220) + 2)
+		if (y > ((actualPlayer->getX() - 110) / 220) - 1 && y < ((actualPlayer->getX() + 110) / 220) + 3 && x > ((actualPlayer->getY() - 110) / 220) - 2 && x < ((actualPlayer->getY() + 110) / 220) + 2)
 		  affObjs(*it, gameClock);
 	    }
-      affObjs(this->getPlayers().front(), gameClock);
+      for (std::list<Field::Player *>::const_iterator it = this->_players.begin(); it != this->_players.end(); ++it)
+	{
+	  if ((*it) != actualPlayer)
+	    {
+	      if (BomberOptions::getOptions()->getNbPlayer() == 1)
+		{
+		  if ((((*it)->getY() - 110) / 220) > ((actualPlayer->getX() - 110) / 220) - 2 && (((*it)->getY() - 110) / 220) < ((actualPlayer->getX() + 110) / 220) + 3 && (((*it)->getX() - 110) / 220) > ((actualPlayer->getY() - 110) / 220) - 2 && (((*it)->getX() - 110) / 220) < ((actualPlayer->getY() + 110) / 220) + 2)
+		    affObjs(*it, gameClock);
+		}
+	      else
+		if ((((*it)->getY() - 110) / 220) > ((actualPlayer->getX() - 110) / 220) - 1 && (((*it)->getY() - 110) / 220) < ((actualPlayer->getX() + 110) / 220) + 3 && (((*it)->getX() - 110) / 220) > ((actualPlayer->getY() - 110) / 220) - 2 && (((*it)->getX() - 110) / 220) < ((actualPlayer->getY() + 110) / 220) + 2)
+		  affObjs(*it, gameClock);
+	    }
+	}
     }
 
     void	BomberGame::draw(gdl::GameClock const & gameClock) const
@@ -355,11 +380,11 @@ namespace BomberMan
       if (BomberOptions::getOptions()->getNbPlayer() == 2)
 	{
 	  glViewport(0, 0, WIDTH / 2, HEIGHT);
-	  this->drawForPlayer3D(gameClock, 0);      	  
+	  this->drawForPlayer3D(gameClock, 0);
 	  glViewport(WIDTH / 2, 0, WIDTH / 2, HEIGHT);
 	  this->drawForPlayer3D(gameClock, 1);
 	  glViewport(0, 0, WIDTH / 2, HEIGHT);
-	  this->drawForPlayer2D(gameClock, 0);      	  
+	  this->drawForPlayer2D(gameClock, 0);
 	  glViewport(WIDTH / 2 - 2, 0, WIDTH / 2 - 2, HEIGHT);
 	  this->drawForPlayer2D(gameClock, 1);
 	}

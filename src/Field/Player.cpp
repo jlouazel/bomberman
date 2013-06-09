@@ -46,6 +46,7 @@ namespace BomberMan
       this->_nbBuffTaked = 0;
       this->_realSpeed = speed;
       this->_nb_bomb_set = 0;
+      this->_moveOk = false;
     }
 
     Player::Player(Player * cpy)
@@ -104,7 +105,7 @@ namespace BomberMan
       this->_nbBuffTaked = newInt;
     }
 
-    void        Player::move(float x, float z, float angle, Manager *manager)
+    void        Player::move(float x, float z, float angle, Manager *)
     {
       this->_x = this->_asset->getPosition().getX() + x;
       this->_y = this->_asset->getPosition().getZ() + z;
@@ -146,7 +147,6 @@ namespace BomberMan
       int	Y = (this->_y + 110) / 220;
       IGameComponent *toadd(this->_bomb);
 
-      std::cout << "Je pose une bombe haha" << std::endl;
       this->newBomb();
       toadd->setX(X);
       toadd->setY(Y);
@@ -174,8 +174,8 @@ namespace BomberMan
       if ((x + 110 - 20) / 220 < 0 || (x + 110 + 20) / 220 > (manager->getWidth()) ||
 	  (z + 110 - 20) / 220 < 0 || (z + 110 + 20) / 220 > (manager->getHeight()))
 	return (false);
-      for (int y = 0; y < manager->getHeight(); y++)
-	for (int X = 0; X < manager->getWidth(); X++)
+      for (unsigned int y = 0; y < manager->getHeight(); y++)
+	for (unsigned int X = 0; X < manager->getWidth(); X++)
 	  {
 	    std::list<IGameComponent *> obj = manager->get(X, y);
 
@@ -245,6 +245,8 @@ namespace BomberMan
 			this->_nb_bomb_max++;
 			break;
 		      }
+		    case NONE:
+		      break;
 		    }
 		  manager->setBuffToFalse(static_cast<int>((this->_y + 110) / 220), static_cast<int>((this->_x + 110) / 220));
 		}
@@ -267,9 +269,6 @@ namespace BomberMan
 
     void	Player::update(gdl::GameClock const & gameClock, Manager *manager)
     {
-      bool	moveOk = false;
-      int i = 0;
-
       if (this->_pv <= 0)
       	{
 	  this->_dying->update(gameClock);
@@ -286,44 +285,10 @@ namespace BomberMan
 	    }
 	}
       this->checkBuff(manager);
-      // const Event::IEvent* event;
-      // while ((event = Event::EventManager::getEvent()) != NULL)
-      // 	{
-      // 	  if (dynamic_cast<const Event::Move *>(event) == event && !moveOk)
-      // 	    {
-      // 	      const Event::Move *move = dynamic_cast<const Event::Move *>(event);
-      // 	      this->_isRunning = move->isRunning();
-      // 	      this->_isMoving = true;
-      // 	      i++;
-
-      // 	      float       angle =  move->getAngle() * 3.14159 / 180.0;
-      // 	      float       x = -(cosf(angle) * this->_speed);
-      // 	      float       z = sinf(angle) * this->_speed;
-
-      // 	      if (this->checkMyMove(this->_asset->getPosition().getZ() + z, this->_asset->getPosition().getX() + x, manager) == true)
-      // 		this->move(x, z, angle, manager);
-      // 	      else
-      // 		{
-      // 		  if (this->checkMyMove(this->_asset->getPosition().getZ(), this->_asset->getPosition().getX() + x, manager) == true)
-      // 		      this->move(x, 0, angle, manager);
-      // 		  else if (this->checkMyMove(this->_asset->getPosition().getZ() + z, this->_asset->getPosition().getX(), manager) == true)
-      // 		    this->move(0, z, angle, manager);
-      // 		}
-      // 	      moveOk = true;
-      // 	    }
-      // 	  else if (dynamic_cast<const Event::Action *>(event) == event && this->_nb_bomb_set < this->_nb_bomb_max)
-      // 	    this->setBomb(manager);
-      // 	  delete event;
-      // 	}
-      // if (i == 0)
-      // 	{
-      // 	  this->_isMoving = false;
-      // 	  this->_isRunning = false;
-      // 	}
       this->run(gameClock);
     }
 
-    void	Player::draw(gdl::GameClock const & gameClock)
+    void	Player::draw(gdl::GameClock const &)
     {
       if (this->_pv <= 0)
 	this->imDyingDraw();
@@ -337,7 +302,17 @@ namespace BomberMan
 	    this->_asset->draw();
 	  this->_mark->draw();
 	}
-      this->_camera->update(gameClock);
+      this->_moveOk = false;
+    }
+
+    void	Player::setMoveOk(bool cond)
+    {
+      this->_moveOk = cond;
+    }
+
+    bool	Player::getMoveOk() const
+    {
+      return (this->_moveOk);
     }
 
     void        Player::run(gdl::GameClock const &gameClock)
@@ -463,7 +438,7 @@ namespace BomberMan
       this->_pv = pv;
     }
 
-    void        Player::explode(int damages, Manager *, int idBomb)
+    void        Player::explode(int damages, Manager *, int)
     {
       this->setPv(this->_pv - damages);
       // annimation je prend des degats.
@@ -507,6 +482,11 @@ namespace BomberMan
 	  this->_isMoving = cpy.getIsMoving();
 	  this->_isRunning = cpy.getIsRunning();
 	}
+    }
+
+    void         Player::updateCamera(gdl::GameClock const & gameClock)
+    {
+      this->_camera->update(gameClock);
     }
   }
 }

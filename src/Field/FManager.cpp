@@ -23,7 +23,7 @@ namespace BomberMan
     static std::string const	randomiseDecor()
     {
       unsigned int r = rand() % 100;
-      if (r >= 0 && r <= 2)
+      if (r > 0 && r <= 2)
 	return "models/Wall3bis1.fbx";
       else
 	if (r >= 3 && r <= 15)
@@ -258,7 +258,7 @@ namespace BomberMan
       return false;
     }
 
-    static unsigned int	createPlaceForPlayer(std::vector<std::list<IGameComponent *> >	& map, std::list<Player *> const & players, unsigned int width, unsigned int height)
+    static unsigned int	createPlaceForPlayer(std::vector<std::list<IGameComponent *> >	& map, std::list<Player *> const & players, unsigned int width, unsigned int)
     {
       unsigned int n = 0;
       for (std::list<Player *>::const_iterator itPl = players.begin(); itPl != players.end(); ++itPl)
@@ -329,7 +329,6 @@ namespace BomberMan
 	if (eraseWall(this->_map[rand() % (this->_width * this->_height)]) == true)
 	  nbCases--;
       unsigned int nbBonus = 0;
-      ObjectFactory * factory = new ObjectFactory;
       while (nbBonus != static_cast<unsigned int>(hopeFullCases * (70.0 / 100.0))) /* % bonus */
       	{
 	  x = rand() % this->_width;
@@ -338,7 +337,6 @@ namespace BomberMan
 	  if (tmp && tmp->getContent() == 0)
 	    {
 	      int r = rand() % 4;
-	      std::cout << r << std::endl;
 	      Display::Vector3f     vectorLen(tmp->getAsset()->getLen());
 	      Display::Vector3f     vectorRot(tmp->getAsset()->getRotation());
 	      Display::Vector3f     vectorPosition(tmp->getAsset()->getPosition());

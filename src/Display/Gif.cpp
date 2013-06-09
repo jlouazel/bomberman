@@ -56,10 +56,7 @@ namespace BomberMan
       for (std::list<AObject *>::iterator it = this->_frames.begin(); it != this->_frames.end(); it++)
 	  {
 	    if (i == current_frame)
-	      {
-		std::cout << "Draw=" << current_frame << std::endl;
-		(*it)->draw();
-	      }
+	      (*it)->draw();
 	    i++;
 	  }
       current_frame++;

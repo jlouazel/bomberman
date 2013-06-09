@@ -43,6 +43,7 @@ namespace BomberMan
       int         _nbCaisseDestroyed;
       int         _nbPlayerKilled;
       int	  _nbBuffTaked;
+      bool	  _moveOk;
 
     public:
       Player(int id, int pv, float speed, int max, int set, float x, float y, Display::AObject * asset, Display::ISound * sound, Display::IAnimation * anim);
@@ -89,6 +90,9 @@ namespace BomberMan
       void		  setNbPlayerKilled(int);
       void		  setNbCaisseDestroyed(int);
       int		  getId() const;
+      void		  setMoveOk(bool);
+      bool		  getMoveOk() const;
+      void		  updateCamera(gdl::GameClock const & gameClock);
     };
   }
 }
