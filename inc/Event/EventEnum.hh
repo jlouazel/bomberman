@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat May 25 10:47:04 2013 julien fortin
-// Last update Fri Jun  7 08:54:00 2013 julien fortin
+// Last update Sun Jun  9 12:36:54 2013 julien fortin
 //
 
 #ifndef	__EVENT_ENUM_HH__
@@ -19,6 +19,7 @@ namespace BomberMan
     {
       enum eEventContext
 	{
+	  NO,
 	  LOADING,
 	  MENU,
 	  GAME

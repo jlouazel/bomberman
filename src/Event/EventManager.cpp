@@ -5,13 +5,14 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 22:23:19 2013 julien fortin
-// Last update Fri Jun  7 08:43:10 2013 julien fortin
+// Last update Sun Jun  9 14:16:55 2013 julien fortin
 //
 
 #include	<algorithm>
 #include	"IEvent.hh"
 #include	"UnixMutex.hh"
 #include	"EventManager.hh"
+#include	"Pause.hh"
 #include	"Move.hh"
 #include	"Action.hh"
 #include	"EndOfBomberMan.hh"
@@ -47,7 +48,6 @@ namespace BomberMan
     EventManager::~EventManager()
     {
       this->_deleteQueue(this->_event);
-      this->_deleteQueue(this->_eventMenu);
     }
 
     void	EventManager::_deleteQueue(std::queue<const IEvent*> &_queue)
@@ -66,26 +66,13 @@ namespace BomberMan
       e = 0;
     }
 
-    void		EventManager::setMenuMode(bool b)
-    {
-      EventManager::getEventManager()->_menuMode = b;
-    }
-
     const IEvent*	EventManager::getEvent()
     {
       const IEvent*	event = 0;
 
       if (!EventManager::getEventManager()->_eventListMutex->trylock())
 	{
-	  if (EventManager::getEventManager()->_menuMode
-	      && EventManager::getEventManager()->_eventMenu.size() > 0)
-	    {
-	      event = EventManager::getEventManager()->_eventMenu.front();
-	      EventManager::getEventManager()->_eventMenu.pop();
-	      EventManager::getEventManager()->_eventListMutex->unlock();
-	      return event;
-	    }
-	  else if (EventManager::getEventManager()->_event.size() > 0)
+	  if (EventManager::getEventManager()->_event.size() > 0)
 	    {
 	      event = EventManager::getEventManager()->_event.front();
 	      EventManager::getEventManager()->_event.pop();
@@ -99,38 +86,25 @@ namespace BomberMan
     {
       if (!EventManager::getEventManager()->_eventListMutex->trylock())
 	{
-	  if (EventManager::getEventManager()->_menuMode)
-	    EventManager::getEventManager()->_eventMenu.push(event);
-	  else
-	    EventManager::getEventManager()->_event.push(event);
+	  EventManager::getEventManager()->_event.push(event);
 	  EventManager::getEventManager()->_eventListMutex->unlock();
 	}
     }
 
     void		EventManager::moveEvent(EventDirection::eEventDirection direction,
-						float angle, bool run)
+						float angle, bool run, int playerId)
     {
-      EventContext::eEventContext	context;  // Core::getContext();
-
-      EventManager::addEvent(new Move(context, direction, angle, run));
+      EventManager::addEvent(new Move(EventContext::NO, direction, angle, run, playerId));
     }
 
-    void		EventManager::actionEvent()
+    void		EventManager::actionEvent(int playerId)
     {
-      EventManager::addEvent(new Action());
+      EventManager::addEvent(new Action(playerId));
     }
 
-    void		EventManager::gameEvent(EventDirection::eEventDirection,
-						EventType::eEventType,
-						float, float)
+    void		EventManager::pauseEvent()
     {
-      //EventContext::eEventContext	context; //Core::getContext();
-
-      EventManager::addEvent(new Action());
-    }
-
-    void		EventManager::coreEvent(EventType::eEventType)
-    {
+      EventManager::addEvent(new Pause());
     }
 
     void		EventManager::cleanEvent()

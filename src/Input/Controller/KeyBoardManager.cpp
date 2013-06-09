@@ -5,16 +5,12 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 21 20:26:12 2013 julien fortin
-// Last update Sat Jun  8 18:24:48 2013 julien fortin
+// Last update Sun Jun  9 14:16:28 2013 julien fortin
 //
 
 #include	"EventManager.hh"
 #include	"KeyBoardManager.hh"
 #include	"EndOfBomberMan.hh"
-
-
-#include <iostream>
-#include <unistd.h>
 
 namespace BomberMan
 {
@@ -46,7 +42,6 @@ namespace BomberMan
 	this->_input = 0;
 
 	this->initMapping(true);
-
 
 	this->_keys[gdl::Keys::S] = &KeyBoardManager::_down;
 	this->_keys[gdl::Keys::D] = &KeyBoardManager::_right;
@@ -116,8 +111,16 @@ namespace BomberMan
 
       void	KeyBoardManager::treatInput(gdl::Input& input)
       {
+	if (input.isKeyDown(gdl::Keys::Escape))
+	  {
+	    Event::EventManager::getEventManager()->pauseEvent();
+	    return ;
+	  }
+
 	this->_input = &input;
+	this->_currentPlayerId = 0;
 	this->_treatInputForPlayer(input, this->_mappingP1);
+	this->_currentPlayerId = 1;
 	this->_treatInputForPlayer(input, this->_mappingP2);
       }
 
@@ -138,7 +141,8 @@ namespace BomberMan
 	      {
 		this->_multiples = true;
 		Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::UP_LEFT, 225.0,
-								  this->_activeSpeed(player));
+								  this->_activeSpeed(player),
+								  this->_currentPlayerId);
 		return true;
 	      }
 	  }
@@ -153,7 +157,8 @@ namespace BomberMan
 	      {
 		this->_multiples = true;
 		Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::UP_RIGHT, 135.0,
-								  this->_activeSpeed(player));
+								  this->_activeSpeed(player),
+								  this->_currentPlayerId);
 		return true;
 	      }
 	  }
@@ -166,7 +171,8 @@ namespace BomberMan
 	  {
 	    if (!this->_upRight(player) && !this->_upLeft(player))
 	      Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::UP, 180.0,
-								this->_activeSpeed(player));
+								this->_activeSpeed(player),
+								this->_currentPlayerId);
 	  }
       }
 
@@ -175,7 +181,8 @@ namespace BomberMan
 	if (!this->_multiples)
 	  {
 	    Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::LEFT, 270.0,
-							      this->_activeSpeed(player));
+							      this->_activeSpeed(player),
+							      this->_currentPlayerId);
 	  }
       }
 
@@ -185,7 +192,8 @@ namespace BomberMan
 	  {
 	    this->_multiples = true;
 	    Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::RIGHT, 90.0,
-							      this->_activeSpeed(player));
+							      this->_activeSpeed(player),
+							      this->_currentPlayerId);
 	  }
       }
 
@@ -199,7 +207,8 @@ namespace BomberMan
 	      {
 		this->_multiples = true;
 		Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::DOWN_LEFT, 315.0,
-								  this->_activeSpeed(player));
+								  this->_activeSpeed(player),
+								  this->_currentPlayerId);
 		return true;
 	      }
 	  }
@@ -213,8 +222,10 @@ namespace BomberMan
 	    if (this->_input && (this->_input->isKeyDown(gdl::Keys::D) || this->_input->isKeyDown(gdl::Keys::Right)))
 	      {
 		this->_multiples = true;
-		Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::DOWN_RIGHT, 45.0,
-								  this->_activeSpeed(player));
+		Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::DOWN_RIGHT,
+								  45.0,
+								  this->_activeSpeed(player),
+								  this->_currentPlayerId);
 		return true;
 	      }
 	  }
@@ -227,13 +238,14 @@ namespace BomberMan
 	  {
 	    if (!this->_downRight(player) && !this->_downLeft(player))
 	      Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::DOWN, 0.0,
-								this->_activeSpeed(player));
+								this->_activeSpeed(player),
+								this->_currentPlayerId);
 	  }
       }
 
       void	KeyBoardManager::_action(const Field::Player* const)
       {
-	Event::EventManager::getEventManager()->actionEvent();
+	Event::EventManager::getEventManager()->actionEvent(this->_currentPlayerId);
       }
     }
   }

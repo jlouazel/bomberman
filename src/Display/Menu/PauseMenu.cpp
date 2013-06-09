@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 21:25:38 2013 julien fortin
-// Last update Sat Jun  8 13:31:10 2013 julien fortin
+// Last update Sun Jun  9 12:06:04 2013 julien fortin
 //
 
 #include	"MenuManager.hh"
@@ -17,7 +17,6 @@
 #include	"EventManager.hh"
 #include	"PauseMenu.hh"
 #include	<unistd.h>
-
 #include	<iostream>
 
 namespace BomberMan
