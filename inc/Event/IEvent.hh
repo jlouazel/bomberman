@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat May 18 18:23:52 2013 julien fortin
-// Last update Sun Jun  9 13:14:07 2013 julien fortin
+// Last update Sun Jun  9 21:04:39 2013 julien fortin
 //
 
 #ifndef	__IEVENT_HH__
@@ -24,7 +24,7 @@ namespace BomberMan
       public:
       virtual ~IEvent() {}
 
-      virtual void				interaction() const = 0;
+      virtual void				interaction(bool = false) const = 0;
       virtual int				getPlayerId() const = 0;
       virtual float				getX() const = 0;
       virtual float				getY() const = 0;

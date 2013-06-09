@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 21 16:18:25 2013 julien fortin
-// Last update Sun Jun  9 13:55:34 2013 julien fortin
+// Last update Sun Jun  9 21:06:40 2013 julien fortin
 //
 
 #ifndef	__MOVE_HH__
@@ -30,7 +30,7 @@ namespace BomberMan
       virtual ~Move();
 
 
-      virtual void			interaction() const;
+      virtual void			interaction(bool = false) const;
       int				getAngle() const;
       bool				isRunning() const;
       EventDirection::eEventDirection	getDirection() const;

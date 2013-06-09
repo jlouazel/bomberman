@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Tue May 14 17:55:11 2013 julien fortin
-// Last update Sun Jun  9 13:50:13 2013 julien fortin
+// Last update Sun Jun  9 21:06:13 2013 julien fortin
 //
 
 #ifndef	__AEVENT_HH__
@@ -37,7 +37,7 @@ namespace BomberMan
 	     EventDirection::eEventDirection,
 	     float, float, int);
 
-      virtual void				interaction() const = 0;
+      virtual void				interaction(bool = false) const = 0;
       virtual int				getPlayerId() const;
       virtual float				getX() const;
       virtual float				getY() const;

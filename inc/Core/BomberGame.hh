@@ -36,7 +36,7 @@ namespace BomberMan
       BomberGame();
 
       bool				isLoaded() const;
-
+      bool				checkIfEnd() const;
       void				update(gdl::GameClock const&);
       void				draw(gdl::GameClock const&) const;
       void				drawForPlayer2D(gdl::GameClock const&, int) const;

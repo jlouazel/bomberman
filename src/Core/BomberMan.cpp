@@ -11,13 +11,6 @@ namespace BomberMan
 {
   namespace Core
   {
-    static BomberMan*	_core = 0;
-
-    BomberMan*	BomberMan::getCore()
-    {
-      return _core;
-    }
-
     BomberMan::BomberMan() : gdl::Game()
     {
       this->_intro = true;
@@ -34,6 +27,13 @@ namespace BomberMan
       if (this->_currentGame)
 	delete this->_currentGame;
       this->unload();
+    }
+
+    static BomberMan*	_core = 0;
+
+    BomberMan*	BomberMan::getCore()
+    {
+      return _core;
     }
 
     void	BomberMan::initialize()
@@ -229,6 +229,11 @@ namespace BomberMan
     void	BomberMan::surrender()
     {
       this->startMenu(Display::MenuEnum::MAIN);
+    }
+
+    BomberGame*	BomberMan::getCurrentGame() const
+    {
+      return this->_currentGame;
     }
   }
 }
