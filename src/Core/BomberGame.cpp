@@ -70,6 +70,7 @@ namespace BomberMan
 	{
 	  this->_players.push_back(new Field::Player(i + 1, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0, rand() % 255, rand() % 255, rand() % 255));
 	  this->_players.back()->startIA(this->_manager->getWidth(), this->_manager->getHeight(), this->_manager->getMap(), this->_players);
+	  std::cout << "IA : "<< i << " is ready" << std::endl;
 	}
 
       this->_manager->randomize(this->_players);
