@@ -156,10 +156,6 @@ namespace BomberMan
       this->_clock.back()->play();
     }
 
-    void        Player::acquireObject()
-    {
-    }
-
     void	Player::initialize()
     {
       this->_asset->initialize();
@@ -223,9 +219,12 @@ namespace BomberMan
 		      }
 		    case SPEED :
 		      {
-			this->_realSpeed+= 10;
-			if (this->_realSpeed > 60)
-			  this->_realSpeed = 60;
+			if (this->_realSpeed == 10)
+			  this->_realSpeed += 10;
+			else
+			  this->_realSpeed += 5;
+			if (this->_realSpeed > 50)
+			  this->_realSpeed = 50;
 			break;
 		      }
 		    case RANGE :
@@ -264,6 +263,12 @@ namespace BomberMan
       bool	moveOk = false;
       int i = 0;
 
+      if (this->_pv <= 0)
+      	{
+	  this->_dying->update(gameClock);
+	  this->_dead->update(gameClock);
+      	  return;
+      	}
       for (std::list<gdl::Clock *>::iterator it = this->_clock.begin(); it != this->_clock.end(); ++it)
 	{
 	  (*it)->update();
@@ -274,12 +279,6 @@ namespace BomberMan
 	    }
 	}
       this->checkBuff(manager);
-      if (this->_pv <= 0)
-      	{
-	  this->_dying->update(gameClock);
-	  this->_dead->update(gameClock);
-      	  return;
-      	}
       const Event::IEvent* event;
       while ((event = Event::EventManager::getEvent()) != NULL)
 	{

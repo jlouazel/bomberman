@@ -52,7 +52,6 @@ namespace BomberMan
       void        move(float, float, float, Manager *);
       void	  newBomb();
       void	  setBomb(Manager *);
-      void        acquireObject();
       void        run(gdl::GameClock const &);
       int         getNbBombMax() const;
       void        setNbBombMax(int);

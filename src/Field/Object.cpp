@@ -56,9 +56,8 @@ namespace BomberMan
       this->_runningTimer += gameClock.getElapsedTime();
       if (this->_runningTimer >= this->_timer && this->_object_type == BOMB)
 	{
-	  std::cout << "Y = " << this->_y << " X = " << this->_x << std::endl;
-	  manager->setExplosion(this->_y, this->_x, 10);
-	  manager->initFrame(this->_y, this->_x, 2);
+	  manager->setExplosion(this->_y, this->_x, this->_power);
+	  manager->initFrame(this->_y, this->_x, 1);
 	  this->bombExplode(this->_power, UP, manager);
 	  this->bombExplode(this->_power, RIGHT, manager);
 	  this->bombExplode(this->_power, DOWN, manager);
