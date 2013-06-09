@@ -1,4 +1,4 @@
-xCC          = g++
+CC          = g++
 
 RM          = rm -f
 
@@ -40,7 +40,6 @@ SRCS_CORE	= $(SRC_DIR)$(CORE)BomberMan.cpp \
 		$(SRC_DIR)$(CORE)BomberGame.cpp \
 		$(SRC_DIR)$(CORE)BomberOptions.cpp \
 		$(SRC_DIR)$(CORE)EndOfBomberMan.cpp \
-		$(SRC_DIR)$(CORE)LoadFile.cpp
 
 SRCS_DATA	= $(SRC_DIR)$(DATAFORMAT)ADataFormat.cpp \
 		$(SRC_DIR)$(DATAFORMAT)FormatError.cpp \

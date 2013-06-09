@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sun May 19 00:17:06 2013 julien fortin
-// Last update Sun Jun  9 14:26:10 2013 julien fortin
+// Last update Sun Jun  9 22:09:09 2013 julien fortin
 //
 
 #include	<string>
@@ -139,6 +139,8 @@ namespace BomberMan
 	  {
 	    if (this->_status.count(this->_data.number) > 0)
 	      this->_status[this->_data.number] = XBoxButtonStatus::RELEASED;
+	    if (this->_data.number == JS_A)
+	      Event::EventManager::getEventManager()->actionEvent(this->_playerId);
 	  }
       }
 
