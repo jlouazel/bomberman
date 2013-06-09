@@ -34,16 +34,18 @@ namespace BomberMan
       this->_walking = new Display::Texture3d("models/WWwalking.fbx", position, rotation, len);
       this->_run = new Display::Texture3d("models/WWrunning.fbx", position, rotation, len);
       this->_mark = new Display::Texture3d("models/PlayerMark.fbx", position, rotation, len);
-      this->_bomb = new Object(0.0, 0.0, new Display::Texture3d("models/ExplodingBomb.fbx", position, rotation, len), 0, 0, BOMB, NONE, 2, 3, this->_id);
+      this->_power = 3;
+      this->_bomb = new Object(0.0, 0.0, new Display::Texture3d("models/ExplodingBomb.fbx", position, rotation, len), 0, 0, BOMB, NONE, this->_power, 3, this->_id);
       this->_camera = 0; // initialise after
       this->_isMoving = false;
       this->_dead = new Display::Texture3d("models/WWdead.fbx", position, rotation, len);;
       this->_dying = new Display::Texture3d("models/WWdying.fbx", position, rotation, len);;
-      this->_clock = new gdl::Clock();
       this->_end = false;
       this->_nbCaisseDestroyed = 0;
       this->_nbPlayerKilled = 0;
       this->_nbBuffTaked = 0;
+      this->_realSpeed = speed;
+      this->_nb_bomb_set = 0;
     }
 
     Player::Player(Player * cpy)
@@ -134,7 +136,7 @@ namespace BomberMan
       Display::Vector3f rotation(0, 0, 0);
       Display::Vector3f len(0, 0, 0);
 
-      this->_bomb =  new Object(0.0, 0.0, new Display::Texture3d("models/ExplodingBomb.fbx", position, rotation, len),0, 0, BOMB, NONE, 3, 3, this->_id);
+      this->_bomb =  new Object(0.0, 0.0, new Display::Texture3d("models/ExplodingBomb.fbx", position, rotation, len),0, 0, BOMB, NONE, this->_power, 3, this->_id);
       this->_bomb->initialize();
     }
 
@@ -144,10 +146,14 @@ namespace BomberMan
       int	Y = (this->_y + 110) / 220;
       IGameComponent *toadd(this->_bomb);
 
+      std::cout << "Je pose une bombe haha" << std::endl;
       this->newBomb();
       toadd->setX(X);
       toadd->setY(Y);
-      manager->addComponent(Y, X, toadd);
+      if (manager->addComponent(Y, X, toadd) == true)
+	this->_nb_bomb_set++;
+      this->_clock.push_back(new gdl::Clock());
+      this->_clock.back()->play();
     }
 
     void        Player::acquireObject()
@@ -187,7 +193,7 @@ namespace BomberMan
       return (true);
     }
 
-    void	Player::checkIfILoseLife(Manager *manager)
+    void	Player::checkBuff(Manager *manager)
     {
       std::list<IGameComponent *> obj = manager->get(static_cast<int>((this->_y + 110) / 220), static_cast<int>((this->_x + 110) / 220));
 
@@ -199,6 +205,43 @@ namespace BomberMan
 
 	      if (tmp->getPlayerTakeDomage() > 0)
 		this->explode(tmp->getPlayerTakeDomage(), manager, tmp->getIdBomb());
+	    }
+	  else if (dynamic_cast<Object *>(*it) == *it)
+	    {
+	      Object *tmp = static_cast<Object *>(*it);
+
+	      if (tmp->getObjectType() == BUFF)
+		{
+		  switch (tmp->getBuffType())
+		    {
+		    case LIFE :
+		      {
+			this->_pv += 20;
+			if (this->_pv > 100)
+			  this->_pv = 100;
+			break;
+		      }
+		    case SPEED :
+		      {
+			this->_realSpeed+= 10;
+			if (this->_realSpeed > 60)
+			  this->_realSpeed = 60;
+			break;
+		      }
+		    case RANGE :
+		      {
+			this->_power += 1;
+			this->_bomb->setPower(this->_power);
+			break;
+		      }
+		    case MORE :
+		      {
+			this->_nb_bomb_max++;
+			break;
+		      }
+		    }
+		  manager->setBuffToFalse(static_cast<int>((this->_y + 110) / 220), static_cast<int>((this->_x + 110) / 220));
+		}
 	    }
 	}
     }
@@ -218,10 +261,19 @@ namespace BomberMan
 
     void	Player::update(gdl::GameClock const & gameClock, Manager *manager)
     {
-      // Input::Controller::KeyBoardManager::treatInput(input);
       bool	moveOk = false;
-      this->checkIfILoseLife(manager);
       int i = 0;
+
+      for (std::list<gdl::Clock *>::iterator it = this->_clock.begin(); it != this->_clock.end(); ++it)
+	{
+	  (*it)->update();
+	  if ((*it)->getTotalElapsedTime() >= 3)
+	    {
+	      this->_nb_bomb_set--;
+	      it = this->_clock.erase(it);
+	    }
+	}
+      this->checkBuff(manager);
       if (this->_pv <= 0)
       	{
 	  this->_dying->update(gameClock);
@@ -288,7 +340,7 @@ namespace BomberMan
         {
           this->_run->play("Take 001", 1);
           this->_walking->stop("Take 001");
-          this->_speed = 30;
+          this->_speed = this->_realSpeed + 10;
         }
       else if (this->_isMoving == true)
         {

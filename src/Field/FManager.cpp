@@ -173,15 +173,31 @@ namespace BomberMan
       return this->_height;
     }
 
-    void	Manager::addComponent(unsigned int x, unsigned int y, IGameComponent *newComponent)
+    void			Manager::setBuffToFalse(unsigned int x, unsigned int y)
+    {
+      unsigned int    pos;
+
+      pos = y * this->_width + x;
+      for (std::list<IGameComponent *>::iterator it = this->_map[pos].begin(); it != this->_map[pos].end(); ++it)
+	if (dynamic_cast<Object *>(*it) == *it)
+	  {
+	    Field::Object *tmp = static_cast<Object *>(*it);
+
+	    if (tmp->getObjectType() == BUFF)
+	      (*it)->setEnd(true);
+	  }
+    }
+
+    bool	Manager::addComponent(unsigned int x, unsigned int y, IGameComponent *newComponent)
     {
       if (dynamic_cast<Object *>(newComponent) == newComponent)
 	{
 	  for (std::list<IGameComponent *>::iterator it = this->_map[y * this->_width + x].begin(); it != this->_map[y * this->_width + x].end(); ++it)
 	    if (dynamic_cast<Object *>(*it) == *it)
-	      return;
+	      return (false);
 	}
       this->_map[y * this->_width + x].push_back(newComponent);
+      return (true);
     }
 
     void	Manager::delComponent(unsigned int x, unsigned int y, IGameComponent *toDel)
@@ -283,10 +299,7 @@ namespace BomberMan
       for (std::list<IGameComponent *>::const_iterator it = this->_map[x + y * this->_width].begin(); it != this->_map[x + y * this->_width].end(); ++it)
 	{
 	  if (dynamic_cast<Wall *>(*it) == *it && dynamic_cast<Wall *>(*it)->isBreakable() == true)
-	    {
-	      std::cout << "OUI" << std::endl;
-	      return *it;
-	    }
+	    return *it;
 	}
       return 0;
     }
@@ -316,7 +329,7 @@ namespace BomberMan
 	  nbCases--;
       unsigned int nbBonus = 0;
       ObjectFactory * factory = new ObjectFactory;
-      while (nbBonus != static_cast<unsigned int>(hopeFullCases * (40.0 / 100.0))) /* % bonus */
+      while (nbBonus != static_cast<unsigned int>(hopeFullCases * (70.0 / 100.0))) /* % bonus */
       	{
 	  x = rand() % this->_width;
 	  y = rand() % this->_height;

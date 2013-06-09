@@ -30,7 +30,7 @@ namespace BomberMan
       Display::Vector3f      vectorLen(0.0, 0.0, 0.0);
       Display::Vector3f      vectorRot(0.0, 0.0, 0.0);
 
-      this->_players.push_front(new Field::Player(0, 100, 14, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+      this->_players.push_front(new Field::Player(0, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
 
       this->_manager->randomize(this->_players);
 
@@ -111,11 +111,7 @@ namespace BomberMan
 			Field::Wall *actualWall = static_cast<Field::Wall *>(*it);
 			Field::Object *buff = actualWall->getContent();
 			if (buff)
-			  {
-			  std::cout << "Je dois add un buff" << std::endl;
 			  this->_manager->get(x, y).insert(it, buff);
-			  // this->_manager->addComponent(x, y, buff);
-			  }
 			int	idPlayer = actualWall->getWhoDestroyedMe();
 			for (std::list<Field::Player *>::iterator it = this->_players.begin(); it != this->_players.end(); ++it)
 			  if ((*it)->getId() == idPlayer)

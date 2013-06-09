@@ -26,10 +26,12 @@ namespace BomberMan
       int	  _id;
       int         _pv;
       float       _speed;
+      float	  _realSpeed;
       int         _nb_bomb_max;
       int         _nb_bomb_set;
+      int	  _power;
       Object *    _bomb;
-      gdl::Clock   *_clock;
+      std::list<gdl::Clock *>   _clock;
       Display::AObject *   _walking;
       Display::AObject *   _mark;
       Display::AObject *   _run;
@@ -67,7 +69,7 @@ namespace BomberMan
       void	  initialize();
       bool	  checkMyMove(float, float, Manager *);
       bool        operator==(IGameComponent *other);
-      void	  checkIfILoseLife(Manager *);
+      void	  checkBuff(Manager *);
       void	  operator=(Player &);
       void	  imDyingDraw();
       bool	  getIsMoving() const;
