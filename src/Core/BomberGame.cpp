@@ -43,11 +43,17 @@ namespace BomberMan
 
       BomberOptions::getOptions()->getNbPlayer();
       BomberOptions::getOptions()->getNbIA();
+      std::cout << "Nb player : " << BomberOptions::getOptions()->getNbPlayer() << std::endl;
+      std::cout << "Nb IA : " << BomberOptions::getOptions()->getNbIA() << std::endl;
       this->_players.push_back(new Field::Player(0, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
       this->_players.back()->setCamera(new Display::Camera(BomberOptions::getOptions()->getNbPlayer()));
-      this->_players.push_back(new Field::Player(1, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
-      this->_players.back()->setCamera(new Display::Camera(BomberOptions::getOptions()->getNbPlayer()));
-
+      if (BomberOptions::getOptions()->getNbPlayer() == 2)
+	{
+	  this->_players.push_back(new Field::Player(1, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+	  this->_players.back()->setCamera(new Display::Camera(BomberOptions::getOptions()->getNbPlayer()));
+	}
+      for (unsigned int i = 1; i < BomberOptions::getOptions()->getNbIA(); i++)
+	this->_players.push_back(new Field::Player(i + 1, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
       this->_manager->randomize(this->_players);
 
       std::list<Field::Player *>::iterator it = this->_players.begin();
@@ -61,6 +67,7 @@ namespace BomberMan
       Display::Vector3f      vectorLen2_(20, 40, 0.0);
       Display::Vector3f      vectorPosition3_(12, 87, 0);
       Display::Vector3f      vectorLen3_(5, 10, 0.0);
+
       this->_infos["barrel"] = new Display::Texture2d("images/MMbarrel.png", vectorPosition_, vectorRot_, vectorLen_);
       this->_infos["barrel"]->initialize();
       this->_infos["wall"] = new Display::Texture2d("images/MMcuve.png", vectorPosition_, vectorRot_, vectorLen_);
@@ -101,6 +108,10 @@ namespace BomberMan
       vectorLen3_.setY(100);
       this->_infos["background"] = new Display::Texture2d("images/black.png", vectorPosition3_, vectorRot_, vectorLen3_);
       this->_infos["background"]->initialize();
+      this->_infos["lose"] = new Display::Texture2d("images/YouAreDead.png", vectorPosition3_, vectorRot_, vectorLen3_);
+      this->_infos["lose"]->initialize();
+      this->_infos["win"] = new Display::Texture2d("images/YouWin.png", vectorPosition3_, vectorRot_, vectorLen3_);
+      this->_infos["win"]->initialize();
       this->_loading = false;
     }
 
@@ -194,6 +205,10 @@ namespace BomberMan
             }
           else if (actualPlayer && dynamic_cast<const Event::Action *>(event) == event && actualPlayer->getNbBombSet() < actualPlayer->getNbBombMax() && actualPlayer->getPv() > 0)
             actualPlayer->setBomb(this->_manager);
+	  // if (actualPlayer && actualPlayer->getPv() <= 0)
+	  //   {
+	      
+	  //   }
           delete event;
         }
       for (std::list<Field::Player *>::iterator it = this->_players.begin(); it != this->_players.end(); ++it)
@@ -268,9 +283,9 @@ namespace BomberMan
       this->_infos.at("player")->setPosition(newPosition2);
       this->_infos.at("player")->draw();
 
-      // if (BomberOptions::getOptions()->getSkinForPlayer(player->getId()) == BomberOptions::WW)
-      // 	this->_infos.at("walter")->draw();
-      // else
+      if (BomberOptions::getOptions()->getSkinForPlayer(player->getId()) == BomberOptions::WW)
+      	this->_infos.at("walter")->draw();
+      else
       	this->_infos.at("jesse")->draw();
       switch (player->getPv())
       	{
