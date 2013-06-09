@@ -1,9 +1,6 @@
-<<<<<<< HEAD
 #include	<iostream>
 #include	<sstream>
-=======
 #include	"BomberOptions.hh"
->>>>>>> e8f5737c4388e9720c1c0609986e1fe55cc7bea6
 #include	<ctime>
 #include	<unistd.h>
 #include	<fmod.h>
@@ -18,12 +15,10 @@
 #include	"Texture2d.hpp"
 #include	"BomberGame.hh"
 #include	"Player.hh"
-<<<<<<< HEAD
 #include	"Enums.hh"
 #include	"Gif.hpp"
 #include	"Xml.hh"
 #include	"Wall.hh"
-=======
 #include	"Gif.hpp"
 #include	"Xml.hh"
 #include	"MyGame.hpp"
@@ -33,7 +28,6 @@
 #include	"Pause.hh"
 #include	<iostream>
 #include	<sstream>
->>>>>>> e8f5737c4388e9720c1c0609986e1fe55cc7bea6
 
 namespace BomberMan
 {
@@ -56,14 +50,12 @@ namespace BomberMan
       Display::Vector3f      vectorLen(0.0, 0.0, 0.0);
       Display::Vector3f      vectorRot(0.0, 0.0, 0.0);
 
-<<<<<<< HEAD
       // this->_players.push_front(new Field::Player(0, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
 
       //      this->_manager->randomize(this->_players);
 
-      std::list<Field::Player *>::iterator it = this->_players.begin();
-      for (; it != this->_players.end(); ++it)
-=======
+      // std::list<Field::Player *>::iterator it = this->_players.begin();
+      // for (; it != this->_players.end(); ++it)
       BomberOptions::getOptions()->getNbPlayer();
       BomberOptions::getOptions()->getNbIA();
       std::cout << "Nb player : " << BomberOptions::getOptions()->getNbPlayer() << std::endl;
@@ -71,7 +63,6 @@ namespace BomberMan
       this->_players.push_back(new Field::Player(0, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
       this->_players.back()->setCamera(new Display::Camera(BomberOptions::getOptions()->getNbPlayer()));
       if (BomberOptions::getOptions()->getNbPlayer() == 2)
->>>>>>> e8f5737c4388e9720c1c0609986e1fe55cc7bea6
 	{
 	  this->_players.push_back(new Field::Player(1, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
 	  this->_players.back()->setCamera(new Display::Camera(BomberOptions::getOptions()->getNbPlayer()));
@@ -241,13 +232,10 @@ namespace BomberMan
             }
           else if (actualPlayer && dynamic_cast<const Event::Action *>(event) == event && actualPlayer->getNbBombSet() < actualPlayer->getNbBombMax() && actualPlayer->getPv() > 0)
             actualPlayer->setBomb(this->_manager);
-<<<<<<< HEAD
-=======
 	  // if (actualPlayer && actualPlayer->getPv() <= 0)
 	  //   {
 
 	  //   }
->>>>>>> 07afcaef71e2b2472ecf5afa741adee4547e3180
           delete event;
         }
       for (std::list<Field::Player *>::iterator it = this->_players.begin(); it != this->_players.end(); ++it)
@@ -345,17 +333,14 @@ namespace BomberMan
       this->_infos.at("player")->setPosition(newPosition2);
       this->_infos.at("player")->draw();
 
-<<<<<<< HEAD
       // if (BomberOptions::getOptions()->getSkinForPlayer(player->getId()) == BomberOptions::WW)
       // 	this->_infos.at("walter")->draw();
       // else
       this->_infos.at("jesse")->draw();
-=======
       if (BomberOptions::getOptions()->getSkinForPlayer(player->getId()) == BomberOptions::WW)
       	this->_infos.at("walter")->draw();
       else
       	this->_infos.at("jesse")->draw();
->>>>>>> e8f5737c4388e9720c1c0609986e1fe55cc7bea6
       switch (player->getPv())
       	{
       	case (0):
@@ -627,8 +612,6 @@ namespace BomberMan
 	  bals.back()->addAttribute(std::make_pair("id", intToString((*itPl)->getId())));
 	  bals.back()->addAttribute(std::make_pair("x", intToString((*itPl)->getX())));
 	  bals.back()->addAttribute(std::make_pair("y", intToString((*itPl)->getY())));
-<<<<<<< HEAD
-
 	  bals.back()->addAttribute(std::make_pair("pv", intToString((*itPl)->getPv())));
 	  bals.back()->addAttribute(std::make_pair("speed", intToString((*itPl)->getSpeed())));
 	  bals.back()->addAttribute(std::make_pair("readSpeed", intToString((*itPl)->getRealSpeed())));
@@ -639,7 +622,7 @@ namespace BomberMan
 	  bals.back()->addAttribute(std::make_pair("nbCaisseDestroyed", intToString((*itPl)->getNbCaisseDestroyed())));
 	  bals.back()->addAttribute(std::make_pair("nbPlayerKilled", intToString((*itPl)->getNbPlayerKilled())));
 	  bals.back()->addAttribute(std::make_pair("buffTaked", intToString((*itPl)->getNbBuffTaked())));
-=======
+
 	  bals.push_back(new DataFormat::Xml::Balise("pv", DataFormat::OPENING));
 	  bals.back()->setContent(intToString((*itPl)->getPv()));
 	  bals.push_back(new DataFormat::Xml::Balise("pv", DataFormat::CLOSING));
@@ -666,7 +649,7 @@ namespace BomberMan
 	  bals.push_back(new DataFormat::Xml::Balise("nbBuffTaked", DataFormat::OPENING));
 	  bals.back()->setContent(intToString((*itPl)->getNbBuffTaked()));
 	  bals.push_back(new DataFormat::Xml::Balise("nbBuffTaked", DataFormat::CLOSING));
->>>>>>> e8f5737c4388e9720c1c0609986e1fe55cc7bea6
+
 	  bals.push_back(new DataFormat::Xml::Balise("player", DataFormat::CLOSING));
 	}
       bals.push_back(new DataFormat::Xml::Balise("players", DataFormat::CLOSING));

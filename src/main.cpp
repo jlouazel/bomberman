@@ -1,17 +1,3 @@
-//
-// main.cpp for bomberman in /home/fortin_j/tek2/projects/bomberman
-//
-// Made by julien fortin
-// Login   <fortin_j@epitech.net>
-//
-// Started on  Sat Jun  1 01:21:17 2013 julien fortin
-<<<<<<< HEAD
-// Last update Sun Jun  9 16:26:59 2013 Jean-Baptiste Louazel
-=======
-// Last update Sun Jun  9 16:23:21 2013 julien fortin
->>>>>>> e8f5737c4388e9720c1c0609986e1fe55cc7bea6
-//
-
 #include	<iostream>
 #include	"EndOfBomberMan.hh"
 #include	"BomberMan.hh"

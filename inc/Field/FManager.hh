@@ -54,13 +54,9 @@ namespace BomberMan
       Manager(unsigned int width, unsigned int height);	// Genere une map aleatoire avec une taille predefinie
       ~Manager();
 
-<<<<<<< HEAD
       int				randAngle(unsigned int);
-=======
       const std::vector<std::list<IGameComponent *> > &getMap() const;
 
-
->>>>>>> e8f5737c4388e9720c1c0609986e1fe55cc7bea6
       unsigned int			getWidth() const;
       unsigned int			getHeight() const;
       std::list<IGameComponent *> &	get(unsigned int, unsigned int);

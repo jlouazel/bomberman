@@ -103,12 +103,8 @@ namespace BomberMan
       void		  setMoveOk(bool);
       bool		  getMoveOk() const;
       void		  updateCamera(gdl::GameClock const & gameClock);
-<<<<<<< HEAD
-      void		  startIA(int, int, const std::vector<std::list<IGameComponent *> > &, const std::list<Player *> &) const;
       bool		  getRealDead() const;
-=======
       void		  startIA(int, int, const std::vector<std::list<IGameComponent *> > &, const std::list<Player *> &);
->>>>>>> 07afcaef71e2b2472ecf5afa741adee4547e3180
     };
   }
 }
