@@ -25,13 +25,13 @@ namespace BomberMan
 
       class Balise {
       private:
-	std::string _name;
-	eBaliseState _state;
-	Balise *_parent;
-	std::string _content;
+	std::string	_name;
+	eBaliseState	_state;
+	Balise *	_parent;
+	std::string	_content;
 	std::list<Balise *> _children;
-	Balise * _associated;
-	attr  _attributes;
+	Balise *	_associated;
+	attr		_attributes;
 
       public:
 	Balise(std::string const &, eBaliseState);
@@ -44,6 +44,8 @@ namespace BomberMan
 	std::list<Balise *> const &getChilden() const;
 	Balise *getAssociated() const;
 	attr const & getAttributes() const;
+	std::string const getAttrValue(std::string const &) const;
+
 
 	void addChild(Balise *);
 	void setParent(Balise *);
@@ -56,6 +58,10 @@ namespace BomberMan
       };
 
       void		addBalises(std::list<Balise *> &);
+      std::list<Balise *> const & getBalises() const;
+      Balise *		getBalisesWthName(std::string const &) const;
+      void		deleteBalisesWthName(std::string const &);
+      Balise *		getBalisesWtAttribute(std::string const &, attr const &) const;
       virtual void	generate(std::string const &) const;
 
     private:

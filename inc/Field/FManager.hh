@@ -51,9 +51,10 @@ namespace BomberMan
       Manager();					// Genere une map aleatoire en tout points
       // Manager(unsigned int);				// Genere une map aleatoire en fonction d'un niveau donne
       // Manager(std::string const &);			// Genere une map en fonction d'un seed
-      // Manager(unsigned int width, unsigned int height);	// Genere une map aleatoire avec une taille predefinie
+      Manager(unsigned int width, unsigned int height);	// Genere une map aleatoire avec une taille predefinie
       ~Manager();
 
+      int				randAngle(unsigned int);
       unsigned int			getWidth() const;
       unsigned int			getHeight() const;
       std::list<IGameComponent *> &	get(unsigned int, unsigned int);
@@ -63,7 +64,7 @@ namespace BomberMan
       void				randomize(std::list<Player *> const &);
       void				initFrame(int, int, int);
       void				setBuffToFalse(unsigned int, unsigned int);
-      IGameComponent *				getWall(unsigned int, unsigned int) const;
+      IGameComponent *			getWall(unsigned int, unsigned int) const;
     };
   }
 }

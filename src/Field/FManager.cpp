@@ -37,7 +37,7 @@ namespace BomberMan
       return "models/Wall3.fbx";
     }
 
-    static int	randAngle(unsigned int plage)
+    int	Manager::randAngle(unsigned int plage)
     {
       unsigned int angle = rand() % 360;
       if (angle > 90 && angle < 180)
@@ -141,8 +141,23 @@ namespace BomberMan
       // for (; this->_width < 15 || this->_width > 100; this->_width = rand() % 100);
       // for (; this->_height < 15 || this->_height > 100; this->_height = rand() % 100);
 
-      this->_width = 100;
-      this->_height = 100;
+      this->_width = 4;
+      this->_height = 4;
+
+      this->_map = std::vector<std::list<IGameComponent *> >(this->_width * this->_height, std::list<IGameComponent *>());
+      unsigned int elemCnt = 0;
+
+      for (std::vector<std::list<IGameComponent *> >::iterator it = this->_map.begin(); it != this->_map.end(); ++it)
+	this->_nbCuves += addEmptyObject(*it, this->_width, this->_height, elemCnt++);
+    }
+
+    Manager::Manager(unsigned int width, unsigned int height)
+      : _width(width),
+	_height(height)
+    {
+      std::cout << ">>" << width << "-" << height<< std::endl;
+      this->_nbCuves = 0;
+      srand(time(0));
 
       this->_map = std::vector<std::list<IGameComponent *> >(this->_width * this->_height, std::list<IGameComponent *>());
       unsigned int elemCnt = 0;
@@ -195,9 +210,10 @@ namespace BomberMan
 	{
 	  for (std::list<IGameComponent *>::iterator it = this->_map[y * this->_width + x].begin(); it != this->_map[y * this->_width + x].end(); ++it)
 	    if (dynamic_cast<Object *>(*it) == *it)
-	      return (false);
+	      if (dynamic_cast<Object *>(*it)->getObjectType() == BOMB)
+		return (false);
 	}
-      this->_map[y * this->_width + x].push_back(newComponent);
+      this->_map[y * this->_width + x].push_front(newComponent);
       return (true);
     }
 
@@ -329,7 +345,6 @@ namespace BomberMan
 	if (eraseWall(this->_map[rand() % (this->_width * this->_height)]) == true)
 	  nbCases--;
       unsigned int nbBonus = 0;
-      ObjectFactory * factory = new ObjectFactory;
       while (nbBonus != static_cast<unsigned int>(hopeFullCases * (70.0 / 100.0))) /* % bonus */
       	{
 	  x = rand() % this->_width;

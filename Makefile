@@ -19,7 +19,7 @@ CPPFLAGS	+= -I./inc/Sound/
 CPPFLAGS	+= -I./lib/fmod/inc/
 CPPFLAGS	+= -I./lib/libgdl/include
 
-LDFLAGS		=  -lpthread -L./lib/libgdl/lib -Wl,--rpath=./lib/libgdl/lib -lgdl_gl -lGL -lGLU ./lib/fmod/lib/libfmodex64-4.44.14.so -lopencv_core -lopencv_highgui -lopencv_imgproc
+LDFLAGS		=  -lpthread -L./lib/libgdl/lib -Wl,--rpath=./lib/libgdl/lib -lgdl_gl -lGL -lGLU ./lib/fmod/lib/libfmodex64-4.44.14.so -lopencv_core -lopencv_imgproc  -lopencv_highgui
 
 SRC_DIR		= src/
 
