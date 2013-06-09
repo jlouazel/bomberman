@@ -5,7 +5,7 @@
 // Login   <fortin_j@epitech.net>
 //
 // Started on  Sat Jun  1 21:25:38 2013 julien fortin
-// Last update Sun Jun  9 15:16:19 2013 julien fortin
+// Last update Sun Jun  9 16:05:09 2013 julien fortin
 //
 
 #include	"MenuManager.hh"
@@ -143,7 +143,7 @@ namespace BomberMan
 
     MenuEnum::eMenu	PauseMenu::getType() const
     {
-      return MenuEnum::MAIN;
+      return MenuEnum::PAUSE;
     }
 
     void	PauseMenu::_cursorMove()

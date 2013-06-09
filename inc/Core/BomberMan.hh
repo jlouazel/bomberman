@@ -63,6 +63,8 @@ namespace BomberMan
       virtual void	unload(void);
       virtual void	draw(void);
 
+      static BomberMan*	getCore();
+
       void		surrender();
       void		resumeGame();
       void		startGame();

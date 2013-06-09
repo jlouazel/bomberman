@@ -11,6 +11,13 @@ namespace BomberMan
 {
   namespace Core
   {
+    static BomberMan*	_core = 0;
+
+    BomberMan*	BomberMan::getCore()
+    {
+      return _core;
+    }
+
     BomberMan::BomberMan() : gdl::Game()
     {
       this->_intro = true;
@@ -31,6 +38,7 @@ namespace BomberMan
 
     void	BomberMan::initialize()
     {
+      _core = this;
       this->_initializeWindow();
       this->_initializeSound();
       this->_initializeIntro();
