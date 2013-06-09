@@ -585,25 +585,12 @@ namespace BomberMan
       bals.back()->addAttribute(std::make_pair("id", name));
 
       bals.push_back(new DataFormat::Xml::Balise("infos", DataFormat::OPENING));
-      bals.push_back(new DataFormat::Xml::Balise("second", DataFormat::OPENING));
-      bals.back()->setContent(intToString(now->tm_sec));
-      bals.push_back(new DataFormat::Xml::Balise("second", DataFormat::CLOSING));
-      bals.push_back(new DataFormat::Xml::Balise("minute", DataFormat::OPENING));
-      bals.back()->setContent(intToString(now->tm_min));
-      bals.push_back(new DataFormat::Xml::Balise("minute", DataFormat::CLOSING));
-      bals.push_back(new DataFormat::Xml::Balise("hour", DataFormat::OPENING));
-      bals.back()->setContent(intToString(now->tm_hour));
-      bals.push_back(new DataFormat::Xml::Balise("hour", DataFormat::CLOSING));
-      bals.push_back(new DataFormat::Xml::Balise("day", DataFormat::OPENING));
-      bals.back()->setContent(intToString(now->tm_mday));
-      bals.push_back(new DataFormat::Xml::Balise("day", DataFormat::CLOSING));
-      bals.push_back(new DataFormat::Xml::Balise("month", DataFormat::OPENING));
-      bals.back()->setContent(intToString(now->tm_mon + 1));
-      bals.push_back(new DataFormat::Xml::Balise("month", DataFormat::CLOSING));
-      bals.push_back(new DataFormat::Xml::Balise("year", DataFormat::OPENING));
-      bals.back()->setContent(intToString(now->tm_year + 1900));
-      bals.push_back(new DataFormat::Xml::Balise("year", DataFormat::CLOSING));
-      bals.push_back(new DataFormat::Xml::Balise("infos", DataFormat::CLOSING));
+      bals.back()->addAttribute(std::make_pair("second", intToString(now->tm_sec)));
+      bals.back()->addAttribute(std::make_pair("minute", intToString(now->tm_min)));
+      bals.back()->addAttribute(std::make_pair("hour", intToString(now->tm_hour)));
+      bals.back()->addAttribute(std::make_pair("day", intToString(now->tm_mday)));
+      bals.back()->addAttribute(std::make_pair("month", intToString(now->tm_mon)));
+      bals.back()->addAttribute(std::make_pair("year", intToString(now->tm_year)));
 
       bals.push_back(new DataFormat::Xml::Balise("players", DataFormat::OPENING));
       for (std::list<Field::Player *>::iterator itPl = this->_players.begin(); itPl != this->_players.end(); ++itPl)
