@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 manour_m. All rights reserved.
 //
 
+#include <stdlib.h>
 #include	"UnixThread.hh"
 #include	<math.h>
 #include	<unistd.h>
@@ -27,7 +28,7 @@ namespace BomberMan
     Player::Player(int id, int pv, float speed, int max, int set, float x, float y, BomberMan::Display::AObject * asset, BomberMan::Display::ISound * sound, BomberMan::Display::IAnimation * anim, unsigned char r, unsigned char g, unsigned char b)
       :   _id(id), _pv(pv), _speed(speed), _nb_bomb_max(max), _nb_bomb_set(set)
     {
-      Display::Vector3f	position(0, 0, 0);
+      Display::Vector3f	position(x, 0, y);
       Display::Vector3f	rotation(0, 0, 0);
       Display::Vector3f	len(0, 0, 0);
 
@@ -81,10 +82,23 @@ namespace BomberMan
 
     void         Player::goThere(float my_x, float my_y, float to_x, float to_y) const
     {
-      float     angle;
+      float angle;
 
-      angle = atan(ABS(to_y - my_y) / ABS(to_x - my_x)) * 180 / M_PI;
-      Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::NO, (static_cast<int>(angle) + 90) % 360, true, this->_id);
+    angle = atan(ABS(to_y - my_y) / ABS(to_x - my_x)) * 180 / M_PI;
+      if (to_y > my_y)
+	{
+	  if (to_x < my_x )
+	    angle = 180 + angle;
+	  else
+	    angle = 360 - angle;
+	}
+      else
+	{
+	  if (to_x < my_x)
+	    angle = 180 - angle;
+	  else
+	    angle = angle;
+	}
     }
 
     static Player* _player = 0;
@@ -96,7 +110,7 @@ namespace BomberMan
       this->_height = height;
       this->_map = &map;
       this->_playersList = &players;
-      Unix::UnixThread *ia = new Unix::UnixThread(0, &_startIAThread, 0, 0);
+      new Unix::UnixThread(0, &_startIAThread, 0, 0);
     }
 
     extern "C"
@@ -109,22 +123,26 @@ namespace BomberMan
       }
     }
 
-    void	Player::launchIA() const
+    void Player::launchIA() const
     {
-      int	width = this->_width, height = this->_height;
-      const std::vector<std::list<IGameComponent *> >	*map = this->_map;
-      const std::list<Player *>				*players = this->_playersList;
+      int i = 0;
+      int angle;
 
+      angle = rand() % 360;
       while (!this->_end)
-        {
-          goThere(this->_x, this->_y, players->front()->getX(), players->front()->getY());
-	  usleep(5000);
-	  //          if (!isInBombRow(width, height, map, my_x, my_y))
-	  //     if (!betterTakeBuff(width, height, map))
-	  //      if (!shouldGetCloserToKill(width, height, map))
-	  //        Event::EventManager::getEventManager()->actionEvent(this->_currentPlayerId);
-        }
-      int	return_value = 0;
+	{
+	  if (i == 1200)
+	    {
+	      Event::EventManager::getEventManager()->actionEvent(this->_id);
+	      angle = rand() % 360;
+	      i = 0;
+	    }
+	  else
+	    Event::EventManager::getEventManager()->moveEvent(Event::EventDirection::NO, angle, true, this->_id);
+	  usleep(1000);
+	  i++;
+	}
+      int return_value = 0;
       pthread_exit(static_cast<void *>(&return_value));
     }
 
@@ -348,7 +366,7 @@ namespace BomberMan
       for (std::list<gdl::Clock *>::iterator it = this->_clock.begin(); it != this->_clock.end(); ++it)
 	{
 	  (*it)->update();
-	  if ((*it)->getTotalElapsedTime() >= 3)
+	  if ((*it)->getTotalElapsedTime() >= 3 && this->_nb_bomb_set > 0)
 	    {
 	      this->_nb_bomb_set--;
 	      it = this->_clock.erase(it);
