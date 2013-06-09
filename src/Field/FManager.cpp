@@ -141,8 +141,8 @@ namespace BomberMan
       // for (; this->_width < 15 || this->_width > 100; this->_width = rand() % 100);
       // for (; this->_height < 15 || this->_height > 100; this->_height = rand() % 100);
 
-      this->_width = 100;
-      this->_height = 100;
+      this->_width = 4;
+      this->_height = 4;
 
       this->_map = std::vector<std::list<IGameComponent *> >(this->_width * this->_height, std::list<IGameComponent *>());
       unsigned int elemCnt = 0;
@@ -214,7 +214,7 @@ namespace BomberMan
       	}
     }
 
-    void	Manager::setExplosion(unsigned int x, unsigned int y, int power)
+    void	Manager::setExplosion(unsigned int x, unsigned int y, int power, int idBomb)
     {
       for (std::list<IGameComponent *>::iterator it = this->_map[y * this->_width + x].begin(); it != this->_map[y * this->_width + x].end(); ++it)
 	{
@@ -226,7 +226,7 @@ namespace BomberMan
 	    }
 	}
       for (std::list<IGameComponent *>::iterator it = this->_map[y * this->_width + x].begin(); it != this->_map[y * this->_width + x].end(); ++it)
-	(*it)->explode(power, this, -1);
+	(*it)->explode(power, this, idBomb);
     }
 
     static bool			isAPlayerHere(std::list<Player *> const & players, unsigned int x, unsigned int y)
