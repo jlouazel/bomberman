@@ -286,40 +286,40 @@ namespace BomberMan
 	    }
 	}
       this->checkBuff(manager);
-      const Event::IEvent* event;
-      while ((event = Event::EventManager::getEvent()) != NULL)
-	{
-	  if (dynamic_cast<const Event::Move *>(event) == event && !moveOk)
-	    {
-	      const Event::Move *move = (const Event::Move *)event;
-	      this->_isRunning = move->isRunning();
-	      this->_isMoving = true;
-	      i++;
+      // const Event::IEvent* event;
+      // while ((event = Event::EventManager::getEvent()) != NULL)
+      // 	{
+      // 	  if (dynamic_cast<const Event::Move *>(event) == event && !moveOk)
+      // 	    {
+      // 	      const Event::Move *move = dynamic_cast<const Event::Move *>(event);
+      // 	      this->_isRunning = move->isRunning();
+      // 	      this->_isMoving = true;
+      // 	      i++;
 
-	      float       angle =  move->getAngle() * 3.14159 / 180.0;
-	      float       x = -(cosf(angle) * this->_speed);
-	      float       z = sinf(angle) * this->_speed;
+      // 	      float       angle =  move->getAngle() * 3.14159 / 180.0;
+      // 	      float       x = -(cosf(angle) * this->_speed);
+      // 	      float       z = sinf(angle) * this->_speed;
 
-	      if (this->checkMyMove(this->_asset->getPosition().getZ() + z, this->_asset->getPosition().getX() + x, manager) == true)
-		this->move(x, z, angle, manager);
-	      else
-		{
-		  if (this->checkMyMove(this->_asset->getPosition().getZ(), this->_asset->getPosition().getX() + x, manager) == true)
-		      this->move(x, 0, angle, manager);
-		  else if (this->checkMyMove(this->_asset->getPosition().getZ() + z, this->_asset->getPosition().getX(), manager) == true)
-		    this->move(0, z, angle, manager);
-		}
-	      moveOk = true;
-	    }
-	  else if (dynamic_cast<const Event::Action *>(event) == event && this->_nb_bomb_set < this->_nb_bomb_max)
-	    this->setBomb(manager);
-	  delete event;
-	}
-      if (i == 0)
-	{
-	  this->_isMoving = false;
-	  this->_isRunning = false;
-	}
+      // 	      if (this->checkMyMove(this->_asset->getPosition().getZ() + z, this->_asset->getPosition().getX() + x, manager) == true)
+      // 		this->move(x, z, angle, manager);
+      // 	      else
+      // 		{
+      // 		  if (this->checkMyMove(this->_asset->getPosition().getZ(), this->_asset->getPosition().getX() + x, manager) == true)
+      // 		      this->move(x, 0, angle, manager);
+      // 		  else if (this->checkMyMove(this->_asset->getPosition().getZ() + z, this->_asset->getPosition().getX(), manager) == true)
+      // 		    this->move(0, z, angle, manager);
+      // 		}
+      // 	      moveOk = true;
+      // 	    }
+      // 	  else if (dynamic_cast<const Event::Action *>(event) == event && this->_nb_bomb_set < this->_nb_bomb_max)
+      // 	    this->setBomb(manager);
+      // 	  delete event;
+      // 	}
+      // if (i == 0)
+      // 	{
+      // 	  this->_isMoving = false;
+      // 	  this->_isRunning = false;
+      // 	}
       this->run(gameClock);
     }
 

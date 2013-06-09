@@ -35,6 +35,8 @@ namespace BomberMan
 
       void				update(gdl::GameClock const&);
       void				draw(gdl::GameClock const&) const;
+      void				drawForPlayer2D(gdl::GameClock const&, int) const;
+      void				drawForPlayer3D(gdl::GameClock const&, int) const;
 
       Field::Manager*			getManager() const;
       std::list<Field::Player *>	getPlayers() const;

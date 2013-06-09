@@ -31,7 +31,6 @@ namespace BomberMan
       Display::Video*		_introVideo;
       Display::Video*		_creditVideo;
       gdl::Clock*		_introTimer;
-      gdl::Clock*		_creditTimer;
       int			FPS;
       float			constElapsedTime;
 

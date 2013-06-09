@@ -1,3 +1,4 @@
+#include	"BomberOptions.hh"
 #include	<ctime>
 #include	<fmod.h>
 #include	<Input.hpp>
@@ -37,14 +38,14 @@ namespace BomberMan
       Display::Vector3f      vectorRot(0.0, 0.0, 0.0);
 
       this->_players.push_front(new Field::Player(0, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
-      // this->_players.push_front(new Field::Player(0, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
+      this->_players.push_front(new Field::Player(0, 100, 10, 1, 0, 0, 0, new Display::Texture3d("models/WWunmoved.fbx", vectorPosition, vectorRot, vectorLen), 0, 0));
 
       this->_manager->randomize(this->_players);
 
       std::list<Field::Player *>::iterator it = this->_players.begin();
       for (; it != this->_players.end(); ++it)
 	{
-	  this->_camera.push_back(new Display::Camera(this->_players.size()));
+	  this->_camera.push_back(new Display::Camera(BomberOptions::getOptions()->getNbPlayer()));
 	  (*it)->setCamera(this->_camera.back());
 	}
 
@@ -93,6 +94,12 @@ namespace BomberMan
       this->_infos["fiole90"]->initialize();
       this->_infos["fiole100"] = new Display::Texture2d("images/Fiole100.png", vectorPosition3_, vectorRot_, vectorLen3_);
       this->_infos["fiole100"]->initialize();
+      vectorPosition3_.setX(0);
+      vectorPosition3_.setY(0);
+      vectorLen3_.setX(100);
+      vectorLen3_.setY(100);
+      this->_infos["background"] = new Display::Texture2d("images/black.png", vectorPosition3_, vectorRot_, vectorLen3_);
+      this->_infos["background"]->initialize();
       this->_loading = false;
     }
 
@@ -139,7 +146,50 @@ namespace BomberMan
 		  updateObjs(*it, gameClock, this->_manager);
 	      }
 	  }
+      this->eventPlayer();
       updateObjs(this->getPlayers().front(), gameClock, this->_manager);
+    }
+
+    void	eventPlayer()
+    {
+      int	id;
+      const Event::IEvent* event;
+
+      while ((event = Event::EventManager::getEvent()) != NULL)
+        {
+	  id = event->getPlayerId();
+      //     if (dynamic_cast<const Event::Move *>(event) == event && !moveOk)
+      //       {
+      //         const Event::Move *move = dynamic_cast<const Event::Move *>(event);
+      //         this->_isRunning = move->isRunning();
+      //         this->_isMoving = true;
+      //         i++;
+
+      //         float       angle =  move->getAngle() * 3.14159 / 180.0;
+      //         float       x = -(cosf(angle) * this->_speed);
+      //         float       z = sinf(angle) * this->_speed;
+
+      //         if (this->checkMyMove(this->_asset->getPosition().getZ() + z, this->_asset->getPosition().getX() + x, manager) == true)
+      //           this->move(x, z, angle, manager);
+      //         else
+      //           {
+      //             if (this->checkMyMove(this->_asset->getPosition().getZ(), this->_asset->getPosition().getX() + x, manager) == true)
+      // 		    this->move(x, 0, angle, manager);
+      //             else if (this->checkMyMove(this->_asset->getPosition().getZ() + z, this->_asset->getPosition().getX(), manager) == true)
+      //               this->move(0, z, angle, manager);
+      //           }
+      //         moveOk = true;
+      //       }
+      //     else if (dynamic_cast<const Event::Action *>(event) == event && this->_nb_bomb_set < this->_nb_bomb_max)
+      //       this->setBomb(manager);
+      //     delete event;
+      //   }
+      // if (i == 0)
+      //   {
+      //     this->_isMoving = false;
+      //     this->_isRunning = false;
+      //   }
+	}
     }
 
     static void affObjs(Field::IGameComponent * comp, gdl::GameClock const & gameClock)
@@ -147,15 +197,9 @@ namespace BomberMan
       comp->draw(gameClock);
     }
 
-    void	BomberGame::draw(gdl::GameClock const & gameClock) const
+    void	BomberGame::drawForPlayer2D(gdl::GameClock const & gameClock, int id_player) const
     {
-      // glViewport(0, 0, WIDTH /2, HEIGHT);
-      for (unsigned int y = 0; y != this->getManager()->Field::Manager::getHeight(); y++)
-	for (unsigned int x = 0; x != this->getManager()->Field::Manager::getWidth(); x++)
-	  for (std::list<Field::IGameComponent *>::iterator it = this->getManager()->Field::Manager::get(x, y).begin(); it != this->getManager()->Field::Manager::get(x, y).end(); ++it)
-	    if (y > ((this->getPlayers().front()->getX() - 110) / 220) - 2 && y < ((this->getPlayers().front()->getX() + 110) / 220) + 4 && x > ((this->getPlayers().front()->getY() - 110) / 220) - 3 && x < ((this->getPlayers().front()->getY() + 110) / 220) + 3)
-	      affObjs(*it, gameClock);
-      affObjs(this->getPlayers().front(), gameClock);
+      this->_infos.at("background")->draw();
 
       float	startx = 88;
       float	starty = 85;
@@ -192,14 +236,14 @@ namespace BomberMan
       			}
       		      else if (!imp)
       			{
-			  this->_infos.at("floor")->setPosition(newPosition);
-			  this->_infos.at("floor")->draw();
-			}
+      			  this->_infos.at("floor")->setPosition(newPosition);
+      			  this->_infos.at("floor")->draw();
+      			}
       		    }
       		}
       	    }
       	}
-
+      
       Display::Vector3f      newPosition2(startx, starty, 0);
       this->_infos.at("player")->setPosition(newPosition2);
       this->_infos.at("player")->draw();
@@ -207,69 +251,109 @@ namespace BomberMan
       // if (BomberOptions::getOptions()->getSkinForPlayer(player->getId()) == BomberOptions::WW)
       // 	this->_infos.at("walter")->draw();
       // else
-	this->_infos.at("jesse")->draw();
+      	this->_infos.at("jesse")->draw();
       switch (player->getPv())
+      	{
+      	case (0):
+      	  {
+      	    this->_infos.at("fiole0")->draw();
+      	    break;
+      	  }
+      	case (10):
+      	  {
+      	    this->_infos.at("fiole10")->draw();
+      	    break;
+      	  }
+      	case (20):
+      	  {
+      	    this->_infos.at("fiole20")->draw();
+      	    break;
+      	  }
+      	case (30):
+      	  {
+      	    this->_infos.at("fiole30")->draw();
+      	    break;
+      	  }
+      	case (40):
+      	  {
+      	    this->_infos.at("fiole40")->draw();
+      	    break;
+      	  }
+      	case (50):
+      	  {
+      	    this->_infos.at("fiole50")->draw();
+      	    break;
+      	  }
+      	case (60):
+      	  {
+      	    this->_infos.at("fiole60")->draw();
+      	    break;
+      	  }
+      	case (70):
+      	  {
+      	    this->_infos.at("fiole70")->draw();
+      	    break;
+      	  }
+      	case (80):
+      	  {
+      	    this->_infos.at("fiole80")->draw();
+      	    break;
+      	  }
+      	case (90):
+      	  {
+      	    this->_infos.at("fiole90")->draw();
+      	    break;
+      	  }
+      	case (100):
+      	  {
+      	    this->_infos.at("fiole100")->draw();
+      	    break;
+      	  }
+      	default:
+      	  {
+      	    this->_infos.at("fiole0")->draw();
+      	    break;
+      	  }
+      	}
+    }
+
+    void	BomberGame::drawForPlayer3D(gdl::GameClock const & gameClock, int id_player) const
+    {
+      for (unsigned int y = 0; y != this->getManager()->Field::Manager::getHeight(); y++)
+	for (unsigned int x = 0; x != this->getManager()->Field::Manager::getWidth(); x++)
+	  for (std::list<Field::IGameComponent *>::iterator it = this->getManager()->Field::Manager::get(x, y).begin(); it != this->getManager()->Field::Manager::get(x, y).end(); ++it)
+	    {
+	      if (BomberOptions::getOptions()->getNbPlayer() == 1)
+		{
+		  if (y > ((this->getPlayers().front()->getX() - 110) / 220) - 2 && y < ((this->getPlayers().front()->getX() + 110) / 220) + 3 && x > ((this->getPlayers().front()->getY() - 110) / 220) - 2 && x < ((this->getPlayers().front()
+->getY() + 110) / 220) + 2)
+		    affObjs(*it, gameClock);
+		}
+	      else
+		if (y > ((this->getPlayers().front()->getX() - 110) / 220) - 1 && y < ((this->getPlayers().front()->getX() + 110) / 220) + 3 && x > ((this->getPlayers().front()->getY() - 110) / 220) - 2 && x < ((this->getPlayers().front()->getY() + 110) / 220) + 2)
+		  affObjs(*it, gameClock);
+	    }
+      affObjs(this->getPlayers().front(), gameClock);
+    }
+
+    void	BomberGame::draw(gdl::GameClock const & gameClock) const
+    {
+      if (BomberOptions::getOptions()->getNbPlayer() == 2)
 	{
-	case (0):
-	  {
-	    this->_infos.at("fiole0")->draw();
-	    break;
-	  }
-	case (10):
-	  {
-	    this->_infos.at("fiole10")->draw();
-	    break;
-	  }
-	case (20):
-	  {
-	    this->_infos.at("fiole20")->draw();
-	    break;
-	  }
-	case (30):
-	  {
-	    this->_infos.at("fiole30")->draw();
-	    break;
-	  }
-	case (40):
-	  {
-	    this->_infos.at("fiole40")->draw();
-	    break;
-	  }
-	case (50):
-	  {
-	    this->_infos.at("fiole50")->draw();
-	    break;
-	  }
-	case (60):
-	  {
-	    this->_infos.at("fiole60")->draw();
-	    break;
-	  }
-	case (70):
-	  {
-	    this->_infos.at("fiole70")->draw();
-	    break;
-	  }
-	case (80):
-	  {
-	    this->_infos.at("fiole80")->draw();
-	    break;
-	  }
-	case (90):
-	  {
-	    this->_infos.at("fiole90")->draw();
-	    break;
-	  }
-	case (100):
-	  {
-	    this->_infos.at("fiole100")->draw();
-	    break;
-	  }
-	default:
-	  {
-	    this->_infos.at("fiole0")->draw();
-	    break;
-	  }
+	  glViewport(0, 0, WIDTH / 2, HEIGHT);
+	  this->drawForPlayer3D(gameClock, 0);      	  
+	  glViewport(WIDTH / 2, 0, WIDTH / 2, HEIGHT);
+	  this->drawForPlayer3D(gameClock, 1);
+	  glViewport(0, 0, WIDTH / 2, HEIGHT);
+	  this->drawForPlayer2D(gameClock, 0);      	  
+	  glViewport(WIDTH / 2 - 2, 0, WIDTH / 2 - 2, HEIGHT);
+	  this->drawForPlayer2D(gameClock, 1);
+	}
+      else
+	{
+	  glViewport(0, 0, WIDTH, HEIGHT);
+	  this->drawForPlayer3D(gameClock, 0);
+	  this->drawForPlayer2D(gameClock, 0);
 	}
     }
 
@@ -351,8 +435,7 @@ namespace BomberMan
 	  bals.back()->setContent(intToString((*itPl)->getPower()));
 	  bals.push_back(new DataFormat::Xml::Balise("power", DataFormat::CLOSING));
 	  bals.push_back(new DataFormat::Xml::Balise("bombmax", DataFormat::OPENING));
-	  bals.back()->setContent(intToString((*itPl)->getNbBombMax()));
-	  bals.push_back(new DataFormat::Xml::Balise("bombmax", DataFormat::CLOSING));
+	  bals.back()->setContent(intToString((*itPl)->getNbBombMax()));	  bals.push_back(new DataFormat::Xml::Balise("bombmax", DataFormat::CLOSING));
 	  bals.push_back(new DataFormat::Xml::Balise("bombset", DataFormat::OPENING));
 	  bals.back()->setContent(intToString((*itPl)->getNbBombSet()));
 	  bals.push_back(new DataFormat::Xml::Balise("bombset", DataFormat::CLOSING));
