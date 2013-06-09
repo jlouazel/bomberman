@@ -5,13 +5,13 @@
 #include	"FieldError.hh"
 #include	"DisplayError.hh"
 
-int	main(int, char**, char **env)
+int	main(int ac, char **av, char **env)
 {
   if (!env)
     return 1;
   try
     {
-      BomberMan::Core::BomberMan game;
+      BomberMan::Core::BomberMan game(ac, av);
 
       game.run();
     }
@@ -34,8 +34,8 @@ int	main(int, char**, char **env)
     {
       std::cerr << e.what() << std::endl;
     }
-  // catch (...)
-  //   {
-  //     std::cerr << "An `Emma Watson` occured." << std::endl;
-  //   }
+  catch (...)
+    {
+      std::cerr << "An `Emma Watson` occured." << std::endl;
+    }
 }

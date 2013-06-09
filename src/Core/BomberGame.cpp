@@ -34,14 +34,17 @@ namespace BomberMan
 {
   namespace Core
   {
-    BomberGame::BomberGame()
+    BomberGame::BomberGame(bool cont, const std::string &file)
     {
       this->_loading = true;
       Sound::SoundManager::getInstance()->stopSound("./resources/sounds/musicIntro2.mp3");
       Sound::SoundManager::getInstance()->playSound("./resources/sounds/ambianceGame.mp3", true);
 
-      this->_manager = new Field::Manager;
-      //this->load(".data/.saves/1370799642.xml");
+      if (cont)
+	this->load(file);
+      else
+	this->_manager = new Field::Manager;
+
       int LightPos[4] = {0,0,3,1};
       glEnable(GL_LIGHTING);
       glEnable(GL_LIGHT0);

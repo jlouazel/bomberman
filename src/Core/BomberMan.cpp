@@ -11,8 +11,13 @@ namespace BomberMan
 {
   namespace Core
   {
-    BomberMan::BomberMan() : gdl::Game()
+    BomberMan::BomberMan(int ac, char **av) : gdl::Game()
     {
+      if (ac == 2)
+	this->_file = av[1];
+      else
+	this->_file = "";
+
       this->_intro = true;
       this->_menu = false;
       this->_game = false;
@@ -215,7 +220,16 @@ namespace BomberMan
       this->_menu = false;
       this->_game = false;
       this->_loading = true;
-      this->_currentGame = new BomberGame;
+      this->_currentGame = new BomberGame(false, "");
+    }
+
+    void	BomberMan::continueGame()
+    {
+      this->_intro = false;
+      this->_menu = false;
+      this->_game = false;
+      this->_loading = true;
+      this->_currentGame = new BomberGame(true, this->_file);
     }
 
     void	BomberMan::resumeGame()

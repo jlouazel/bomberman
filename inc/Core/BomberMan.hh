@@ -27,6 +27,7 @@ namespace BomberMan
       bool		_loading;
 
     private:
+      std::string		_file;
       BomberGame*		_currentGame;
       Display::Video*		_introVideo;
       Display::Video*		_creditVideo;
@@ -55,7 +56,7 @@ namespace BomberMan
       void		_updateLoading();
 
     public:
-      BomberMan();
+      BomberMan(int ac, char**);
       virtual ~BomberMan();
 
       virtual void	initialize(void);
@@ -70,6 +71,7 @@ namespace BomberMan
       void		surrender();
       void		resumeGame();
       void		startGame();
+      void		continueGame();
       void		startMenu(Display::MenuEnum::eMenu);
     };
   }

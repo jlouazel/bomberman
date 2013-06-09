@@ -33,7 +33,7 @@ namespace BomberMan
     protected:
     public:
       ~BomberGame();
-      BomberGame();
+      BomberGame(bool, std::string const&);
 
       bool				isLoaded() const;
       bool				checkIfEnd() const;
